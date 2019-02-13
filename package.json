@@ -1,0 +1,14 @@
+{
+  "name": "asuka-nodejs",
+  "version": "0.0.0",
+  "description": "forum for asuka on node-js",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "tskon",
+  "license": "MIT",
+  "dependencies": {
+    "mysql": "^2.16.0"
+  }
+}
