@@ -1,11 +1,7 @@
-import Link from 'next/link'
+import MainMenu from '../components/menu/MainMenu'
 
 export default () => (
   <div>
-    Click{' '}
-    <Link href={{ pathname: '/about' }}>
-      <a>here</a>
-    </Link>{' '}
-    to read more
+    <MainMenu/>
   </div>
 )
