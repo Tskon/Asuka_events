@@ -21,9 +21,11 @@
   "dependencies": {
     "@zeit/next-sass": "^1.0.1",
     "css-modules": "^0.3.0",
+    "mysql2": "^1.6.5",
     "next": "^8.0.1",
     "node-sass": "^4.11.0",
     "react": "^16.8.1",
-    "react-dom": "^16.8.1"
+    "react-dom": "^16.8.1",
+    "sequelize": "^4.42.0"
   }
 }

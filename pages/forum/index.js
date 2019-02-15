@@ -1,5 +1,5 @@
 import {Component} from 'react'
-import css from './index.scss'
+import css from '../../scss/index.scss'
 
 export default class Forum extends Component{
   render(){
