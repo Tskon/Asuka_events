@@ -1,11 +1,11 @@
 import {Component} from 'react'
-
+import css from './index.scss'
 
 export default class Forum extends Component{
   render(){
     return (
       <main>
-        <h1>Asuka forum</h1>
+        <h1 className={css.example}>Asuka forum</h1>
       </main>
     )
   }
