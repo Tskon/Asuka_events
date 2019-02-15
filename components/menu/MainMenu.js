@@ -1,15 +1,17 @@
 import { Component } from 'react'
-import Link from 'next/link'
+
+/**
+ * Не удается использовать роутер пока нет решения проблемы загрузки стилей чанками
+ */
+// import Link from 'next/link'
 
 export default class MainMenu extends Component {
   render() {
     return (
       <nav>
-        <Link href="/forum"><a>Forum page</a></Link>
-        <br/>
-        <Link href="/about"><a>About page</a></Link>
-        <br/>
-        <a href="/forum">222 forum</a>
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/forum">Forum</a>
       </nav>
     )
   }
