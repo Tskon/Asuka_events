@@ -13,16 +13,26 @@ nextApp.prepare().then(() => {
   const app = express()
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
+
+  /**
+   * Routes
+   */
   // app.use('/api/photos', require('./routes/index'))
   app.get('*', (req,res) => {
     return handle(req,res) // for all the react stuff
   })
+
+  /**
+   * Listening port by express
+   */
   app.listen(PORT, err => {
     if (err) throw err;
     console.log(`ready at http://localhost:${PORT}`)
   })
 
-
+  /**
+   * Connect to database
+   */
   sequelize
     .authenticate()
     .then(()=>{
