@@ -1,0 +1,52 @@
+.login__button{
+  cursor: pointer;
+  padding: 10px 20px;
+  @include border($orange, $radius);
+  transition: 0.2s;
+  &:hover{
+    background-color: $orange;
+  }
+}
+
+.login__modal{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: $gray_dark;
+  @include border($gray_dark, $radius);
+  padding: 30px;
+  padding-top: 50px;
+  text-align: center;
+  box-shadow: 2px 2px 10px -2px $gray;
+}
+
+.login__modal-close-btn{
+  border: none;
+  background-color: transparent;
+  color: $white;
+  position: absolute;
+  line-height: 18px;
+  height: 18px;
+  width: 22px;
+  right: 5px;
+  top: 5px;
+}
+
+.login__modal-shadow{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0,0,0,0.6);
+}
+
+.login__field{
+  text-align: right;
+  padding-bottom: 10px;
+  input{
+    border: none;
+    padding: 5px;
+  }
+}
