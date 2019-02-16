@@ -1,13 +1,11 @@
 import {Component} from 'react'
 
 export default class About extends Component {
-  constructor(props){
-    super(props)
-    this.header = 'About page'
-  }
   render(){
     return (
-      <h1>{this.header}</h1>
+      <main>
+        <h1>About</h1>
+      </main>
     )
   }
 }
