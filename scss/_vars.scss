@@ -25,3 +25,21 @@ Fonts
 
 $font_headers: 'Cuprum', sans-serif;
 $font_basic: 'Open Sans', sans-serif;
+
+
+/*/////////////////////
+Radius
+/////////////////////*/
+
+$radius: 5px;
+$radius_big: 10px;
+
+
+/*/////////////////////
+Mixins
+/////////////////////*/
+
+@mixin border($color, $radius){
+  border: solid 1px $color;
+  border-radius: $radius;
+}
