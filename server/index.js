@@ -4,6 +4,7 @@ const models = require('./models/index')
 const passport = require('passport')
 const session = require('express-session')
 const bodyParser = require('body-parser')
+const cors = require('cors')
 const env = require('dotenv').load();
 
 const PORT = process.env.PORT || 3000
@@ -14,6 +15,7 @@ const handle = nextApp.getRequestHandler()
 
 nextApp.prepare().then(() => {
   const app = express()
+  app.use(cors())
   app.use(bodyParser.json())
   app.use(bodyParser.urlencoded({ extended: true }))
   app.use(session({ secret: 'asuka and ray',resave: true, saveUninitialized:true}))
