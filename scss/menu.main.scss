@@ -6,9 +6,9 @@
     font-size: 20px;
     margin: 5px;
     color: $gold;
+    transition: 0.3s;
     &:hover{
       color: $white;
-      border-bottom: 1px solid $white;
     }
     &:first-child{
       margin-left: 0;
@@ -16,5 +16,8 @@
   }
   .active{
     border-bottom: 1px solid $gold;
+    &:hover{
+      border-color: $white;
+    }
   }
 }
