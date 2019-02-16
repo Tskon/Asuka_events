@@ -1,6 +1,7 @@
 /*/////////////////////
 Colors
 /////////////////////*/
+
 $font_main: #404040;
 $font_secondary: #fff;
 
@@ -8,9 +9,19 @@ $white: #fff;
 $gray: #3a3939;
 $gray_light: #f1f1f1;
 $gray_dark: #373636;
-$gold: #fdc073;         //светлые ссылки, мелкие элементы
-$brown: #fdc073;        //темные ссылки, мелкие элементы
+$gold: #fdc073; //светлые ссылки, мелкие элементы
+$brown: #fdc073; //темные ссылки, мелкие элементы
 
 //кнопки
 $orange: #fd9460;
 $green: #498161;
+
+
+/*/////////////////////
+Fonts
+/////////////////////*/
+
+@import url('https://fonts.googleapis.com/css?family=Cuprum|Open+Sans');
+
+$font_headers: 'Cuprum', sans-serif;
+$font_basic: 'Open Sans', sans-serif;
