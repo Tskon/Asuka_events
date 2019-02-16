@@ -1,19 +1,22 @@
 import { withRouter } from 'next/router';
-import Link from 'next/link';
+import StandartLink from 'next/link';
 import React, { Children } from 'react';
 
-const ActiveLink = ({ router, children, ...props }) => {
+/**
+ * Компонент принимает className и activeClassName (default 'active')
+ * Возвращает ссылку с рабочим сравнением пути
+ */
+const Link = ({ router, children, ...props }) => {
   const child = Children.only(children)
 
   let className = (child.props.className) ? child.props.className + ' ' : ''
   if (router.pathname === props.href) {
-    console.log(child.props.activeClassName)
     className += (child.props.activeClassName) ? `${child.props.activeClassName}`.trim() : 'active'
   }
 
   delete props.activeClassName
 
-  return <Link {...props}>{React.cloneElement(child, { className })}</Link>
+  return <StandartLink {...props}>{React.cloneElement(child, { className })}</StandartLink>
 };
 
-export default withRouter(ActiveLink)
+export default withRouter(Link)
