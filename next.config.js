@@ -7,5 +7,5 @@ module.exports = withSass({
    * https://github.com/zeit/next.js/issues/5264
    * https://github.com/zeit/next.js/issues/5291
    */
-  // cssModules: true
+  cssModules: true
 })
