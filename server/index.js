@@ -17,7 +17,8 @@ nextApp.prepare().then(() => {
   /**
    * Routes
    */
-  // app.use('/api/photos', require('./routes/index'))
+  app.use('/api', require('./routes/index'))
+
   app.get('*', (req,res) => {
     return handle(req,res) // for all the react stuff
   })
