@@ -1,6 +1,6 @@
 import React from 'react'
 import App, { Container } from 'next/app'
-import MainMenu from '../components/menu/MainMenu'
+import Header from '../components/Header'
 import Attachcss from './attach-css';
 import '../scss/_index.scss'
 
@@ -42,7 +42,7 @@ export default class MyApp extends App {
 
     return (
       <Container>
-        <MainMenu/>
+        <Header/>
         <Component {...pageProps} />
       </Container>
     )
