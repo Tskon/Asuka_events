@@ -1,9 +1,5 @@
 import { Component } from 'react'
-
-/**
- * Не удается использовать роутер пока нет решения проблемы загрузки стилей чанками
- */
-import Link from 'next/link'
+import Link from '../ui/Link'
 
 export default class MainMenu extends Component {
   render() {
