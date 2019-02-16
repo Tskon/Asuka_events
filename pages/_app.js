@@ -1,6 +1,7 @@
 import React from 'react'
 import App, { Container } from 'next/app'
 import Header from '../components/Header'
+import Footer from '../components/Footer'
 import Attachcss from './attach-css';
 import '../scss/_index.scss'
 
@@ -46,6 +47,7 @@ export default class MyApp extends App {
         <div className='container'>
           <Component {...pageProps} />
         </div>
+        <Footer/>
       </Container>
     )
   }
