@@ -1,4 +1,7 @@
 .header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   background-color: $gray;
   color: $font_secondary;
   padding: 10px;

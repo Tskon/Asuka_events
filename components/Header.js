@@ -1,5 +1,6 @@
 import { Component } from 'react'
 import MainMenu from './menu/MainMenu'
+import Login from './Login'
 
 export default class Header extends Component {
   render() {
@@ -7,6 +8,7 @@ export default class Header extends Component {
       <header className="header">
         <h1>Asuka</h1>
         <MainMenu/>
+        <Login/>
       </header>
     )
   }
