@@ -1,7 +1,7 @@
 import React from 'react'
 import App, { Container } from 'next/app'
 import MainMenu from '../components/menu/MainMenu'
-
+import Attachcss from './attach-css';
 
 export default class MyApp extends App {
   static async getInitialProps({ Component, router, ctx }) {
@@ -25,6 +25,18 @@ export default class MyApp extends App {
           assetPrefix,
         },
       });
+    }
+
+    try{
+      if (location){
+        var splitedUrl = location.pathname.split('/')
+        fixInit(splitedUrl[splitedUrl.length - 1])
+      }
+    } catch (e) {
+
+    }
+    function fixInit(page){
+      <Attachcss include={['_app', page]}/>
     }
 
     return (
