@@ -43,7 +43,9 @@ export default class MyApp extends App {
     return (
       <Container>
         <Header/>
-        <Component {...pageProps} />
+        <div className='container'>
+          <Component {...pageProps} />
+        </div>
       </Container>
     )
   }
