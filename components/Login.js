@@ -4,7 +4,7 @@ export default class Header extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      showModal: true,
+      showModal: false,
     }
 
     this.loginHandler = this.loginHandler.bind(this)
@@ -59,7 +59,7 @@ export default class Header extends Component {
             <div className="login__field">
               <label>Pass: <input type="password"/></label>
             </div>
-            <button type="submit">Login</button>
+            <button className="login__submit-btn" type="submit">Login</button>
           </form>
         </div>
       </div>
