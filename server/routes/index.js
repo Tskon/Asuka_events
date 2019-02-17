@@ -1,40 +1,19 @@
 const express = require('express')
 const router = express.Router()
+const fs = require('fs')
+const path = require('path')
+const models = require('../models/index')
 
-router.get('/user', (req, res) => {
-  console.log('api user', req, res)
-})
-
-
-// router.get('/', (req, res) => {
-  // User.find({}, (err, photos) => {
-  //   res.json(photos)
-  // })
-// })
-// router.use('/:id', (req, res, next) => {
-//   console.log(req.params.id)
-  // User.findById(req.params.id, (err, photo) => {
-  //   if(err)
-  //     res.status(500).send(err)
-  //   else
-  //     req.photo = photo
-  //   next()
-  // })
-// })
-
-// router
-//   .get('/:id', (req, res) => {
-//     return res.json( req.photo )
-//   })
-//   .put('/:id', (req, res) =>{
-//     Object.keys(req.body).map(key=>{
-//       req.photo[key] = req.body[key]
-//     })
-//     req.photo.save()
-//     res.json(req.photo)
-//   })
-
-
-
+/**
+ * Auto-import all files from './routes' directory
+ */
+fs
+  .readdirSync(__dirname)
+  .filter(function(file) {
+    return (file.indexOf(".") !== 0 && (file !== "index.js"))
+  })
+  .forEach(function(file) {
+    require(path.join(__dirname, file))(router, models)
+  });
 
 module.exports = router;

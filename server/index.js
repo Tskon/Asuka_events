@@ -1,6 +1,6 @@
 const express = require ('express')
 const next = require('next')
-const models = require('./models/index')
+
 const passport = require('passport')
 const session = require('express-session')
 const bodyParser = require('body-parser')
@@ -23,9 +23,10 @@ nextApp.prepare().then(() => {
   app.use(passport.session())
 
   /**
-   * Routes
+   * Routes. use path /api + path in routes.
+   * For example: /api/auth
    */
-  app.use('/api', require('./routes/index'))
+  app.use('/api', require('./routes'))
 
   app.get('*', (req,res) => {
     return handle(req,res) // for all the react stuff
@@ -38,17 +39,5 @@ nextApp.prepare().then(() => {
     if (err) throw err
     console.log(`ready at http://localhost:${PORT}`)
   })
-
-  /**
-   * Connect to database
-   */
-  models.sequelize
-    .sync()
-    .then(()=>{
-      console.log('All right! connection success')
-    })
-    .catch(err=>{
-      console.error(new Date(),'error from sequelize', err)
-    })
 
 })

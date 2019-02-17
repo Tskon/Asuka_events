@@ -1,7 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 const Sequelize = require('sequelize')
-const dbConfig = require('../database-worker/db-config')
+const dbConfig = require('../db-config')
 
 const db = {}
 const sequelize = new Sequelize(dbConfig.dbName, dbConfig.dbUser, dbConfig.dbPassword, dbConfig.dbOptions)
@@ -26,11 +26,3 @@ db.sequelize = sequelize
 db.Sequelize = Sequelize
 
 module.exports = db
-// sequelize
-//   .authenticate()
-//   .then(()=>{
-//     console.log('All right! connection success')
-//   })
-//   .catch(err=>{
-//     console.error(new Date(),'error from sequelize', err)
-//   })

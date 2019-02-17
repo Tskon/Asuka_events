@@ -137,3 +137,4 @@ fabric.properties
 .idea/httpRequests
 
 /backend/database-worker/db-config.js
+db-config.js
