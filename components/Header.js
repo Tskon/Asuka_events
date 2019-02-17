@@ -1,6 +1,6 @@
 import { Component } from 'react'
 import MainMenu from './menu/MainMenu'
-import Login from './Login'
+import Login from './login/Login'
 
 export default class Header extends Component {
   render() {

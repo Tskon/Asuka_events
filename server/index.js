@@ -1,6 +1,6 @@
 const express = require ('express')
 const next = require('next')
-
+const models = require('./models/index')
 const passport = require('passport')
 const session = require('express-session')
 const bodyParser = require('body-parser')
@@ -31,6 +31,20 @@ nextApp.prepare().then(() => {
   app.get('*', (req,res) => {
     return handle(req,res) // for all the react stuff
   })
+
+  /**
+   * Load passport strategies
+   */
+  require('./passport/passport.js')(passport, models.user);
+
+  /**
+   * Sync with database
+   */
+  models.sequelize.sync().then(function() {
+    console.log('Nice! Database looks fine')
+  }).catch(function(err) {
+    console.log(err, "Something went wrong with the Database Update!")
+  });
 
   /**
    * Listening port by express
