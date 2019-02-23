@@ -1,4 +1,4 @@
-import { Component } from 'react'
+import { Component } from 'react';
 
 export default class Footer extends Component {
   render() {
@@ -7,12 +7,14 @@ export default class Footer extends Component {
         <p>
           © Wargaming.net.
           Все права защищены. Источником игровых данных
-          пользователя является <a href="https://worldofwarships.ru/">Wargaming</a>
+          пользователя является
+          {' '}
+          <a href="https://worldofwarships.ru/">Wargaming</a>
         </p>
         <a target="_blank" href="https://ru.wargaming.net/support/ru/products/wows/">
           Центр поддержки пользователей WoWs
         </a>
       </footer>
-    )
+    );
   }
 }
