@@ -2,11 +2,11 @@ import React from 'react'
 import App, { Container } from 'next/app'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
-import Attachcss from './attach-css';
+import Attachcss from './attach-css'
 import '../scss/_index.scss'
 
 export default class MyApp extends App {
-  static async getInitialProps({ Component, router, ctx }) {
+  static async getInitialProps({ Component, ctx }) {
     let pageProps = {}
 
     if (Component.getInitialProps) {
@@ -16,9 +16,13 @@ export default class MyApp extends App {
     return { pageProps }
   }
 
-  render () {
+  render() {
     const { Component, pageProps } = this.props
-    const { router: { pageLoader: { buildId, assetPrefix } = {} } = {} } = this.props;
+    const { router: { pageLoader: { buildId, assetPrefix } = {} } = {} } = this.props
+
+    function fixInit(page) {
+      return <Attachcss include={['_app', page]} />
+    }
 
     if (buildId) {
       Object.assign(global, {
@@ -26,28 +30,25 @@ export default class MyApp extends App {
           buildId,
           assetPrefix,
         },
-      });
+      })
     }
 
-    try{
-      if (location){
-        var splitedUrl = location.pathname.split('/')
+    try {
+      if (document.location) {
+        const splitedUrl = document.location.pathname.split('/')
         fixInit(splitedUrl[splitedUrl.length - 1])
       }
     } catch (e) {
-
-    }
-    function fixInit(page){
-      <Attachcss include={['_app', page]}/>
+      console.log(e)
     }
 
     return (
       <Container>
-        <Header/>
-        <div className='container'>
+        <Header />
+        <div className="container">
           <Component {...pageProps} />
         </div>
-        <Footer/>
+        <Footer />
       </Container>
     )
   }
