@@ -1,15 +1,10 @@
-import { Component } from 'react'
 import MainMenu from './menu/MainMenu'
 import Login from './login/Login'
 
-export default class Header extends Component {
-  render() {
-    return (
-      <header className="header">
-        <h1>Asuka</h1>
-        <MainMenu/>
-        <Login/>
-      </header>
-    )
-  }
-}
+export default () => (
+  <header className="header">
+    <h1>Asuka</h1>
+    <MainMenu />
+    <Login />
+  </header>
+)
