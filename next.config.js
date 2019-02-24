@@ -1,7 +1,10 @@
 const withSass = require('@zeit/next-sass');
-const withESLint = require('next-eslint')
+const withESLint = require('next-eslint');
 
 module.exports = withESLint(withSass({
+  webpack(config) {
+    return config;
+  },
   /**
    * For use css-modules
    * turn on when solve the problem:
