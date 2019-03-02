@@ -14,7 +14,7 @@ const Link = ({ router, children, ...props }) => {
 
   let className = (child.props.className) ? `${child.props.className} ` : ''
   if (router.pathname === href) {
-    className += (child.props.activeClassName) ? `${child.props.activeClassName}`.trim() : 'active'
+    className += `${child.props.activeClassName}`.trim()
   }
 
   return <StandartLink {...props}>{React.cloneElement(child, { className })}</StandartLink>
