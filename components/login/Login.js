@@ -47,25 +47,26 @@ export default class Login extends Component {
     const { showModal } = this.state
 
     const modal = (
-      <div role="button" tabIndex={0} className="login__modal-shadow" onClick={Login.loginHandler}>
-        <div className="login__modal" onClick={this.stopPropagation}>
+      <div className="login__modal-shadow">
+        <div className="login__modal">
           <button
+            type="button"
             className="login__modal-close-btn"
-            onClick={this.loginHandler}
+            onClick={Login.loginHandler}
           >
             &#10006;
           </button>
           <form action="/login" method="POST">
             <div className="login__field">
-              <label>
+              <label htmlFor="login__login-field">
                 Login:
-                <input type="text" />
+                <input type="text" id="login__login-field" />
               </label>
             </div>
             <div className="login__field">
-              <label>
+              <label htmlFor="login__password-field">
                 Pass:
-                <input type="password" />
+                <input type="password" id="login__password-field" />
               </label>
             </div>
             <button className="login__submit-btn" type="submit">Login</button>
@@ -76,9 +77,9 @@ export default class Login extends Component {
 
     return (
       <div>
-        <div className="login__button" onClick={this.loginHandler}>
+        <button type="button" className="login__button" onClick={Login.loginHandler}>
           Login
-        </div>
+        </button>
         {showModal && modal}
       </div>
     )
