@@ -29,18 +29,20 @@ export default class Login extends Component {
     e.stopPropagation()
   }
 
-  static loginHandler() {
-    const { showModal } = this.state
-    this.setState({
-      showModal: !showModal,
-    })
-  }
-
   constructor(props) {
     super(props)
     this.state = {
       showModal: false,
     }
+
+    this.loginHandler = this.loginHandler.bind(this)
+  }
+
+  loginHandler() {
+    const { showModal } = this.state
+    this.setState({
+      showModal: !showModal,
+    })
   }
 
   render() {
@@ -52,7 +54,7 @@ export default class Login extends Component {
           <button
             type="button"
             className="login__modal-close-btn"
-            onClick={Login.loginHandler}
+            onClick={this.loginHandler}
           >
             &#10006;
           </button>
@@ -77,7 +79,7 @@ export default class Login extends Component {
 
     return (
       <div>
-        <button type="button" className="login__button" onClick={Login.loginHandler}>
+        <button type="button" className="login__button" onClick={this.loginHandler}>
           Login
         </button>
         {showModal && modal}
