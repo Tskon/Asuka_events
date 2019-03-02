@@ -1,11 +1,11 @@
-const express = require ('express')
+const express = require('express')
 const next = require('next')
-const models = require('./models/index')
 const passport = require('passport')
 const session = require('express-session')
 const bodyParser = require('body-parser')
 const cors = require('cors')
-const env = require('dotenv').load();
+// const env = require('dotenv').load()
+const models = require('./models/index')
 
 const PORT = process.env.PORT || 3000
 const dev = process.env.NODE_DEV !== 'production'
@@ -18,7 +18,7 @@ nextApp.prepare().then(() => {
   app.use(cors())
   app.use(bodyParser.json())
   app.use(bodyParser.urlencoded({ extended: true }))
-  app.use(session({ secret: 'asuka and ray',resave: true, saveUninitialized:true}))
+  app.use(session({ secret: 'asuka and ray', resave: true, saveUninitialized: true }))
   app.use(passport.initialize())
   app.use(passport.session())
 
@@ -28,30 +28,28 @@ nextApp.prepare().then(() => {
    */
   app.use('/api', require('./routes/api/index'))
 
-  app.get('*', (req,res) => {
-    return handle(req,res) // for all the react stuff
-  })
+  app.get('*', (req, res) => handle(req, res), // for all the react stuff
+  )
 
   /**
    * Load passport strategies
    */
-  require('./passport/passport.js')(passport, models.user);
+  require('./passport/passport.js')(passport, models.user)
 
   /**
    * Sync with database
    */
-  models.sequelize.sync().then(function() {
+  models.sequelize.sync().then(() => {
     console.log('Nice! Database looks fine')
-  }).catch(function(err) {
-    console.log(err, "Something went wrong with the Database Update!")
-  });
+  }).catch((err) => {
+    console.log(err, 'Something went wrong with the Database Update!')
+  })
 
   /**
    * Listening port by express
    */
-  app.listen(PORT, err => {
+  app.listen(PORT, (err) => {
     if (err) throw err
     console.log(`ready at http://localhost:${PORT}`)
   })
-
 })
