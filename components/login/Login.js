@@ -1,6 +1,6 @@
 import { Component } from 'react'
 
-export default class Header extends Component {
+export default class Login extends Component {
   /**
    * Не работает локально
    * TODO допилить после выгрузки на сервер
@@ -41,38 +41,30 @@ export default class Header extends Component {
     this.state = {
       showModal: false,
     }
-
-    this.loginHandler = this.loginHandler.bind(this)
   }
 
   render() {
     const { showModal } = this.state
 
     const modal = (
-      <div role="button" tabIndex={0} className="login__modal-shadow" onClick={this.loginHandler}>
+      <div role="button" tabIndex={0} className="login__modal-shadow" onClick={Login.loginHandler}>
         <div className="login__modal" onClick={this.stopPropagation}>
           <button
             className="login__modal-close-btn"
             onClick={this.loginHandler}
           >
-
-
             &#10006;
           </button>
           <form action="/login" method="POST">
             <div className="login__field">
               <label>
-
-
-Login:
+                Login:
                 <input type="text" />
               </label>
             </div>
             <div className="login__field">
               <label>
-
-
-Pass:
+                Pass:
                 <input type="password" />
               </label>
             </div>
@@ -88,7 +80,6 @@ Pass:
           Login
         </div>
         {showModal && modal}
-
       </div>
     )
   }
