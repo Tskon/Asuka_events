@@ -58,7 +58,7 @@ export default class Login extends Component {
           >
             &#10006;
           </button>
-          <form action="/login" method="POST">
+          <form action="/api/signup" method="POST">
             <div className="login__field">
               <label htmlFor="login__login-field">
                 Login:
