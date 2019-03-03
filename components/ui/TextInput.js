@@ -3,9 +3,9 @@ import classNames from 'classnames'
 import PropTypes from 'prop-types'
 
 class TextInput extends Component {
-  constructor(...props) {
+  constructor(props) {
     super()
-    this.label = props.label
+    this.label = props.labelText
     this.name = props.name
 
     this.state = {
@@ -20,7 +20,11 @@ class TextInput extends Component {
   }
 
   handleChange(e) {
-    this.setState({ value: e.target.value })
+    const newState = {
+      value: e.target.value,
+      isCompleted: e.target.value !== '',
+    }
+    this.setState(newState)
   }
 
   handleFocus() {
@@ -31,9 +35,9 @@ class TextInput extends Component {
   handleBloor() {
     const newState = {
       isFocused: false,
-      isComleted: this.state.value === '',
+      isCompleted: this.state.value !== '',
     }
-    if (this.state.value === '') newState.isComleted = false
+    this.setState(newState)
   }
 
   render() {
@@ -47,24 +51,23 @@ class TextInput extends Component {
 
     return (
       <div className={wrapperStyles}>
-        <label className="mat-label" htmlFor={this.name}>{this.label}
-          <input
-            type="text"
-            className="mat-input"
-            id={this.name}
-            value={this.state.value}
-            onChange={this.handleChange}
-            onFocus={this.handleFocus}
-            onBlur={this.handleBloor}
-          />
-        </label>
+        <span className="mat-label">{this.label}</span>
+        <input
+          type="text"
+          className="mat-input"
+          id={this.name}
+          value={this.state.value}
+          onChange={this.handleChange}
+          onFocus={this.handleFocus}
+          onBlur={this.handleBloor}
+        />
       </div>
     )
   }
 }
 
 TextInput.propTypes = {
-  label: PropTypes.string.isRequired,
+  labelText: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
 }
 

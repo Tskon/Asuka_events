@@ -33,7 +33,7 @@ export default class Login extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      showModal: false,
+      showModal: true,
     }
 
     this.loginHandler = this.loginHandler.bind(this)
@@ -60,8 +60,8 @@ export default class Login extends Component {
             &#10006;
           </button>
           <form action="/api/signup" method="POST">
-            <TextInput label="Login" name="login__login-field" />
-            <TextInput label="Password" name="login__password-field" />
+            <TextInput labelText="Login" name="login__login-field" />
+            <TextInput labelText="Password" name="login__password-field" />
             <button className="login__submit-btn" type="submit">Login</button>
           </form>
         </div>

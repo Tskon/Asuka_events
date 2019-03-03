@@ -1,9 +1,11 @@
 .mat-label {
   display: block;
   font-size: 16px;
+  text-align: left;
   transform: translateY(25px);
   color: #e2e2e2;
   transition: all 0.5s;
+  opacity: 0.3;
 }
 
 .mat-input {
@@ -17,8 +19,10 @@
 }
 
 .mat-div {
-  padding: 30px 0 0 0;
+  margin-bottom: 10px;
+  padding: 0;
   position: relative;
+  height: 55px;
 }
 
 .mat-div:after, .mat-div:before {
