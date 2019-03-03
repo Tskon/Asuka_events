@@ -9,7 +9,9 @@
 }
 
 .mat-input {
-  position: relative;
+  position: absolute;
+  bottom: 0;
+  left: 0;
   background: transparent;
   width: 100%;
   border: none;
@@ -23,6 +25,7 @@
   padding: 0;
   position: relative;
   height: 55px;
+  min-width: 120px;
 }
 
 .mat-div:after, .mat-div:before {
@@ -50,7 +53,9 @@
   color: #8E8DBE;
 }
 
-.is-completed .mat-label {
-  font-size: 12px;
-  transform: translateY(0);
+.is-completed {
+  .mat-label {
+    font-size: 12px;
+    transform: translateY(0);
+  }
 }
