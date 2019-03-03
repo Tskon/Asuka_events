@@ -42,19 +42,19 @@ class TextInput extends Component {
 
   render() {
     const wrapperStyles = classNames(
-      'mat-div',
+      'ui-text-input',
       {
-        'is-active': this.state.isFocused,
-        'is-completed': this.state.isCompleted,
+        'ui-text-input_active': this.state.isFocused,
+        'ui-text-input_completed': this.state.isCompleted,
       },
     )
 
     return (
       <div className={wrapperStyles}>
-        <span className="mat-label">{this.label}</span>
+        <span className="ui-text-input__label">{this.label}</span>
         <input
           type="text"
-          className="mat-input"
+          className="ui-text-input__input"
           id={this.name}
           value={this.state.value}
           onChange={this.handleChange}
