@@ -1,4 +1,4 @@
-module.exports = function(router, models){
+module.exports = function (router, models) {
   router.get('/user', (req, res) => {
     console.log('api user', req, res)
 
@@ -17,5 +17,3 @@ module.exports = function(router, models){
     res.send('Answer from /user route')
   })
 }
-
-

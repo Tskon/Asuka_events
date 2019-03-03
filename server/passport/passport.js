@@ -8,44 +8,42 @@ module.exports = function (passport, user) {
     {
       usernameField: 'username',
       passwordField: 'password',
-      passReqToCallback: true // allows us to pass back the entire request to the callback
+      passReqToCallback: true, // allows us to pass back the entire request to the callback
 
     },
 
-    function (req, username, password, done) {
+    ((req, username, password, done) => {
       const generateHash = function (password) {
-        return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null);
+        return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null)
       }
 
       User.findOne({
         where: {
-          username: username
-        }
-      }).then(function (user) {
+          username,
+        },
+      }).then((user) => {
         if (user) {
           return done(null, false, {
-            message: 'Данный логин занят'
-          })
-
-        } else {
-          const userPassword = generateHash(password)
-          const data = {
-            username: username,
-            password: userPassword,
-            // firstname: req.body.firstname,
-            // lastname: req.body.lastname
-          }
-
-          User.create(data).then(function (newUser, created) {
-            if (!newUser) {
-              return done(null, false)
-            }
-            if (newUser) {
-              return done(null, newUser)
-            }
+            message: 'Данный логин занят',
           })
         }
+        const userPassword = generateHash(password)
+        const data = {
+          username,
+          password: userPassword,
+          // firstname: req.body.firstname,
+          // lastname: req.body.lastname
+        }
+
+        User.create(data).then((newUser, created) => {
+          if (!newUser) {
+            return done(null, false)
+          }
+          if (newUser) {
+            return done(null, newUser)
+          }
+        })
       })
-    }
+    }),
   ))
 }

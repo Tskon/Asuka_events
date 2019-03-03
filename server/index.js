@@ -26,7 +26,7 @@ nextApp.prepare().then(() => {
    * Routes. use path /api + path in routes.
    * For example: /api/auth
    */
-  app.use('/api', require('./routes/api/index'))
+  app.use('/api', require('./routes/api/index')(passport))
 
   app.get('*', (req, res) => handle(req, res), // for all the react stuff
   )
