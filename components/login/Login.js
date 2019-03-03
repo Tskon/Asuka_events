@@ -1,4 +1,5 @@
 import { Component } from 'react'
+import TextInput from '../ui/TextInput'
 
 export default class Login extends Component {
   /**
@@ -59,18 +60,8 @@ export default class Login extends Component {
             &#10006;
           </button>
           <form action="/api/signup" method="POST">
-            <div className="login__field">
-              <label htmlFor="login__login-field">
-                Login:
-                <input type="text" id="login__login-field" />
-              </label>
-            </div>
-            <div className="login__field">
-              <label htmlFor="login__password-field">
-                Pass:
-                <input type="password" id="login__password-field" />
-              </label>
-            </div>
+            <TextInput label="Login" name="login__login-field" />
+            <TextInput label="Password" name="login__password-field" />
             <button className="login__submit-btn" type="submit">Login</button>
           </form>
         </div>
