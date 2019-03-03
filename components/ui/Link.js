@@ -8,27 +8,33 @@ import PropTypes from 'prop-types'
  * Возвращает ссылку с рабочим с  равнением пути
  */
 const Link = ({ router, children, ...props }) => {
-  const { href } = props
+  const { href, activeClassName, className } = props
+  let resultClassName = ''
 
   const child = Children.only(children)
 
-  let className = (child.props.className) ? `${child.props.className} ` : ''
   if (router.pathname === href) {
-    className += `${child.props.activeClassName}`.trim()
+    resultClassName = className + activeClassName.trim()
   }
 
-  return <StandartLink {...props}>{React.cloneElement(child, { className })}</StandartLink>
+  return (
+    <StandartLink href={href}>
+      {React.cloneElement(child, { className: resultClassName })}
+    </StandartLink>
+  )
 }
 
 Link.propTypes = {
   router: PropTypes.instanceOf(Object).isRequired,
-  children: PropTypes.instanceOf(Array).isRequired,
+  children: PropTypes.element.isRequired,
   activeClassName: PropTypes.string,
+  className: PropTypes.string,
   href: PropTypes.string.isRequired,
 }
 
 Link.defaultProps = {
   activeClassName: 'active',
+  className: '',
 }
 
 export default withRouter(Link)
