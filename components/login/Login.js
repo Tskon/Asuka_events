@@ -34,16 +34,53 @@ export default class Login extends Component {
     super(props)
     this.state = {
       showModal: false,
+      loginValue: '',
+      passwordValue: '',
     }
 
-    this.loginHandler = this.loginHandler.bind(this)
+    this.loginModalSwitcher = this.loginModalSwitcher.bind(this)
+    this.submitHandler = this.submitHandler.bind(this)
+    this.loginOnChangeHandler = this.loginOnChangeHandler.bind(this)
+    this.passwordOnChangeHandler = this.passwordOnChangeHandler.bind(this)
   }
 
-  loginHandler() {
+  loginModalSwitcher() {
     const { showModal } = this.state
     this.setState({
       showModal: !showModal,
     })
+  }
+
+  loginOnChangeHandler(val) {
+    this.setState({
+      loginValue: val,
+    })
+  }
+
+  passwordOnChangeHandler(val) {
+    this.setState({
+      passwordValue: val,
+    })
+  }
+
+  submitHandler(e) {
+    e.preventDefault()
+
+    const body = {
+      login: this.state.loginValue,
+      password: this.state.passwordValue,
+    }
+
+    const myInit = {
+      method: 'POST',
+      body: JSON.stringify(body),
+    }
+
+    fetch('/api/signup', myInit)
+      .then(response => response.json())
+      .then((data) => {
+        console.log(data)
+      })
   }
 
   render() {
@@ -55,13 +92,13 @@ export default class Login extends Component {
           <button
             type="button"
             className="login__modal-close-btn"
-            onClick={this.loginHandler}
+            onClick={this.loginModalSwitcher}
           >
             &#10006;
           </button>
-          <form action="/api/signup" method="POST">
-            <TextInput labelText="Login" name="login__login-field" />
-            <TextInput labelText="Password" name="login__password-field" />
+          <form onSubmit={this.submitHandler}>
+            <TextInput onChange={this.loginOnChangeHandler} labelText="Login" name="login__login-field" />
+            <TextInput onChange={this.passwordOnChangeHandler} labelText="Password" name="login__password-field" />
             <button className="login__submit-btn" type="submit">Login</button>
           </form>
         </div>
@@ -70,7 +107,7 @@ export default class Login extends Component {
 
     return (
       <div>
-        <button type="button" className="login__button" onClick={this.loginHandler}>
+        <button type="button" className="login__button" onClick={this.loginModalSwitcher}>
           Login
         </button>
         {showModal && modal}

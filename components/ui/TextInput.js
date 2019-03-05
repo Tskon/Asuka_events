@@ -7,6 +7,7 @@ class TextInput extends Component {
     super()
     this.label = props.labelText
     this.name = props.name
+    this.onChangeHandler = props.onChange
 
     this.state = {
       value: '',
@@ -24,6 +25,7 @@ class TextInput extends Component {
       value: e.target.value,
       isCompleted: e.target.value !== '',
     }
+    this.onChangeHandler(e.value)
     this.setState(newState)
   }
 
@@ -69,6 +71,11 @@ class TextInput extends Component {
 TextInput.propTypes = {
   labelText: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+  onChange: PropTypes.func,
+}
+
+TextInput.defaultProps = {
+  onChange: () => {},
 }
 
 export default TextInput
