@@ -76,11 +76,14 @@ export default class Login extends Component {
       body: JSON.stringify(body),
     }
 
-    fetch('/api/signup', myInit)
-      .then(response => response.json())
-      .then((data) => {
-        console.log(data)
-      })
+    try {
+      fetch('/api/signup', myInit)
+        .then((response) => {
+          console.log(response)
+        })
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   render() {
@@ -97,8 +100,16 @@ export default class Login extends Component {
             &#10006;
           </button>
           <form onSubmit={this.submitHandler}>
-            <TextInput onChange={this.loginOnChangeHandler} labelText="Login" name="login__login-field" />
-            <TextInput onChange={this.passwordOnChangeHandler} labelText="Password" name="login__password-field" />
+            <TextInput
+              onChange={this.loginOnChangeHandler}
+              labelText="Login"
+              name="login__login-field"
+            />
+            <TextInput
+              onChange={this.passwordOnChangeHandler}
+              labelText="Password"
+              name="login__password-field"
+            />
             <button className="login__submit-btn" type="submit">Login</button>
           </form>
         </div>
