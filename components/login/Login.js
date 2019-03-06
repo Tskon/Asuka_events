@@ -55,11 +55,13 @@ export default class Login extends Component {
   }
 
   switchType() {
-    const newType = ((this.state.typesList[0] === this.state.currentType)
-      ? this.state.typesList[1]
-      : this.state.typesList[0])
+    const signInType = this.state.typesList[0]
+    const signUpType = this.state.typesList[1]
+    const curentType = this.state.currentType
+    const newType = ((signInType === curentType) ? signUpType : signInType)
+
     this.setState({
-      currentType: !newType,
+      currentType: newType,
     })
   }
 
@@ -105,13 +107,6 @@ export default class Login extends Component {
       <div className="login__modal-shadow">
         <div className="login__modal">
           <button
-            type="button"
-            className="login__modal-switch-type-btn"
-            onClick={this.switchType}
-          >
-            Зарегистрироваться
-          </button>
-          <button
             title="Закрыть"
             type="button"
             className="login__modal-close-btn"
@@ -137,6 +132,13 @@ export default class Login extends Component {
                 ? <button className="login__signin-btn" type="submit">Войти</button>
                 : <button className="login__signup-btn" type="submit">Зарегистрироваться</button>
             }
+            <button
+              type="button"
+              className="login__modal-switch-type-btn"
+              onClick={this.switchType}
+            >
+              { (this.state.currentType === this.state.typesList[0]) ? 'Зарегистрироваться' : 'Войти' }
+            </button>
           </form>
         </div>
       </div>
