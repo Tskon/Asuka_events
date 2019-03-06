@@ -8,6 +8,7 @@ class TextInput extends Component {
     this.label = props.labelText
     this.name = props.name
     this.onChangeHandler = props.onChange
+    this.isRequired = props.required
 
     this.state = {
       value: '',
@@ -62,6 +63,7 @@ class TextInput extends Component {
           onChange={this.handleChange}
           onFocus={this.handleFocus}
           onBlur={this.handleBloor}
+          required={this.isRequired}
         />
       </div>
     )
@@ -72,10 +74,12 @@ TextInput.propTypes = {
   labelText: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func,
+  required: PropTypes.bool,
 }
 
 TextInput.defaultProps = {
   onChange: () => {},
+  required: false,
 }
 
 export default TextInput

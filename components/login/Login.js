@@ -104,11 +104,13 @@ export default class Login extends Component {
               onChange={this.loginOnChangeHandler}
               labelText="Login"
               name="login__login-field"
+              required
             />
             <TextInput
               onChange={this.passwordOnChangeHandler}
               labelText="Password"
               name="login__password-field"
+              required
             />
             <button className="login__submit-btn" type="submit">Login</button>
           </form>
