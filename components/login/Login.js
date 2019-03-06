@@ -33,21 +33,33 @@ export default class Login extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      showModal: false,
+      showModal: true,
       loginValue: '',
       passwordValue: '',
+      currentType: 'signin',
+      typesList: ['signin', 'signup'],
     }
 
     this.loginModalSwitcher = this.loginModalSwitcher.bind(this)
     this.submitHandler = this.submitHandler.bind(this)
     this.loginOnChangeHandler = this.loginOnChangeHandler.bind(this)
     this.passwordOnChangeHandler = this.passwordOnChangeHandler.bind(this)
+    this.switchType = this.switchType.bind(this)
   }
 
   loginModalSwitcher() {
     const { showModal } = this.state
     this.setState({
       showModal: !showModal,
+    })
+  }
+
+  switchType() {
+    const newType = ((this.state.typesList[0] === this.state.currentType)
+      ? this.state.typesList[1]
+      : this.state.typesList[0])
+    this.setState({
+      currentType: !newType,
     })
   }
 
@@ -94,6 +106,14 @@ export default class Login extends Component {
         <div className="login__modal">
           <button
             type="button"
+            className="login__modal-switch-type-btn"
+            onClick={this.switchType}
+          >
+            Зарегистрироваться
+          </button>
+          <button
+            title="Закрыть"
+            type="button"
             className="login__modal-close-btn"
             onClick={this.loginModalSwitcher}
           >
@@ -102,17 +122,21 @@ export default class Login extends Component {
           <form onSubmit={this.submitHandler}>
             <TextInput
               onChange={this.loginOnChangeHandler}
-              labelText="Login"
+              labelText="Логин"
               name="login__login-field"
               required
             />
             <TextInput
               onChange={this.passwordOnChangeHandler}
-              labelText="Password"
+              labelText="Пароль"
               name="login__password-field"
               required
             />
-            <button className="login__submit-btn" type="submit">Login</button>
+            {
+              (this.state.currentType === this.state.typesList[0])
+                ? <button className="login__signin-btn" type="submit">Войти</button>
+                : <button className="login__signup-btn" type="submit">Зарегистрироваться</button>
+            }
           </form>
         </div>
       </div>
@@ -121,7 +145,7 @@ export default class Login extends Component {
     return (
       <div>
         <button type="button" className="login__button" onClick={this.loginModalSwitcher}>
-          Login
+          Войти
         </button>
         {showModal && modal}
       </div>
