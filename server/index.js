@@ -28,7 +28,10 @@ nextApp.prepare().then(() => {
    */
   app.use('/api', require('./routes/api/index')(passport))
 
-  app.get('*', (req, res) => handle(req, res)) // for all the react stuff
+  /**
+   * for all the react stuff
+   */
+  app.get('*', (req, res) => handle(req, res))
 
 
   /**
