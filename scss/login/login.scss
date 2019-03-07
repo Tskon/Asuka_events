@@ -42,16 +42,7 @@
 }
 
 .login__modal-switch-type-btn{
-  border: none;
-  background-color: transparent;
-  position: absolute;
-  color: $white;
-  left: 50%;
-  bottom: 10px;
-  transform: translateX(-50%);
-  opacity: 0.5;
-  outline: none;
-  transition: 0.3s;
+
   &:focus{
     box-shadow: 0 3px 5px -3px $white;
   }

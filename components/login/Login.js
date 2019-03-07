@@ -1,5 +1,6 @@
 import { Component } from 'react'
 import TextInput from '../ui/TextInput'
+import CheckboxLoginTypeSwitcher from './CheckboxLoginTypeSwitcher'
 
 export default class Login extends Component {
   /**
@@ -115,6 +116,7 @@ export default class Login extends Component {
             &#10006;
           </button>
           <form onSubmit={this.submitHandler}>
+            <CheckboxLoginTypeSwitcher onChange={this.switchType} checked />
             <TextInput
               onChange={this.loginOnChangeHandler}
               labelText="Логин"
@@ -132,13 +134,6 @@ export default class Login extends Component {
                 ? <button className="login__signin-btn" type="submit">Войти</button>
                 : <button className="login__signup-btn" type="submit">Зарегистрироваться</button>
             }
-            <button
-              type="button"
-              className="login__modal-switch-type-btn"
-              onClick={this.switchType}
-            >
-              { (this.state.currentType === this.state.typesList[0]) ? 'Зарегистрироваться' : 'Войти' }
-            </button>
           </form>
         </div>
       </div>
