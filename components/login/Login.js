@@ -116,7 +116,7 @@ export default class Login extends Component {
             &#10006;
           </button>
           <form onSubmit={this.submitHandler}>
-            <CheckboxLoginTypeSwitcher onChange={this.switchType} checked />
+            <CheckboxLoginTypeSwitcher onChange={this.switchType} />
             <TextInput
               onChange={this.loginOnChangeHandler}
               labelText="Логин"

@@ -6,45 +6,35 @@ class CheckboxLoginTypeSwitcher extends Component {
     super()
     this.onChange = props.onChange
 
-    this.state = {
-      checked: props.checked,
-    }
-
     this.handleChange = this.handleChange.bind(this)
   }
 
   handleChange() {
-    const newState = { checked: !this.checked }
-
-    this.setState(newState)
-
     this.onChange(!this.checked)
   }
 
   render() {
     return (
-      <div className="rocker">
+      <label htmlFor="CheckboxLoginTypeSwitcher" className="rocker">
         <input
+          id="CheckboxLoginTypeSwitcher"
           type="checkbox"
-          checked={this.state.checked}
-          onChange={this.onChange}
+          onChange={this.handleChange}
         />
         <span className="switch-left"><span>Вход</span></span>
         <span className="switch-right"><span>Рега</span></span>
-      </div>
+      </label>
     )
   }
 }
 
 CheckboxLoginTypeSwitcher.propTypes = {
   onChange: PropTypes.func,
-  checked: PropTypes.bool,
 }
 
 CheckboxLoginTypeSwitcher.defaultProps = {
   onChange: () => {
   },
-  checked: false,
 }
 
 export default CheckboxLoginTypeSwitcher
