@@ -2,7 +2,7 @@ module.exports = {
   dbName: 'tskon1_asuka_frm',
   dbUser: 'tskon1_asuka_frm',
   dbPassword: 'q1w2Q!W@',
-  dbOptions:{
+  dbOptions: {
     host: 'tskon1.beget.tech',
     dialect: 'mysql',
     operatorsAliases: false,
@@ -10,8 +10,7 @@ module.exports = {
       max: 5,
       min: 0,
       acquire: 30000,
-      idle: 10000
+      idle: 1000,
     },
-  }
-
+  },
 }
