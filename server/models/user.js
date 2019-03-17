@@ -1,32 +1,31 @@
-module.exports = function(sequelize, Sequelize) {
+module.exports = function (sequelize, Sequelize) {
   const User = sequelize.define('user', {
 
     id: {
       autoIncrement: true,
       primaryKey: true,
-      type: Sequelize.INTEGER
+      type: Sequelize.INTEGER,
     },
 
     username: {
-      type: Sequelize.TEXT
+      type: Sequelize.TEXT,
     },
 
     password: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: false,
     },
 
     last_login: {
-      type: Sequelize.DATE
+      type: Sequelize.DATE,
     },
 
     status: {
       type: Sequelize.ENUM('active', 'inactive'),
-      defaultValue: 'active'
-    }
+      defaultValue: 'active',
+    },
 
-  });
+  })
 
-  return User;
-
+  return User
 }
