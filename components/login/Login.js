@@ -88,8 +88,11 @@ export default class Login extends Component {
 
     const myInit = {
       method: 'POST',
+      // TODO пофиксить передачу данных
       body: JSON.stringify(body),
     }
+
+    console.log(myInit.body, body)
 
     try {
       fetch('/api/signup', myInit)
