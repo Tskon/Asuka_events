@@ -26,7 +26,7 @@ class TextInput extends Component {
       value: e.target.value,
       isCompleted: e.target.value !== '',
     }
-    this.onChangeHandler(e.value)
+    this.onChangeHandler(e.target.value)
     this.setState(newState)
   }
 
