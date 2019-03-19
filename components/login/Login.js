@@ -92,12 +92,11 @@ export default class Login extends Component {
       body: JSON.stringify(body),
     }
 
-    console.log(myInit.body, body)
-
     try {
       fetch('/api/signup', myInit)
-        .then((response) => {
-          console.log(response)
+        .then(response => response.text())
+        .then((data) => {
+          console.log(data)
         })
     } catch (err) {
       console.log(err)
