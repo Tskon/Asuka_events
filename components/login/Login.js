@@ -90,6 +90,7 @@ export default class Login extends Component {
       method: 'POST',
       // TODO пофиксить передачу данных
       body: JSON.stringify(body),
+      headers: { 'Content-Type': 'application/json' },
     }
 
     try {
