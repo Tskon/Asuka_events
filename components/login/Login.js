@@ -82,7 +82,7 @@ export default class Login extends Component {
     e.preventDefault()
 
     const body = {
-      login: this.state.loginValue,
+      username: this.state.loginValue,
       password: this.state.passwordValue,
     }
 

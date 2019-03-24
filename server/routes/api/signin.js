@@ -1,9 +1,5 @@
 module.exports = function (router, models, passport) {
-  // router.post('/signup', passport.authenticate('local-signup', {
-  //   successRedirect: '/success-signup',
-  //   failureRedirect: '/fail-signup',
-  // }))
-  router.post('/signup', (req, res) => {
+  router.post('/signin', (req, res) => {
     // TODO переделать поиск по введенным данным, а не всех пользователей
     console.log('req body: ', req.body)
 

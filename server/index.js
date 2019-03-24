@@ -18,7 +18,7 @@ nextApp.prepare().then(() => {
   app.use(cors())
   app.use(bodyParser.json())
   app.use(bodyParser.urlencoded({ extended: true }))
-  app.use(session({ secret: 'asuka and ray', resave: true, saveUninitialized: true }))
+  app.use(session({ secret: 'asuka_and_ray', resave: true, saveUninitialized: true }))
   app.use(passport.initialize())
   app.use(passport.session())
 
