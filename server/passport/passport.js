@@ -8,14 +8,11 @@ module.exports = function (passport, user) {
     {
       usernameField: 'username',
       passwordField: 'password',
-      passReqToCallback: true, // allows us to pass back the entire request to the callback
-
+      passReqToCallback: true, // передаем изначальный запрос в колбэк
     },
 
     ((req, username, password, done) => {
-      const generateHash = function (password) {
-        return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null)
-      }
+      const generateHash = password => bCrypt.hashSync(password, bCrypt.genSaltSync(8), null)
 
       User.findOne({
         where: {
@@ -31,8 +28,6 @@ module.exports = function (passport, user) {
         const data = {
           username,
           password: userPassword,
-          // firstname: req.body.firstname,
-          // lastname: req.body.lastname
         }
 
         User.create(data).then((newUser, created) => {
