@@ -1,5 +1,7 @@
 const bCrypt = require('bcrypt-nodejs')
 
+const generateHash = password => bCrypt.hashSync(password, bCrypt.genSaltSync(8), null)
+
 module.exports = function (passport, user) {
   const User = user
   const LocalStrategy = require('passport-local').Strategy
@@ -12,8 +14,6 @@ module.exports = function (passport, user) {
     },
 
     ((req, username, password, done) => {
-      const generateHash = password => bCrypt.hashSync(password, bCrypt.genSaltSync(8), null)
-
       User.findOne({
         where: {
           username,
@@ -38,6 +38,34 @@ module.exports = function (passport, user) {
             return done(null, newUser)
           }
         })
+      })
+    }),
+  ))
+
+  passport.use('local-signin', new LocalStrategy(
+    {
+      usernameField: 'username',
+      passwordField: 'password',
+      passReqToCallback: true, // передаем изначальный запрос в колбэк
+    },
+
+    ((req, username, password, done) => {
+      const userPassword = generateHash(password)
+      User.findOne({
+        where: {
+          username,
+          password: userPassword,
+        },
+      }).then((user) => {
+        if (!user) {
+          return done(null, false, {
+            message: 'Успешный вход',
+          })
+        } else {
+          return done(null, false, {
+            message: 'Неверные имя пользователя или пароль',
+          })
+        }
       })
     }),
   ))
