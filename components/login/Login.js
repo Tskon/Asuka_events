@@ -94,6 +94,7 @@ export default class Login extends Component {
     }
 
     try {
+      const url = (currentType === 'signin') ? '/api/signin' : '/api/signup'
       fetch('/api/signup', myInit)
         .then(response => response.text())
         .then((data) => {
