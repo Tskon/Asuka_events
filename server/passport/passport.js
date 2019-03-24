@@ -41,4 +41,14 @@ module.exports = function (passport, user) {
       })
     }),
   ))
+
+  passport.serializeUser((user, done) => {
+    done(null, user.id)
+  })
+
+  passport.deserializeUser((id, done) => {
+    User.findByPk(id, (err, user) => {
+      done(err, user)
+    })
+  })
 }
