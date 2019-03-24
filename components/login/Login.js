@@ -69,14 +69,17 @@ export default class Login extends Component {
     }
 
     try {
-      const url = (this.currentType === 'signin') ? '/api/signin' : '/api/signup'
+      const url = (this.state.currentType === 'signin') ? '/api/signin' : '/api/signup'
       fetch(url, myInit)
         .then(response => response.text())
-        .then((data) => {
-          console.log(data)
+        .then(() => {
+          // console.log(data)
+        })
+        .catch((err) => {
+          console.log(err)
         })
     } catch (err) {
-      console.log(err)
+      // console.log(err)
     }
   }
 

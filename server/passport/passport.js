@@ -61,11 +61,10 @@ module.exports = function (passport, user) {
           return done(null, false, {
             message: 'Успешный вход',
           })
-        } else {
-          return done(null, false, {
-            message: 'Неверные имя пользователя или пароль',
-          })
         }
+        return done(null, false, {
+          message: 'Неверные имя пользователя или пароль',
+        })
       })
     }),
   ))
