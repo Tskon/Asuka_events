@@ -50,17 +50,13 @@ module.exports = function (passport, user) {
     },
 
     ((req, username, password, done) => {
-      const userPassword = generateHash(password)
       User.findOne({
         where: {
           username,
-          password: userPassword,
         },
       }).then((user) => {
-        if (!user) {
-          return done(null, false, {
-            message: 'Успешный вход',
-          })
+        if (bCrypt.compareSync(password, user.password)) {
+          return done(null, user)
         }
         return done(null, false, {
           message: 'Неверные имя пользователя или пароль',
