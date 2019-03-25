@@ -69,6 +69,9 @@ module.exports = function (passport, user) {
     }),
   ))
 
+  passport.authenticate('local-signup', { failureFlash: 'signup-error' });
+  passport.authenticate('local-signin', { failureFlash: 'signin-error' });
+
   passport.serializeUser((user, done) => {
     done(null, user.id)
   })
