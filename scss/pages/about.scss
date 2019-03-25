@@ -1,0 +1,14 @@
+.event-header{
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.event-map{
+  background-image: url(/static/map.svg);
+  background-size: 500%;
+  background-position: 88% 65%;
+  width: calc(100% + 20px);
+  padding-top: 40%;
+  margin: -10px;
+}
