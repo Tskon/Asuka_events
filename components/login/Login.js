@@ -7,6 +7,27 @@ export default class Login extends Component {
     e.stopPropagation()
   }
 
+  static logOut() {
+    const myInit = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+    }
+
+    try {
+      const url = '/api/logout'
+      fetch(url, myInit)
+        .then(response => response.text())
+        .then((data) => {
+          console.log(data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    } catch (err) {
+      // console.log(err)
+    }
+  }
+
   constructor(props) {
     super(props)
     this.state = {
@@ -125,6 +146,9 @@ export default class Login extends Component {
       <div>
         <button type="button" className="login__button" onClick={this.loginModalSwitcher}>
           Войти
+        </button>
+        <button type="button" className="login__button" onClick={this.logOut}>
+          Выйти
         </button>
         {showModal && modal}
       </div>
