@@ -5,8 +5,8 @@ export default class About extends Component {
     super(props)
 
     this.state = {
-      blocsNumInRow: 20,
-      blocsNumInCol: 20,
+      blocsNumInRow: 8,
+      blocsNumInCol: 6,
     }
 
     this.gridElems = []
