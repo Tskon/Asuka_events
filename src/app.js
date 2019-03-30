@@ -3,4 +3,4 @@ import ReactDOM from 'react-dom'
 
 import MainLayout from './layout/main'
 
-ReactDOM.render(<MainLayout />, document.body)
+ReactDOM.render(<MainLayout />, document.getElementById('app'))

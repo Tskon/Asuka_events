@@ -1,3 +1,5 @@
+import React from 'react'
+
 import MainMenu from './menu/MainMenu'
 import Login from './login/Login'
 
