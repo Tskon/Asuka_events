@@ -1,8 +1,8 @@
-import { Component } from 'react'
+import React from 'react'
 import TextInput from '../ui/TextInput'
 import CheckboxLoginTypeSwitcher from './CheckboxLoginTypeSwitcher'
 
-export default class Login extends Component {
+export default class Login extends React.Component {
   static stopPropagation(e) {
     e.stopPropagation()
   }

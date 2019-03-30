@@ -1,10 +1,11 @@
 import React from 'react'
-import Link from '../ui/Link'
+import { NavLink } from 'react-router-dom'
+// import Link from '../ui/Link'
 
 export default () => (
   <nav className="menu">
-    <Link href="/"><a>Home</a></Link>
-    <Link href="/about"><a>About</a></Link>
-    <Link href="/forum"><a>Forum</a></Link>
+    <NavLink to="/" activeClassName="active">Home</NavLink>
+    <NavLink to="/about" activeClassName="active">About</NavLink>
+    <NavLink to="/forum" activeClassName="active">Forum</NavLink>
   </nav>
 )
