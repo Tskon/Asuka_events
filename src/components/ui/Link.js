@@ -1,5 +1,5 @@
-import { withRouter } from 'next/router'
-import StandartLink from 'next/link'
+import { withRouter } from 'react-router'
+import { NavLink } from 'react-router-dom'
 import React, { Children } from 'react'
 import PropTypes from 'prop-types'
 
@@ -9,18 +9,14 @@ import PropTypes from 'prop-types'
  */
 const Link = ({ router, children, ...props }) => {
   const { href, activeClassName, className } = props
-  let resultClassName = ''
+  const resultClassName = ''
 
   const child = Children.only(children)
 
-  if (router.pathname === href) {
-    resultClassName = className + activeClassName.trim()
-  }
-
   return (
-    <StandartLink href={href}>
+    <NavLink to={href} className={className} activeClassName={activeClassName}>
       {React.cloneElement(child, { className: resultClassName })}
-    </StandartLink>
+    </NavLink>
   )
 }
 
