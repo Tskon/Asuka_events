@@ -1,4 +1,5 @@
 const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   mode: 'development',
@@ -19,6 +20,22 @@ module.exports = {
           },
         },
       },
+      {
+        test: /\.(png|jpg|gif)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              outputPath: 'img',
+            },
+          },
+        ],
+      },
     ],
   },
+  plugins: [new HtmlWebpackPlugin({
+    meta: { viewport: 'width=device-width, initial-scale=1' },
+    title: 'Wows Events',
+    template: 'src/index.html',
+  })],
 }
