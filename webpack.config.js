@@ -40,6 +40,17 @@ module.exports = {
           'sass-loader', // compiles Sass to CSS, using Node Sass by default
         ],
       },
+      {
+        test: /\.(png|jpe?g|gif|svg)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: 'img/[hash].[ext]',
+            },
+          },
+        ],
+      },
     ],
   },
   plugins: [new HtmlWebpackPlugin({
