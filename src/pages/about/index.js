@@ -1,4 +1,5 @@
 import React from 'react'
+import '../../scss/pages/about.scss'
 
 export default class About extends React.Component {
   constructor(props) {
@@ -22,7 +23,7 @@ export default class About extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="event-wrapper">
         <h1 className="event-header">WoWs amateur`s event</h1>
         <div className="event-map">
           { this.gridElems }
