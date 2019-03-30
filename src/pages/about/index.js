@@ -1,6 +1,6 @@
-import { Component } from 'react'
+import React from 'react'
 
-export default class About extends Component {
+export default class About extends React.Component {
   constructor(props) {
     super(props)
 
@@ -22,12 +22,12 @@ export default class About extends Component {
 
   render() {
     return (
-      <main>
+      <div>
         <h1 className="event-header">WoWs amateur`s event</h1>
         <div className="event-map">
           { this.gridElems }
         </div>
-      </main>
+      </div>
     )
   }
 }

@@ -1,5 +1,7 @@
+import React from 'react'
+
 export default () => (
-  <main>
+  <div>
     <h1 className="example">Forum</h1>
-  </main>
+  </div>
 )
