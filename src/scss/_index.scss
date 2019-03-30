@@ -1,10 +1,10 @@
-@import "./_vars";
-@import "./_general";
-@import "./header";
+@import "vars";
+@import "general";
+@import "header";
 @import "login/login";
 @import "login/checkboxLoginTypeSwitcher";
-@import "./footer";
-@import "./menu.main";
+@import "footer";
+@import "menu.main";
 @import "pages/forum.index";
 @import "pages/about";
 

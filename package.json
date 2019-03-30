@@ -2,7 +2,7 @@
   "name": "asuka_forum2",
   "version": "0.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "src/app.js",
   "scripts": {
     "dev": "webpack",
     "start": "npm run ./server/index.js"

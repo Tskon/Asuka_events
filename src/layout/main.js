@@ -7,7 +7,7 @@ export default () => (
   <div>
     <Header />
     <main>
-        Content
+      Content
     </main>
     <Footer />
   </div>
