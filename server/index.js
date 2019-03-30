@@ -3,6 +3,7 @@ const passport = require('passport')
 const session = require('express-session')
 const bodyParser = require('body-parser')
 const cors = require('cors')
+const path = require('path')
 const models = require('./models/index')
 
 const PORT = process.env.PORT || 3000
@@ -16,17 +17,22 @@ app.use(session({ secret: 'asuka_and_ray', resave: true, saveUninitialized: true
 app.use(passport.initialize())
 app.use(passport.session())
 
+// Serve the static files from the React app
+app.use(express.static(path.resolve(__dirname, '../dist')))
+
 /**
    * Routes. use path /api + path in routes.
    * For example: /api/auth
    */
 app.use('/api', require('./routes/api/index')(passport))
 
+
 /**
    * for all the react stuff
    */
-app.get('*', (req, res) => handle(req, res))
-
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../dist/index.html'))
+})
 
 /**
    * Load passport strategies
