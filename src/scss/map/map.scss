@@ -1,0 +1,21 @@
+.event-map{
+  background-image: url(../../static/map-indonesia.svg);
+  background-size: 100%;
+  width: calc(100% + 20px);
+  margin: 0 -10px;
+  display: grid;
+  grid-template-rows: repeat(6, 1fr);
+  grid-template-columns: repeat(8, 1fr);
+  min-width: 1000px;
+}
+
+.event-map__elem{
+  display: inline-block;
+  padding-top: 50%;
+  height: 0;
+  box-shadow: 0 0 1px rgba(0,0,0,0.5);
+  cursor: pointer;
+  &:hover{
+    background-color: rgba(0,0,0,0.3);
+  }
+}
