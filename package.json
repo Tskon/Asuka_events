@@ -5,7 +5,8 @@
   "main": "src/app.js",
   "scripts": {
     "dev": "webpack -w",
-    "start": "npm run ./server/index.js"
+    "start": "npm run ./server/index.js",
+    "start:dev": "webpack-dev-server"
   },
   "repository": {
     "type": "git",

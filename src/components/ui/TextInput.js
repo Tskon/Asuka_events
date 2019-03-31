@@ -1,8 +1,8 @@
-import { Component } from 'react'
+import React from 'react'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
 
-class TextInput extends Component {
+class TextInput extends React.Component {
   constructor(props) {
     super()
     this.label = props.labelText

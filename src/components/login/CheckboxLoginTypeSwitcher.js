@@ -1,7 +1,7 @@
-import { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
-class CheckboxLoginTypeSwitcher extends Component {
+class CheckboxLoginTypeSwitcher extends React.Component {
   constructor(props) {
     super()
     this.onChange = props.onChange

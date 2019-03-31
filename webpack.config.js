@@ -9,6 +9,14 @@ module.exports = {
     filename: 'js/app.bundle.js',
   },
   devtool: 'source-map',
+  devServer: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000',
+        pathRewrite: { '^/api': '' },
+      },
+    },
+  },
   module: {
     rules: [
       {

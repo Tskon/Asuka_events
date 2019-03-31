@@ -7,7 +7,6 @@ const path = require('path')
 const models = require('./models/index')
 
 const PORT = process.env.PORT || 3000
-// const dev = process.env.NODE_DEV !== 'production'
 
 const app = express()
 app.use(cors())
@@ -16,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(session({
   secret: 'asuka_and_ray',
   resave: true,
-  saveUninitialized: true
+  saveUninitialized: true,
 }))
 app.use(passport.initialize())
 app.use(passport.session())
@@ -29,7 +28,6 @@ app.use(express.static(path.resolve(__dirname, '../dist')))
  * For example: /api/auth
  */
 app.use('/api', require('./routes/api/index')(passport))
-
 
 /**
  * for all the react stuff
