@@ -13,7 +13,11 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-app.use(session({ secret: 'asuka_and_ray', resave: true, saveUninitialized: true }))
+app.use(session({
+  secret: 'asuka_and_ray',
+  resave: true,
+  saveUninitialized: true
+}))
 app.use(passport.initialize())
 app.use(passport.session())
 
@@ -21,36 +25,39 @@ app.use(passport.session())
 app.use(express.static(path.resolve(__dirname, '../dist')))
 
 /**
-   * Routes. use path /api + path in routes.
-   * For example: /api/auth
-   */
+ * Routes. use path /api + path in routes.
+ * For example: /api/auth
+ */
 app.use('/api', require('./routes/api/index')(passport))
 
 
 /**
-   * for all the react stuff
-   */
+ * for all the react stuff
+ */
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../dist/index.html'))
 })
 
 /**
-   * Load passport strategies
-   */
+ * Load passport strategies
+ *
+ */
 require('./passport/passport.js')(passport, models.user)
 
 /**
-   * Sync with database
-   */
-models.sequelize.sync().then(() => {
-  console.log('Nice! Database looks fine')
-}).catch((err) => {
-  console.log(err, 'Something went wrong with the Database Update!')
-})
+ * Sync with database
+ */
+models.sequelize.sync()
+  .then(() => {
+    console.log('Nice! Database looks fine')
+  })
+  .catch((err) => {
+    console.log(err, 'Something went wrong with the Database Update!')
+  })
 
 /**
-   * Listening port by express
-   */
+ * Listening port by express
+ */
 app.listen(PORT, (err) => {
   if (err) throw err
   console.log(`ready at http://localhost:${PORT}`)

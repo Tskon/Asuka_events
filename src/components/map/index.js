@@ -23,8 +23,10 @@ export default class Map extends React.Component {
 
   render() {
     return (
-      <div className="event-map">
-        {this.gridElems}
+      <div className="map-wrapper">
+        <div className="event-map">
+          {this.gridElems}
+        </div>
       </div>
     )
   }
