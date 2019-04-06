@@ -28,6 +28,17 @@ export default class Map extends React.Component {
     this.scopeIn = this.scopeIn.bind(this)
     this.scopeOut = this.scopeOut.bind(this)
     this.rangeHandler = this.rangeHandler.bind(this)
+    this.wheelHandler = this.wheelHandler.bind(this)
+  }
+
+  componentDidMount() {
+    document.addEventListener('wheel', this.wheelHandler)
+  }
+
+  getMapStyles() {
+    return {
+      width: `${100 * this.state.currentScope}%`,
+    }
   }
 
   scopeIn() {
@@ -49,14 +60,17 @@ export default class Map extends React.Component {
     }
   }
 
-  getMapStyles() {
-    return {
-      width: `${100 * this.state.currentScope}%`,
-    }
-  }
-
   rangeHandler() {
     console.log(this.state.currentScope)
+  }
+
+  wheelHandler(event) {
+    event.preventDefault()
+    const e = event || window.event
+    const delta = e.deltaY || e.detail || e.wheelDelta
+
+    if (delta < 0) this.scopeIn()
+    else this.scopeOut()
   }
 
   render() {
