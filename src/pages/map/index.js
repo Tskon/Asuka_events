@@ -10,20 +10,7 @@ export default class Map extends React.Component {
   }
 
   componentDidMount() {
-    ymaps.ready(
-      () => {
-        this.map = new ymaps.Map('map', {
-          center: [55.76, 37.64],
-          zoom: 7,
-          controls: ['zoomControl'],
-          type: 'yandex#map',
-        },
-        {
-          maxZoom: 7,
-          minZoom: 5,
-        })
-      },
-    )
+
   }
 
   render() {
