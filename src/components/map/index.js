@@ -24,10 +24,14 @@ export default class Map extends React.Component {
         />,
       )
     }
+
+    this.scopeIn = this.scopeIn.bind(this)
+    this.scopeOut = this.scopeOut.bind(this)
+    this.rangeHandler = this.rangeHandler.bind(this)
   }
 
   scopeIn() {
-    const newScope = this.state.currentType + this.step
+    const newScope = this.state.currentScope + this.step
     if (newScope <= this.maxScope) {
       this.setState({
         currentScope: newScope,
@@ -36,7 +40,8 @@ export default class Map extends React.Component {
   }
 
   scopeOut() {
-    const newScope = this.state.currentType - this.step
+    const newScope = this.state.currentScope - this.step
+    console.log(newScope, this.state.currentScope, this.step)
     if (newScope > this.minScope - this.step) {
       this.setState({
         currentScope: newScope,
@@ -44,15 +49,32 @@ export default class Map extends React.Component {
     }
   }
 
+  getMapStyles() {
+    return {
+      width: `${100 * this.state.currentScope}%`,
+    }
+  }
+
+  rangeHandler() {
+    console.log(this.state.currentScope)
+  }
+
   render() {
     return (
       <div className="map-wrapper">
-        <div className="event-map">
+        <div className="event-map" style={this.getMapStyles()}>
           {this.gridElems}
         </div>
         <div className="event-map__controls">
           <button type="button" onClick={this.scopeIn}>+</button>
-          <input type="range" min="1" max="5" id="size" value="3" />
+          <input
+            type="range"
+            min={this.minScope}
+            max={this.maxScope}
+            id="size"
+            value={this.state.currentScope}
+            onChange={this.rangeHandler}
+          />
           <button type="button" onClick={this.scopeOut}>-</button>
         </div>
       </div>
