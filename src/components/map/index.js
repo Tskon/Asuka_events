@@ -27,6 +27,11 @@ export default class Map extends React.Component {
         <div className="event-map">
           {this.gridElems}
         </div>
+        <div className="event-map__controls">
+          <button type="button">+</button>
+          <input type="range" min="1" max="5" id="size" value="3" />
+          <button type="button">-</button>
+        </div>
       </div>
     )
   }
