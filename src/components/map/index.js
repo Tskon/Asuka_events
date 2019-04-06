@@ -52,7 +52,6 @@ export default class Map extends React.Component {
 
   scopeOut() {
     const newScope = this.state.currentScope - this.step
-    console.log(newScope, this.state.currentScope, this.step)
     if (newScope > this.minScope - this.step) {
       this.setState({
         currentScope: newScope,
