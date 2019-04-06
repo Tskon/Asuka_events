@@ -6,12 +6,12 @@ export default class Map extends React.Component {
     super(props)
 
     this.state = {
-      blocsNumInRow: 8,
-      blocsNumInCol: 6,
+      cols: 8,
+      rows: 6,
     }
 
     this.gridElems = []
-    for (let i = 0; i < this.state.blocsNumInRow * this.state.blocsNumInCol; i += 1) {
+    for (let i = 0; i < this.state.cols * this.state.rows; i += 1) {
       this.gridElems.push(
         <div
           className="event-map__elem"
