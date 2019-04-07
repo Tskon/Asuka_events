@@ -11,20 +11,19 @@
   background-image: url(../../static/map-indonesia.svg);
   background-size: 100%;
   background-repeat: no-repeat;
-  margin: 0 -10px;
   display: grid;
   grid-template-columns: repeat(8, 1fr);
-  width: 100%;
+  grid-template-rows: auto;
+  //width: 100%;
   background-color: #bcdaff;
 }
 
 .event-map__elem{
   display: inline-block;
-  padding-top: 50%;
-  height: 0;
   box-shadow: 0 0 1px rgba(0,0,0,0.5);
   cursor: pointer;
   transition: 0.3s;
+  padding-top: 50%;
   &:hover{
     background-color: rgba(0,0,0,0.3);
   }

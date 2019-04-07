@@ -14,14 +14,22 @@ export default class Map extends React.Component {
     this.step = 1
     this.minScope = 1
     this.maxScope = 8
+    this.letters = 'ABCDIFGHIJKLMNOP'
 
     this.gridElems = []
     for (let i = 0; i < this.state.cols * this.state.rows; i += 1) {
+      const rowNum = Math.ceil((i + 1) / this.state.cols)
+      const colNum = (i + 1) % this.state.cols || this.state.cols
+      const colLetter = this.letters[colNum - 1]
+
       this.gridElems.push(
         <div
           className="event-map__elem"
           key={`map-elem-${i}`}
-        />,
+          id={colLetter + rowNum}
+        >
+          {colLetter + rowNum}
+        </div>,
       )
     }
 
