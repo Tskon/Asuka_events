@@ -10,6 +10,5 @@ export default () => (
   <nav className="menu">
     <NavLink to="/" activeClassName="active" isActive={isActiveChecker}>Home</NavLink>
     <NavLink to="/event" activeClassName="active" isActive={isActiveChecker}>Event</NavLink>
-    <NavLink to="/map" activeClassName="active" isActive={isActiveChecker}>Map</NavLink>
   </nav>
 )
