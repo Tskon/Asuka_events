@@ -37,7 +37,7 @@ export default class Map extends React.Component {
 
   getMapStyles() {
     return {
-      width: `${100 * this.state.currentScope}%`,
+      width: `${100 * (1 + this.state.currentScope / 2)}%`,
     }
   }
 
