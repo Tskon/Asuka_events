@@ -15,6 +15,8 @@ export default class Map extends React.Component {
     this.minScope = 1
     this.maxScope = 8
     this.letters = 'ABCDIFGHIJKLMNOP'
+    this.mouseEventStart = { x: 0, y: 0 }
+    this.mouseMoveAvailable = false
 
     this.gridElems = []
     for (let i = 0; i < this.state.cols * this.state.rows; i += 1) {
@@ -37,6 +39,9 @@ export default class Map extends React.Component {
     this.scopeOut = this.scopeOut.bind(this)
     this.rangeHandler = this.rangeHandler.bind(this)
     this.wheelHandler = this.wheelHandler.bind(this)
+    this.wrapperMouseDownHandler = this.wrapperMouseDownHandler.bind(this)
+    this.wrapperMouseUpHandler = this.wrapperMouseUpHandler.bind(this)
+    this.wrapperMouseMoveHandler = this.wrapperMouseMoveHandler.bind(this)
   }
 
   componentDidMount() {
@@ -80,14 +85,46 @@ export default class Map extends React.Component {
     else this.scopeOut()
   }
 
+  wrapperMouseDownHandler(event) {
+    event.preventDefault()
+    this.mouseEventStart = { x: event.clientX, y: event.clientY }
+    this.mouseMoveAvailable = true
+  }
+
+  wrapperMouseUpHandler(event) {
+    this.mouseMoveAvailable = false
+  }
+
+  wrapperMouseMoveHandler(event) {
+    if (this.mouseMoveAvailable) {
+      const xShift = event.clientX - this.mouseEventStart.x
+      const yShift = event.clientY - this.mouseEventStart.y
+
+      this.mapRef.scrollLeft -= xShift
+      this.mapRef.scrollTop -= yShift
+
+      this.mouseEventStart = { x: event.clientX, y: event.clientY }
+    }
+  }
+
   render() {
     return (
-      <div className="map-wrapper">
-        <div className="event-map" style={this.getMapStyles()}>
+      <div
+        className="map-wrapper"
+        onMouseDown={this.wrapperMouseDownHandler}
+        onMouseUp={this.wrapperMouseUpHandler}
+        onMouseLeave={this.wrapperMouseUpHandler}
+        onMouseMove={this.wrapperMouseMoveHandler}
+        ref={(ref) => { this.mapRef = ref }}
+      >
+        <div
+          className="event-map"
+          style={this.getMapStyles()}
+        >
           {this.gridElems}
         </div>
         <div className="event-map__controls">
-          <button type="button" onClick={this.scopeIn}>+</button>
+          <button type="button" onClick={this.scopeOut}>-</button>
           <input
             type="range"
             min={this.minScope}
@@ -96,7 +133,7 @@ export default class Map extends React.Component {
             value={this.state.currentScope}
             onChange={this.rangeHandler}
           />
-          <button type="button" onClick={this.scopeOut}>-</button>
+          <button type="button" onClick={this.scopeIn}>+</button>
         </div>
       </div>
     )
