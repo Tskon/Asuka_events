@@ -17,6 +17,8 @@ export default class Map extends React.Component {
     this.letters = 'ABCDIFGHIJKLMNOP'
     this.mouseEventStart = { x: 0, y: 0 }
     this.mouseMoveAvailable = false
+    this.shiftX = 0
+    this.shiftY = 0
 
     this.gridElems = []
     for (let i = 0; i < this.state.cols * this.state.rows; i += 1) {
@@ -97,11 +99,11 @@ export default class Map extends React.Component {
 
   wrapperMouseMoveHandler(event) {
     if (this.mouseMoveAvailable) {
-      const xShift = event.clientX - this.mouseEventStart.x
-      const yShift = event.clientY - this.mouseEventStart.y
+      this.shiftX -= event.clientX - this.mouseEventStart.x
+      this.shiftY -= event.clientY - this.mouseEventStart.y
 
-      this.mapRef.scrollLeft -= xShift
-      this.mapRef.scrollTop -= yShift
+      this.mapRef.style.left = `calc(50% - ${this.shiftX}px)`
+      this.mapRef.style.top = `calc(50% - ${this.shiftY}px)`
 
       this.mouseEventStart = { x: event.clientX, y: event.clientY }
     }
@@ -115,9 +117,9 @@ export default class Map extends React.Component {
         onMouseUp={this.wrapperMouseUpHandler}
         onMouseLeave={this.wrapperMouseUpHandler}
         onMouseMove={this.wrapperMouseMoveHandler}
-        ref={(ref) => { this.mapRef = ref }}
       >
         <div
+          ref={(ref) => { this.mapRef = ref }}
           className="event-map"
           style={this.getMapStyles()}
         >

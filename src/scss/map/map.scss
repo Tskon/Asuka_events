@@ -15,6 +15,9 @@
   grid-template-columns: repeat(8, 1fr);
   grid-template-rows: auto;
   background-color: #bcdaff;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .event-map__elem{
