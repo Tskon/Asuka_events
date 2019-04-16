@@ -78,29 +78,35 @@ export default class Login extends React.Component {
   submitHandler(e) {
     e.preventDefault()
 
-    const body = {
-      username: this.state.loginValue,
-      password: this.state.passwordValue,
-    }
+    // check inputs length
+    if (this.state.loginValue.length > 5 && this.state.passwordValue.length > 6) {
+      const body = {
+        username: this.state.loginValue,
+        password: this.state.passwordValue,
+      }
 
-    const myInit = {
-      method: 'POST',
-      body: JSON.stringify(body),
-      headers: { 'Content-Type': 'application/json' },
-    }
+      const myInit = {
+        method: 'POST',
+        body: JSON.stringify(body),
+        headers: { 'Content-Type': 'application/json' },
+      }
 
-    try {
-      const url = (this.state.currentType === 'signin') ? '/api/signin' : '/api/signup'
-      fetch(url, myInit)
-        .then(response => response.text())
-        .then(() => {
-          // console.log(data)
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-    } catch (err) {
-      // console.log(err)
+      try {
+        const url = (this.state.currentType === 'signin') ? '/api/signin' : '/api/signup'
+        fetch(url, myInit)
+          .then(response => response.text())
+          .then(() => {
+            // console.log(data)
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+      } catch (err) {
+        // console.log(err)
+      }
+    } else {
+      if (this.state.loginValue.length < 5) alert('Логин должен быть длиннее 5 символов')
+      if (this.state.passwordValue.length < 6) alert('Пароль должен быть длиннее 6 символов')
     }
   }
 
