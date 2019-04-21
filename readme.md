@@ -1,1 +1,7 @@
-<!-- test md file -->
+# Develop notes
+
+## Dev-accounts (docker)
+| service | password |
+|:-------:|:--------:|
+|MariaDB  |root      |
+
