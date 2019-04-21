@@ -1,7 +1,7 @@
 # Develop notes
 
 ## Dev-accounts (docker)
-| service |docker image name| password |
+| Service |Docker image name| Password |
 |:-------:|:---------------:|:--------:|
 |MariaDB  |mariadb          |root      |
 
