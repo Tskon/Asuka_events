@@ -1,10 +1,15 @@
 module.exports = {
-  dbName: 'tskon1_asuka_frm',
-  dbUser: 'tskon1_asuka_frm',
-  dbPassword: 'q1w2Q!W@',
+  dbName: 'asuka_events',
+  // dbUser: 'tskon1_asuka_frm',
+  dbUser: 'root',
+  // dbPassword: 'q1w2Q!W@',
+  dbPassword: 'root',
   dbOptions: {
-    host: 'tskon1.beget.tech',
-    dialect: 'mysql',
+    // host: 'tskon1.beget.tech',
+    host: 'localhost',
+    port: 8080,
+    // dialect: 'mysql',
+    dialect: 'mariadb',
     operatorsAliases: false,
     pool: {
       max: 5,
