@@ -139,3 +139,4 @@ fabric.properties
 /backend/database-worker/db-config.js
 db-config.js
 /dist/
+/databaseBackup/

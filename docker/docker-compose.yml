@@ -3,14 +3,17 @@ version: '3.1'
 services:
 
   db:
-    image: mariadb
+    build: ./db
     container_name: mariadb
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: asuka_events
+    volumes:
+      - $PWD/databaseBackup:/var/lib/mysql
 
   phpmyadmin:
-    image: phpmyadmin/phpmyadmin
+    build: ./phpMyAdmin
     container_name: phpmyadmin
     environment:
       - PMA_ARBITRARY=1
