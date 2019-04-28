@@ -3,22 +3,33 @@ version: '3.1'
 services:
 
   db:
-    image: mariadb
-    container_name: mariadb
+    image: mysql
+    container_name: mysql
+    command: --default-authentication-plugin=mysql_native_password
     restart: always
+    ports:
+      - 3306:3306
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: asuka_events
+      MYSQL_USER: tskon1_asuka_frm
+      MYSQL_PASSWORD: q1w2Q!W@
     volumes:
       - $PWD/databaseBackup:/var/lib/mysql
 
-  phpmyadmin:
-    build: ./phpMyAdmin
-    container_name: phpmyadmin
-    environment:
-      - PMA_ARBITRARY=1
+  adminer:
+    image: adminer
     restart: always
     ports:
-      - 8080:80
-    volumes:
-      - /sessions
+      - 8080:8080
+
+#  phpmyadmin:
+#    build: ./phpMyAdmin
+#    container_name: phpmyadmin
+#    environment:
+#      - PMA_ARBITRARY=1
+#    restart: always
+#    ports:
+#      - 8080:80
+#    volumes:
+#      - /sessions
