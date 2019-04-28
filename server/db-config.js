@@ -10,7 +10,6 @@ module.exports = {
     port: 8080,
     // dialect: 'mysql',
     dialect: 'mariadb',
-    operatorsAliases: false,
     pool: {
       max: 5,
       min: 0,
