@@ -2,9 +2,11 @@ const express = require('express')
 const passport = require('passport')
 const session = require('express-session')
 const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
 const cors = require('cors')
 const path = require('path')
 const models = require('./models/index')
+const RedisStore = require('connect-redis')(express);
 
 const PORT = process.env.PORT || 3000
 
@@ -12,10 +14,17 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(cookieParser());
 app.use(session({
-  secret: 'asuka_and_ray',
+  store: new RedisStore(),
   resave: true,
-  saveUninitialized: true,
+  rolling: true,
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 10 * 60 * 1000,
+    httpOnly: false,
+  },
+  secret: 'asuka_and_ray',
 }))
 app.use(passport.initialize())
 app.use(passport.session())
@@ -34,6 +43,10 @@ app.use('/api', require('./routes/api/index')(passport))
  */
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../dist/index.html'))
+})
+
+app.post('*', (req, res) => {
+  res.send({ status: 'failed!' })
 })
 
 /**
