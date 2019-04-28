@@ -136,6 +136,7 @@ export default class Login extends React.Component {
               onChange={this.passwordOnChangeHandler}
               labelText="Пароль"
               name="login__password-field"
+              type="password"
               required
             />
             {

@@ -4,11 +4,12 @@ import PropTypes from 'prop-types'
 
 class TextInput extends React.Component {
   constructor(props) {
-    super()
+    super(props)
     this.label = props.labelText
     this.name = props.name
     this.onChangeHandler = props.onChange
     this.isRequired = props.required
+    this.type = props.type || 'text'
 
     this.state = {
       value: '',
@@ -56,7 +57,7 @@ class TextInput extends React.Component {
       <div className={wrapperStyles}>
         <span className="ui-text-input__label">{this.label}</span>
         <input
-          type="text"
+          type={this.type}
           className="ui-text-input__input"
           id={this.name}
           value={this.state.value}
@@ -78,7 +79,8 @@ TextInput.propTypes = {
 }
 
 TextInput.defaultProps = {
-  onChange: () => {},
+  onChange: () => {
+  },
   required: false,
 }
 
