@@ -14,7 +14,6 @@ const PORT = process.env.PORT || 3000
 function mustAuthenticated(req, res, next) {
   console.log('=========== check auth ============')
   console.log(req.isAuthenticated(), req.user)
-  console.log(req.cookies)
   console.log('=========== fin ============')
   next()
 }
