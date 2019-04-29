@@ -7,27 +7,6 @@ export default class Login extends React.Component {
     e.stopPropagation()
   }
 
-  static logOut() {
-    const myInit = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-    }
-
-    try {
-      const url = '/api/logout'
-      fetch(url, myInit)
-        .then(response => response.text())
-        .then((data) => {
-          console.log(data)
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-    } catch (err) {
-      // console.log(err)
-    }
-  }
-
   constructor(props) {
     super(props)
     this.state = {
@@ -107,6 +86,27 @@ export default class Login extends React.Component {
     } else {
       if (this.state.loginValue.length < 5) alert('Логин должен быть длиннее 5 символов')
       if (this.state.passwordValue.length < 6) alert('Пароль должен быть длиннее 6 символов')
+    }
+  }
+
+  logOut() {
+    const myInit = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+    }
+
+    try {
+      const url = '/api/logout'
+      fetch(url, myInit)
+        .then(response => response.text())
+        .then((data) => {
+          console.log(data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    } catch (err) {
+      // console.log(err)
     }
   }
 
