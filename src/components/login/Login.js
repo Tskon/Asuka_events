@@ -18,11 +18,27 @@ class Login extends React.Component {
     }
 
     this.loginModalSwitcher = this.loginModalSwitcher.bind(this)
-    this.submitHandler = this.submitHandler.bind(this)
     this.loginOnChangeHandler = this.loginOnChangeHandler.bind(this)
-    this.passwordOnChangeHandler = this.passwordOnChangeHandler.bind(this)
-    this.switchType = this.switchType.bind(this)
     this.logOut = this.logOut.bind(this)
+    this.passwordOnChangeHandler = this.passwordOnChangeHandler.bind(this)
+    this.setUser = this.setUser.bind(this)
+    this.submitHandler = this.submitHandler.bind(this)
+    this.switchType = this.switchType.bind(this)
+  }
+
+  componentDidMount() {
+    // TODO добавить метод заполнения текущего юзера в стор
+    // post('/api/get-user').then((data) => {
+    //   this.setUser(data.data)
+    // })
+  }
+
+  setUser(user) {
+    store.dispatch(userActions.setUser(user))
+    this.setState({
+      isLogIn: true,
+      showModal: false,
+    })
   }
 
   loginModalSwitcher() {
@@ -69,11 +85,7 @@ class Login extends React.Component {
       post(url, body)
         .then((data) => {
           if (data.status === 'ok') {
-            store.dispatch(userActions.setUser(data.data))
-            this.setState({
-              isLogIn: true,
-              showModal: false,
-            })
+            this.setUser(data.data)
           }
         })
     } else {
