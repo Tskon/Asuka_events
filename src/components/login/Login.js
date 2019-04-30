@@ -1,15 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import TextInput from '../ui/TextInput'
-import CheckboxLoginTypeSwitcher from './CheckboxLoginTypeSwitcher'
 import userActions from '../../redux/actions/userActions'
 import store from '../../redux/store'
+import LoginView from './LoginView'
 
 class Login extends React.Component {
-  static stopPropagation(e) {
-    e.stopPropagation()
-  }
-
   constructor(props) {
     super(props)
     this.state = {
@@ -117,62 +112,22 @@ class Login extends React.Component {
   }
 
   render() {
-    const { showModal } = this.state
-
-    const modal = (
-      <div className="login__modal-shadow">
-        <div className="login__modal">
-          <button
-            title="Закрыть"
-            type="button"
-            className="login__modal-close-btn"
-            onClick={this.loginModalSwitcher}
-          >
-            &#10006;
-          </button>
-          <form onSubmit={this.submitHandler}>
-            <CheckboxLoginTypeSwitcher onChange={this.switchType} />
-            <TextInput
-              onChange={this.loginOnChangeHandler}
-              labelText="Логин"
-              name="login__login-field"
-              required
-            />
-            <TextInput
-              onChange={this.passwordOnChangeHandler}
-              labelText="Пароль"
-              name="login__password-field"
-              type="password"
-              required
-            />
-            {
-              (this.state.currentType === this.state.typesList[0])
-                ? <button className="login__signin-btn" type="submit">Войти</button>
-                : <button className="login__signup-btn" type="submit">Зарегистрироваться</button>
-            }
-          </form>
-        </div>
-      </div>
-    )
-
     return (
-      <div>
-        <button type="button" className="login__button" onClick={this.loginModalSwitcher}>
-          Войти
-        </button>
-        <button type="button" className="login__button" onClick={this.logOut}>
-          Выйти
-        </button>
-        {showModal && modal}
-      </div>
+      <LoginView
+        {...this.state}
+        loginModalSwitcher={this.loginModalSwitcher}
+        submitHandler={this.submitHandler}
+        switchType={this.switchType}
+        loginOnChangeHandler={this.loginOnChangeHandler}
+        passwordOnChangeHandler={this.passwordOnChangeHandler}
+        logOut={this.logOut}
+      />
     )
   }
 }
 
-const mapStateToProps = (store) => {
-  return {
-    user: store.user,
-  }
-}
+const mapStateToProps = store => ({
+  user: store.user,
+})
 
 export default connect(mapStateToProps)(Login)
