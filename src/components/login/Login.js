@@ -68,22 +68,15 @@ class Login extends React.Component {
         headers: { 'Content-Type': 'application/json' },
       }
 
-      try {
-        const url = (this.state.currentType === 'signin') ? '/api/signin' : '/api/signup'
-        fetch(url, myInit)
-          .then(response => response.text())
-          .then((data) => {
-            const parsedData = JSON.parse(data)
-            if (parsedData.status === 'ok') {
-              store.dispatch(userActions.setUser(parsedData.data))
-            }
-          })
-          .catch((err) => {
-            console.log(err)
-          })
-      } catch (err) {
-        // console.log(err)
-      }
+      const url = (this.state.currentType === 'signin') ? '/api/signin' : '/api/signup'
+
+      fetch(url, myInit)
+        .then(response => response.json())
+        .then((parsedData) => {
+          if (parsedData.status === 'ok') {
+            store.dispatch(userActions.setUser(parsedData.data))
+          }
+        })
     } else {
       if (this.state.loginValue.length < 5) alert('Логин должен быть длиннее 5 символов')
       if (this.state.passwordValue.length < 6) alert('Пароль должен быть длиннее 6 символов')
