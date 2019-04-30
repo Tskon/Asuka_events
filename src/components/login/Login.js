@@ -10,6 +10,7 @@ class Login extends React.Component {
     super(props)
     this.state = {
       showModal: false,
+      isLogIn: false,
       loginValue: '',
       passwordValue: '',
       currentType: 'signin',
@@ -21,6 +22,7 @@ class Login extends React.Component {
     this.loginOnChangeHandler = this.loginOnChangeHandler.bind(this)
     this.passwordOnChangeHandler = this.passwordOnChangeHandler.bind(this)
     this.switchType = this.switchType.bind(this)
+    this.logOut = this.logOut.bind(this)
   }
 
   loginModalSwitcher() {
@@ -68,6 +70,10 @@ class Login extends React.Component {
         .then((data) => {
           if (data.status === 'ok') {
             store.dispatch(userActions.setUser(data.data))
+            this.setState({
+              isLogIn: true,
+              showModal: false,
+            })
           }
         })
     } else {
@@ -77,9 +83,15 @@ class Login extends React.Component {
   }
 
   logOut() {
-    post('/api/logout').then((data) => {
-      console.log(data)
-    })
+    const _this = this
+    post('/api/logout')
+      .then((data) => {
+        if (data.status === 'ok') {
+          _this.setState({
+            isLogIn: false,
+          })
+        }
+      })
   }
 
   render() {
