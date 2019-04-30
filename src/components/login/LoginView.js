@@ -4,7 +4,6 @@ import CheckboxLoginTypeSwitcher from './CheckboxLoginTypeSwitcher'
 import TextInput from '../ui/TextInput'
 
 function LoginView(props) {
-  console.log(props)
   const modal = (
     <div className="login__modal-shadow">
       <div className="login__modal">

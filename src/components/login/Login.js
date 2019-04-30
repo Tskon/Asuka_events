@@ -1,8 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import userActions from '../../redux/actions/userActions'
-import store from '../../redux/store'
+import userActions from '../../services/redux/actions/userActions'
+import store from '../../services/redux/store'
 import LoginView from './LoginView'
+import { post } from '../../services/utils'
 
 class Login extends React.Component {
   constructor(props) {
@@ -61,20 +62,12 @@ class Login extends React.Component {
         username: this.state.loginValue,
         password: this.state.passwordValue,
       }
-
-      const myInit = {
-        method: 'POST',
-        body: JSON.stringify(body),
-        headers: { 'Content-Type': 'application/json' },
-      }
-
       const url = (this.state.currentType === 'signin') ? '/api/signin' : '/api/signup'
 
-      fetch(url, myInit)
-        .then(response => response.json())
-        .then((parsedData) => {
-          if (parsedData.status === 'ok') {
-            store.dispatch(userActions.setUser(parsedData.data))
+      post(url, body)
+        .then((data) => {
+          if (data.status === 'ok') {
+            store.dispatch(userActions.setUser(data.data))
           }
         })
     } else {
@@ -84,24 +77,9 @@ class Login extends React.Component {
   }
 
   logOut() {
-    const myInit = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-    }
-
-    try {
-      const url = '/api/logout'
-      fetch(url, myInit)
-        .then(response => response.text())
-        .then((data) => {
-          console.log(data)
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-    } catch (err) {
-      // console.log(err)
-    }
+    post('/api/logout').then((data) => {
+      console.log(data)
+    })
   }
 
   render() {
@@ -119,8 +97,8 @@ class Login extends React.Component {
   }
 }
 
-const mapStateToProps = store => ({
-  user: store.user,
+const mapStateToProps = state => ({
+  user: state.user,
 })
 
 export default connect(mapStateToProps)(Login)
