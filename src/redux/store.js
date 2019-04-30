@@ -1,9 +1,9 @@
 import { configureStore} from 'redux-starter-kit'
-import usersReducer from './reducers/usersReducer'
+import userReducer from './reducers/userReducer'
 
 const store = configureStore({
   reducer: {
-    users: usersReducer,
+    user: userReducer,
   },
 })
 
