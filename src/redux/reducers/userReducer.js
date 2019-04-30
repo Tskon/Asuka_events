@@ -5,7 +5,7 @@ const initialState = {
 }
 
 const userReducer = createReducer(initialState, {
-  SET_USER: (state, action) => {
+  SET_USER(state, action) {
     state.data = action.payload
   },
 })
