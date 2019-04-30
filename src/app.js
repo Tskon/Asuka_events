@@ -1,7 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-
-import MainLayout from './layout/main'
+import { Provider } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom'
 
-ReactDOM.render(<Router><MainLayout /></Router>, document.getElementById('app'))
+import store from './redux/store'
+import MainLayout from './layout/main'
+
+ReactDOM.render(
+  <Provider store={store}><Router><MainLayout /></Router></Provider>,
+  document.getElementById('app'),
+)

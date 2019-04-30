@@ -1,8 +1,11 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import TextInput from '../ui/TextInput'
 import CheckboxLoginTypeSwitcher from './CheckboxLoginTypeSwitcher'
+import userActions from '../../redux/actions/userActions'
+import store from '../../redux/store'
 
-export default class Login extends React.Component {
+class Login extends React.Component {
   static stopPropagation(e) {
     e.stopPropagation()
   }
@@ -74,8 +77,11 @@ export default class Login extends React.Component {
         const url = (this.state.currentType === 'signin') ? '/api/signin' : '/api/signup'
         fetch(url, myInit)
           .then(response => response.text())
-          .then(() => {
-            // console.log(data)
+          .then((data) => {
+            const parsedData = JSON.parse(data)
+            if (parsedData.status === 'ok') {
+              store.dispatch(userActions.setUser(parsedData.data))
+            }
           })
           .catch((err) => {
             console.log(err)
@@ -162,3 +168,11 @@ export default class Login extends React.Component {
     )
   }
 }
+
+const mapStateToProps = (store) => {
+  return {
+    user: store.user,
+  }
+}
+
+export default connect(mapStateToProps)(Login)
