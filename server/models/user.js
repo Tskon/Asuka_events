@@ -25,6 +25,15 @@ module.exports = function (sequelize, Sequelize) {
       defaultValue: 'active',
     },
 
+    is_admin: {
+      type: Sequelize.ENUM('true', 'false'),
+      defaultValue: 'false',
+    },
+
+    is_player: {
+      type: Sequelize.ENUM('true', 'false'),
+      defaultValue: 'false',
+    },
   })
 
   return User
