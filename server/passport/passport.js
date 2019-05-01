@@ -58,7 +58,7 @@ module.exports = function (passport, user) {
         },
       })
         .then((user) => {
-          if (bCrypt.compareSync(password, user.password)) {
+          if (user && bCrypt.compareSync(password, user.password)) {
             return done(null, user)
           }
           return done(null, false, {
