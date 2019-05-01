@@ -17,13 +17,13 @@ module.exports = function (sequelize, Sequelize) {
     },
 
     is_admin: {
-      type: Sequelize.ENUM('true', 'false'),
-      defaultValue: 'false',
+      type: Sequelize.BOOLEAN,
+      defaultValue: false,
     },
 
     is_player: {
-      type: Sequelize.ENUM('true', 'false'),
-      defaultValue: 'false',
+      type: Sequelize.BOOLEAN,
+      defaultValue: false,
     },
   })
 

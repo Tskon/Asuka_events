@@ -12,6 +12,7 @@ export default () => (
     <main>
       <Route exact path="/" component={IndexPage} />
       <Route path="/event" component={AboutPage} />
+      <Route path="/admin" component={AboutPage} />
     </main>
     <Footer />
   </div>
