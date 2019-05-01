@@ -1,11 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 import userActions from '../../services/redux/actions/userActions'
 import store from '../../services/redux/store'
 import LoginView from './LoginView'
+import UserInfoView from './UserInfoView'
 import { post } from '../../services/utils'
 
-class Login extends React.Component {
+class LoginBlock extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -28,10 +30,11 @@ class Login extends React.Component {
 
   componentDidMount() {
     // TODO добавить метод заполнения текущего юзера в стор
-    post('/api/get-user').then((data) => {
-      if (data.status === 'ok') this.setUser(data.data)
-      if (data.message) console.log(data.message)
-    })
+    post('/api/get-user')
+      .then((data) => {
+        if (data.status === 'ok') this.setUser(data.data)
+        if (data.message) console.log(data.message)
+      })
   }
 
   setUser(user) {
@@ -96,11 +99,10 @@ class Login extends React.Component {
   }
 
   logOut() {
-    const _this = this
     post('/api/logout')
       .then((data) => {
         if (data.status === 'ok') {
-          _this.setState({
+          this.setState({
             isLogIn: false,
           })
         }
@@ -108,22 +110,33 @@ class Login extends React.Component {
   }
 
   render() {
-    return (
-      <LoginView
-        {...this.state}
-        loginModalSwitcher={this.loginModalSwitcher}
-        submitHandler={this.submitHandler}
-        switchType={this.switchType}
-        loginOnChangeHandler={this.loginOnChangeHandler}
-        passwordOnChangeHandler={this.passwordOnChangeHandler}
-        logOut={this.logOut}
-      />
-    )
+    const content = !this.state.isLogIn
+      ? (
+        <LoginView
+          {...this.state}
+          loginModalSwitcher={this.loginModalSwitcher}
+          submitHandler={this.submitHandler}
+          switchType={this.switchType}
+          loginOnChangeHandler={this.loginOnChangeHandler}
+          passwordOnChangeHandler={this.passwordOnChangeHandler}
+        />
+      )
+      : <UserInfoView user={this.props.user} logOut={this.logOut} />
+
+    return content
   }
 }
 
+LoginBlock.propTypes = {
+  user: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    isAdmin: PropTypes.bool.isRequired,
+    isPlayer: PropTypes.bool.isRequired,
+  }).isRequired,
+}
+
 const mapStateToProps = state => ({
-  user: state.user,
+  user: state.user.data,
 })
 
-export default connect(mapStateToProps)(Login)
+export default connect(mapStateToProps)(LoginBlock)

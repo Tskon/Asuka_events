@@ -45,9 +45,9 @@ function LoginView(props) {
       <button
         type="button"
         className="login__button"
-        onClick={(props.isLogIn) ? props.logOut : props.loginModalSwitcher}
+        onClick={props.loginModalSwitcher}
       >
-        {(props.isLogIn) ? 'Выйти' : 'Войти'}
+        Войти
       </button>
       {props.showModal && modal}
     </div>
@@ -56,7 +56,6 @@ function LoginView(props) {
 
 LoginView.propTypes = {
   loginModalSwitcher: PropTypes.func.isRequired,
-  logOut: PropTypes.func.isRequired,
   submitHandler: PropTypes.func.isRequired,
   switchType: PropTypes.func.isRequired,
   loginOnChangeHandler: PropTypes.func.isRequired,
@@ -64,7 +63,6 @@ LoginView.propTypes = {
   currentType: PropTypes.string.isRequired,
   typesList: PropTypes.arrayOf(PropTypes.string).isRequired,
   showModal: PropTypes.bool.isRequired,
-  isLogIn: PropTypes.bool.isRequired,
 }
 
 export default LoginView
