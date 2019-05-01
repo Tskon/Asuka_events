@@ -28,9 +28,10 @@ class Login extends React.Component {
 
   componentDidMount() {
     // TODO добавить метод заполнения текущего юзера в стор
-    // post('/api/get-user').then((data) => {
-    //   this.setUser(data.data)
-    // })
+    post('/api/get-user').then((data) => {
+      if (data.status === 'ok') this.setUser(data.data)
+      if (data.message) console.log(data.message)
+    })
   }
 
   setUser(user) {
