@@ -9,15 +9,15 @@ const isActiveChecker = (match, location) => {
 
 const MainMenu = props => (
   <nav className="menu">
-    <NavLink to="/" activeClassName="active" isActive={isActiveChecker}>Home</NavLink>
-    <NavLink to="/event" activeClassName="active" isActive={isActiveChecker}>Event</NavLink>
+    <NavLink to="/" activeClassName="active" isActive={isActiveChecker}>Главная</NavLink>
+    <NavLink to="/event" activeClassName="active" isActive={isActiveChecker}>Эвент-карта</NavLink>
     {
       props.user.isAdmin
-      && <NavLink to="/event" activeClassName="active" isActive={isActiveChecker}>Админка</NavLink>
+      && <NavLink to="/admin" activeClassName="active" isActive={isActiveChecker}>Админка</NavLink>
     }
     {
       props.user.isPlayer
-      && <NavLink to="/event" activeClassName="active" isActive={isActiveChecker}>ЛК</NavLink>
+      && <NavLink to="/lk" activeClassName="active" isActive={isActiveChecker}>ЛК</NavLink>
     }
   </nav>
 )
