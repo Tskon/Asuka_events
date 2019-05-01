@@ -16,15 +16,6 @@ module.exports = function (sequelize, Sequelize) {
       allowNull: false,
     },
 
-    last_login: {
-      type: Sequelize.DATE,
-    },
-
-    status: {
-      type: Sequelize.ENUM('active', 'inactive'),
-      defaultValue: 'active',
-    },
-
     is_admin: {
       type: Sequelize.ENUM('true', 'false'),
       defaultValue: 'false',

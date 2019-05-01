@@ -1,5 +1,4 @@
 module.exports = function (router, models, passport) {
-  models.sequelize.sync()
   router.post('/get-user', (req, res) => {
     if (req.isAuthenticated()) {
       res.send({
@@ -12,9 +11,11 @@ module.exports = function (router, models, passport) {
         },
       })
     } else {
-      res.send({
-        status: 'error',
-        message: 'Пользователь не авторизован',
+      models.user.sync().then(()=> {
+        res.send({
+          status: 'error',
+          message: 'Пользователь не авторизован',
+        })
       })
     }
   })
