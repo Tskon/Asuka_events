@@ -63,15 +63,15 @@ class LoginBlock extends React.Component {
     })
   }
 
-  loginOnChangeHandler(val) {
+  loginOnChangeHandler(e) {
     this.setState({
-      loginValue: val,
+      loginValue: e.currentTarget.value,
     })
   }
 
-  passwordOnChangeHandler(val) {
+  passwordOnChangeHandler(e) {
     this.setState({
-      passwordValue: val,
+      passwordValue: e.currentTarget.value,
     })
   }
 
