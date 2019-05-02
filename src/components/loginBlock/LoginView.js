@@ -11,6 +11,8 @@ import FormControlLabel from '@material-ui/core/es/FormControlLabel/FormControlL
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import IconLockOpen from '@material-ui/icons/LockOpen'
+import IconRestore from '@material-ui/icons/Restore'
+import IconPersonAdd from '@material-ui/icons/PersonAdd'
 import '../../scss/loginBlock/loginModal.scss'
 
 function LoginView(props) {
@@ -51,8 +53,14 @@ function LoginView(props) {
         </DialogTitle>
         <DialogContent>
           <DialogContentText className="dialog__content-text">
-            Зарегистрируйтесь со своим игровым ником, данные по клану можно будет заполнить в личном
-            кабинете, после подтверждения участника администратором
+            {props.currentType === 'signin'
+            && 'Войдите для доступа к эвенту и личному кабинету'}
+            {props.currentType === 'signup'
+            && `Зарегистрируйтесь со своим игровым ником, данные по клану можно будет заполнить в 
+            личном кабинете, после подтверждения участника администратором`}
+            {props.currentType === 'restore'
+            && `Восстановите пароль с помощью кодового слова заданного в личном кабинете или
+            обратитесь к администратору`}
           </DialogContentText>
           <TextField
             onChange={props.loginOnChangeHandler}
@@ -75,8 +83,12 @@ function LoginView(props) {
             Отмена
           </Button>
           <Button onClick={props.submitHandler} variant="contained" color="primary">
-            Вход
-            <IconLockOpen className="button-icon" />
+            {props.currentType === 'signin' && 'Войти'}
+            {props.currentType === 'signin' && <IconLockOpen className="button-icon" />}
+            {props.currentType === 'signup' && 'Зарегистрироваться'}
+            {props.currentType === 'signup' && <IconPersonAdd className="button-icon" />}
+            {props.currentType === 'restore' && 'Восстановить пароль'}
+            {props.currentType === 'restore' && <IconRestore className="button-icon" />}
           </Button>
         </DialogActions>
       </Dialog>
