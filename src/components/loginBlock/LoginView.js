@@ -12,13 +12,9 @@ import TextField from '@material-ui/core/TextField'
 function LoginView(props) {
   return (
     <div>
-      <button
-        type="button"
-        className="login__button"
-        onClick={props.loginModalSwitcher}
-      >
+      <Button onClick={props.loginModalSwitcher} color="default">
         Войти
-      </button>
+      </Button>
       <Dialog open={props.showModal} onClose={props.loginModalSwitcher} fullWidth>
         <DialogTitle>Вход \ Регистрация</DialogTitle>
         <DialogContent>

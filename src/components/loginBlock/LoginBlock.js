@@ -105,6 +105,7 @@ class LoginBlock extends React.Component {
           this.setState({
             isLogIn: false,
           })
+          store.dispatch(userActions.resetUser())
         }
       })
   }

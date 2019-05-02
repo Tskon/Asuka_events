@@ -5,4 +5,9 @@ export default {
       payload: user,
     }
   },
+  resetUser() {
+    return {
+      type: 'RESET_USER',
+    }
+  },
 }
