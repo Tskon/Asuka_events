@@ -29,7 +29,7 @@ app.use(cors())
     secret: 'asuka and ray',
     resave: true,
     saveUninitialized: false,
-    cookie: { maxAge: 1000 * 60 * 20 },
+    cookie: { maxAge: 1000 * 60 * 60 * 24 * 7 }, // 7 суток живут сессии
   }))
   .use(passport.initialize())
   .use(passport.session())
