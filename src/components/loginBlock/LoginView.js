@@ -91,7 +91,6 @@ LoginView.propTypes = {
   loginOnChangeHandler: PropTypes.func.isRequired,
   passwordOnChangeHandler: PropTypes.func.isRequired,
   currentType: PropTypes.string.isRequired,
-  typesList: PropTypes.arrayOf(PropTypes.string).isRequired,
   showModal: PropTypes.bool.isRequired,
 }
 
