@@ -78,7 +78,21 @@ class LoginBlock extends React.Component {
         username: this.state.loginValue,
         password: this.state.passwordValue,
       }
-      const url = (this.state.currentType === 'signin') ? '/api/signin' : '/api/signup'
+      let url = (this.state.currentType === 'signin') ? '/api/signin' : '/api/signup'
+
+      switch (this.state.currentType) {
+        case 'signin':
+          url = '/api/signin'
+          break
+        case 'signup':
+          url = '/api/signup'
+          break
+        case 'restore':
+          url = '/api/restore'
+          break
+        default:
+          url = ''
+      }
 
       post(url, body)
         .then((data) => {
@@ -116,7 +130,7 @@ class LoginBlock extends React.Component {
           passwordOnChangeHandler={this.passwordOnChangeHandler}
         />
       )
-      : <UserInfoView user={this.props.user} logOut={this.logOut} />
+      : <UserInfoView user={this.props.user} logOut={this.logOut}/>
 
     return content
   }

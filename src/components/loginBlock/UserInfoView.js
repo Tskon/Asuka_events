@@ -4,17 +4,21 @@ import { Link } from 'react-router-dom'
 import '../../scss/loginBlock/userInfo.scss'
 
 function UserInfoView(props) {
+  const description = (props.user.isPlayer || props.user.isAdmin) ?
+    (
+      <p className="user-info__description">
+        (
+        {props.user.isAdmin && 'Админ'}
+        {props.user.isAdmin && props.user.isPlayer && ' | '}
+        {props.user.isPlayer && 'Участник эвента'}
+        )
+      </p>
+    ) : <br/>
   return (
     <div className="user-info">
       <div>
         <p className="user-info__name">{props.user.name}</p>
-        <p className="user-info__description">
-          (
-          {props.user.isAdmin && 'Админ'}
-          {props.user.isAdmin && props.user.isPlayer && ' | '}
-          {props.user.isPlayer && 'Участник эвента'}
-          )
-        </p>
+        {description}
       </div>
       <Link to="/" onClick={props.logOut}>Выйти</Link>
     </div>
