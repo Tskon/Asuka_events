@@ -44,7 +44,7 @@ function LoginView(props) {
           </Button>
           <Button onClick={props.submitHandler} variant="contained" color="primary">
             Вход
-            <IconLockOpen />
+            <IconLockOpen className="button-icon" />
           </Button>
         </DialogActions>
       </Dialog>
