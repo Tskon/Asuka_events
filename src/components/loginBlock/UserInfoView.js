@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom'
 import '../../scss/loginBlock/userInfo.scss'
 
 function UserInfoView(props) {
-  const description = (props.user.isPlayer || props.user.isAdmin) ?
-    (
+  const description = (props.user.isPlayer || props.user.isAdmin)
+    ? (
       <p className="user-info__description">
         (
         {props.user.isAdmin && 'Админ'}
@@ -13,7 +13,7 @@ function UserInfoView(props) {
         {props.user.isPlayer && 'Участник эвента'}
         )
       </p>
-    ) : <br/>
+    ) : <br />
   return (
     <div className="user-info">
       <div>
