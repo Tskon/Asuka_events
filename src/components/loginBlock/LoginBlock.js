@@ -16,7 +16,6 @@ class LoginBlock extends React.Component {
       loginValue: '',
       passwordValue: '',
       currentType: 'signin',
-      typesList: ['signin', 'signup'],
     }
 
     this.loginModalSwitcher = this.loginModalSwitcher.bind(this)
@@ -52,14 +51,9 @@ class LoginBlock extends React.Component {
     })
   }
 
-  switchType() {
-    const signInType = this.state.typesList[0]
-    const signUpType = this.state.typesList[1]
-    const curentType = this.state.currentType
-    const newType = ((signInType === curentType) ? signUpType : signInType)
-
+  switchType(e) {
     this.setState({
-      currentType: newType,
+      currentType: e.currentTarget.value,
     })
   }
 
