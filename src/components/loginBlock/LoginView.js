@@ -7,12 +7,12 @@ import DialogContent from '@material-ui/core/DialogContent'
 import DialogContentText from '@material-ui/core/DialogContentText'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
-
+import IconLockOpen from '@material-ui/icons/LockOpen'
 
 function LoginView(props) {
   return (
     <div>
-      <Button onClick={props.loginModalSwitcher} color="default">
+      <Button variant="outlined" onClick={props.loginModalSwitcher} color="primary">
         Войти
       </Button>
       <Dialog open={props.showModal} onClose={props.loginModalSwitcher} fullWidth>
@@ -42,8 +42,9 @@ function LoginView(props) {
           <Button onClick={props.loginModalSwitcher} color="default">
             Отмена
           </Button>
-          <Button onClick={props.submitHandler} color="primary">
+          <Button onClick={props.submitHandler} variant="contained" color="primary">
             Вход
+            <IconLockOpen />
           </Button>
         </DialogActions>
       </Dialog>
@@ -61,5 +62,20 @@ LoginView.propTypes = {
   typesList: PropTypes.arrayOf(PropTypes.string).isRequired,
   showModal: PropTypes.bool.isRequired,
 }
+
+const styles = theme => ({
+  button: {
+    margin: theme.spacing.unit,
+  },
+  leftIcon: {
+    marginRight: theme.spacing.unit,
+  },
+  rightIcon: {
+    marginLeft: theme.spacing.unit,
+  },
+  iconSmall: {
+    fontSize: 20,
+  },
+})
 
 export default LoginView
