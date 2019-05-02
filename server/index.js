@@ -1,21 +1,22 @@
 const express = require('express')
 const passport = require('passport')
 const session = require('express-session')
+const MySQLStore = require('express-mysql-session')(session);
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const cors = require('cors')
 const path = require('path')
 const models = require('./models/index')
+const dbConfig = require('./db-config')
 
 const PORT = process.env.PORT || 3000
 
-
-// test function.
-function mustAuthenticated(req, res, next) {
-  console.log('=========== check auth ============')
-  console.log(req.isAuthenticated(), req.user)
-  console.log('=========== fin ============')
-  next()
+const options = {
+  host: dbConfig.dbOptions.host,
+  port: dbConfig.dbOptions.port,
+  user: dbConfig.dbUser,
+  password: dbConfig.dbPassword,
+  database: dbConfig.dbName,
 }
 
 const app = express()
@@ -24,7 +25,8 @@ app.use(cors())
   .use(bodyParser.urlencoded({ extended: true }))
   .use(cookieParser())
   .use(session({
-    secret: 'keyboard cat',
+    store: new MySQLStore(options),
+    secret: 'asuka and ray',
     resave: true,
     saveUninitialized: false,
     cookie: { maxAge: 1000 * 60 * 20 },
@@ -44,7 +46,7 @@ app.use(cors())
   /**
    * for all the react stuff
    */
-  .use(mustAuthenticated)
+  // .use(mustAuthenticated)
   .get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, '../dist/index.html'))
   })
