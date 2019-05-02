@@ -5,4 +5,12 @@
   background-color: $gray;
   color: $font_secondary;
   padding: 10px;
+  a {
+    color: $gold;
+    text-decoration: none;
+    transition: 0.2s;
+    &:hover{
+      color: $white;
+    }
+  }
 }

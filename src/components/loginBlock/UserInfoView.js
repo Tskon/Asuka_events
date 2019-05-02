@@ -1,19 +1,19 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import '../../scss/loginBlock/userInfo.scss'
 
-function LoginView(props) {
+function UserInfoView(props) {
   return (
-    <div>
+    <div className="user-info">
       <div>
-        <p>{props.user.name}&nbsp;
-          <span>
-            (
-            {props.user.isAdmin && 'Админ'}
-            {props.user.isAdmin && props.user.isPlayer && ' | '}
-            {props.user.isPlayer && 'Участник эвента'}
-            )
-          </span>
+        <p className="user-info__name">{props.user.name}</p>
+        <p className="user-info__description">
+          (
+          {props.user.isAdmin && 'Админ'}
+          {props.user.isAdmin && props.user.isPlayer && ' | '}
+          {props.user.isPlayer && 'Участник эвента'}
+          )
         </p>
       </div>
       <Link to="/" onClick={props.logOut}>Выйти</Link>
@@ -21,7 +21,7 @@ function LoginView(props) {
   )
 }
 
-LoginView.propTypes = {
+UserInfoView.propTypes = {
   logOut: PropTypes.func.isRequired,
   user: PropTypes.shape({
     name: PropTypes.string.isRequired,
@@ -30,4 +30,4 @@ LoginView.propTypes = {
   }).isRequired,
 }
 
-export default LoginView
+export default UserInfoView
