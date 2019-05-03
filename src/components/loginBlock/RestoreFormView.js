@@ -10,8 +10,7 @@ function RestoreFormView(props) {
   return (
     <div>
       <DialogContentText className="side-modal__content-text">
-        Восстановите пароль с помощью кодового слова (заданного в личном кабинете) или
-        обратитесь к администратору
+        Восстановите пароль с помощью секретного слова или обратитесь к администратору
       </DialogContentText>
       <TextField
         onChange={props.loginOnChangeHandler}
@@ -23,7 +22,7 @@ function RestoreFormView(props) {
         fullWidth
       />
       <TextField
-        onChange={props.passwordOnChangeHandler}
+        onChange={props.secretOnChangeHandler}
         margin="dense"
         label="Секретное слово"
         name="secret"
@@ -31,7 +30,7 @@ function RestoreFormView(props) {
         fullWidth
       />
       <div className="side-modal__actions">
-        <Button onClick={props.submitHandler} variant="contained" color="primary">
+        <Button onClick={props.submitRestoreHandler} variant="contained" color="primary">
           Восстановить пароль
           <IconRestore className="button-icon" />
         </Button>
@@ -45,9 +44,9 @@ function RestoreFormView(props) {
 
 RestoreFormView.propTypes = {
   loginModalSwitcher: PropTypes.func.isRequired,
-  submitHandler: PropTypes.func.isRequired,
+  submitRestoreHandler: PropTypes.func.isRequired,
   loginOnChangeHandler: PropTypes.func.isRequired,
-  passwordOnChangeHandler: PropTypes.func.isRequired,
+  secretOnChangeHandler: PropTypes.func.isRequired,
 }
 
 export default RestoreFormView

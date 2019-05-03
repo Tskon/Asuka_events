@@ -14,6 +14,7 @@ module.exports = function (passport, user) {
     },
 
     ((req, username, password, done) => {
+      console.log('============= signup =========', req)
       User.findOne({
         where: {
           username,

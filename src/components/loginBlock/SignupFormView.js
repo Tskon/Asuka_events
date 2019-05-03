@@ -38,7 +38,7 @@ function SignupFormView(props) {
         fullWidth
       />
       <TextField
-        onChange={props.passwordOnChangeHandler}
+        onChange={props.secretOnChangeHandler}
         margin="dense"
         label="Секретное слово"
         name="secret"
@@ -46,7 +46,7 @@ function SignupFormView(props) {
         fullWidth
       />
       <div className="side-modal__actions">
-        <Button onClick={props.submitHandler} variant="contained" color="primary">
+        <Button onClick={props.submitSignupHandler} variant="contained" color="primary">
           Зарегистрироваться
           <IconPersonAdd className="button-icon" />
         </Button>
@@ -60,9 +60,10 @@ function SignupFormView(props) {
 
 SignupFormView.propTypes = {
   loginModalSwitcher: PropTypes.func.isRequired,
-  submitHandler: PropTypes.func.isRequired,
+  submitSignupHandler: PropTypes.func.isRequired,
   loginOnChangeHandler: PropTypes.func.isRequired,
   passwordOnChangeHandler: PropTypes.func.isRequired,
+  secretOnChangeHandler: PropTypes.func.isRequired,
 }
 
 export default SignupFormView

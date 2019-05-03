@@ -25,6 +25,11 @@ module.exports = function (sequelize, Sequelize) {
       type: Sequelize.BOOLEAN,
       defaultValue: false,
     },
+
+    secret: {
+      type: Sequelize.STRING,
+      defaultValue: '',
+    },
   })
 
   return User

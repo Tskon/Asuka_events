@@ -30,7 +30,7 @@ function SigninFormView(props) {
         fullWidth
       />
       <div className="side-modal__actions">
-        <Button onClick={props.submitHandler} variant="contained" color="primary">
+        <Button onClick={props.submitSigninHandler} variant="contained" color="primary">
           Войти
           <IconLockOpen className="button-icon" />
         </Button>
@@ -44,7 +44,7 @@ function SigninFormView(props) {
 
 SigninFormView.propTypes = {
   loginModalSwitcher: PropTypes.func.isRequired,
-  submitHandler: PropTypes.func.isRequired,
+  submitSigninHandler: PropTypes.func.isRequired,
   loginOnChangeHandler: PropTypes.func.isRequired,
   passwordOnChangeHandler: PropTypes.func.isRequired,
 }

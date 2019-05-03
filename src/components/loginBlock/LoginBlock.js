@@ -18,6 +18,7 @@ class LoginBlock extends React.Component {
       isLogIn: false,
       loginValue: '',
       passwordValue: '',
+      secretValue: '',
       currentType: 'signin',
     }
 
@@ -25,13 +26,15 @@ class LoginBlock extends React.Component {
     this.loginOnChangeHandler = this.loginOnChangeHandler.bind(this)
     this.logOut = this.logOut.bind(this)
     this.passwordOnChangeHandler = this.passwordOnChangeHandler.bind(this)
+    this.secretOnChangeHandler = this.secretOnChangeHandler.bind(this)
     this.setUser = this.setUser.bind(this)
-    this.submitHandler = this.submitHandler.bind(this)
+    this.submitSigninHandler = this.submitSigninHandler.bind(this)
+    this.submitSignupHandler = this.submitSignupHandler.bind(this)
+    this.submitRestoreHandler = this.submitRestoreHandler.bind(this)
     this.switchType = this.switchType.bind(this)
   }
 
   componentDidMount() {
-    // TODO добавить метод заполнения текущего юзера в стор
     post('/api/get-user')
       .then((data) => {
         if (data.status === 'ok') this.setUser(data.data)
@@ -72,7 +75,13 @@ class LoginBlock extends React.Component {
     })
   }
 
-  submitHandler(e) {
+  secretOnChangeHandler(e) {
+    this.setState({
+      secretValue: e.currentTarget.value,
+    })
+  }
+
+  submitSigninHandler(e) {
     e.preventDefault()
 
     // check inputs length
@@ -81,33 +90,60 @@ class LoginBlock extends React.Component {
         username: this.state.loginValue,
         password: this.state.passwordValue,
       }
-      let url = (this.state.currentType === 'signin') ? '/api/signin' : '/api/signup'
 
-      switch (this.state.currentType) {
-        case 'signin':
-          url = '/api/signin'
-          break
-        case 'signup':
-          url = '/api/signup'
-          break
-        case 'restore':
-          url = '/api/restore'
-          break
-        default:
-          url = ''
-      }
-
-      post(url, body)
+      post('/api/signin', body)
         .then((data) => {
           if (data.status === 'ok') {
             this.setUser(data.data)
           }
         })
     } else {
-      if (this.state.loginValue.length < 5) alert('Логин должен быть длиннее 5 символов')
-      if (this.state.passwordValue.length < 6) alert('Пароль должен быть длиннее 6 символов')
+      if (this.state.loginValue.length <= 5) alert('Логин должен быть длиннее 5 символов')
+      if (this.state.passwordValue.length <= 6) alert('Пароль должен быть длиннее 6 символов')
     }
   }
+  // TODO проверять что пароли совпадают
+  submitSignupHandler(e) {
+    e.preventDefault()
+
+    // check inputs length
+    if (this.state.loginValue.length > 5
+      && this.state.passwordValue.length > 6
+      && this.state.secret.length > 3) {
+      const body = {
+        username: this.state.loginValue,
+        password: this.state.passwordValue,
+        secret: this.state.secretValue,
+      }
+
+      post('/api/signup', body)
+        .then((data) => {
+          if (data.status === 'ok') {
+            this.setUser(data.data)
+          }
+        })
+    } else {
+      if (this.state.loginValue.length <= 5) alert('Логин должен быть длиннее 5 символов')
+      if (this.state.passwordValue.length <= 6) alert('Пароль должен быть длиннее 6 символов')
+      if (this.state.secret.length <= 3) alert('Введите секретное слово для восстановления пароля длиннее 3 символов')
+    }
+  }
+
+  submitRestoreHandler(e) {
+    e.preventDefault()
+    const body = {
+      username: this.state.loginValue,
+      secret: this.state.secretValue,
+    }
+
+    post('/api/restore', body)
+      .then((data) => {
+        if (data.status === 'ok') {
+          this.setUser(data.data)
+        }
+      })
+  }
+
 
   logOut() {
     post('/api/logout')
@@ -127,37 +163,35 @@ class LoginBlock extends React.Component {
         <LoginView
           {...this.state}
           loginModalSwitcher={this.loginModalSwitcher}
-          submitHandler={this.submitHandler}
           switchType={this.switchType}
-          loginOnChangeHandler={this.loginOnChangeHandler}
-          passwordOnChangeHandler={this.passwordOnChangeHandler}
         >
           {this.state.currentType === 'signin'
           && (
-          <SigninFormView
-            loginModalSwitcher={this.loginModalSwitcher}
-            submitHandler={this.submitHandler}
-            loginOnChangeHandler={this.loginOnChangeHandler}
-            passwordOnChangeHandler={this.passwordOnChangeHandler}
-          />
+            <SigninFormView
+              loginModalSwitcher={this.loginModalSwitcher}
+              submitSigninHandler={this.submitSigninHandler}
+              loginOnChangeHandler={this.loginOnChangeHandler}
+              passwordOnChangeHandler={this.passwordOnChangeHandler}
+            />
           )}
           {this.state.currentType === 'signup'
           && (
-          <SignupFormView
-            loginModalSwitcher={this.loginModalSwitcher}
-            submitHandler={this.submitHandler}
-            loginOnChangeHandler={this.loginOnChangeHandler}
-            passwordOnChangeHandler={this.passwordOnChangeHandler}
-          />
+            <SignupFormView
+              loginModalSwitcher={this.loginModalSwitcher}
+              submitSignupHandler={this.submitSignupHandler}
+              loginOnChangeHandler={this.loginOnChangeHandler}
+              passwordOnChangeHandler={this.passwordOnChangeHandler}
+              secretOnChangeHandler={this.secretOnChangeHandler}
+            />
           )}
           {this.state.currentType === 'restore'
           && (
-          <RestoreFormView
-            loginModalSwitcher={this.loginModalSwitcher}
-            submitHandler={this.submitHandler}
-            loginOnChangeHandler={this.loginOnChangeHandler}
-            passwordOnChangeHandler={this.passwordOnChangeHandler}
-          />
+            <RestoreFormView
+              loginModalSwitcher={this.loginModalSwitcher}
+              submitRestoreHandler={this.submitRestoreHandler}
+              loginOnChangeHandler={this.loginOnChangeHandler}
+              secretOnChangeHandler={this.secretOnChangeHandler}
+            />
           )}
         </LoginView>
       )
