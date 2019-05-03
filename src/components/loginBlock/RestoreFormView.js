@@ -1,7 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import DialogActions from '@material-ui/core/DialogActions'
-import DialogContent from '@material-ui/core/DialogContent'
 import DialogContentText from '@material-ui/core/DialogContentText'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
@@ -11,38 +9,36 @@ import '../../scss/loginBlock/loginModal.scss'
 function RestoreFormView(props) {
   return (
     <div>
-      <DialogContent>
-        <DialogContentText className="dialog__content-text">
-          Восстановите пароль с помощью кодового слова (заданного в личном кабинете) или
-          обратитесь к администратору
-        </DialogContentText>
-        <TextField
-          onChange={props.loginOnChangeHandler}
-          autoFocus
-          margin="dense"
-          name="login"
-          label="Логин (игровой ник)"
-          type="text"
-          fullWidth
-        />
-        <TextField
-          onChange={props.passwordOnChangeHandler}
-          margin="dense"
-          label="Секретное слово"
-          name="secret"
-          type="password"
-          fullWidth
-        />
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={props.loginModalSwitcher} color="default">
-          Отмена
-        </Button>
+      <DialogContentText className="side-modal__content-text">
+        Восстановите пароль с помощью кодового слова (заданного в личном кабинете) или
+        обратитесь к администратору
+      </DialogContentText>
+      <TextField
+        onChange={props.loginOnChangeHandler}
+        autoFocus
+        margin="dense"
+        name="login"
+        label="Логин (игровой ник)"
+        type="text"
+        fullWidth
+      />
+      <TextField
+        onChange={props.passwordOnChangeHandler}
+        margin="dense"
+        label="Секретное слово"
+        name="secret"
+        type="password"
+        fullWidth
+      />
+      <div className="side-modal__actions">
         <Button onClick={props.submitHandler} variant="contained" color="primary">
           Восстановить пароль
           <IconRestore className="button-icon" />
         </Button>
-      </DialogActions>
+        <Button onClick={props.loginModalSwitcher} color="default">
+          Отмена
+        </Button>
+      </div>
     </div>
   )
 }
