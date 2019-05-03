@@ -11,7 +11,7 @@ import LKPage from '../pages/lk/index'
 export default () => (
   <div>
     <Header />
-    <main>
+    <main className='site-content'>
       <Route exact path="/" component={IndexPage} />
       <Route path="/event" component={AboutPage} />
       <Route path="/admin" component={AdminPage} />
