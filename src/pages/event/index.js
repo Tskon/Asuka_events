@@ -12,7 +12,6 @@ export default class About extends React.Component {
   render() {
     return (
       <div className="event-wrapper">
-        <h1 className="event-header">Amateur`s event</h1>
         <Map />
       </div>
     )
