@@ -4,6 +4,9 @@ import PropTypes from 'prop-types'
 import userActions from '../../services/redux/actions/userActions'
 import store from '../../services/redux/store'
 import LoginView from './LoginView'
+import RestoreFormView from './RestoreFormView'
+import SigninFormView from './SigninFormView'
+import SignupFormView from './SignupFormView'
 import UserInfoView from './UserInfoView'
 import { post } from '../../services/utils'
 
@@ -128,9 +131,37 @@ class LoginBlock extends React.Component {
           switchType={this.switchType}
           loginOnChangeHandler={this.loginOnChangeHandler}
           passwordOnChangeHandler={this.passwordOnChangeHandler}
-        />
+        >
+          {this.state.currentType === 'signin'
+          && (
+          <SigninFormView
+            loginModalSwitcher={this.loginModalSwitcher}
+            submitHandler={this.submitHandler}
+            loginOnChangeHandler={this.loginOnChangeHandler}
+            passwordOnChangeHandler={this.passwordOnChangeHandler}
+          />
+          )}
+          {this.state.currentType === 'signup'
+          && (
+          <SignupFormView
+            loginModalSwitcher={this.loginModalSwitcher}
+            submitHandler={this.submitHandler}
+            loginOnChangeHandler={this.loginOnChangeHandler}
+            passwordOnChangeHandler={this.passwordOnChangeHandler}
+          />
+          )}
+          {this.state.currentType === 'restore'
+          && (
+          <RestoreFormView
+            loginModalSwitcher={this.loginModalSwitcher}
+            submitHandler={this.submitHandler}
+            loginOnChangeHandler={this.loginOnChangeHandler}
+            passwordOnChangeHandler={this.passwordOnChangeHandler}
+          />
+          )}
+        </LoginView>
       )
-      : <UserInfoView user={this.props.user} logOut={this.logOut}/>
+      : <UserInfoView user={this.props.user} logOut={this.logOut} />
 
     return content
   }
