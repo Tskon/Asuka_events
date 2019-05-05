@@ -109,7 +109,7 @@ class LoginBlock extends React.Component {
     // check inputs length
     if (this.state.loginValue.length > 5
       && this.state.passwordValue.length > 6
-      && this.state.secret.length > 3) {
+      && this.state.secretValue.length > 3) {
       const body = {
         username: this.state.loginValue,
         password: this.state.passwordValue,
