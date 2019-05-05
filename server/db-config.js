@@ -1,5 +1,5 @@
 module.exports = {
-  dbName: 'asuka_events',
+  dbName: 'tskon1_asuka_frm',
   dbUser: 'tskon1_asuka_frm',
   dbPassword: 'q1w2Q!W@',
   dbOptions: {

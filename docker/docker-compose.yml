@@ -11,7 +11,7 @@ services:
       - 3306:3306
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: asuka_events
+      MYSQL_DATABASE: tskon1_asuka_frm
       MYSQL_USER: tskon1_asuka_frm
       MYSQL_PASSWORD: q1w2Q!W@
     volumes:
