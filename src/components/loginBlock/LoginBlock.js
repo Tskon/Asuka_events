@@ -18,6 +18,7 @@ class LoginBlock extends React.Component {
       isLogIn: false,
       loginValue: '',
       passwordValue: '',
+      secondPasswordValue: '',
       secretValue: '',
       currentType: 'signin',
     }
@@ -75,6 +76,12 @@ class LoginBlock extends React.Component {
     })
   }
 
+  secondPasswordOnChangeHandler(e) {
+    this.setState({
+      secondPasswordValue: e.currentTarget.value,
+    })
+  }
+
   secretOnChangeHandler(e) {
     this.setState({
       secretValue: e.currentTarget.value,
@@ -102,6 +109,7 @@ class LoginBlock extends React.Component {
       if (this.state.passwordValue.length <= 6) alert('Пароль должен быть длиннее 6 символов')
     }
   }
+
   // TODO проверять что пароли совпадают
   submitSignupHandler(e) {
     e.preventDefault()
@@ -109,7 +117,8 @@ class LoginBlock extends React.Component {
     // check inputs length
     if (this.state.loginValue.length > 5
       && this.state.passwordValue.length > 6
-      && this.state.secretValue.length > 3) {
+      && this.state.secretValue.length > 3
+      && this.state.secondPasswordValue === this.state.passwordValue) {
       const body = {
         username: this.state.loginValue,
         password: this.state.passwordValue,
@@ -126,6 +135,7 @@ class LoginBlock extends React.Component {
       if (this.state.loginValue.length <= 5) alert('Логин должен быть длиннее 5 символов')
       if (this.state.passwordValue.length <= 6) alert('Пароль должен быть длиннее 6 символов')
       if (this.state.secret.length <= 3) alert('Введите секретное слово для восстановления пароля длиннее 3 символов')
+      if (this.state.secondPasswordValue !== this.state.passwordValue) alert('Пароли не совпадают')
     }
   }
 

@@ -31,7 +31,7 @@ function SignupFormView(props) {
         fullWidth
       />
       <TextField
-        onChange={props.passwordOnChangeHandler}
+        onChange={props.secondPasswordOnChangeHandler}
         margin="dense"
         label="Повторите пароль"
         type="password"
