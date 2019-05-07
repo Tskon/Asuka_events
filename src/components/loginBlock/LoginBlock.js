@@ -27,6 +27,7 @@ class LoginBlock extends React.Component {
     this.loginOnChangeHandler = this.loginOnChangeHandler.bind(this)
     this.logOut = this.logOut.bind(this)
     this.passwordOnChangeHandler = this.passwordOnChangeHandler.bind(this)
+    this.secondPasswordOnChangeHandler = this.secondPasswordOnChangeHandler.bind(this)
     this.secretOnChangeHandler = this.secretOnChangeHandler.bind(this)
     this.setUser = this.setUser.bind(this)
     this.submitSigninHandler = this.submitSigninHandler.bind(this)
@@ -134,7 +135,7 @@ class LoginBlock extends React.Component {
     } else {
       if (this.state.loginValue.length <= 5) alert('Логин должен быть длиннее 5 символов')
       if (this.state.passwordValue.length <= 6) alert('Пароль должен быть длиннее 6 символов')
-      if (this.state.secret.length <= 3) alert('Введите секретное слово для восстановления пароля длиннее 3 символов')
+      if (this.state.secretValue.length <= 3) alert('Введите секретное слово для восстановления пароля длиннее 3 символов')
       if (this.state.secondPasswordValue !== this.state.passwordValue) alert('Пароли не совпадают')
     }
   }
@@ -191,6 +192,7 @@ class LoginBlock extends React.Component {
               submitSignupHandler={this.submitSignupHandler}
               loginOnChangeHandler={this.loginOnChangeHandler}
               passwordOnChangeHandler={this.passwordOnChangeHandler}
+              secondPasswordOnChangeHandler={this.secondPasswordOnChangeHandler}
               secretOnChangeHandler={this.secretOnChangeHandler}
             />
           )}

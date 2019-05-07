@@ -63,6 +63,7 @@ SignupFormView.propTypes = {
   submitSignupHandler: PropTypes.func.isRequired,
   loginOnChangeHandler: PropTypes.func.isRequired,
   passwordOnChangeHandler: PropTypes.func.isRequired,
+  secondPasswordOnChangeHandler: PropTypes.func.isRequired,
   secretOnChangeHandler: PropTypes.func.isRequired,
 }
 
