@@ -22,14 +22,3 @@ services:
     restart: always
     ports:
       - 8080:8080
-
-#  phpmyadmin:
-#    build: ./phpMyAdmin
-#    container_name: phpmyadmin
-#    environment:
-#      - PMA_ARBITRARY=1
-#    restart: always
-#    ports:
-#      - 8080:80
-#    volumes:
-#      - /sessions
