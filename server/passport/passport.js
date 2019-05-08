@@ -14,7 +14,6 @@ module.exports = function (passport, user) {
     },
 
     ((req, username, password, done) => {
-      console.log('============= signup =========', req)
       User.findOne({
         where: {
           username,
@@ -27,9 +26,11 @@ module.exports = function (passport, user) {
             })
           }
           const userPassword = generateHash(password)
+          const userSecret = generateHash(req.body.secret)
           const data = {
             username,
             password: userPassword,
+            secret: userSecret,
           }
 
           User.create(data)
