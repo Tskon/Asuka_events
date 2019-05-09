@@ -28,6 +28,7 @@ module.exports = {
     "react/destructuring-assignment": 0,
     "linebreak-style": 0,
     "jsx-a11y/anchor-is-valid": 0,
-    "no-param-reassign": [2, { "props": false }]
+    "no-param-reassign": [2, { "props": false }],
+    "consistent-return": 0,
   },
 };
