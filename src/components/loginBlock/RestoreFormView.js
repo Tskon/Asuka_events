@@ -29,6 +29,21 @@ function RestoreFormView(props) {
         type="password"
         fullWidth
       />
+      <TextField
+        onChange={props.passwordOnChangeHandler}
+        margin="dense"
+        label="Новый пароль"
+        name="password"
+        type="password"
+        fullWidth
+      />
+      <TextField
+        onChange={props.secondPasswordOnChangeHandler}
+        margin="dense"
+        label="Повторите пароль"
+        type="password"
+        fullWidth
+      />
       <div className="side-modal__actions">
         <Button onClick={props.submitRestoreHandler} variant="contained" color="primary">
           Восстановить пароль
@@ -47,6 +62,8 @@ RestoreFormView.propTypes = {
   submitRestoreHandler: PropTypes.func.isRequired,
   loginOnChangeHandler: PropTypes.func.isRequired,
   secretOnChangeHandler: PropTypes.func.isRequired,
+  passwordOnChangeHandler: PropTypes.func.isRequired,
+  secondPasswordOnChangeHandler: PropTypes.func.isRequired,
 }
 
 export default RestoreFormView

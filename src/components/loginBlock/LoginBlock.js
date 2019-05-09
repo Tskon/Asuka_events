@@ -203,6 +203,8 @@ class LoginBlock extends React.Component {
               submitRestoreHandler={this.submitRestoreHandler}
               loginOnChangeHandler={this.loginOnChangeHandler}
               secretOnChangeHandler={this.secretOnChangeHandler}
+              passwordOnChangeHandler={this.passwordOnChangeHandler}
+              secondPasswordOnChangeHandler={this.secondPasswordOnChangeHandler}
             />
           )}
         </LoginView>
