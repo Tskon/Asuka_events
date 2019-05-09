@@ -114,36 +114,36 @@ class LoginBlock extends React.Component {
   // TODO проверять что пароли совпадают
   submitSignupHandler(e) {
     e.preventDefault()
-
     // check inputs length
-    if (this.state.loginValue.length > 5
-      && this.state.passwordValue.length > 6
-      && this.state.secretValue.length > 3
-      && this.state.secondPasswordValue === this.state.passwordValue) {
-      const body = {
-        username: this.state.loginValue,
-        password: this.state.passwordValue,
-        secret: this.state.secretValue,
-      }
+    if (this.state.loginValue.length <= 5) return alert('Логин должен быть длиннее 5 символов')
+    if (this.state.passwordValue.length <= 6) return alert('Пароль должен быть длиннее 6 символов')
+    if (this.state.secretValue.length <= 3) return alert('Введите секретное слово для восстановления пароля длиннее 3 символов')
+    if (this.state.secondPasswordValue !== this.state.passwordValue) return alert('Пароли не совпадают')
 
-      post('/api/signup', body)
-        .then((data) => {
-          if (data.status === 'ok') {
-            this.setUser(data.data)
-          }
-        })
-    } else {
-      if (this.state.loginValue.length <= 5) alert('Логин должен быть длиннее 5 символов')
-      if (this.state.passwordValue.length <= 6) alert('Пароль должен быть длиннее 6 символов')
-      if (this.state.secretValue.length <= 3) alert('Введите секретное слово для восстановления пароля длиннее 3 символов')
-      if (this.state.secondPasswordValue !== this.state.passwordValue) alert('Пароли не совпадают')
+    const body = {
+      username: this.state.loginValue,
+      password: this.state.passwordValue,
+      secret: this.state.secretValue,
     }
+
+    post('/api/signup', body)
+      .then((data) => {
+        if (data.status === 'ok') {
+          this.setUser(data.data)
+        }
+      })
   }
 
   submitRestoreHandler(e) {
     e.preventDefault()
+    if (this.state.loginValue.length <= 5) return alert('Логин должен быть длиннее 5 символов')
+    if (this.state.passwordValue.length <= 6) return alert('Пароль должен быть длиннее 6 символов')
+    if (this.state.secondPasswordValue !== this.state.passwordValue) return alert('Пароли не совпадают')
+    if (this.state.secretValue.length <= 3) return alert('Введите секретное слово для восстановления пароля длиннее 3 символов')
+
     const body = {
       username: this.state.loginValue,
+      newPassword: this.state.password,
       secret: this.state.secretValue,
     }
 
