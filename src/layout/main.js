@@ -7,6 +7,7 @@ import IndexPage from '../pages/index'
 import AboutPage from '../pages/event/index'
 import AdminPage from '../pages/admin/index'
 import LKPage from '../pages/lk/index'
+import Snackbar from '../components/ui/Snackbar'
 
 export default () => (
   <div>
@@ -18,5 +19,6 @@ export default () => (
       <Route path="/lk" component={LKPage} />
     </main>
     <Footer />
+    <Snackbar />
   </div>
 )
