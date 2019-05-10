@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Button from '@material-ui/core/Button'
+import { connect } from 'react-redux'
 import CheckCircleIcon from '@material-ui/icons/CheckCircle'
 import ErrorIcon from '@material-ui/icons/Error'
 import InfoIcon from '@material-ui/icons/Info'
@@ -9,6 +9,9 @@ import IconButton from '@material-ui/core/IconButton'
 import Snackbar from '@material-ui/core/Snackbar'
 import SnackbarContent from '@material-ui/core/SnackbarContent'
 import WarningIcon from '@material-ui/icons/Warning'
+import snackbarActions from '../../services/redux/actions/snackbarActions'
+import store from '../../services/redux/store'
+import '../../scss/ui/snackbar.scss'
 
 const variantIcon = {
   success: CheckCircleIcon,
@@ -27,11 +30,12 @@ function MySnackbarContent(props) {
     <SnackbarContent
       aria-describedby="client-snackbar"
       message={(
-        <span id="client-snackbar">
+        <span id="client-snackbar" className="snackbar__content">
           <Icon />
           {message}
         </span>
-)}
+      )}
+
       action={[
         <IconButton
           key="close"
@@ -49,12 +53,8 @@ function MySnackbarContent(props) {
 
 MySnackbarContent.propTypes = {
   message: PropTypes.node.isRequired,
-  onClose: PropTypes.func,
+  onClose: PropTypes.func.isRequired,
   variant: PropTypes.oneOf(['success', 'warning', 'error', 'info']).isRequired,
-}
-
-MySnackbarContent.defaultProps = {
-  onClose: () => {},
 }
 
 class CustomizedSnackbars extends React.Component {
@@ -62,15 +62,10 @@ class CustomizedSnackbars extends React.Component {
     super(props)
 
     this.state = {
-      open: false,
+      open: this.props.open,
     }
 
-    this.handleClick = this.handleClick.bind(this)
     this.handleClose = this.handleClose.bind(this)
-  }
-
-  handleClick() {
-    this.setState({ open: true })
   }
 
   handleClose(event, reason) {
@@ -78,15 +73,12 @@ class CustomizedSnackbars extends React.Component {
       return
     }
 
-    this.setState({ open: false })
+    store.dispatch(snackbarActions.closeSnackbar())
   }
 
   render() {
     return (
       <div>
-        <Button onClick={this.handleClick}>
-          Open success snackbar
-        </Button>
         <Snackbar
           anchorOrigin={{
             vertical: 'bottom',
@@ -97,6 +89,7 @@ class CustomizedSnackbars extends React.Component {
           onClose={this.handleClose}
         >
           <MySnackbarContent
+            class={`snackbar snackbar_${this.props.type}`}
             onClose={this.handleClose}
             variant={this.props.type}
             message={this.props.message}
@@ -108,12 +101,15 @@ class CustomizedSnackbars extends React.Component {
 }
 
 CustomizedSnackbars.propTypes = {
-  type: PropTypes.string,
+  type: PropTypes.string.isRequired,
   message: PropTypes.string.isRequired,
+  open: PropTypes.bool.isRequired,
 }
 
-CustomizedSnackbars.defaultProps = {
-  type: 'info',
-}
+const mapStateToProps = state => ({
+  type: state.snackbar.type,
+  message: state.snackbar.message,
+  open: state.snackbar.open,
+})
 
-export default CustomizedSnackbars
+export default connect(mapStateToProps)(CustomizedSnackbars)
