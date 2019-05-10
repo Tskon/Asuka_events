@@ -1,0 +1,20 @@
+@import "../vars";
+
+.snackbar{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  border-radius: 10px;
+  background-color: $white;
+  color: $font_main;
+  .snackbar__content{
+    display: flex;
+    align-items: center;
+    & > svg {
+      margin-right: 10px;
+    }
+  }
+}
+
+//snackbar_info, snackbar_warning, snackbar_error, snackbar_success
