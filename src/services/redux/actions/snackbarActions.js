@@ -1,5 +1,8 @@
+import store from '../store'
+
 export default {
   openSnackbar(options) {
+    store.dispatch({ type: 'CLOSE' }) // сброс таймера
     return {
       type: 'OPEN',
       payload: {

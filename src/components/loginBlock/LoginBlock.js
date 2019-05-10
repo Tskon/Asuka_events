@@ -215,7 +215,6 @@ class LoginBlock extends React.Component {
       })
   }
 
-
   logOut() {
     post('/api/logout')
       .then((data) => {
@@ -224,6 +223,10 @@ class LoginBlock extends React.Component {
             isLogIn: false,
           })
           store.dispatch(userActions.resetUser())
+          store.dispatch(snackbarActions.openSnackbar({
+            message: 'Возвращайся, товарищ!',
+            type: 'info',
+          }))
         }
       })
   }
