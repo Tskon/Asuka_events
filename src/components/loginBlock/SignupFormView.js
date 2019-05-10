@@ -20,6 +20,7 @@ function SignupFormView(props) {
         label="Логин (игровой ник)"
         name="login"
         type="text"
+        autoComplete="username"
         fullWidth
       />
       <TextField
@@ -28,6 +29,7 @@ function SignupFormView(props) {
         label="Пароль"
         name="password"
         type="password"
+        autoComplete="new-password"
         fullWidth
       />
       <TextField
@@ -35,6 +37,7 @@ function SignupFormView(props) {
         margin="dense"
         label="Повторите пароль"
         type="password"
+        autoComplete="new-password"
         fullWidth
       />
       <TextField
@@ -43,6 +46,7 @@ function SignupFormView(props) {
         label="Секретное слово"
         name="secret"
         type="password"
+        autoComplete="new-password"
         fullWidth
       />
       <div className="side-modal__actions">

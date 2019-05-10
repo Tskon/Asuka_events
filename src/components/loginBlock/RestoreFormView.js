@@ -19,6 +19,7 @@ function RestoreFormView(props) {
         name="login"
         label="Логин (игровой ник)"
         type="text"
+        autoComplete="username"
         fullWidth
       />
       <TextField
@@ -27,6 +28,7 @@ function RestoreFormView(props) {
         label="Секретное слово"
         name="secret"
         type="password"
+        autoComplete="off"
         fullWidth
       />
       <TextField
@@ -35,6 +37,7 @@ function RestoreFormView(props) {
         label="Новый пароль"
         name="password"
         type="password"
+        autoComplete="new-password"
         fullWidth
       />
       <TextField
@@ -42,6 +45,7 @@ function RestoreFormView(props) {
         margin="dense"
         label="Повторите пароль"
         type="password"
+        autoComplete="new-password"
         fullWidth
       />
       <div className="side-modal__actions">

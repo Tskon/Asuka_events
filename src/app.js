@@ -8,6 +8,9 @@ import store from './services/redux/store'
 import MainLayout from './layout/main'
 
 const theme = createMuiTheme({
+  typography: {
+    useNextVariants: true,
+  },
   palette: {
     type: 'dark',
     primary: { main: '#fdc073' },

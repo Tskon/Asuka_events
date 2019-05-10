@@ -19,6 +19,7 @@ function SigninFormView(props) {
         label="Логин (игровой ник)"
         name="login"
         type="text"
+        autoComplete="username"
         fullWidth
       />
       <TextField
@@ -27,6 +28,7 @@ function SigninFormView(props) {
         name="password"
         label="Пароль"
         type="password"
+        autoComplete="current-password"
         fullWidth
       />
       <div className="side-modal__actions">

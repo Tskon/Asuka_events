@@ -14,7 +14,7 @@ function LoginView(props) {
         Войти
       </Button>
       <Drawer open={props.showModal} onClose={props.loginModalSwitcher} anchor="right">
-        <div className="side-modal__content">
+        <form className="side-modal__content">
           {props.children}
           <RadioGroup
             aria-label="position"
@@ -40,7 +40,7 @@ function LoginView(props) {
               labelPlacement="end"
             />
           </RadioGroup>
-        </div>
+        </form>
       </Drawer>
     </div>
   )
