@@ -1,9 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import DialogContentText from '@material-ui/core/DialogContentText'
-import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
-import IconRestore from '@material-ui/icons/Restore'
 import '../../scss/loginBlock/loginModal.scss'
 
 function RestoreFormView(props) {
@@ -48,22 +46,11 @@ function RestoreFormView(props) {
         autoComplete="new-password"
         fullWidth
       />
-      <div className="side-modal__actions">
-        <Button onClick={props.submitRestoreHandler} variant="contained" color="primary">
-          Восстановить пароль
-          <IconRestore className="button-icon" />
-        </Button>
-        <Button onClick={props.loginModalSwitcher} color="default">
-          Отмена
-        </Button>
-      </div>
     </div>
   )
 }
 
 RestoreFormView.propTypes = {
-  loginModalSwitcher: PropTypes.func.isRequired,
-  submitRestoreHandler: PropTypes.func.isRequired,
   loginOnChangeHandler: PropTypes.func.isRequired,
   secretOnChangeHandler: PropTypes.func.isRequired,
   passwordOnChangeHandler: PropTypes.func.isRequired,

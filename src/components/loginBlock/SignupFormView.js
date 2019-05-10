@@ -1,9 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import DialogContentText from '@material-ui/core/DialogContentText'
-import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
-import IconPersonAdd from '@material-ui/icons/PersonAdd'
 import '../../scss/loginBlock/loginModal.scss'
 
 function SignupFormView(props) {
@@ -49,22 +47,11 @@ function SignupFormView(props) {
         autoComplete="new-password"
         fullWidth
       />
-      <div className="side-modal__actions">
-        <Button onClick={props.submitSignupHandler} variant="contained" color="primary">
-          Зарегистрироваться
-          <IconPersonAdd className="button-icon" />
-        </Button>
-        <Button onClick={props.loginModalSwitcher} color="default">
-          Отмена
-        </Button>
-      </div>
     </div>
   )
 }
 
 SignupFormView.propTypes = {
-  loginModalSwitcher: PropTypes.func.isRequired,
-  submitSignupHandler: PropTypes.func.isRequired,
   loginOnChangeHandler: PropTypes.func.isRequired,
   passwordOnChangeHandler: PropTypes.func.isRequired,
   secondPasswordOnChangeHandler: PropTypes.func.isRequired,

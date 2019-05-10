@@ -1,6 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import Button from '@material-ui/core/Button'
+import IconPersonAdd from '@material-ui/icons/PersonAdd'
+import IconRestore from '@material-ui/icons/Restore'
+import IconLockOpen from '@material-ui/icons/LockOpen'
 import userActions from '../../services/redux/actions/userActions'
 import store from '../../services/redux/store'
 import snackbarActions from '../../services/redux/actions/snackbarActions'
@@ -210,6 +214,18 @@ class LoginBlock extends React.Component {
   }
 
   render() {
+    let submitHandler
+    switch (this.currentType) {
+      case 'signin':
+        submitHandler = this.submitSigninHandler
+        break
+      case 'signup':
+        submitHandler = this.submitSignupHandler
+        break
+      default:
+        submitHandler = this.submitRestoreHandler
+    }
+
     const content = !this.state.isLogIn
       ? (
         <LoginView
@@ -217,37 +233,46 @@ class LoginBlock extends React.Component {
           loginModalSwitcher={this.loginModalSwitcher}
           switchType={this.switchType}
         >
-          {this.state.currentType === 'signin'
-          && (
-            <SigninFormView
-              loginModalSwitcher={this.loginModalSwitcher}
-              submitSigninHandler={this.submitSigninHandler}
-              loginOnChangeHandler={this.loginOnChangeHandler}
-              passwordOnChangeHandler={this.passwordOnChangeHandler}
-            />
-          )}
-          {this.state.currentType === 'signup'
-          && (
-            <SignupFormView
-              loginModalSwitcher={this.loginModalSwitcher}
-              submitSignupHandler={this.submitSignupHandler}
-              loginOnChangeHandler={this.loginOnChangeHandler}
-              passwordOnChangeHandler={this.passwordOnChangeHandler}
-              secondPasswordOnChangeHandler={this.secondPasswordOnChangeHandler}
-              secretOnChangeHandler={this.secretOnChangeHandler}
-            />
-          )}
-          {this.state.currentType === 'restore'
-          && (
-            <RestoreFormView
-              loginModalSwitcher={this.loginModalSwitcher}
-              submitRestoreHandler={this.submitRestoreHandler}
-              loginOnChangeHandler={this.loginOnChangeHandler}
-              secretOnChangeHandler={this.secretOnChangeHandler}
-              passwordOnChangeHandler={this.passwordOnChangeHandler}
-              secondPasswordOnChangeHandler={this.secondPasswordOnChangeHandler}
-            />
-          )}
+          <div>
+            {this.state.currentType === 'signin'
+            && (
+              <SigninFormView
+                loginOnChangeHandler={this.loginOnChangeHandler}
+                passwordOnChangeHandler={this.passwordOnChangeHandler}
+              />
+            )}
+            {this.state.currentType === 'signup'
+            && (
+              <SignupFormView
+                loginOnChangeHandler={this.loginOnChangeHandler}
+                passwordOnChangeHandler={this.passwordOnChangeHandler}
+                secondPasswordOnChangeHandler={this.secondPasswordOnChangeHandler}
+                secretOnChangeHandler={this.secretOnChangeHandler}
+              />
+            )}
+            {this.state.currentType === 'restore'
+            && (
+              <RestoreFormView
+                loginOnChangeHandler={this.loginOnChangeHandler}
+                secretOnChangeHandler={this.secretOnChangeHandler}
+                passwordOnChangeHandler={this.passwordOnChangeHandler}
+                secondPasswordOnChangeHandler={this.secondPasswordOnChangeHandler}
+              />
+            )}
+            <div className="side-modal__actions">
+              <Button onClick={submitHandler} variant="contained" color="primary">
+                {this.state.currentType === 'restore' && 'Восстановить пароль'}
+                {this.state.currentType === 'restore' && <IconRestore className="button-icon" />}
+                {this.state.currentType === 'signin' && 'Войти'}
+                {this.state.currentType === 'signin' && <IconLockOpen className="button-icon" />}
+                {this.state.currentType === 'signup' && 'Зарегистрироваться'}
+                {this.state.currentType === 'signup' && <IconPersonAdd className="button-icon" />}
+              </Button>
+              <Button onClick={this.loginModalSwitcher} color="default">
+                Отмена
+              </Button>
+            </div>
+          </div>
         </LoginView>
       )
       : <UserInfoView user={this.props.user} logOut={this.logOut} />
