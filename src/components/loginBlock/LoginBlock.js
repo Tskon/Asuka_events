@@ -1,10 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import Button from '@material-ui/core/Button'
-import IconPersonAdd from '@material-ui/icons/PersonAdd'
-import IconRestore from '@material-ui/icons/Restore'
-import IconLockOpen from '@material-ui/icons/LockOpen'
 import userActions from '../../services/redux/actions/userActions'
 import store from '../../services/redux/store'
 import snackbarActions from '../../services/redux/actions/snackbarActions'
@@ -98,28 +94,36 @@ class LoginBlock extends React.Component {
   submitSigninHandler(e) {
     e.preventDefault()
 
-    // check inputs length
-    if (this.state.loginValue.length > 5 && this.state.passwordValue.length > 6) {
-      const body = {
-        username: this.state.loginValue,
-        password: this.state.passwordValue,
-      }
-
-      post('/api/signin', body)
-        .then((data) => {
-          if (data.status === 'ok') {
-            this.setUser(data.data)
-          }
-        })
-    } else {
-      if (this.state.loginValue.length <= 5) alert('Логин должен быть длиннее 5 символов')
-      if (this.state.passwordValue.length <= 6) alert('Пароль должен быть длиннее 6 символов')
+    if (this.state.loginValue.length <= 5) {
+      return store.dispatch(snackbarActions.openSnackbar({
+        message: 'Логин должен быть длиннее 5 символов',
+        type: 'error',
+      }))
     }
+    if (this.state.passwordValue.length <= 6) {
+      return store.dispatch(snackbarActions.openSnackbar({
+        message: 'Пароль должен быть длиннее 6 символов',
+        type: 'error',
+      }))
+    }
+
+    const body = {
+      username: this.state.loginValue,
+      password: this.state.passwordValue,
+    }
+
+    post('/api/signin', body)
+      .then((data) => {
+        if (data.status === 'ok') {
+          this.setUser(data.data)
+        }
+      })
+
   }
 
   submitSignupHandler(e) {
     e.preventDefault()
-    // check inputs length
+
     if (this.state.loginValue.length <= 5) {
       return store.dispatch(snackbarActions.openSnackbar({
         message: 'Логин должен быть длиннее 5 символов',
@@ -215,7 +219,7 @@ class LoginBlock extends React.Component {
 
   render() {
     let submitHandler
-    switch (this.currentType) {
+    switch (this.state.currentType) {
       case 'signin':
         submitHandler = this.submitSigninHandler
         break
@@ -230,49 +234,35 @@ class LoginBlock extends React.Component {
       ? (
         <LoginView
           {...this.state}
+          submitHandler={submitHandler}
           loginModalSwitcher={this.loginModalSwitcher}
           switchType={this.switchType}
         >
-          <div>
-            {this.state.currentType === 'signin'
-            && (
-              <SigninFormView
-                loginOnChangeHandler={this.loginOnChangeHandler}
-                passwordOnChangeHandler={this.passwordOnChangeHandler}
-              />
-            )}
-            {this.state.currentType === 'signup'
-            && (
-              <SignupFormView
-                loginOnChangeHandler={this.loginOnChangeHandler}
-                passwordOnChangeHandler={this.passwordOnChangeHandler}
-                secondPasswordOnChangeHandler={this.secondPasswordOnChangeHandler}
-                secretOnChangeHandler={this.secretOnChangeHandler}
-              />
-            )}
-            {this.state.currentType === 'restore'
-            && (
-              <RestoreFormView
-                loginOnChangeHandler={this.loginOnChangeHandler}
-                secretOnChangeHandler={this.secretOnChangeHandler}
-                passwordOnChangeHandler={this.passwordOnChangeHandler}
-                secondPasswordOnChangeHandler={this.secondPasswordOnChangeHandler}
-              />
-            )}
-            <div className="side-modal__actions">
-              <Button onClick={submitHandler} variant="contained" color="primary">
-                {this.state.currentType === 'restore' && 'Восстановить пароль'}
-                {this.state.currentType === 'restore' && <IconRestore className="button-icon" />}
-                {this.state.currentType === 'signin' && 'Войти'}
-                {this.state.currentType === 'signin' && <IconLockOpen className="button-icon" />}
-                {this.state.currentType === 'signup' && 'Зарегистрироваться'}
-                {this.state.currentType === 'signup' && <IconPersonAdd className="button-icon" />}
-              </Button>
-              <Button onClick={this.loginModalSwitcher} color="default">
-                Отмена
-              </Button>
-            </div>
-          </div>
+          {this.state.currentType === 'signin'
+          && (
+            <SigninFormView
+              loginOnChangeHandler={this.loginOnChangeHandler}
+              passwordOnChangeHandler={this.passwordOnChangeHandler}
+            />
+          )}
+          {this.state.currentType === 'signup'
+          && (
+            <SignupFormView
+              loginOnChangeHandler={this.loginOnChangeHandler}
+              passwordOnChangeHandler={this.passwordOnChangeHandler}
+              secondPasswordOnChangeHandler={this.secondPasswordOnChangeHandler}
+              secretOnChangeHandler={this.secretOnChangeHandler}
+            />
+          )}
+          {this.state.currentType === 'restore'
+          && (
+            <RestoreFormView
+              loginOnChangeHandler={this.loginOnChangeHandler}
+              secretOnChangeHandler={this.secretOnChangeHandler}
+              passwordOnChangeHandler={this.passwordOnChangeHandler}
+              secondPasswordOnChangeHandler={this.secondPasswordOnChangeHandler}
+            />
+          )}
         </LoginView>
       )
       : <UserInfoView user={this.props.user} logOut={this.logOut} />

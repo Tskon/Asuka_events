@@ -5,6 +5,9 @@ import RadioGroup from '@material-ui/core/es/RadioGroup/RadioGroup'
 import Radio from '@material-ui/core/es/Radio/Radio'
 import FormControlLabel from '@material-ui/core/es/FormControlLabel/FormControlLabel'
 import Button from '@material-ui/core/Button'
+import IconPersonAdd from '@material-ui/icons/PersonAdd'
+import IconRestore from '@material-ui/icons/Restore'
+import IconLockOpen from '@material-ui/icons/LockOpen'
 import '../../scss/loginBlock/loginModal.scss'
 
 function LoginView(props) {
@@ -14,8 +17,24 @@ function LoginView(props) {
         Войти
       </Button>
       <Drawer open={props.showModal} onClose={props.loginModalSwitcher} anchor="right">
-        <form className="side-modal__content">
-          {props.children}
+        <form onSubmit={props.submitHandler} className="side-modal__content">
+          <div>
+            {props.children}
+            <div className="side-modal__actions">
+              <Button type="submit" variant="contained" color="primary">
+                {props.currentType === 'restore' && 'Восстановить пароль'}
+                {props.currentType === 'restore' && <IconRestore className="button-icon" />}
+                {props.currentType === 'signin' && 'Войти'}
+                {props.currentType === 'signin' && <IconLockOpen className="button-icon" />}
+                {props.currentType === 'signup' && 'Зарегистрироваться'}
+                {props.currentType === 'signup' && <IconPersonAdd className="button-icon" />}
+              </Button>
+              <Button onClick={props.loginModalSwitcher} color="default">
+                Отмена
+              </Button>
+            </div>
+          </div>
+
           <RadioGroup
             aria-label="position"
             value={props.currentType}
@@ -47,6 +66,7 @@ function LoginView(props) {
 }
 
 LoginView.propTypes = {
+  submitHandler: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired,
   loginModalSwitcher: PropTypes.func.isRequired,
   switchType: PropTypes.func.isRequired,
