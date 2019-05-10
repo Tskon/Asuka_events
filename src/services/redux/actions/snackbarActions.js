@@ -8,7 +8,7 @@ export default {
       },
     }
   },
-  closeSnackbar(options) {
+  closeSnackbar() {
     return {
       type: 'CLOSE',
     }

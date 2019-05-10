@@ -8,7 +8,7 @@ const initialState = {
 
 const snackbarReducer = createReducer(initialState, {
   OPEN(state, action) {
-    state.show = true
+    state.open = true
     state.type = action.payload.type
     state.message = action.payload.message
   },

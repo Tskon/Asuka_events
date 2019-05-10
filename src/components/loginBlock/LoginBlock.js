@@ -3,12 +3,14 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import userActions from '../../services/redux/actions/userActions'
 import store from '../../services/redux/store'
+import snackbarActions from '../../services/redux/actions/snackbarActions'
 import LoginView from './LoginView'
 import RestoreFormView from './RestoreFormView'
 import SigninFormView from './SigninFormView'
 import SignupFormView from './SignupFormView'
 import UserInfoView from './UserInfoView'
 import { post } from '../../services/utils'
+
 
 class LoginBlock extends React.Component {
   constructor(props) {
@@ -111,14 +113,33 @@ class LoginBlock extends React.Component {
     }
   }
 
-  // TODO проверять что пароли совпадают
   submitSignupHandler(e) {
     e.preventDefault()
     // check inputs length
-    if (this.state.loginValue.length <= 5) return alert('Логин должен быть длиннее 5 символов')
-    if (this.state.passwordValue.length <= 6) return alert('Пароль должен быть длиннее 6 символов')
-    if (this.state.secretValue.length <= 3) return alert('Введите секретное слово для восстановления пароля длиннее 3 символов')
-    if (this.state.secondPasswordValue !== this.state.passwordValue) return alert('Пароли не совпадают')
+    if (this.state.loginValue.length <= 5) {
+      return store.dispatch(snackbarActions.openSnackbar({
+        message: 'Логин должен быть длиннее 5 символов',
+        type: 'error',
+      }))
+    }
+    if (this.state.passwordValue.length <= 6) {
+      return store.dispatch(snackbarActions.openSnackbar({
+        message: 'Пароль должен быть длиннее 6 символов',
+        type: 'error',
+      }))
+    }
+    if (this.state.secretValue.length <= 3) {
+      return store.dispatch(snackbarActions.openSnackbar({
+        message: 'Введите секретное слово для восстановления пароля длиннее 3 символов',
+        type: 'error',
+      }))
+    }
+    if (this.state.secondPasswordValue !== this.state.passwordValue) {
+      return store.dispatch(snackbarActions.openSnackbar({
+        message: 'Пароли не совпадают',
+        type: 'error',
+      }))
+    }
 
     const body = {
       username: this.state.loginValue,
@@ -136,10 +157,30 @@ class LoginBlock extends React.Component {
 
   submitRestoreHandler(e) {
     e.preventDefault()
-    if (this.state.loginValue.length <= 5) return alert('Логин должен быть длиннее 5 символов')
-    if (this.state.passwordValue.length <= 6) return alert('Пароль должен быть длиннее 6 символов')
-    if (this.state.secondPasswordValue !== this.state.passwordValue) return alert('Пароли не совпадают')
-    if (this.state.secretValue.length <= 3) return alert('Введите секретное слово для восстановления пароля длиннее 3 символов')
+    if (this.state.loginValue.length <= 5) {
+      return store.dispatch(snackbarActions.openSnackbar({
+        message: 'Логин должен быть длиннее 5 символов',
+        type: 'error',
+      }))
+    }
+    if (this.state.passwordValue.length <= 6) {
+      return store.dispatch(snackbarActions.openSnackbar({
+        message: 'Пароль должен быть длиннее 6 символов',
+        type: 'error',
+      }))
+    }
+    if (this.state.secretValue.length <= 3) {
+      return store.dispatch(snackbarActions.openSnackbar({
+        message: 'Введите секретное слово для восстановления пароля длиннее 3 символов',
+        type: 'error',
+      }))
+    }
+    if (this.state.secondPasswordValue !== this.state.passwordValue) {
+      return store.dispatch(snackbarActions.openSnackbar({
+        message: 'Пароли не совпадают',
+        type: 'error',
+      }))
+    }
 
     const body = {
       username: this.state.loginValue,
