@@ -4,7 +4,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 5px;
+  padding: 5px 12px;
   border-radius: 10px;
   background-color: $white;
   color: $font_main;
@@ -12,9 +12,27 @@
     display: flex;
     align-items: center;
     & > svg {
-      margin-right: 10px;
+      margin: 0 10px 0 0;
     }
   }
 }
 
-//snackbar_info, snackbar_warning, snackbar_error, snackbar_success
+.snackbar_info{
+  background-color: #1976d1;
+  color: $white;
+}
+
+.snackbar_warning{
+  background-color: #ffa000;
+  color: $white;
+}
+
+.snackbar_error{
+  background-color: #d32f2f;
+  color: $white;
+}
+
+.snackbar_success{
+  background-color: #43a047;
+  color: $white;
+}
