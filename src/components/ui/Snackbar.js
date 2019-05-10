@@ -61,10 +61,6 @@ class CustomizedSnackbars extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = {
-      open: this.props.open,
-    }
-
     this.handleClose = this.handleClose.bind(this)
   }
 
@@ -78,24 +74,22 @@ class CustomizedSnackbars extends React.Component {
 
   render() {
     return (
-      <div>
-        <Snackbar
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'left',
-          }}
-          open={this.state.open}
-          autoHideDuration={6000}
+      <Snackbar
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+        open={this.props.open}
+        autoHideDuration={400000}
+        onClose={this.handleClose}
+      >
+        <MySnackbarContent
+          classes={{ root: `snackbar snackbar_${this.props.type}`}}
           onClose={this.handleClose}
-        >
-          <MySnackbarContent
-            class={`snackbar snackbar_${this.props.type}`}
-            onClose={this.handleClose}
-            variant={this.props.type}
-            message={this.props.message}
-          />
-        </Snackbar>
-      </div>
+          variant={this.props.type}
+          message={this.props.message}
+        />
+      </Snackbar>
     )
   }
 }

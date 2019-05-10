@@ -1,13 +1,9 @@
 @import "../vars";
 
 .snackbar{
-  display: flex;
-  justify-content: space-between;
+  flex-wrap: nowrap !important;
   align-items: center;
-  padding: 5px 12px;
-  border-radius: 10px;
-  background-color: $white;
-  color: $font_main;
+  padding: 5px 12px !important;
   .snackbar__content{
     display: flex;
     align-items: center;
@@ -18,21 +14,21 @@
 }
 
 .snackbar_info{
-  background-color: #1976d1;
-  color: $white;
+  background-color: #1976d1 !important;
+  color: $white !important;
 }
 
 .snackbar_warning{
-  background-color: #ffa000;
-  color: $white;
+  background-color: #ffa000 !important;
+  color: $white !important;
 }
 
 .snackbar_error{
-  background-color: #d32f2f;
-  color: $white;
+  background-color: #d32f2f !important;
+  color: $white !important;
 }
 
 .snackbar_success{
-  background-color: #43a047;
-  color: $white;
+  background-color: #43a047 !important;
+  color: $white !important;
 }

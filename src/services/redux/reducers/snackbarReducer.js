@@ -13,7 +13,7 @@ const snackbarReducer = createReducer(initialState, {
     state.message = action.payload.message
   },
   CLOSE(state) {
-    state = { ...initialState }
+    state.open = initialState.open
   },
 })
 
