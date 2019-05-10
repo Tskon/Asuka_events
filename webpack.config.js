@@ -42,7 +42,13 @@ module.exports = {
       {
         test: /\.scss$/,
         use: [
-          'style-loader', // creates style nodes from JS strings
+          {
+            loader: 'style-loader',
+            options: {
+              insertInto: () => document.querySelector('#styles'),
+            },
+          },
+          // 'style-loader', // creates style nodes from JS strings
           'css-loader', // translates CSS into CommonJS
           'sass-loader', // compiles Sass to CSS, using Node Sass by default
         ],
