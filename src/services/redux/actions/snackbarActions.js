@@ -1,11 +1,16 @@
 export default {
-  showSnackbar(options) {
+  openSnackbar(options) {
     return {
-      type: 'SHOW',
+      type: 'OPEN',
       payload: {
         type: options.type,
         message: options.message,
       },
+    }
+  },
+  closeSnackbar(options) {
+    return {
+      type: 'CLOSE',
     }
   },
 }

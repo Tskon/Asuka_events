@@ -1,19 +1,19 @@
 import { createReducer } from 'redux-starter-kit'
 
 const initialState = {
-  show: false,
+  open: false,
   type: 'info',
   message: '',
 }
 
 const snackbarReducer = createReducer(initialState, {
-  SHOW(state, action) {
+  OPEN(state, action) {
     state.show = true
     state.type = action.payload.type
     state.message = action.payload.message
   },
-  RESET_USER(state) {
-    state.data = initialState.data
+  CLOSE(state) {
+    state = { ...initialState }
   },
 })
 
