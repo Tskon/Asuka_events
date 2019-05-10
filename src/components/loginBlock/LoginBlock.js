@@ -116,9 +116,12 @@ class LoginBlock extends React.Component {
       .then((data) => {
         if (data.status === 'ok') {
           this.setUser(data.data)
+          store.dispatch(snackbarActions.openSnackbar({
+            message: `Добро пожаловать, ${data.data.name}`,
+            type: 'success',
+          }))
         }
       })
-
   }
 
   submitSignupHandler(e) {
@@ -159,6 +162,10 @@ class LoginBlock extends React.Component {
       .then((data) => {
         if (data.status === 'ok') {
           this.setUser(data.data)
+          store.dispatch(snackbarActions.openSnackbar({
+            message: `Добро пожаловать, ${data.data.name}`,
+            type: 'success',
+          }))
         }
       })
   }
@@ -200,6 +207,10 @@ class LoginBlock extends React.Component {
       .then((data) => {
         if (data.status === 'ok') {
           this.setUser(data.data)
+          store.dispatch(snackbarActions.openSnackbar({
+            message: 'Пароль успешно изменен',
+            type: 'success',
+          }))
         }
       })
   }
