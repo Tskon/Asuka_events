@@ -120,7 +120,7 @@ export default class Map extends React.Component {
   render() {
     return (
       <div
-        className="map-wrapper"
+        className="map-page"
         onMouseDown={this.wrapperMouseDownHandler}
         onMouseUp={this.wrapperMouseUpHandler}
         onMouseLeave={this.wrapperMouseUpHandler}
@@ -128,10 +128,12 @@ export default class Map extends React.Component {
       >
         <div
           ref={(ref) => { this.mapRef = ref }}
-          className="event-map"
+          className="map-wrapper"
           style={this.getMapStyles()}
         >
-          {this.gridElems}
+          <div className="event-map">
+            {this.gridElems}
+          </div>
         </div>
         <div className="event-map__controls">
           <button type="button" onClick={this.scopeOut}>-</button>

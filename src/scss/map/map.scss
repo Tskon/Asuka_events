@@ -1,4 +1,4 @@
-.map-wrapper{
+.map-page{
   max-width: 100%;
   min-height: calc(100vh - 206px);
   overflow: hidden;
@@ -6,18 +6,28 @@
   background-color: #bcdaff;
 }
 
-.event-map{
+.map-wrapper{
   position: absolute;
   background-image: url(../../static/map-indonesia.svg);
   background-size: 100%;
   background-repeat: no-repeat;
-  display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  grid-template-rows: auto;
   background-color: #bcdaff;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  width: 100% !important;
+  padding-top: 40%;
+}
+
+.event-map{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(6, 1fr);
 }
 
 .event-map__elem{
@@ -25,7 +35,7 @@
   box-shadow: 0 0 1px rgba(0,0,0,0.5);
   cursor: pointer;
   transition: 0.3s;
-  padding-top: 50%;
+  //padding-top: 50%;
   &:hover{
     background-color: rgba(0,0,0,0.3);
   }
