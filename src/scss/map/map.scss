@@ -15,8 +15,8 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 100% !important;
-  padding-top: 40%;
+  width: 1200px;
+  height: 480px;
 }
 
 .event-map{
@@ -35,7 +35,6 @@
   box-shadow: 0 0 1px rgba(0,0,0,0.5);
   cursor: pointer;
   transition: 0.3s;
-  //padding-top: 50%;
   &:hover{
     background-color: rgba(0,0,0,0.3);
   }
