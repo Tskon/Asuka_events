@@ -8,11 +8,11 @@ export default class Map extends React.Component {
     this.state = {
       cols: 8,
       rows: 6,
-      // currentScope: 1,
+      currentScope: 1,
     }
 
-    this.step = 1
-    this.minScope = 1
+    this.step = 0.2
+    this.minScope = 0.5
     this.maxScope = 8
     this.letters = 'ABCDIFGHIJKLMNOP'
     this.mouseEventStart = {
@@ -40,10 +40,10 @@ export default class Map extends React.Component {
       )
     }
 
-    // this.scopeIn = this.scopeIn.bind(this)
-    // this.scopeOut = this.scopeOut.bind(this)
-    // this.rangeHandler = this.rangeHandler.bind(this)
-    // this.wheelHandler = this.wheelHandler.bind(this)
+    this.scopeIn = this.scopeIn.bind(this)
+    this.scopeOut = this.scopeOut.bind(this)
+    this.rangeHandler = this.rangeHandler.bind(this)
+    this.wheelHandler = this.wheelHandler.bind(this)
     this.wrapperMouseDownHandler = this.wrapperMouseDownHandler.bind(this)
     this.wrapperMouseUpHandler = this.wrapperMouseUpHandler.bind(this)
     this.wrapperMouseMoveHandler = this.wrapperMouseMoveHandler.bind(this)
@@ -53,45 +53,45 @@ export default class Map extends React.Component {
     document.addEventListener('wheel', this.wheelHandler)
   }
 
-  // getMapStyles() {
-  //   return {
-  //     width: `${100 * (1 + this.state.currentScope / 2)}%`,
-  //   }
-  // }
+  getMapStyles() {
+    return {
+      transform: `scope(${this.state.currentScope})`,
+    }
+  }
 
-  // scopeIn() {
-  //   const newScope = this.state.currentScope + this.step
-  //   if (newScope <= this.maxScope) {
-  //     this.setState({
-  //       currentScope: newScope,
-  //     })
-  //   }
-  // }
-  //
-  // scopeOut() {
-  //   const newScope = this.state.currentScope - this.step
-  //   if (newScope > this.minScope - this.step) {
-  //     this.setState({
-  //       currentScope: newScope,
-  //     })
-  //   }
-  // }
+  scopeIn() {
+    const newScope = this.state.currentScope + this.step
+    if (newScope <= this.maxScope) {
+      this.setState({
+        currentScope: newScope,
+      })
+    }
+  }
 
-  // rangeHandler() {
-  //   console.log(this.state.currentScope)
-  // }
+  scopeOut() {
+    const newScope = this.state.currentScope - this.step
+    if (newScope > this.minScope - this.step) {
+      this.setState({
+        currentScope: newScope,
+      })
+    }
+  }
 
-  // wheelHandler(event) {
-  //   event.preventDefault()
-  //   const e = event || window.event
-  //   const delta = e.deltaY || e.detail || e.wheelDelta
-  //
-  //   if (delta < 0) {
-  //     this.scopeIn()
-  //   } else {
-  //     this.scopeOut()
-  //   }
-  // }
+  rangeHandler() {
+    console.log(this.state.currentScope)
+  }
+
+  wheelHandler(event) {
+    event.preventDefault()
+    const e = event || window.event
+    const delta = e.deltaY || e.detail || e.wheelDelta
+
+    if (delta < 0) {
+      this.scopeIn()
+    } else {
+      this.scopeOut()
+    }
+  }
 
   wrapperMouseDownHandler(event) {
     event.preventDefault()
@@ -148,21 +148,19 @@ export default class Map extends React.Component {
             {this.gridElems}
           </div>
         </div>
+        <div className="event-map__controls">
+          <button type="button" onClick={this.scopeOut}>-</button>
+          <input
+            type="range"
+            min={this.minScope}
+            max={this.maxScope}
+            id="size"
+            value={this.state.currentScope}
+            onChange={this.rangeHandler}
+          />
+          <button type="button" onClick={this.scopeIn}>+</button>
+        </div>
       </div>
     )
   }
 }
-/*
-<div className="event-map__controls">
-  <button type="button" onClick={this.scopeOut}>-</button>
-  <input
-    type="range"
-    min={this.minScope}
-    max={this.maxScope}
-    id="size"
-    value={this.state.currentScope}
-    onChange={this.rangeHandler}
-  />
-  <button type="button" onClick={this.scopeIn}>+</button>
-</div>
-*/
