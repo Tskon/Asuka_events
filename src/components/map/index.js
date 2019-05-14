@@ -55,7 +55,7 @@ export default class Map extends React.Component {
 
   getMapStyles() {
     return {
-      transform: `scope(${this.state.currentScope})`,
+      transform: `scale(${this.state.currentScope})`,
     }
   }
 
@@ -143,6 +143,7 @@ export default class Map extends React.Component {
             this.mapRef = ref
           }}
           className="map-wrapper"
+          style={this.getMapStyles()}
         >
           <div className="event-map">
             {this.gridElems}
