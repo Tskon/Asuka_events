@@ -2,19 +2,18 @@
   max-width: 100%;
   min-height: calc(100vh - 206px);
   overflow: hidden;
-  position: relative;
   background-color: #bcdaff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .map-wrapper{
-  position: absolute;
+  position: relative;
   background-image: url(../../static/map-indonesia.svg);
   background-size: 100%;
   background-repeat: no-repeat;
   background-color: #bcdaff;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
   width: 1200px;
   height: 480px;
 }
