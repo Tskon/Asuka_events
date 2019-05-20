@@ -111,16 +111,8 @@ export default class Map extends React.Component {
       this.shiftX -= event.clientX - this.mouseEventStart.x
       this.shiftY -= event.clientY - this.mouseEventStart.y
 
-      const maxValX = this.mapRef.clientWidth / 4
-      if (this.shiftX > maxValX) this.shiftX = maxValX
-      if (this.shiftX < -maxValX) this.shiftX = -maxValX
-
-      const maxValY = this.mapRef.clientHeight / 4
-      if (this.shiftY > maxValY) this.shiftY = maxValY
-      if (this.shiftY < -maxValY) this.shiftY = -maxValY
-
-      this.mapRef.style.left = `calc(50% - ${this.shiftX}px)`
-      this.mapRef.style.top = `calc(50% - ${this.shiftY}px)`
+      this.mapRef.style.left = `-${this.shiftX}px`
+      this.mapRef.style.top = `-${this.shiftY}px`
 
       this.mouseEventStart = {
         x: event.clientX,
