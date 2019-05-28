@@ -82,7 +82,6 @@ export default class Map extends React.Component {
   }
 
   wheelHandler(event) {
-    event.preventDefault()
     const e = event || window.event
     const delta = e.deltaY || e.detail || e.wheelDelta
 
