@@ -47,6 +47,7 @@ export default class Map extends React.Component {
     this.wrapperMouseDownHandler = this.wrapperMouseDownHandler.bind(this)
     this.wrapperMouseUpHandler = this.wrapperMouseUpHandler.bind(this)
     this.wrapperMouseMoveHandler = this.wrapperMouseMoveHandler.bind(this)
+    this.checkShiftValues = this.checkShiftValues.bind(this)
   }
 
   componentDidMount() {
@@ -90,6 +91,8 @@ export default class Map extends React.Component {
     } else {
       this.scopeOut()
     }
+
+    this.checkShiftValues()
   }
 
   wrapperMouseDownHandler(event) {
@@ -110,6 +113,8 @@ export default class Map extends React.Component {
       this.shiftX += event.clientX - this.mouseEventStart.x
       this.shiftY += event.clientY - this.mouseEventStart.y
 
+      this.checkShiftValues()
+
       this.mapRef.style.left = `${this.shiftX}px`
       this.mapRef.style.top = `${this.shiftY}px`
 
@@ -118,6 +123,18 @@ export default class Map extends React.Component {
         y: event.clientY,
       }
     }
+  }
+
+  checkShiftValues() {
+    const maxShiftX = 250 * (this.state.currentScope ** 2) / 1.5
+    const minShiftX = -maxShiftX
+    const maxShiftY = 100 * (this.state.currentScope ** 2) / 1.5
+    const minShiftY = -maxShiftY
+
+    if (this.shiftX > maxShiftX) this.shiftX = maxShiftX
+    if (this.shiftY > maxShiftY) this.shiftY = maxShiftY
+    if (this.shiftX < minShiftX) this.shiftX = minShiftX
+    if (this.shiftY < minShiftY) this.shiftY = minShiftY
   }
 
   render() {
