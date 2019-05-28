@@ -126,9 +126,9 @@ export default class Map extends React.Component {
   }
 
   checkShiftValues() {
-    const maxShiftX = 250 * (this.state.currentScope ** 2) / 1.5
+    const maxShiftX = 250 * (this.state.currentScope ** 2) / 8
     const minShiftX = -maxShiftX
-    const maxShiftY = 100 * (this.state.currentScope ** 2) / 1.5
+    const maxShiftY = 100 * (this.state.currentScope ** 2) / 5
     const minShiftY = -maxShiftY
 
     if (this.shiftX > maxShiftX) this.shiftX = maxShiftX
