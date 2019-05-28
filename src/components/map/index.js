@@ -8,12 +8,12 @@ export default class Map extends React.Component {
     this.state = {
       cols: 8,
       rows: 6,
-      currentScope: 1,
+      currentScope: 3,
     }
 
-    this.step = 0.2
-    this.minScope = 0.5
-    this.maxScope = 8
+    this.step = 1
+    this.minScope = 2
+    this.maxScope = 6
     this.letters = 'ABCDIFGHIJKLMNOP'
     this.mouseEventStart = {
       x: 0,
@@ -56,7 +56,7 @@ export default class Map extends React.Component {
 
   getMapStyles() {
     return {
-      transform: `scale(${this.state.currentScope})`,
+      transform: `scale(${this.state.currentScope * 0.5})`,
     }
   }
 
