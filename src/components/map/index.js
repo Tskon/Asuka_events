@@ -107,11 +107,11 @@ export default class Map extends React.Component {
 
   wrapperMouseMoveHandler(event) {
     if (this.mouseMoveAvailable) {
-      this.shiftX -= event.clientX - this.mouseEventStart.x
-      this.shiftY -= event.clientY - this.mouseEventStart.y
+      this.shiftX += event.clientX - this.mouseEventStart.x
+      this.shiftY += event.clientY - this.mouseEventStart.y
 
-      this.mapRef.style.left = `-${this.shiftX}px`
-      this.mapRef.style.top = `-${this.shiftY}px`
+      this.mapRef.style.left = `${this.shiftX}px`
+      this.mapRef.style.top = `${this.shiftY}px`
 
       this.mouseEventStart = {
         x: event.clientX,
