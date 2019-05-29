@@ -11,6 +11,17 @@ import LKPage from '../pages/lk/index'
 import Snackbar from '../components/ui/Snackbar'
 
 const theme = createMuiTheme({
+  typography: {
+    fontFamily: [
+      'Roboto',
+      '-apple-system',
+      'BlinkMacSystemFont',
+      'Segoe UI',
+      'Arial',
+      'sans-serif',
+    ].join(','),
+    useNextVariants: true,
+  },
   palette: {
     type: 'light',
     // primary: { main: '#fdc073' },
@@ -22,7 +33,7 @@ export default () => (
   <div>
     <Header />
     <MuiThemeProvider theme={theme}>
-      <main className='site-content'>
+      <main className="site-content">
         <Route exact path="/" component={IndexPage} />
         <Route path="/event" component={AboutPage} />
         <Route path="/admin" component={AdminPage} />
