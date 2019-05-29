@@ -1,5 +1,5 @@
 import React from 'react'
-import '../../scss/_index.scss'
+import '../../scss/pages/lk.scss'
 import LkView from './LkView'
 
 export default class Lk extends React.Component {
