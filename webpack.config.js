@@ -40,7 +40,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.scss$/,
+        test: /\.s(a|c)ss$/,
         use: [
           {
             loader: 'style-loader',
@@ -48,10 +48,30 @@ module.exports = {
               insertInto: () => document.querySelector('#styles'),
             },
           },
-          // 'style-loader', // creates style nodes from JS strings
           'css-loader', // translates CSS into CommonJS
           'sass-loader', // compiles Sass to CSS, using Node Sass by default
         ],
+      },
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: 'style-loader',
+            options: {
+              insertInto: () => document.querySelector('#styles'),
+            },
+          },
+          'css-loader', // translates CSS into CommonJS
+        ],
+      },
+      {
+        test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
+        use: [{
+          loader: 'file-loader',
+          options: {
+            name: 'fonts/[name].[ext]',
+          }
+        }]
       },
       {
         test: /\.(png|jpe?g|gif|svg)$/,
