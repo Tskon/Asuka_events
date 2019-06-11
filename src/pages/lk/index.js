@@ -7,11 +7,31 @@ export default class Lk extends React.Component {
     super(props)
 
     this.state = {
+      imageUrl: '',
+    }
 
+    this.inputHandler = this.inputHandler.bind(this)
+  }
+
+  inputHandler(e) {
+    switch (e.target.name) {
+      case 'image':
+        this.setState({
+          imageUrl: e.target.value,
+        })
+        break
+      default: console.log(e.target.name)
     }
   }
 
+  submitHandler(e) {
+    e.preventDefault()
+  }
+
   render() {
-    return <LkView />
+    return <LkView
+      submitHandler={this.submitHandler}
+      inputHandler={this.inputHandler}
+    />
   }
 }
