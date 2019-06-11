@@ -32,6 +32,9 @@ const LkView = props => (
         <IconSave className="button-icon" />
       </Button>
     </form>
+    <section className="about-user">
+      img
+    </section>
   </div>
 )
 
