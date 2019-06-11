@@ -25,6 +25,9 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             presets: ['@babel/preset-env', '@babel/preset-react'],
+            plugins: [
+              ['@babel/plugin-proposal-class-properties', { loose: true }],
+            ],
           },
         },
       },
@@ -70,8 +73,8 @@ module.exports = {
           loader: 'file-loader',
           options: {
             name: 'fonts/[name].[ext]',
-          }
-        }]
+          },
+        }],
       },
       {
         test: /\.(png|jpe?g|gif|svg)$/,

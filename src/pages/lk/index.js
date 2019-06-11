@@ -13,11 +13,9 @@ export default class Lk extends React.Component {
     super(props)
 
     this.state = { ...initState }
-
-    this.inputHandler = this.inputHandler.bind(this)
   }
 
-  inputHandler(e) {
+  inputHandler = (e) => {
     switch (e.target.name) {
       case 'image':
         this.setState({
@@ -38,7 +36,7 @@ export default class Lk extends React.Component {
     }
   }
 
-  submitHandler(e) {
+  submitHandler = (e) => {
     e.preventDefault()
   }
 
@@ -47,6 +45,7 @@ export default class Lk extends React.Component {
       <LkView
         submitHandler={this.submitHandler}
         inputHandler={this.inputHandler}
+
       />
     )
   }
