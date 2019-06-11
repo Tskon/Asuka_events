@@ -39,28 +39,19 @@ export default class Map extends React.Component {
         </div>,
       )
     }
-
-    this.scopeIn = this.scopeIn.bind(this)
-    this.scopeOut = this.scopeOut.bind(this)
-    this.rangeHandler = this.rangeHandler.bind(this)
-    this.wheelHandler = this.wheelHandler.bind(this)
-    this.wrapperMouseDownHandler = this.wrapperMouseDownHandler.bind(this)
-    this.wrapperMouseUpHandler = this.wrapperMouseUpHandler.bind(this)
-    this.wrapperMouseMoveHandler = this.wrapperMouseMoveHandler.bind(this)
-    this.checkShiftValues = this.checkShiftValues.bind(this)
   }
 
   componentDidMount() {
     document.addEventListener('wheel', this.wheelHandler)
   }
 
-  getMapStyles() {
+  getMapStyles = () => {
     return {
       transform: `scale(${this.state.currentScope * 0.5})`,
     }
   }
 
-  scopeIn() {
+  scopeIn = () => {
     const newScope = this.state.currentScope + this.step
     if (newScope <= this.maxScope) {
       this.setState({
@@ -69,7 +60,7 @@ export default class Map extends React.Component {
     }
   }
 
-  scopeOut() {
+  scopeOut = () => {
     const newScope = this.state.currentScope - this.step
     if (newScope > this.minScope - this.step) {
       this.setState({
@@ -78,11 +69,11 @@ export default class Map extends React.Component {
     }
   }
 
-  rangeHandler() {
+  rangeHandler = () => {
     console.log(this.state.currentScope)
   }
 
-  wheelHandler(event) {
+  wheelHandler = (event) => {
     const e = event || window.event
     const delta = e.deltaY || e.detail || e.wheelDelta
 
@@ -95,7 +86,7 @@ export default class Map extends React.Component {
     this.checkShiftValues()
   }
 
-  wrapperMouseDownHandler(event) {
+  wrapperMouseDownHandler = (event) => {
     event.preventDefault()
     this.mouseEventStart = {
       x: event.clientX,
@@ -104,11 +95,11 @@ export default class Map extends React.Component {
     this.mouseMoveAvailable = true
   }
 
-  wrapperMouseUpHandler() {
+  wrapperMouseUpHandler = () => {
     this.mouseMoveAvailable = false
   }
 
-  wrapperMouseMoveHandler(event) {
+  wrapperMouseMoveHandler = (event) => {
     if (this.mouseMoveAvailable) {
       this.shiftX += event.clientX - this.mouseEventStart.x
       this.shiftY += event.clientY - this.mouseEventStart.y
@@ -125,7 +116,7 @@ export default class Map extends React.Component {
     }
   }
 
-  checkShiftValues() {
+  checkShiftValues = () => {
     const maxShiftX = 600 * this.state.currentScope
     const maxShiftY = 240 * this.state.currentScope
     const minShiftX = -maxShiftX

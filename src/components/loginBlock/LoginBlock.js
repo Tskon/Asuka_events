@@ -13,6 +13,14 @@ import { post } from '../../services/utils'
 
 
 class LoginBlock extends React.Component {
+  static propTypes = {
+    user: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      isAdmin: PropTypes.bool.isRequired,
+      isPlayer: PropTypes.bool.isRequired,
+    }).isRequired,
+  }
+
   constructor(props) {
     super(props)
     this.state = {
@@ -24,18 +32,6 @@ class LoginBlock extends React.Component {
       secretValue: '',
       currentType: 'signin',
     }
-
-    this.loginModalSwitcher = this.loginModalSwitcher.bind(this)
-    this.loginOnChangeHandler = this.loginOnChangeHandler.bind(this)
-    this.logOut = this.logOut.bind(this)
-    this.passwordOnChangeHandler = this.passwordOnChangeHandler.bind(this)
-    this.secondPasswordOnChangeHandler = this.secondPasswordOnChangeHandler.bind(this)
-    this.secretOnChangeHandler = this.secretOnChangeHandler.bind(this)
-    this.setUser = this.setUser.bind(this)
-    this.submitSigninHandler = this.submitSigninHandler.bind(this)
-    this.submitSignupHandler = this.submitSignupHandler.bind(this)
-    this.submitRestoreHandler = this.submitRestoreHandler.bind(this)
-    this.switchType = this.switchType.bind(this)
   }
 
   componentDidMount() {
@@ -46,7 +42,7 @@ class LoginBlock extends React.Component {
       })
   }
 
-  setUser(user) {
+  setUser = (user) => {
     store.dispatch(userActions.setUser(user))
     this.setState({
       isLogIn: true,
@@ -54,44 +50,44 @@ class LoginBlock extends React.Component {
     })
   }
 
-  loginModalSwitcher() {
+  loginModalSwitcher = () => {
     const { showModal } = this.state
     this.setState({
       showModal: !showModal,
     })
   }
 
-  switchType(e) {
+  switchType = (e) => {
     this.setState({
       currentType: e.currentTarget.value,
     })
   }
 
-  loginOnChangeHandler(e) {
+  loginOnChangeHandler = (e) => {
     this.setState({
       loginValue: e.currentTarget.value,
     })
   }
 
-  passwordOnChangeHandler(e) {
+  passwordOnChangeHandler = (e) => {
     this.setState({
       passwordValue: e.currentTarget.value,
     })
   }
 
-  secondPasswordOnChangeHandler(e) {
+  secondPasswordOnChangeHandler = (e) => {
     this.setState({
       secondPasswordValue: e.currentTarget.value,
     })
   }
 
-  secretOnChangeHandler(e) {
+  secretOnChangeHandler = (e) => {
     this.setState({
       secretValue: e.currentTarget.value,
     })
   }
 
-  submitSigninHandler(e) {
+  submitSigninHandler = (e) => {
     e.preventDefault()
 
     if (this.state.loginValue.length <= 5) {
@@ -124,7 +120,7 @@ class LoginBlock extends React.Component {
       })
   }
 
-  submitSignupHandler(e) {
+  submitSignupHandler = (e) => {
     e.preventDefault()
 
     if (this.state.loginValue.length <= 5) {
@@ -170,7 +166,7 @@ class LoginBlock extends React.Component {
       })
   }
 
-  submitRestoreHandler(e) {
+  submitRestoreHandler = (e) => {
     e.preventDefault()
     if (this.state.loginValue.length <= 5) {
       return store.dispatch(snackbarActions.openSnackbar({
@@ -215,7 +211,7 @@ class LoginBlock extends React.Component {
       })
   }
 
-  logOut() {
+  logOut = () => {
     post('/api/logout')
       .then((data) => {
         if (data.status === 'ok') {
@@ -283,14 +279,6 @@ class LoginBlock extends React.Component {
 
     return content
   }
-}
-
-LoginBlock.propTypes = {
-  user: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    isAdmin: PropTypes.bool.isRequired,
-    isPlayer: PropTypes.bool.isRequired,
-  }).isRequired,
 }
 
 const mapStateToProps = state => ({
