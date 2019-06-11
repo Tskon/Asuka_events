@@ -3,11 +3,11 @@ import TextField from '@material-ui/core/TextField'
 import IconSave from '@material-ui/icons/Save'
 import Button from '@material-ui/core/Button'
 
-
 export default props => (
   <div>
     <h1>Личный кабинет</h1>
     <form onSubmit={(e) => {
+      e.preventDefault()
       console.log(props, e)
     }}
     >
