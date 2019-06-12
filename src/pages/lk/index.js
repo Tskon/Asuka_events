@@ -45,7 +45,7 @@ export default class Lk extends React.Component {
       <LkView
         submitHandler={this.submitHandler}
         inputHandler={this.inputHandler}
-
+        {...this.state}
       />
     )
   }

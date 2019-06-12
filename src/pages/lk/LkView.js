@@ -7,11 +7,12 @@ import Button from '@material-ui/core/Button'
 LkView.propTypes = {
   submitHandler: PropTypes.func.isRequired,
   inputHandler: PropTypes.func.isRequired,
+  imageUrl: PropTypes.string.isRequired,
 }
 
 function LkView(props) {
   return (
-    <div>
+    <div className="lk-layout">
       <h1>Личный кабинет</h1>
       <form className="lk-form" onSubmit={props.submitHandler}>
         <TextField
@@ -39,7 +40,8 @@ function LkView(props) {
         </Button>
       </form>
       <section className="about-user">
-        img
+        <h3>{props.clanTag && `[${props.clanTag}] `}{props.clanName}</h3>
+        {props.imageUrl && <img src={props.imageUrl} alt="Аватар" />}
       </section>
     </div>
   )
