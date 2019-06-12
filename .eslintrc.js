@@ -23,6 +23,7 @@ module.exports = {
   rules: {
     semi: ["error", "never"],
     "no-console": 0,
+    "no-use-before-define": 0,
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/react-in-jsx-scope": 0,
     "react/jsx-one-expression-per-line": 0,
