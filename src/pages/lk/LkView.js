@@ -40,8 +40,10 @@ function LkView(props) {
         </Button>
       </form>
       <section className="lk-preview">
-        <h3>{props.clanTag && `[${props.clanTag}] `}{props.clanName}</h3>
-        {props.imageUrl && <img src={props.imageUrl} alt="Аватар" />}
+        <h3 className="lk-preview__title">{props.clanTag && `[${props.clanTag}] `}{props.clanName}</h3>
+        <div className="lk-preview__avatar">
+          {props.imageUrl && <img src={props.imageUrl} alt="Аватар" />}
+        </div>
       </section>
     </div>
   )
