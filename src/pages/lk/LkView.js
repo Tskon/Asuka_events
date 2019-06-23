@@ -13,7 +13,7 @@ LkView.propTypes = {
 function LkView(props) {
   return (
     <div className="lk-layout">
-      <h1>Личный кабинет</h1>
+      <h1 className="lk-title">Личный кабинет</h1>
       <form className="lk-form" onSubmit={props.submitHandler}>
         <TextField
           label="Название клана"
@@ -39,7 +39,7 @@ function LkView(props) {
           <IconSave className="button-icon" />
         </Button>
       </form>
-      <section className="about-user">
+      <section className="lk-preview">
         <h3>{props.clanTag && `[${props.clanTag}] `}{props.clanName}</h3>
         {props.imageUrl && <img src={props.imageUrl} alt="Аватар" />}
       </section>

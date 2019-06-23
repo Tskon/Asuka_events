@@ -1,12 +1,26 @@
 .lk-layout{
   display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto;
+  grid-template-areas:
+  "title title"
+  "form preview";
+}
+
+.lk-title{
+  grid-area: title;
 }
 
 .lk-form{
+  grid-area: form;
   display: flex;
   flex-direction: column;
   max-width: 300px;
   & > * {
     margin-bottom: 10px;
   }
+}
+
+.lk-preview{
+  grid-area: preview;
 }
