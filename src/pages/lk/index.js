@@ -1,6 +1,7 @@
 import React from 'react'
 import '../../scss/pages/lk.scss'
 import LkView from './LkView'
+import {post} from '../../services/utils'
 
 const initState = {
   imageUrl: '',
@@ -38,6 +39,9 @@ export default class Lk extends React.Component {
 
   submitHandler = (e) => {
     e.preventDefault()
+    post('/api/save-lk-data', {
+      ...this.state,
+    })
   }
 
   render() {
