@@ -2,6 +2,7 @@
   box-sizing: border-box;
 }
 
+// autofill fix for dark theme
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
@@ -9,7 +10,7 @@ input:-webkit-autofill:active  {
   -webkit-box-shadow: 0 0 0 50px #424242 inset !important;
   -webkit-text-fill-color:white !important;
 }
-
+// autofill fix for content
 .site-content{
   input:-webkit-autofill,
   input:-webkit-autofill:hover,
