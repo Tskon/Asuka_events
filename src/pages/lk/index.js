@@ -44,6 +44,11 @@ export default class Lk extends React.Component {
     })
   }
 
+  componentDidMount() {
+    post('/api/get-lk-data')
+    console.log(3333)
+  }
+
   render() {
     return (
       <LkView

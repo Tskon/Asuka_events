@@ -1,4 +1,4 @@
-export function post(url, body) {
+export function post(url, body = {}) {
   const myInit = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
