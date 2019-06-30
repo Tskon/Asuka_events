@@ -23,6 +23,11 @@ module.exports = function (router, models) {
       res.send({
         status: 'ok',
       })
+    } else {
+      res.send({
+        status: 'error',
+        message: 'Вы не авторизованы',
+      })
     }
   })
 }
