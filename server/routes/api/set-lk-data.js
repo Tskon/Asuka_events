@@ -1,5 +1,5 @@
 module.exports = function (router, models) {
-  router.post('/save-lk-data', (req, res) => {
+  router.post('/set-lk-data', (req, res) => {
     if (req.isAuthenticated()) {
       models.user_lk_data.findByPk(req.user.id)
         .then((userDataObject) => {

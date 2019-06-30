@@ -40,7 +40,7 @@ export default class Lk extends React.Component {
 
   submitHandler = (e) => {
     e.preventDefault()
-    post('/api/save-lk-data', {
+    post('/api/set-lk-data', {
       ...this.state,
     })
   }
