@@ -39,7 +39,7 @@ function AdminView(props) {
 
       {!!props.commonUsers.length && (
       <section>
-        <h2>Зарегистрированные пользователи</h2>
+        <h2>Бесправные пользователи</h2>
         {commonUsers}
       </section>
       )}
