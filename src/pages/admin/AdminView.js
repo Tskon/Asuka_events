@@ -16,9 +16,9 @@ AdminView.propTypes = {
 }
 
 function AdminView(props) {
-  const admins = props.admins.map(user => (<div key="admin">{user.username}</div>))
-  const players = props.players.map(user => (<div key="player">{user.username}</div>))
-  const commonUsers = props.commonUsers.map(user => (<div key="commonUser">{user.username}</div>))
+  const admins = props.admins.map(user => (<div key={`a_${user.username}`}>{user.username}</div>))
+  const players = props.players.map(user => (<div key={`p_${user.username}`}>{user.username}</div>))
+  const commonUsers = props.commonUsers.map(user => (<div key={`cu_${user.username}`}>{user.username}</div>))
 
   return (
     <div>
