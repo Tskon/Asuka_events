@@ -4,7 +4,9 @@ import AdminView from './AdminView'
 import { post } from '../../services/utils'
 
 const initState = {
-  users: [],
+  admins: [],
+  players: [],
+  commonUsers: [],
 }
 
 export default class Admin extends React.Component {
@@ -19,9 +21,9 @@ export default class Admin extends React.Component {
       .then((resp) => {
         if (resp.status === 'ok') {
           this.setState({
-            imageUrl: resp.data.imageUrl,
-            clanName: resp.data.clanName,
-            clanTag: resp.data.clanTag,
+            admins: resp.data.admins,
+            players: resp.data.players,
+            commonUsers: resp.data.commonUsers,
           })
         }
       })
