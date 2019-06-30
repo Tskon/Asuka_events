@@ -1,7 +1,7 @@
 import React from 'react'
 import '../../scss/pages/lk.scss'
 import LkView from './LkView'
-import {post} from '../../services/utils'
+import { post } from '../../services/utils'
 
 const initState = {
   imageUrl: '',
@@ -33,7 +33,8 @@ export default class Lk extends React.Component {
           clanTag: e.target.value,
         })
         break
-      default: console.log(e.target.name)
+      default:
+        console.log(e.target.name)
     }
   }
 
@@ -46,7 +47,15 @@ export default class Lk extends React.Component {
 
   componentDidMount() {
     post('/api/get-lk-data')
-    console.log(3333)
+      .then((resp) => {
+        if (resp.status === 'ok') {
+          this.setState({
+            imageUrl: resp.data.imageUrl,
+            clanName: resp.data.clanName,
+            clanTag: resp.data.clanTag,
+          })
+        }
+      })
   }
 
   render() {
