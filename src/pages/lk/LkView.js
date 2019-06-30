@@ -8,6 +8,8 @@ LkView.propTypes = {
   submitHandler: PropTypes.func.isRequired,
   inputHandler: PropTypes.func.isRequired,
   imageUrl: PropTypes.string.isRequired,
+  clanName: PropTypes.string.isRequired,
+  clanTag: PropTypes.string.isRequired,
 }
 
 function LkView(props) {
@@ -19,19 +21,21 @@ function LkView(props) {
           label="Название клана"
           name="clanName"
           type="text"
+          value={props.clanName}
           onChange={props.inputHandler}
         />
         <TextField
           label="Клан-тег"
           name="clanTag"
           type="text"
+          value={props.clanTag}
           onChange={props.inputHandler}
         />
         <TextField
           label="Ссылка на аватар"
           name="image"
           type="text"
-          autoComplete="username"
+          value={props.imageUrl}
           onChange={props.inputHandler}
         />
         <Button type="submit" variant="contained" color="primary">
