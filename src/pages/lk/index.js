@@ -2,6 +2,8 @@ import React from 'react'
 import '../../scss/pages/lk.scss'
 import LkView from './LkView'
 import { post } from '../../services/utils'
+import store from '../../services/redux/store'
+import snackbarActions from '../../services/redux/actions/snackbarActions'
 
 const initState = {
   imageUrl: '',
@@ -43,6 +45,14 @@ export default class Lk extends React.Component {
     post('/api/set-lk-data', {
       ...this.state,
     })
+      .then((resp) => {
+        if (resp.status === 'ok') {
+          store.dispatch(snackbarActions.openSnackbar({
+            message: 'Сохранено',
+            type: 'success',
+          }))
+        }
+      })
   }
 
   componentDidMount() {
