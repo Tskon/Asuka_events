@@ -2,11 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Button from '@material-ui/core/Button'
 
-UserRow.propTypes = {
+AdminView.propTypes = {
   name: PropTypes.string.isRequired,
 }
 
-function UserRow(props) {
+function AdminView(props) {
   return (
     <div className="user-row">
       <span className="user-row__name">{props.name}</span>
@@ -18,4 +18,4 @@ function UserRow(props) {
   )
 }
 
-export default UserRow
+export default AdminView
