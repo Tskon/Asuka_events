@@ -9,7 +9,7 @@
   background-color: $gray_light;
   padding: 5px 10px;
   border-radius: 8px;
-  &:nth-child(n + 1){
+  &:nth-child(odd){
     background-color: transparent;
   }
 }
