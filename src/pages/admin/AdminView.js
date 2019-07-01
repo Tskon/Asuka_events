@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import '../../scss/_index.scss'
+import UserRow from './UserRow'
 
 const shape = {
   id: PropTypes.number.isRequired,
@@ -18,30 +18,32 @@ AdminView.propTypes = {
 function AdminView(props) {
   const admins = props.admins.map(user => (<div key={`a_${user.username}`}>{user.username}</div>))
   const players = props.players.map(user => (<div key={`p_${user.username}`}>{user.username}</div>))
-  const commonUsers = props.commonUsers.map(user => (<div key={`cu_${user.username}`}>{user.username}</div>))
+  const commonUsers = props.commonUsers.map(user => (
+    <UserRow key={`cu_${user.username}`} name={user.username} />
+  ))
 
   return (
     <div>
       <h1>Админка</h1>
       {!!props.admins.length && (
-      <section>
-        <h2>Админы</h2>
-        {admins}
-      </section>
+        <section>
+          <h2>Админы</h2>
+          {admins}
+        </section>
       )}
 
       {!!props.players.length && (
-      <section>
-        <h2>Игроки</h2>
-        {players}
-      </section>
+        <section>
+          <h2>Игроки</h2>
+          {players}
+        </section>
       )}
 
       {!!props.commonUsers.length && (
-      <section>
-        <h2>Бесправные пользователи</h2>
-        {commonUsers}
-      </section>
+        <section>
+          <h2>Бесправные пользователи</h2>
+          {commonUsers}
+        </section>
       )}
     </div>
   )

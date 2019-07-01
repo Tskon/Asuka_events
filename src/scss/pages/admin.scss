@@ -1,0 +1,25 @@
+@import "../vars";
+
+.user-row{
+  display:flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  width: 500px;
+  background-color: $gray_light;
+  padding: 5px 10px;
+  border-radius: 8px;
+  &:nth-child(n + 1){
+    background-color: transparent;
+  }
+}
+
+.user-row__name{
+  padding: 0 ;
+}
+
+.user-row__actions{
+  width: 230px;
+  display: flex;
+  justify-content: space-between;
+}

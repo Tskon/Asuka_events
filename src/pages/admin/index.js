@@ -1,5 +1,5 @@
 import React from 'react'
-import '../../scss/pages/lk.scss'
+import '../../scss/pages/admin.scss'
 import AdminView from './AdminView'
 import { post } from '../../services/utils'
 
