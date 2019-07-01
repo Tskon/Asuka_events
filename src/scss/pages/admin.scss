@@ -19,7 +19,10 @@
 }
 
 .user-row__actions{
-  width: 230px;
   display: flex;
+  flex-wrap: nowrap;
   justify-content: space-between;
+  & > * {
+    margin-left: 10px;
+  }
 }

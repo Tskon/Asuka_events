@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import UserRow from './UserRow'
+import PlayerRow from './PlayerRow'
 
 const shape = {
   id: PropTypes.number.isRequired,
@@ -17,7 +18,9 @@ AdminView.propTypes = {
 
 function AdminView(props) {
   const admins = props.admins.map(user => (<div key={`a_${user.username}`}>{user.username}</div>))
-  const players = props.players.map(user => (<div key={`p_${user.username}`}>{user.username}</div>))
+  const players = props.players.map(user => (
+    <PlayerRow key={`cu_${user.username}`} name={user.username} />
+  ))
   const commonUsers = props.commonUsers.map(user => (
     <UserRow key={`cu_${user.username}`} name={user.username} />
   ))
