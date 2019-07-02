@@ -29,10 +29,20 @@ export default class Admin extends React.Component {
       })
   }
 
+  setPlayerStatus = (status = 0) => {
+    post('/api/set-player-status', { status })
+  }
+
+  deleteUser = (status) => {
+    post('/api/delete-user')
+  }
+
   render() {
     return (
       <AdminView
         {...this.state}
+        setPlayerStatus={this.setPlayerStatus}
+        deleteUser={this.deleteUser}
       />
     )
   }

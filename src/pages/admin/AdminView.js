@@ -14,15 +14,27 @@ AdminView.propTypes = {
   admins: PropTypes.arrayOf(PropTypes.shape(shape)).isRequired,
   players: PropTypes.arrayOf(PropTypes.shape(shape)).isRequired,
   commonUsers: PropTypes.arrayOf(PropTypes.shape(shape)).isRequired,
+  setPlayerStatus: PropTypes.func.isRequired,
+  deleteUser: PropTypes.func.isRequired,
 }
 
 function AdminView(props) {
   const admins = props.admins.map(user => (<div key={`a_${user.username}`}>{user.username}</div>))
   const players = props.players.map(user => (
-    <PlayerRow key={`cu_${user.username}`} name={user.username} />
+    <PlayerRow
+      key={`cu_${user.username}`}
+      name={user.username}
+      setPlayerStatus={props.setPlayerStatus}
+      deleteUser={props.deleteUser}
+    />
   ))
   const commonUsers = props.commonUsers.map(user => (
-    <UserRow key={`cu_${user.username}`} name={user.username} />
+    <UserRow
+      key={`cu_${user.username}`}
+      name={user.username}
+      setPlayerStatus={props.setPlayerStatus}
+      deleteUser={props.deleteUser}
+    />
   ))
 
   return (
