@@ -5,7 +5,6 @@ module.exports = {
     es6: true,
     node: true,
   },
-  extends: 'airbnb',
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
@@ -21,6 +20,7 @@ module.exports = {
     'react',
   ],
   rules: {
+    "indent": ["error", 2],
     semi: ["error", "never"],
     "no-console": 0,
     "no-use-before-define": 0,
