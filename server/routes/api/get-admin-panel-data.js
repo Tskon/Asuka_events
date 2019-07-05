@@ -21,7 +21,7 @@ module.exports = function (router, models) {
 
             if (isAdmin) admins.push(userObject)
             if (isPlayer) players.push(userObject)
-            if (!isAdmin && !isPlayer) commonUsers.push(userObject)
+            if (!isPlayer) commonUsers.push(userObject)
           })
 
           res.send({
