@@ -33,8 +33,8 @@ export default class Admin extends React.Component {
       })
   }
 
-  setPlayerStatus = (status = 0) => {
-    post('/api/set-player-status', { status })
+  setPlayerStatus = (userId, status = 0) => {
+    post('/api/set-player-status', { userId, status })
       .then((resp) => {
         if (resp.status === 'ok') this.getData()
       })

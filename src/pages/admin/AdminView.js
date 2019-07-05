@@ -23,14 +23,14 @@ function AdminView(props) {
   const players = props.players.map(user => (
     <PlayerRow
       key={`cu_${user.username}`}
-      name={user.username}
+      user={user}
       setPlayerStatus={props.setPlayerStatus}
     />
   ))
   const commonUsers = props.commonUsers.map(user => (
     <UserRow
       key={`cu_${user.username}`}
-      name={user.username}
+      user={user}
       setPlayerStatus={props.setPlayerStatus}
       deleteUser={props.deleteUser}
     />
