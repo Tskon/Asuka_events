@@ -25,7 +25,6 @@ function AdminView(props) {
       key={`cu_${user.username}`}
       name={user.username}
       setPlayerStatus={props.setPlayerStatus}
-      deleteUser={props.deleteUser}
     />
   ))
   const commonUsers = props.commonUsers.map(user => (

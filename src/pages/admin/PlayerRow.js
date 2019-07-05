@@ -5,7 +5,6 @@ import Button from '@material-ui/core/Button'
 PlayerRow.propTypes = {
   name: PropTypes.string.isRequired,
   setPlayerStatus: PropTypes.func.isRequired,
-  deleteUser: PropTypes.func.isRequired,
 }
 
 function PlayerRow(props) {
@@ -15,9 +14,6 @@ function PlayerRow(props) {
       <div className="user-row__actions">
         <Button size="small" variant="outlined" color="primary" onClick={() => props.setPlayerStatus(0)}>
           Сделать бесправным
-        </Button>
-        <Button size="small" variant="outlined" color="secondary" onClick={props.deleteUser}>
-          Удалить
         </Button>
       </div>
     </div>

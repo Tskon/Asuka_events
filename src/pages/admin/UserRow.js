@@ -14,7 +14,7 @@ function UserRow(props) {
       <span className="user-row__name">{props.name}</span>
       <div className="user-row__actions">
         <Button size="small" variant="outlined" color="primary" onClick={() => props.setPlayerStatus(1)}>
-          Сделать бесправным
+          Сделать игроком
         </Button>
         <Button size="small" variant="outlined" color="secondary" onClick={props.deleteUser}>
           Удалить
