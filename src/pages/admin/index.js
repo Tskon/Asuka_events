@@ -1,7 +1,7 @@
 import React from 'react'
 import '../../scss/pages/admin.scss'
 import AdminView from './AdminView'
-import { post } from '../../services/utils'
+import {post} from '../../services/utils'
 
 const initState = {
   admins: [],
@@ -17,6 +17,10 @@ export default class Admin extends React.Component {
   }
 
   componentDidMount() {
+    this.getData()
+  }
+
+  getData = () => {
     post('/api/get-admin-panel-data')
       .then((resp) => {
         if (resp.status === 'ok') {
@@ -31,6 +35,9 @@ export default class Admin extends React.Component {
 
   setPlayerStatus = (status = 0) => {
     post('/api/set-player-status', { status })
+      .then((resp) => {
+        if (resp.status === 'ok') this.getData()
+      })
   }
 
   deleteUser = (status) => {
