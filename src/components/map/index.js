@@ -1,4 +1,5 @@
 import React from 'react'
+import ActionBar from './actionBar/ActionBar'
 import '../../scss/map/map.scss'
 
 export default class Map extends React.Component {
@@ -9,6 +10,7 @@ export default class Map extends React.Component {
       cols: 8,
       rows: 6,
       currentScope: 3,
+      actionBarShown: false
     }
 
     this.step = 1
@@ -34,11 +36,24 @@ export default class Map extends React.Component {
           className="event-map__elem"
           key={`map-elem-${i}`}
           id={colLetter + rowNum}
+          onClick={() => {this.showActionBar(colLetter + rowNum)}}
         >
           {colLetter + rowNum}
         </div>,
       )
     }
+  }
+
+  showActionBar = (id) => {
+    this.setState({
+      actionBarShown: true
+    })
+  }
+
+  closeActionBar = () => {
+    this.setState({
+      actionBarShown: false
+    })
   }
 
   componentDidMount() {
@@ -160,6 +175,7 @@ export default class Map extends React.Component {
           />
           <button type="button" onClick={this.scopeIn}>+</button>
         </div>
+        <ActionBar show={this.state.actionBarShown} closeHandler={this.closeActionBar}></ActionBar>
       </div>
     )
   }
