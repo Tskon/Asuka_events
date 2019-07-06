@@ -7,11 +7,12 @@ module.exports = function (sequelize, Sequelize) {
 
     clan_tag: {
       type: Sequelize.TEXT,
+      defaultValue: 'UNKNW',
     },
 
     clan_name: {
       type: Sequelize.STRING,
-      allowNull: false,
+      defaultValue: 'Unknown clan',
     },
 
     image_url: {
