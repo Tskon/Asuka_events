@@ -11,7 +11,7 @@ UserRow.propTypes = {
 function UserRow(props) {
   return (
     <div className="user-row">
-      <span className="user-row__name">{props.user.name}</span>
+      <span className="user-row__name">{props.user.username}</span>
       <div className="user-row__actions">
         <Button size="small" variant="outlined" color="primary" onClick={() => props.setPlayerStatus(props.user.id ,1)}>
           Сделать игроком
