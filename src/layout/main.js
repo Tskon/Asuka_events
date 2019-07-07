@@ -1,7 +1,8 @@
 import React from 'react'
 
-import { Route } from 'react-router'
-import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
+import {Route} from 'react-router'
+import {MuiThemeProvider} from '@material-ui/core/styles'
+import themes from '../services/themes'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import IndexPage from '../pages/index'
@@ -10,29 +11,10 @@ import AdminPage from '../pages/admin/index'
 import LKPage from '../pages/lk/index'
 import Snackbar from '../components/ui/Snackbar'
 
-const theme = createMuiTheme({
-  typography: {
-    fontFamily: [
-      'Roboto',
-      '-apple-system',
-      'BlinkMacSystemFont',
-      'Segoe UI',
-      'Arial',
-      'sans-serif',
-    ].join(','),
-    useNextVariants: true,
-  },
-  palette: {
-    type: 'light',
-    // primary: { main: '#fdc073' },
-    // secondary: { main: '#498161' },
-  },
-})
-
 export default () => (
   <div>
     <Header />
-    <MuiThemeProvider theme={theme}>
+    <MuiThemeProvider theme={themes.light}>
       <main className="site-content">
         <Route exact path="/" component={IndexPage} />
         <Route path="/event" component={AboutPage} />
