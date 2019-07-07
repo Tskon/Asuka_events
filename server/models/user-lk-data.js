@@ -7,7 +7,7 @@ module.exports = function (sequelize, Sequelize) {
 
     clan_tag: {
       type: Sequelize.TEXT,
-      defaultValue: 'UNKNW',
+      defaultValue: 'UNKWN',
     },
 
     clan_name: {
