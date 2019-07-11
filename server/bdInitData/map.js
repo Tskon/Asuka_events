@@ -41,10 +41,18 @@ const cellsMap = new Map();
   })
 })
 
-console.log(cellsMap)
+function getConnectedCells(cellName = 'a1') {
+  const letters = 'abcdifgh'
+  const numbers = [1, 2, 3, 4, 5, 6]
 
-function getConnectedCells() {
+  const cellLetter = cellName[0]
+  const cellNumber = cellName[1]
 
+  const result = []
+
+  // TODO дописать логику
+
+  return result
 }
 
 module.exports = (models) => {
