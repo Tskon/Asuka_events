@@ -15,7 +15,6 @@ module.exports = function (sequelize, Sequelize) {
       type: Sequelize.TEXT,
       defaultValue: '{"players":[],"connectedCells":[],"bonus":0, "controlledTurnsCount": 0}',
     },
-
   })
 
   return Map
