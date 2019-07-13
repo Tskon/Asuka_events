@@ -37,36 +37,53 @@ const cellsMap = new Map();
 [starterCellsList, emptyCellsList, lowCellsList, highCellsList, richCellsList].forEach((cellsList) => {
   cellsList.forEach((cell, i, arr) => {
     if (i === 0) return
-    cellsMap.set(cell, arr[0])
+    cellsMap.set(cell, {...arr[0], connectedCells: getConnectedCells(cell)})
   })
 })
 
 function getConnectedCells(cellName = 'a1') {
   const letters = 'abcdifgh'
   const numbers = [1, 2, 3, 4, 5, 6]
-
   const cellLetter = cellName[0]
-  const cellNumber = cellName[1]
-
+  const letterIndex = letters.indexOf(cellLetter)
+  const cellNumber = +cellName[1]
   const result = []
 
-  // TODO дописать логику
+  if (letterIndex === -1) return result
+  if (!numbers.includes(cellNumber)) return result
+
+  if (letterIndex > 0) {
+    const nearLetter = letters[letterIndex - 1]
+    result.push(nearLetter + cellNumber)
+  }
+  if (letterIndex < letters.length - 1) {
+    const nearLetter = letters[letterIndex + 1]
+    result.push(nearLetter + cellNumber)
+  }
+  if (cellNumber > 1) {
+    const nearNumber = cellNumber - 1
+    result.push(cellLetter + nearNumber)
+  }
+  if (cellNumber < numbers.length) {
+    const nearNumber = cellNumber + 1
+    result.push(cellLetter + nearNumber)
+  }
 
   return result
 }
 
 module.exports = (models) => {
   cellsMap.forEach((cell, cellName) => {
-    models.map.findOne({where: {cell_name: cellName}})
+    models.mapCell.findOne({where: {cell_name: cellName}})
       .then((userDataObject) => {
         if (userDataObject) {
-          models.map.update({
+          models.mapCell.update({
             data_json: JSON.stringify(cell)
           }, {
             where: { cell_name: cellName },
           })
         } else {
-          models.map.create({
+          models.mapCell.create({
             cell_name: cellName,
             data_json: JSON.stringify(cell)
           })

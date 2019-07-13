@@ -63,6 +63,7 @@ require('./passport/passport.js')(passport, models.user)
 models.sequelize.sync()
   .then(() => {
     console.log('Nice! Database looks fine')
+    require('./dbInitData/map')(models)
   })
   .catch((err) => {
     console.log(err, 'Something went wrong with the Database Update!')
