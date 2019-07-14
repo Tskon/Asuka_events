@@ -64,6 +64,7 @@ models.sequelize.sync()
   .then(() => {
     console.log('Nice! Database looks fine')
     require('./dbInitData/map')(models)
+    require('./dbInitData/btxd')(models)
   })
   .catch((err) => {
     console.log(err, 'Something went wrong with the Database Update!')
