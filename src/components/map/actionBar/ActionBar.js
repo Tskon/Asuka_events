@@ -32,8 +32,9 @@ class ActionBar extends React.Component {
             anchor="right"
           >
             <div className="cell-info">
-              <p>{cell.id}</p>
-              <p>Bonus: {cell.bonus}</p>
+              <p>Клетка {cell.id.toUpperCase()}</p>
+              <p>Бонус: {cell.bonus}</p>
+              <p>Соседние клетки: {cell.connectedCells.join(', ')}</p>
             </div>
           </Drawer>
         </MuiThemeProvider>
