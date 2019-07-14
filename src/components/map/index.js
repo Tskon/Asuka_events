@@ -2,8 +2,9 @@ import React from 'react'
 import ActionBar from './actionBar/ActionBar'
 import {getCellsData} from '../../services/redux/actions/mapActions'
 import '../../scss/map/map.scss'
+import {connect} from "react-redux"
 
-export default class Map extends React.Component {
+class Map extends React.Component {
   constructor(props) {
     super(props)
 
@@ -11,7 +12,8 @@ export default class Map extends React.Component {
       cols: 8,
       rows: 6,
       currentScope: 3,
-      actionBarShown: false
+      actionBarShown: false,
+      selectedCell: 'a1'
     }
 
     this.step = 1
@@ -59,7 +61,8 @@ export default class Map extends React.Component {
 
   showActionBar = (id) => {
     this.setState({
-      actionBarShown: true
+      actionBarShown: true,
+      selectedCell: id.toLowerCase()
     })
   }
 
@@ -192,8 +195,18 @@ export default class Map extends React.Component {
           />
           <button type="button" onClick={this.scopeIn}>+</button>
         </div>
-        <ActionBar show={this.state.actionBarShown} closeHandler={this.closeActionBar}></ActionBar>
+        <ActionBar
+          show={this.state.actionBarShown}
+          closeHandler={this.closeActionBar}
+          selectedCell={this.state.selectedCell}
+        />
       </div>
     )
   }
 }
+
+const mapStateToProps = state => ({
+  cells: state.map.cells
+})
+
+export default connect(mapStateToProps)(Map)
