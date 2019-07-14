@@ -25,6 +25,8 @@ export default class Map extends React.Component {
     this.shiftX = 0
     this.shiftY = 0
 
+    this.cellClickPosition = 0
+
     this.gridElems = []
     for (let i = 0; i < this.state.cols * this.state.rows; i += 1) {
       const rowNum = Math.ceil((i + 1) / this.state.cols)
@@ -32,16 +34,26 @@ export default class Map extends React.Component {
       const colLetter = this.letters[colNum - 1]
 
       this.gridElems.push(
-        <div
+        <button
           className="event-map__elem"
           key={`map-elem-${i}`}
           id={colLetter + rowNum}
-          onClick={() => {this.showActionBar(colLetter + rowNum)}}
+          onClick={(e) => {this.cellClickHandler(e,colLetter + rowNum)}}
+          onMouseDown={this.cellDownHandler}
         >
           {colLetter + rowNum}
-        </div>,
+        </button>
       )
     }
+  }
+
+  cellDownHandler = (e) => {
+    this.cellClickPosition = e.clientX
+  }
+
+  cellClickHandler = (e, id) => {
+    if (this.cellClickPosition === e.clientX) this.showActionBar(id)
+
   }
 
   showActionBar = (id) => {
