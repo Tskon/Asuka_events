@@ -55,6 +55,7 @@ class Map extends React.Component {
   }
 
   cellClickHandler = (e, id) => {
+    if (!this.props.user.isAdmin && !this.props.user.isPlayer) return
     if (this.cellClickPosition === e.clientX) this.showActionBar(id)
 
   }
@@ -163,6 +164,13 @@ class Map extends React.Component {
     getCellsData()
   }
 
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if ((this.props.user.isAdmin || this.props.user.isPlayer)
+      && !prevProps.cells.hasOwnProperty(this.state.selectedCell)) {
+      getCellsData()
+    }
+  }
+
   render() {
     return (
       <div
@@ -206,7 +214,8 @@ class Map extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  cells: state.map.cells
+  cells: state.map.cells,
+  user: state.user.data
 })
 
 export default connect(mapStateToProps)(Map)

@@ -6,6 +6,8 @@ const initialState = {
 
 const mapReducer = createReducer(initialState, {
   SET_CELLS(state, action) {
+    if (!action.payload.data) return
+
     const cells = {}
     action.payload.data.forEach(cell => {
       cells[cell.id] = cell
