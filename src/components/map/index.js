@@ -1,5 +1,6 @@
 import React from 'react'
 import ActionBar from './actionBar/ActionBar'
+import {getCellsData} from '../../services/redux/actions/mapActions'
 import '../../scss/map/map.scss'
 
 export default class Map extends React.Component {
@@ -153,6 +154,10 @@ export default class Map extends React.Component {
     if (this.shiftY > maxShiftY) this.shiftY = maxShiftY
     if (this.shiftX < minShiftX) this.shiftX = minShiftX
     if (this.shiftY < minShiftY) this.shiftY = minShiftY
+  }
+
+  componentDidMount() {
+    getCellsData()
   }
 
   render() {
