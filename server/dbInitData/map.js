@@ -76,13 +76,7 @@ module.exports = (models) => {
   cellsMap.forEach((cell, cellName) => {
     models.mapCell.findOne({where: {cell_name: cellName}})
       .then((userDataObject) => {
-        if (userDataObject) {
-          models.mapCell.update({
-            data_json: JSON.stringify(cell)
-          }, {
-            where: { cell_name: cellName },
-          })
-        } else {
+        if (!userDataObject) {
           models.mapCell.create({
             cell_name: cellName,
             data_json: JSON.stringify(cell)
