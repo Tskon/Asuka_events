@@ -1,4 +1,5 @@
 import React from 'react'
+import classnames from 'classnames'
 import ActionBar from './actionBar/ActionBar'
 import {getCellsData} from '../../services/redux/actions/mapActions'
 import '../../scss/map/map.scss'
@@ -21,7 +22,7 @@ class Map extends React.Component {
     this.step = 1
     this.minScope = 2
     this.maxScope = 6
-    this.letters = 'ABCDIFGHIJKLMNOP'
+    this.letters = 'abcdefghijklmnop'
     this.mouseEventStart = {
       x: 0,
       y: 0,
@@ -31,25 +32,6 @@ class Map extends React.Component {
     this.shiftY = 0
 
     this.cellClickPosition = 0
-
-    this.gridElems = []
-    for (let i = 0; i < this.state.cols * this.state.rows; i += 1) {
-      const rowNum = Math.ceil((i + 1) / this.state.cols)
-      const colNum = (i + 1) % this.state.cols || this.state.cols
-      const colLetter = this.letters[colNum - 1]
-
-      this.gridElems.push(
-        <button
-          className="event-map__elem"
-          key={`map-elem-${i}`}
-          id={colLetter + rowNum}
-          onClick={(e) => {this.cellClickHandler(e,colLetter + rowNum)}}
-          onMouseDown={this.cellDownHandler}
-        >
-          {colLetter + rowNum}
-        </button>
-      )
-    }
   }
 
   cellDownHandler = (e) => {
@@ -162,6 +144,35 @@ class Map extends React.Component {
     if (this.shiftY < minShiftY) this.shiftY = minShiftY
   }
 
+  initCells = () => {
+    const gridCells = []
+    for (let i = 0; i < this.state.cols * this.state.rows; i += 1) {
+      const rowNum = Math.ceil((i + 1) / this.state.cols)
+      const colNum = (i + 1) % this.state.cols || this.state.cols
+      const colLetter = this.letters[colNum - 1]
+      const id = colLetter + rowNum
+      console.log(id, this.props.cells, this.props.cells[id])
+      gridCells.push(
+        <button
+          className={classnames(
+            'event-map__elem',
+            {
+              'event-map__elem_started': this.props.cells[id] && this.props.cells[id].isStarted
+            }
+          )}
+          key={`map-elem-${i}`}
+          id={id}
+          onClick={(e) => {this.cellClickHandler(e,id)}}
+          onMouseDown={this.cellDownHandler}
+        >
+          {id}
+        </button>
+      )
+    }
+
+    return gridCells
+  }
+
   componentDidMount() {
     getCellsData()
   }
@@ -174,6 +185,7 @@ class Map extends React.Component {
   }
 
   render() {
+    const gridCells = this.initCells()
     return (
       <div
         className="map-page"
@@ -190,7 +202,7 @@ class Map extends React.Component {
           style={this.getMapStyles()}
         >
           <div className="event-map">
-            {this.gridElems}
+            {gridCells}
           </div>
         </div>
         <div className="event-map__controls">
