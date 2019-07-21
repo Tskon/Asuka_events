@@ -3,6 +3,7 @@ import ActionBar from './actionBar/ActionBar'
 import {getCellsData} from '../../services/redux/actions/mapActions'
 import '../../scss/map/map.scss'
 import {connect} from "react-redux"
+import {STAGES} from '../../services/constants'
 
 class Map extends React.Component {
   constructor(props) {
@@ -13,7 +14,8 @@ class Map extends React.Component {
       rows: 6,
       currentScope: 3,
       actionBarShown: false,
-      selectedCell: 'a1'
+      selectedCell: 'a1',
+      stage: STAGES.CHOOSE_START_SECTOR
     }
 
     this.step = 1
