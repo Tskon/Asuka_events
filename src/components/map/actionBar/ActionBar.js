@@ -2,8 +2,10 @@ import React from 'react'
 import Drawer from '@material-ui/core/Drawer'
 import PropTypes from 'prop-types'
 import {MuiThemeProvider} from "@material-ui/core/styles"
+import {connect} from 'react-redux'
+import {Button} from '@material-ui/core'
 import themes from '../../../services/themes'
-import {connect} from "react-redux"
+import {STAGES} from '../../../services/constants'
 
 class ActionBar extends React.Component {
   static propTypes = {
@@ -31,10 +33,15 @@ class ActionBar extends React.Component {
             onClose={this.props.closeHandler}
             anchor="right"
           >
-            <div className="cell-info">
+            <div className="map-action-bar">
               <p>Клетка {cell.id.toUpperCase()}</p>
               <p>Бонус: {cell.bonus}</p>
               <p>Соседние клетки: {cell.connectedCells.join(', ')}</p>
+              {
+                this.props.stage === STAGES.CHOOSE_START_SECTOR
+                && cell.isStarted
+                && <Button variant="contained" color="primary">Выбрать сектор стартовым</Button>
+              }
             </div>
           </Drawer>
         </MuiThemeProvider>
@@ -46,7 +53,8 @@ class ActionBar extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  cells: state.map.cells
+  cells: state.map.cells,
+  stage: state.map.stage
 })
 
 export default connect(mapStateToProps)(ActionBar)

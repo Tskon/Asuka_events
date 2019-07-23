@@ -1,7 +1,9 @@
 import {createReducer} from 'redux-starter-kit'
+import {STAGES} from '../../constants'
 
 const initialState = {
-  cells: {}
+  cells: {},
+  stage: STAGES.CHOOSE_START_SECTOR
 }
 
 const mapReducer = createReducer(initialState, {
