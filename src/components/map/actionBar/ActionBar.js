@@ -7,6 +7,7 @@ import {Button} from '@material-ui/core'
 import themes from '../../../services/themes'
 import {STAGES} from '../../../services/constants'
 import {chooseStartSector} from '../../../services/redux/actions/mapActions'
+import store from '../../../services/redux/store'
 
 class ActionBar extends React.Component {
   static propTypes = {
@@ -24,7 +25,7 @@ class ActionBar extends React.Component {
   }
 
   chooseStartSectorHandler = () => {
-    chooseStartSector(this.props.cells[this.props.selectedCell])
+    store.dispatch(chooseStartSector(this.props.cells[this.props.selectedCell]))
   }
 
   render() {

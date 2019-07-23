@@ -18,9 +18,8 @@ const mapReducer = createReducer(initialState, {
     state.cells = cells
   },
   SET_PLAYER_SECTOR(state, action) {
-    if (!action.payload.data) return
-
-    state.playerSector = action.payload.data
+    if (!action.payload) return
+    state.playerSector = action.payload
   }
 })
 
