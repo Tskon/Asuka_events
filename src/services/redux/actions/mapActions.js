@@ -14,3 +14,13 @@ function setCellsData(cells) {
     payload: cells
   }
 }
+
+export function chooseStartSector(cellId) {
+  post('/api/choose-start-sector', {
+    cellId
+  })
+  return {
+    type: 'SET_PLAYER_SECTOR',
+    payload: cells
+  }
+}

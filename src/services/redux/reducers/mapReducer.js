@@ -3,7 +3,8 @@ import {STAGES} from '../../constants'
 
 const initialState = {
   cells: {},
-  stage: STAGES.CHOOSE_START_SECTOR
+  stage: STAGES.CHOOSE_START_SECTOR,
+  playerSector: null
 }
 
 const mapReducer = createReducer(initialState, {
@@ -15,6 +16,11 @@ const mapReducer = createReducer(initialState, {
       cells[cell.id] = cell
     })
     state.cells = cells
+  },
+  SET_PLAYER_SECTOR(state, action) {
+    if (!action.payload.data) return
+
+    state.playerSector = action.payload.data
   }
 })
 
