@@ -149,7 +149,7 @@ class Map extends React.Component {
       const colNum = (i + 1) % this.state.cols || this.state.cols
       const colLetter = this.letters[colNum - 1]
       const id = colLetter + rowNum
-      console.log(id, this.props.cells, this.props.cells[id])
+
       gridCells.push(
         <button
           className={classnames(
