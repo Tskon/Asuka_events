@@ -178,6 +178,7 @@ class Map extends React.Component {
   componentDidUpdate(prevProps, prevState, snapshot) {
     if ((this.props.user.isAdmin || this.props.user.isPlayer)
       && !prevProps.cells.hasOwnProperty(this.state.selectedCell)) {
+      console.log(this.state.selectedCell)
       getCellsData()
     }
   }
