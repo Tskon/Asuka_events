@@ -5,16 +5,23 @@ const fs = require('fs')
 const path = require('path')
 const models = require('../../models/index')
 
-module.exports = function (passport) {
+module.exports = function (passport, req) {
   /**
-   * Auto-import all files from './routes' directory
+   * Auto-import all files from directories
    */
-  fs
-    .readdirSync(__dirname)
-    .filter(file => (file.indexOf('.') !== 0 && (file !== 'index.js')))
-    .forEach((file) => {
-      require(path.join(__dirname, file))(router, models, passport)
-    })
+  const getRoutesByFolder = (folder) => {
+    fs
+      .readdirSync(path.join(__dirname, folder))
+      .filter(file => (file.indexOf('.') !== 0 && file !== 'index.js' && file.includes('.js')))
+      .forEach((file) => {
+        console.log(file)
+        require(path.join(__dirname, folder, file))(router, models, passport)
+      })
+  }
 
+  getRoutesByFolder('common')
+  getRoutesByFolder('user')
+  getRoutesByFolder('admin')
+  getRoutesByFolder('map')
   return router
 }
