@@ -16,7 +16,7 @@ function setCellsData(cells) {
 }
 
 export function chooseStartSector(cell) {
-  post('/api/choose-start-sector', {
+  post('/api/map/choose-start-sector', {
     cellId: cell.id
   })
   return {

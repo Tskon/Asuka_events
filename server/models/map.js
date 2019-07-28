@@ -13,7 +13,7 @@ module.exports = function (sequelize, Sequelize) {
 
     data_json: {
       type: Sequelize.TEXT,
-      defaultValue: '{"players":[],"connectedCells":[],"bonus":0, "controlledTurnsCount": 0}',
+      defaultValue: '{"connectedCells":[],"bonus":0, "controlledTurnsCount": 0}',
     },
   })
 
