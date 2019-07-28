@@ -11,10 +11,9 @@ module.exports = function (router, models) {
         }
 
         models.user_map_data.update({
-          user_id: req.user.id,
-          clan_tag: req.body.clanTag,
-          clan_name: req.body.clanName,
-          image_url: req.body.imageUrl,
+          ceil_id: req.body.cellId
+        }, {
+          where: { user_id: req.user.id },
         })
       })
 
