@@ -1,5 +1,5 @@
 module.exports = function (router, models) {
-  router.post('/set-player-status', (req, res) => {
+  router.post('/admin/set-player-status', (req, res) => {
     if (req.isAuthenticated() && req.user.is_admin) {
       models.user.findByPk(req.user.id)
         .then((userDataObject) => {

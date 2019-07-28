@@ -42,7 +42,7 @@ export default class Lk extends React.Component {
 
   submitHandler = (e) => {
     e.preventDefault()
-    post('/api/set-lk-data', {
+    post('/api/user/set-lk-data', {
       ...this.state,
     })
       .then((resp) => {
@@ -56,7 +56,7 @@ export default class Lk extends React.Component {
   }
 
   componentDidMount() {
-    post('/api/get-lk-data')
+    post('/api/user/get-lk-data')
       .then((resp) => {
         if (resp.status === 'ok') {
           this.setState({

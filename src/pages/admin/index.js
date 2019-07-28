@@ -21,7 +21,7 @@ export default class Admin extends React.Component {
   }
 
   getData = () => {
-    post('/api/get-admin-panel-data')
+    post('/api/admin/get-admin-panel-data')
       .then((resp) => {
         if (resp.status === 'ok') {
           this.setState({
@@ -34,7 +34,7 @@ export default class Admin extends React.Component {
   }
 
   setPlayerStatus = (userId, status = 0) => {
-    post('/api/set-player-status', { userId, status })
+    post('/api/admin/set-player-status', { userId, status })
       .then((resp) => {
         if (resp.status === 'ok') this.getData()
       })

@@ -35,7 +35,7 @@ class LoginBlock extends React.Component {
   }
 
   componentDidMount() {
-    post('/api/get-user')
+    post('/api/user/get-user')
       .then((data) => {
         if (data.status === 'ok') this.setUser(data.data)
         if (data.message) console.log(data.message)
@@ -212,7 +212,7 @@ class LoginBlock extends React.Component {
   }
 
   logOut = () => {
-    post('/api/logout')
+    post('/api/user/logout')
       .then((data) => {
         if (data.status === 'ok') {
           this.setState({

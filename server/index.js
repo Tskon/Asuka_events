@@ -1,7 +1,7 @@
 const express = require('express')
 const passport = require('passport')
 const session = require('express-session')
-const MySQLStore = require('express-mysql-session')(session);
+const MySQLStore = require('express-mysql-session')(session)
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const cors = require('cors')
@@ -41,12 +41,23 @@ app.use(cors())
    * Routes. use path /api + path in routes.
    * For example: /api/auth
    */
-  .use('/api', require('./routes/api/index')(passport))
+  .use('/api/user', (req, res, next) => {
+    if (req.isAuthenticated()) next()
+    else res.send({status: 'error', message: 'Вы не авторизованы'})
+  })
+  .use('/api/admin', (req, res, next) => {
+    if (req.user && req.user.is_admin) next()
+    else res.send({status: 'error', message: 'Не достаточно прав'})
+  })
+  .use('/api/map', (req, res, next) => {
+    if (req.user && req.user.is_player) next()
+    else res.send({status: 'error', message: 'Не достаточно прав'})
+  })
+  .use('/api', require('./routes/api/index')(passport, app))
 
   /**
    * for all the react stuff
    */
-  // .use(mustAuthenticated)
   .get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, '../dist/index.html'))
   })

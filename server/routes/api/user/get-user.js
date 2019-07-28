@@ -1,5 +1,5 @@
 module.exports = function (router, models, passport) {
-  router.post('/get-user', (req, res) => {
+  router.post('/user/get-user', (req, res) => {
     if (req.isAuthenticated()) {
       res.send({
         status: 'ok',

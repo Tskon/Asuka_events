@@ -1,5 +1,5 @@
 module.exports = function (router, models) {
-  router.post('/get-admin-panel-data', (req, res) => {
+  router.post('/admin/get-admin-panel-data', (req, res) => {
     if (req.isAuthenticated() && req.user.is_admin) {
       models.user.findAll()
         .then((users) => {

@@ -1,5 +1,5 @@
 module.exports = function (router, models) {
-  router.post('/get-map-cells', (req, res) => {
+  router.post('/map/get-map-cells', (req, res) => {
     if (!req.isAuthenticated() || (!req.user.is_admin && !req.user.is_player)){
       return res.send({
         status: 'error',
