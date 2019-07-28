@@ -8,7 +8,7 @@ const sequelize = new Sequelize(
   dbConfig.dbName,
   dbConfig.dbUser,
   dbConfig.dbPassword,
-  dbConfig.dbOptions,
+  dbConfig.dbOptions
 )
 
 fs
