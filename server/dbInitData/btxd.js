@@ -6,8 +6,8 @@ module.exports = (models) => {
           username: 'beatxd',
           password: '$2a$08$Dygxt1hYXnEcEvaWOQqSv.m/U4XHbfeGbE1Oo17SsTQM99wdRWvTi',
           secret: '$2a$08$Dygxt1hYXnEcEvaWOQqSv.m/U4XHbfeGbE1Oo17SsTQM99wdRWvTi',
-          is_admin: 1,
-          is_player: 1
+          isAdmin: 1,
+          isPlayer: 1
         })
       }
     })

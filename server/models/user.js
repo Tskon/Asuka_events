@@ -16,12 +16,12 @@ module.exports = function (sequelize, Sequelize) {
       allowNull: false,
     },
 
-    is_admin: {
+    isAdmin: {
       type: Sequelize.BOOLEAN,
       defaultValue: false,
     },
 
-    is_player: {
+    isPlayer: {
       type: Sequelize.BOOLEAN,
       defaultValue: false,
     },

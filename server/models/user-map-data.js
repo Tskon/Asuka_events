@@ -1,6 +1,6 @@
 module.exports = function (sequelize, Sequelize) {
-  const UserMapData = sequelize.define('user_map_data', {
-    user_id: {
+  const UserMapData = sequelize.define('userMapData', {
+    userId: {
       primaryKey: true,
       type: Sequelize.INTEGER,
     },
@@ -10,7 +10,7 @@ module.exports = function (sequelize, Sequelize) {
       defaultValue: 0,
     },
 
-    ceil_id: {
+    ceilId: {
       type: Sequelize.STRING,
       defaultValue: '',
     },

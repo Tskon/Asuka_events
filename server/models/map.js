@@ -1,17 +1,17 @@
 module.exports = function (sequelize, Sequelize) {
-  const Map = sequelize.define('map_cell', {
+  const Map = sequelize.define('mapCell', {
     id: {
       autoIncrement: true,
       primaryKey: true,
       type: Sequelize.INTEGER,
     },
 
-    cell_name: {
+    cellName: {
       type: Sequelize.TEXT,
       defaultValue: 'a1'
     },
 
-    data_json: {
+    dataJson: {
       type: Sequelize.TEXT,
       defaultValue: '{"connectedCells":[],"bonus":0, "controlledTurnsCount": 0}',
     },

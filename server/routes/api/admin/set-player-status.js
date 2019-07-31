@@ -4,7 +4,7 @@ module.exports = function (router, models) {
       .then((userDataObject) => {
         if (userDataObject) {
           models.user.update({
-            is_player: req.body.status,
+            isPlayer: req.body.status,
           }, {
             where: {id: req.body.userId},
           })

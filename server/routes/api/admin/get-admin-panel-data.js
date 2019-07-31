@@ -8,7 +8,7 @@ module.exports = function (router, models) {
 
         users.forEach((user) => {
           const {
-            id, username, is_admin: isAdmin, is_player: isPlayer,
+            id, username, isAdmin: isAdmin, isPlayer: isPlayer,
           } = user
 
           const userObject = {

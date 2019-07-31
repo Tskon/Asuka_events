@@ -17,11 +17,11 @@ module.exports = function (router, models) {
             clanName: req.body.clanName,
             imageUrl: req.body.imageUrl,
           }, {
-            where: { user_id: req.user.id },
+            where: { userId: req.user.id },
           })
         } else {
           models.userLkData.create({
-            user_id: req.user.id,
+            userId: req.user.id,
             clanTag: req.body.clanTag,
             clanName: req.body.clanName,
             imageUrl: req.body.imageUrl,

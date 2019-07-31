@@ -74,12 +74,12 @@ function getConnectedCells(cellName = 'a1') {
 
 module.exports = (models) => {
   cellsMap.forEach((cell, cellName) => {
-    models.mapCell.findOne({where: {cell_name: cellName}})
+    models.mapCell.findOne({where: {cellName: cellName}})
       .then((userDataObject) => {
         if (!userDataObject) {
-          models.map_cell.create({
-            cell_name: cellName,
-            data_json: JSON.stringify(cell)
+          models.mapCell.create({
+            cellName: cellName,
+            dataJson: JSON.stringify(cell)
           })
         }
       })

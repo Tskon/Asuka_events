@@ -5,8 +5,8 @@ module.exports = function (router, models, passport) {
       data: {
         name: req.user.username,
         id: req.user.id,
-        isAdmin: req.user.is_admin,
-        isPlayer: req.user.is_player,
+        isAdmin: req.user.isAdmin,
+        isPlayer: req.user.isPlayer,
       },
     })
   })
