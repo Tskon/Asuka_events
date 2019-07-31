@@ -1,5 +1,5 @@
 module.exports = function (sequelize, Sequelize) {
-  const Map = sequelize.define('mapCell', {
+  const Map = sequelize.define('map_cell', {
     id: {
       autoIncrement: true,
       primaryKey: true,

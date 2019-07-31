@@ -77,7 +77,7 @@ module.exports = (models) => {
     models.mapCell.findOne({where: {cell_name: cellName}})
       .then((userDataObject) => {
         if (!userDataObject) {
-          models.mapCell.create({
+          models.map_cell.create({
             cell_name: cellName,
             data_json: JSON.stringify(cell)
           })

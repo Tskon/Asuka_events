@@ -1,21 +1,21 @@
 module.exports = function (sequelize, Sequelize) {
-  const UserLkData = sequelize.define('user_lk_data', {
+  const UserLkData = sequelize.define('userLkData', {
     user_id: {
       primaryKey: true,
       type: Sequelize.INTEGER,
     },
 
-    clan_tag: {
+    clanTag: {
       type: Sequelize.TEXT,
       defaultValue: 'UNKWN',
     },
 
-    clan_name: {
+    clanName: {
       type: Sequelize.STRING,
       defaultValue: 'Unknown clan',
     },
 
-    image_url: {
+    imageUrl: {
       type: Sequelize.STRING,
       defaultValue: false,
     },
