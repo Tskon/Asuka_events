@@ -28,4 +28,7 @@ Object.keys(db).forEach((modelName) => {
 db.sequelize = sequelize
 db.Sequelize = Sequelize
 
+db.userMapData.hasOne(db.mapCell, {foreignKey: 'cellName', sourceKey: 'ceilId'})
+db.userMapData.hasOne(db.userLkData, {foreignKey: 'userId', sourceKey: 'userId'})
+
 module.exports = db
