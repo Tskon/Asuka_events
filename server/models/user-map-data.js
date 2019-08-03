@@ -10,8 +10,8 @@ module.exports = function (sequelize, Sequelize) {
       defaultValue: 0,
     },
 
-    ceilId: {
-      type: Sequelize.STRING,
+    cellId: {
+      type: Sequelize.CHAR(4),
       defaultValue: '',
     },
   })

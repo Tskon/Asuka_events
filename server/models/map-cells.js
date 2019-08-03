@@ -7,7 +7,7 @@ module.exports = function (sequelize, Sequelize) {
     },
 
     cellName: {
-      type: Sequelize.TEXT,
+      type: Sequelize.CHAR(4),
       defaultValue: 'a1'
     },
 

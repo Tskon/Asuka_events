@@ -28,7 +28,11 @@ Object.keys(db).forEach((modelName) => {
 db.sequelize = sequelize
 db.Sequelize = Sequelize
 
-db.userMapData.hasOne(db.mapCell, {foreignKey: 'cellName', sourceKey: 'ceilId'})
-db.userMapData.hasOne(db.userLkData, {foreignKey: 'userId', sourceKey: 'userId'})
+// TODO исправить. Ошибка при создании таблиц без фикса
+setTimeout(() => {
+  db.userMapData.hasOne(db.mapCell, {foreignKey: 'cellName', sourceKey: 'cellId'})
+  db.userMapData.hasOne(db.userLkData, {foreignKey: 'userId', sourceKey: 'userId'})
+}, 1000)
+
 
 module.exports = db
