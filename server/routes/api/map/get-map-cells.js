@@ -11,15 +11,20 @@ module.exports = function (router, models) {
         })
 
         models.userMapData.findAll({
+          attributes: ['cellId', 'score'],
           include: [
-            {model: models.mapCell, attributes: ['cellName']},
-            {model: models.userLkData, attributes: ['clanTag','clanName', 'imageUrl']}
+            {model: models.userLkData, attributes: ['clanTag','clanName', 'imageUrl', 'userId']}
           ]
-        }).then(resp => {
-          console.log(resp, data)
+        }).then(userCells => {
+          data.map(cell => {
+            const userCellsFiltered = userCells.filter(userCell => userCell.cellId === cell.id)
+            userCellsFiltered.forEach(userCell => cell.players.push(userCell.userLkDatum))
+            return cell
+          })
+
           res.send({
             status: 'ok',
-            data: data
+            data
           })
         })
       })

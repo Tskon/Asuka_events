@@ -5,16 +5,21 @@ module.exports = function (router, models) {
         if (!userMapData) {
           models.userMapData.create({
             userId: req.user.id,
-            ceilId: req.body.cellId
+            cellId: req.body.cellId
           })
           return
         }
 
         models.userMapData.update({
-          ceilId: req.body.cellId
+          cellId: req.body.cellId
         }, {
           where: { userId: req.user.id },
         })
+          .then(() => {
+            res.send({
+              status: 'ok'
+            })
+          })
       })
 
   })
