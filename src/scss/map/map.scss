@@ -13,7 +13,6 @@
   position: relative;
   top: 0;
   left: 0;
-
   background-image: url(../../static/map-indonesia.svg);
   background-size: 100%;
   background-repeat: no-repeat;
@@ -66,4 +65,15 @@
 .cell-info{
   padding: 20px;
   min-width: 250px;
+}
+
+.players-in-cell{
+  ul{
+    padding: 0;
+    list-style: none;
+  }
+
+  img{
+    max-width: 25px;
+  }
 }
