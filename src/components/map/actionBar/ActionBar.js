@@ -59,8 +59,8 @@ class ActionBar extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  cells: state.mapCells.cells,
-  stage: state.mapCells.stage
+  cells: state.mapCells ? state.mapCells.cells : [],
+  stage: state.mapCells ? state.mapCells.stage : '',
 })
 
 export default connect(mapStateToProps)(ActionBar)
