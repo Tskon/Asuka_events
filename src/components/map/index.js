@@ -240,8 +240,8 @@ class Map extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  cells: state.map.cells,
-  stage: state.map.stage,
+  cells: state.mapCells.cells,
+  stage: state.mapCells.stage,
   user: state.user.data
 })
 
