@@ -14,8 +14,8 @@ services:
       MYSQL_DATABASE: tskon1_asuka_frm
       MYSQL_USER: tskon1_asuka_frm
       MYSQL_PASSWORD: q1w2Q!W@
-    volumes:
-      - $PWD/databaseBackup:/var/lib/mysql
+#    volumes:
+#      - $PWD/databaseBackup:/var/lib/mysql
 
   adminer:
     image: adminer
