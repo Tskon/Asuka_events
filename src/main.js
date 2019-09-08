@@ -5,6 +5,14 @@ import store from './store'
 
 Vue.config.productionTip = false
 
+Vue.mixin({
+  data() {
+    return {
+      baseUrl: process.env.BASE_URL
+    }
+  }
+})
+
 new Vue({
   router,
   store,
