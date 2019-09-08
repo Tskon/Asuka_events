@@ -6,5 +6,8 @@ module.exports = {
     'style-resources-loader': {
       'patterns': [ path.resolve(__dirname, 'src/assets/scss/variables') ]
     }
+  },
+  devServer: {
+    proxy: 'http://localhost:3000'
   }
 }
