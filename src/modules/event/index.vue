@@ -1,13 +1,17 @@
 <template>
   <div>
     <h1>Event</h1>
+    <Map/>
   </div>
 </template>
 
 <script>
-    export default {
-        name: "index"
+  import Map from './components/Map'
+  export default {
+    components: {
+      Map
     }
+  }
 </script>
 
 <style scoped>
