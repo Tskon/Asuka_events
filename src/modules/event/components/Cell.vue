@@ -1,5 +1,5 @@
 <template>
-  <div>{{id.toUpperCase()}}</div>
+  <div class="map-cell">{{id.toUpperCase()}}</div>
 </template>
 
 <script>
@@ -14,5 +14,7 @@
 </script>
 
 <style scoped>
-
+  .map-cell {
+    border: 1px solid gray;
+  }
 </style>
