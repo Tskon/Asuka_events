@@ -13,8 +13,17 @@
   }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
   .map-cell {
-    border: 1px solid gray;
+    display: inline-block;
+    border: none;
+    background-color: transparent;
+    box-shadow: 0 0 1px rgba(0,0,0,0.5);
+    cursor: pointer;
+    transition: 0.3s;
+
+    &:hover{
+     background-color: rgba(0,0,0,0.3);
+   }
   }
 </style>

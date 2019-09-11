@@ -1,9 +1,11 @@
 <template>
-  <div>
-    <cell
-        v-for="cellId in cells"
-        :key="cellId"
-        :id="cellId"/>
+  <div class="map-wrapper">
+    <div class="event-map">
+      <cell
+          v-for="cellId in cells"
+          :key="cellId"
+          :id="cellId"/>
+    </div>
   </div>
 </template>
 
@@ -42,5 +44,26 @@
 </script>
 
 <style scoped>
+  .map-wrapper{
+    position: relative;
+    top: 0;
+    left: 0;
+    /*background-image: url(../../static/map-indonesia.svg);*/
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-color: #bcdaff;
+    width: 1200px;
+    height: 480px;
+  }
 
+  .event-map{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+  }
 </style>
