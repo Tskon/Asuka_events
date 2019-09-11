@@ -45,6 +45,7 @@
 
 <style scoped>
   .map-wrapper{
+    margin: 0 auto;
     position: relative;
     top: 0;
     left: 0;
