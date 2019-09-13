@@ -1,0 +1,8 @@
+{
+  "extends": ["plugin:vue/recommended"],
+  "rules": {
+    "indent": ["error", 2],
+    "no-console": "off",
+    "vue/html-closing-bracket-spacing)": "off"
+  }
+}
