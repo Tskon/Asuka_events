@@ -7,6 +7,8 @@
       <b-modal
         id="login-modal"
         title="BootstrapVue"
+        @ok="onSubmit"
+        @hidden="resetForm"
       >
         <b-form-group
           label="Email address:"
@@ -15,7 +17,7 @@
         >
           <b-form-input
             id="login-input"
-            v-model="form.login"
+            v-model="form.username"
             type="email"
             required
             placeholder="Enter email"
@@ -42,6 +44,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import MainMenu from "./MainMenu"
 
 export default {
@@ -51,14 +54,23 @@ export default {
   data () {
     return {
       form: {
-        login: '',
+        username: '',
         password: ''
       }
     }
   },
   methods: {
-    onSubmit() {
+    onSubmit () {
+      const body = {
+        username: this.form.username,
+        password: this.form.password,
+      }
 
+      axios.post('/api/signin', body)
+    },
+    resetForm () {
+      this.form.username = ''
+      this.form.password = ''
     }
   }
 }
