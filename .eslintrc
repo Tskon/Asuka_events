@@ -3,6 +3,11 @@
   "rules": {
     "indent": ["error", 2],
     "no-console": "off",
-    "vue/html-closing-bracket-spacing)": "off"
+    "vue/html-closing-bracket-spacing)": "off",
+    "vue/html-closing-bracket-spacing": ["error", {
+      "startTag": "never",
+      "endTag": "never",
+      "selfClosingTag": "never"
+    }]
   }
 }
