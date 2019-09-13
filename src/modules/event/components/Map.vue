@@ -2,45 +2,46 @@
   <div class="map-wrapper">
     <div class="event-map">
       <cell
-          v-for="cellId in cells"
-          :key="cellId"
-          :id="cellId"/>
+        v-for="cellId in cells"
+        :id="cellId"
+        :key="cellId"
+      />
     </div>
   </div>
 </template>
 
 <script>
-  import Cell from './Cell'
+import Cell from './Cell'
 
-  export default {
-    components: {
-      Cell
-    },
+export default {
+  components: {
+    Cell
+  },
 
-    data() {
-      return {
-        cols: 8,
-        rows: 6,
-        selectedCell: 'a1',
-        letters: 'abcdefghijklmnop'
+  data() {
+    return {
+      cols: 8,
+      rows: 6,
+      selectedCell: 'a1',
+      letters: 'abcdefghijklmnop'
+    }
+  },
+
+  computed: {
+    cells() {
+      const cells = []
+
+      for (let i = 0; i < this.cols * this.rows; i += 1) {
+        const rowNum = Math.ceil((i + 1) / this.cols)
+        const colNum = (i + 1) % this.cols || this.cols
+        const colLetter = this.letters[colNum - 1]
+        cells.push(colLetter + rowNum)
       }
-    },
 
-    computed: {
-      cells() {
-        const cells = []
-
-        for (let i = 0; i < this.cols * this.rows; i += 1) {
-          const rowNum = Math.ceil((i + 1) / this.cols)
-          const colNum = (i + 1) % this.cols || this.cols
-          const colLetter = this.letters[colNum - 1]
-          cells.push(colLetter + rowNum)
-        }
-
-        return cells
-      }
+      return cells
     }
   }
+}
 </script>
 
 <style scoped>

@@ -1,16 +1,18 @@
 <template>
-  <div class="map-cell">{{id.toUpperCase()}}</div>
+  <div class="map-cell">
+    {{ id.toUpperCase() }}
+  </div>
 </template>
 
 <script>
-  export default {
-    props: {
-      id: {
-        type: String,
-        required: true
-      }
+export default {
+  props: {
+    id: {
+      type: String,
+      required: true
     }
   }
+}
 </script>
 
 <style lang="scss" scoped>
