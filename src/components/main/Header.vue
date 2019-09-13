@@ -65,7 +65,7 @@ export default {
         username: this.form.username,
         password: this.form.password,
       }
-
+      // TODO перенести запрос во вьюх, сохранять там пользователя
       axios.post('/api/signin', body)
     },
     resetForm () {
