@@ -44,14 +44,14 @@
 </template>
 
 <script>
-import axios from 'axios'
-import MainMenu from "./MainMenu"
+import {mapActions} from 'vuex'
+import MainMenu from './MainMenu'
 
 export default {
   components: {
     MainMenu
   },
-  data () {
+  data() {
     return {
       form: {
         username: '',
@@ -60,15 +60,16 @@ export default {
     }
   },
   methods: {
-    onSubmit () {
+    ...mapActions({getUser: 'user/getUser'}),
+    onSubmit() {
       const body = {
         username: this.form.username,
         password: this.form.password,
       }
-      // TODO перенести запрос во вьюх, сохранять там пользователя
-      axios.post('/api/signin', body)
+
+      this.getUser(body)
     },
-    resetForm () {
+    resetForm() {
       this.form.username = ''
       this.form.password = ''
     }
