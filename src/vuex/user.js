@@ -15,17 +15,15 @@ export default {
       axios
         .post('/api/signin', body)
         .then(({data}) => {
-          console.log(data)
           if (data.status !== 'ok') return
 
           context.commit('setUser', data.data)
         })
     },
-    getUser (context, body) {
+    getUser (context) {
       axios
-        .post('/api/user/get-user', body)
+        .post('/api/user/get-user')
         .then(({data}) => {
-          console.log(data)
           if (data.status !== 'ok') return
 
           context.commit('setUser', data.data)
