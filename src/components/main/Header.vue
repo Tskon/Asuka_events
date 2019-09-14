@@ -72,15 +72,21 @@ export default {
       user: state => state.user.user
     })
   },
+  created () {
+    this.getUser()
+  },
   methods: {
-    ...mapActions({getUser: 'user/getUser'}),
+    ...mapActions({
+      signIn: 'user/signIn',
+      getUser: 'user/getUser',
+    }),
     onSubmit() {
       const body = {
         username: this.form.username,
         password: this.form.password,
       }
 
-      this.getUser(body)
+      this.signIn(body)
     },
     resetForm() {
       this.form.username = ''
