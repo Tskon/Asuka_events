@@ -6,7 +6,7 @@
       </b-button>
       <b-modal
         id="login-modal"
-        title="BootstrapVue"
+        title="Войти"
         @ok="onSubmit"
         @hidden="resetForm"
       >
