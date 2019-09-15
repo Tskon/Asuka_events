@@ -23,6 +23,9 @@
           <template slot="button-content">
               {{ user.name }}
           </template>
+          <b-dropdown-text v-if="user.isAdmin">Администратор</b-dropdown-text>
+          <b-dropdown-text v-if="user.isPlayer">Участник&nbsp;эвента</b-dropdown-text>
+          <b-dropdown-divider v-if="user.isAdmin || user.isPlayer"></b-dropdown-divider>
           <b-dropdown-item href="#">
             Выход
           </b-dropdown-item>
