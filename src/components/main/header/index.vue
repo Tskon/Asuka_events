@@ -14,12 +14,21 @@
       is-nav
     >
       <MainMenu/>
-      <div class="ml-auto">
+      <b-navbar-nav class="ml-auto">
         <Login v-if="!user.id"/>
-        <div v-else>
-          {{ user.name }}
-        </div>
-      </div>
+        <b-nav-item-dropdown
+          v-else
+          right
+        >
+          <template slot="button-content">
+              {{ user.name }}
+          </template>
+          <b-dropdown-item href="#">
+            Выход
+          </b-dropdown-item>
+        </b-nav-item-dropdown>
+
+      </b-navbar-nav>
     </b-collapse>
   </b-navbar>
 </template>
