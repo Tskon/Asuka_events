@@ -1,16 +1,13 @@
 <template>
-  <nav>
-    <router-link to="/">
-      Главная
-    </router-link> |
-    <router-link to="/event">
+  <b-navbar-nav>
+    <b-nav-item to="/event">
       Эвент
-    </router-link> |
-    <router-link to="/personalPanel">
+    </b-nav-item>
+    <b-nav-item to="/personalPanel">
       Личный кабинет
-    </router-link> |
-    <router-link to="/adminPanel">
+    </b-nav-item>
+    <b-nav-item to="/adminPanel">
       Админка
-    </router-link>
-  </nav>
+    </b-nav-item>
+  </b-navbar-nav>
 </template>

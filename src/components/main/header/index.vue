@@ -1,18 +1,27 @@
 <template>
-  <header class="row flex-wrap-reverse">
-    <MainMenu class="col-12 col-sm-9"/>
-    <div class="col-12 col-sm-3">
-      <Login v-if="!user.id"/>
-      <div
-        v-else
-        class="text-left text-sm-right"
-      >
-        {{user.name}}
+  <b-navbar
+    toggleable="sm"
+    type="dark"
+    variant="primary"
+    class="row"
+  >
+    <b-navbar-brand to="/">
+      Asuka
+    </b-navbar-brand>
+    <b-navbar-toggle target="nav-collapse"/>
+    <b-collapse
+      id="nav-collapse"
+      is-nav
+    >
+      <MainMenu/>
+      <div class="ml-auto">
+        <Login v-if="!user.id"/>
+        <div v-else>
+          {{ user.name }}
+        </div>
       </div>
-    </div>
-
-
-  </header>
+    </b-collapse>
+  </b-navbar>
 </template>
 
 <script>
