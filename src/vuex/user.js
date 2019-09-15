@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {post} from "../../src_old/services/utils";
 
 export default {
   namespaced: true,
@@ -20,6 +21,7 @@ export default {
           context.commit('setUser', data.data)
         })
     },
+
     getUser (context) {
       axios
         .post('/api/user/get-user')
@@ -27,6 +29,16 @@ export default {
           if (data.status !== 'ok') return
 
           context.commit('setUser', data.data)
+        })
+    },
+
+    logout (context) {
+      axios
+        .post('/api/user/logout')
+        .then((data) => {
+          if (data.status !== 'ok') return
+
+          context.commit('setUser', {})
         })
     }
   }

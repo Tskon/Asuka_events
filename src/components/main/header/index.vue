@@ -21,16 +21,19 @@
           right
         >
           <template slot="button-content">
-              {{ user.name }}
+            {{ user.name }}
           </template>
-          <b-dropdown-text v-if="user.isAdmin">Администратор</b-dropdown-text>
-          <b-dropdown-text v-if="user.isPlayer">Участник&nbsp;эвента</b-dropdown-text>
-          <b-dropdown-divider v-if="user.isAdmin || user.isPlayer"></b-dropdown-divider>
-          <b-dropdown-item href="#">
+          <b-dropdown-text v-if="user.isAdmin">
+            Администратор
+          </b-dropdown-text>
+          <b-dropdown-text v-if="user.isPlayer">
+            Участник&nbsp;эвента
+          </b-dropdown-text>
+          <b-dropdown-divider v-if="user.isAdmin || user.isPlayer"/>
+          <b-dropdown-item-button @click="logout">
             Выход
-          </b-dropdown-item>
+          </b-dropdown-item-button>
         </b-nav-item-dropdown>
-
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>
@@ -56,7 +59,8 @@ export default {
   },
   methods: {
     ...mapActions({
-      getUser: 'user/getUser'
+      getUser: 'user/getUser',
+      logout: 'user/logout'
     })
   }
 }

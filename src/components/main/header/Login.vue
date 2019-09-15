@@ -6,7 +6,7 @@
     <b-modal
       id="login-modal"
       title="Войти"
-      @ok="onSubmit"
+      @ok="submit"
       @hidden="resetForm"
     >
       <b-form-group
@@ -56,7 +56,7 @@ export default {
       signIn: 'user/signIn',
       getUser: 'user/getUser',
     }),
-    onSubmit() {
+    submit() {
       const body = {
         username: this.form.username,
         password: this.form.password
