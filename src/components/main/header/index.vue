@@ -2,7 +2,7 @@
   <b-navbar
     toggleable="sm"
     type="dark"
-    variant="primary"
+    variant="dark"
     class="row"
   >
     <b-navbar-brand to="/">
