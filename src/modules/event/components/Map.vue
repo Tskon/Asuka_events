@@ -12,6 +12,7 @@
 
 <script>
 import Cell from './Cell'
+import {mapActions} from 'vuex'
 
 export default {
   components: {
@@ -40,6 +41,16 @@ export default {
 
       return cells
     }
+  },
+
+  created () {
+    this.getCells()
+  },
+
+  methods: {
+    ...mapActions({
+      getCells: 'map/getCells'
+    })
   }
 }
 </script>
