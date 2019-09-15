@@ -1,3 +1,10 @@
 @import "../variables";
 @import '~bootstrap/scss/bootstrap';
 @import '~bootstrap-vue/src/index.scss';
+
+.navbar-dark .navbar-nav .nav-link.router-link-active,
+.navbar-dark .navbar-nav .show > .nav-link
+{
+  color: $info;
+}
+
