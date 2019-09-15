@@ -1,14 +1,21 @@
 import axios from 'axios'
 import {post} from "../../src_old/services/utils";
 
+const stateInit = {
+  name: '',
+  id: 0,
+  isAdmin: false,
+  isPlayer: false
+}
+
 export default {
   namespaced: true,
-  state: {
-    user: {}
-  },
+  state: {...stateInit},
   mutations: {
     setUser (state, user) {
-      state.user = user
+      Object.keys(user).forEach(key => {
+        state[key] = user[key]
+      })
     }
   },
   actions: {
@@ -37,7 +44,7 @@ export default {
         .post('/api/user/logout')
         .then(({data}) => {
           if (data.status !== 'ok') return
-          context.commit('setUser', {})
+          context.commit('setUser', stateInit)
         })
     }
   }
