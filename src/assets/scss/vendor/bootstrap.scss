@@ -3,7 +3,8 @@
 @import '~bootstrap-vue/src/index.scss';
 
 .navbar-dark .navbar-nav .nav-link.router-link-active,
-.navbar-dark .navbar-nav .show > .nav-link
+.navbar-dark .navbar-nav .show > .nav-link,
+.navbar-dark .navbar-brand.router-link-exact-active
 {
   color: $info;
 }

@@ -35,9 +35,8 @@ export default {
     logout (context) {
       axios
         .post('/api/user/logout')
-        .then((data) => {
+        .then(({data}) => {
           if (data.status !== 'ok') return
-
           context.commit('setUser', {})
         })
     }
