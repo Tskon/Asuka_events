@@ -1,16 +1,17 @@
 <template>
-  <header>
-    <div class="d-flex">
+  <header class="row flex-wrap-reverse">
+    <MainMenu class="col-12 col-sm-9"/>
+    <div class="col-12 col-sm-3">
       <Login v-if="!user.id"/>
       <div
         v-else
-        class="info"
+        class="text-left text-sm-right"
       >
         {{user.name}}
       </div>
     </div>
 
-    <MainMenu/>
+
   </header>
 </template>
 

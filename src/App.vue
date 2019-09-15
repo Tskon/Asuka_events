@@ -1,5 +1,8 @@
 <template>
-  <div id="app">
+  <div
+      id="app"
+      class="container-fluid"
+  >
     <Header/>
     <router-view/>
   </div>
