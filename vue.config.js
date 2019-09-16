@@ -4,7 +4,10 @@ module.exports = {
   // configureWebpack: {},
   pluginOptions: {
     'style-resources-loader': {
-      'patterns': [ path.resolve(__dirname, 'src/assets/scss/variables') ]
+      patterns: [
+        'E:\\Development\\PhpstormProjects\\Asuka_events\\src\\assets\\scss\\variables'
+      ],
+      preProcessor: 'scss'
     }
   },
   devServer: {

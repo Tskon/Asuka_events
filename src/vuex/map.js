@@ -12,7 +12,6 @@ export default {
   },
   mutations: {
     setCells (state, cellsList) {
-      console.log(cellsList, 222)
       state.cells = [...cellsList]
     }
   },

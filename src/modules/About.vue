@@ -7,19 +7,19 @@
 </template>
 
 <script>
-  import axios from 'axios'
+import axios from 'axios'
 
-  export default {
-    data() {
-      return {
-        data: null
-      }
-    },
-    mounted() {
-      axios.post('/api/user/get-user').then(resp => {
-        console.log(resp)
-        this.data = resp.data.message
-      })
+export default {
+  data() {
+    return {
+      data: null
     }
+  },
+  mounted() {
+    axios.post('/api/user/get-user').then(resp => {
+      console.log(resp)
+      this.data = resp.data.message
+    })
   }
+}
 </script>
