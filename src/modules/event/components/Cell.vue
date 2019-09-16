@@ -1,11 +1,16 @@
 <template>
-  <div class="map-cell">
+  <div
+    :class="{
+      'started-cell': cell.isStarted
+    }"
+    class="map-cell"
+  >
     <button
-      :id="'cell-popover-' + id"
+      :id="'cell-popover-' + cell.id"
     >
-      {{ id.toUpperCase() }}
+      {{ cell.id.toUpperCase() }}
     </button>
-    <CellPopover :id="id"/>
+    <CellPopover :id="cell.id"/>
   </div>
 </template>
 
@@ -17,8 +22,8 @@ export default {
     CellPopover
   },
   props: {
-    id: {
-      type: String,
+    cell: {
+      type: Object,
       required: true
     }
   }
@@ -29,7 +34,6 @@ export default {
   .map-cell {
     display: inline-block;
     border: none;
-    background-color: transparent;
     box-shadow: 0 0 1px rgba(0,0,0,0.1);
     transition: 0.3s;
 
@@ -43,5 +47,9 @@ export default {
       height: 100%;
       background-color: transparent;
     }
+  }
+
+  .started-cell {
+    background-color: rgba(green, 0.5);
   }
 </style>

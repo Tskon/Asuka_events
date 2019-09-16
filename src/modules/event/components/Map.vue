@@ -2,9 +2,9 @@
   <div class="map-wrapper">
     <div class="event-map">
       <cell
-        v-for="cellId in cells"
-        :id="cellId"
-        :key="cellId"
+        v-for="cell in cells"
+        :cell="cell"
+        :key="cell.id"
       />
     </div>
   </div>
@@ -12,7 +12,7 @@
 
 <script>
 import Cell from './Cell'
-import {mapActions} from 'vuex'
+import {mapActions, mapState} from 'vuex'
 
 export default {
   components: {
@@ -21,26 +21,14 @@ export default {
 
   data() {
     return {
-      cols: 8,
-      rows: 6,
       selectedCell: 'a1',
-      letters: 'abcdefghijklmnop'
     }
   },
 
   computed: {
-    cells() {
-      const cells = []
-
-      for (let i = 0; i < this.cols * this.rows; i += 1) {
-        const rowNum = Math.ceil((i + 1) / this.cols)
-        const colNum = (i + 1) % this.cols || this.cols
-        const colLetter = this.letters[colNum - 1]
-        cells.push(colLetter + rowNum)
-      }
-
-      return cells
-    }
+    ...mapState({
+      cells: state => state.map.cells
+    })
   },
 
   created () {
@@ -78,5 +66,6 @@ export default {
     display: grid;
     grid-template-columns: repeat(8, 1fr);
     grid-template-rows: repeat(6, 1fr);
+    grid-auto-flow: column;
   }
 </style>
