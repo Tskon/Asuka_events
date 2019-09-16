@@ -3,8 +3,8 @@
     <div class="event-map">
       <cell
         v-for="cell in cells"
-        :cell="cell"
         :key="cell.id"
+        :cell="cell"
       />
     </div>
   </div>

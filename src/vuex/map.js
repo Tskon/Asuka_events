@@ -26,9 +26,15 @@ export default {
         })
     },
     setStartSector (context, cellId) {
-      axios.post('/api/map/choose-start-sector', {
-        cellId: cellId
-      })
+      axios
+        .post('/api/map/choose-start-sector', {
+          cellId: cellId
+        })
+        .then(({data}) => {
+          if (data.status !== 'ok') return
+
+          
+        })
     }
   }
 }

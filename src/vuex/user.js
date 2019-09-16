@@ -1,5 +1,4 @@
 import axios from 'axios'
-import {post} from "../../src_old/services/utils";
 
 const stateInit = {
   name: '',

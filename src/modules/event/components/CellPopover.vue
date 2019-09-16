@@ -1,13 +1,15 @@
 <template>
   <b-popover
-    :target="'cell-popover-' + id"
-    :title="'Действия для сектора ' + id.toUpperCase()"
+    :target="'cell-popover-' + cell.id"
+    :title="'Действия для сектора ' + cell.id.toUpperCase()"
     triggers="focus"
     placement="rightbottom"
   >
+    <span v-if="!cell.isStarted">Доступных действий нет</span>
     <b-button
+      v-if="cell.isStarted"
       variant="info"
-      @click="chooseStartSector"
+      @click="setStartSector(cell.id)"
     >
       Выбрать сектор стартовым
     </b-button>
@@ -15,19 +17,19 @@
 </template>
 
 <script>
-import axios from 'axios'
-
+import {mapActions} from 'vuex'
+  
 export default {
   props: {
-    id: {
-      type: String,
+    cell: {
+      type: Object,
       required: true
     }
   },
   methods: {
-    chooseStartSector () {
-
-    }
+    ...mapActions({
+      setStartSector: 'map/setStartSector'
+    })
   }
 }
 </script>

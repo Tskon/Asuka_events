@@ -10,7 +10,7 @@
     >
       {{ cell.id.toUpperCase() }}
     </button>
-    <CellPopover :id="cell.id"/>
+    <CellPopover :cell="cell"/>
   </div>
 </template>
 
