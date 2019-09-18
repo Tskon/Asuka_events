@@ -33,7 +33,7 @@ export default {
         .then(({data}) => {
           if (data.status !== 'ok') return
 
-          
+          context.dispatch('getCells')
         })
     }
   }
