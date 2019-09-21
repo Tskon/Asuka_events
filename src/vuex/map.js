@@ -2,7 +2,12 @@ import axios from 'axios'
 import {post} from "../../src_old/services/utils";
 
 const mapInit = {
-  cells: []
+  cells: [],
+  currentTurn: {
+    turnNumber: 0,
+    turnName: '',
+    fog: false
+  }
 }
 
 export default {
@@ -13,9 +18,21 @@ export default {
   mutations: {
     setCells (state, cellsList) {
       state.cells = [...cellsList]
+    },
+    setCurrentTurn (state, turn) {
+      state.currentTurn = turn
     }
   },
   actions: {
+    getCurrentTurn (context) {
+      axios
+        .post('/api/map/get-current-turn')
+        .then(({data}) => {
+          if (data.status !== 'ok') return
+          console.log(data.data)
+          context.commit('setCurrentTurn', data.data)
+        })
+    },
     getCells (context) {
       axios
         .post('/api/map/get-map-cells')
