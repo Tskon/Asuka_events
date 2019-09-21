@@ -5,9 +5,9 @@
     triggers="focus"
     placement="rightbottom"
   >
-    <span v-if="!cell.isStarted">Доступных действий нет</span>
+    <span v-if="isNoActions">Доступных действий нет</span>
     <b-button
-      v-if="cell.isStarted"
+      v-if="isStartSectorAvailable"
       variant="info"
       @click="setStartSector(cell.id)"
     >
@@ -17,13 +17,24 @@
 </template>
 
 <script>
-import {mapActions} from 'vuex'
+import {mapActions, mapState} from 'vuex'
   
 export default {
   props: {
     cell: {
       type: Object,
       required: true
+    }
+  },
+  computed: {
+    ...mapState({
+      turnName: state => state.map.currentTurn.turnName
+    }),
+    isNoActions () {
+      return !this.isStartSectorAvailable
+    },
+    isStartSectorAvailable () {
+      return this.turnName === 'selectStartSector' && this.cell.isStarted
     }
   },
   methods: {
