@@ -1,6 +1,6 @@
 module.exports = function (sequelize, Sequelize) {
   const Map = sequelize.define('mapLog', {
-    currentTurn: {
+    turn: {
       autoIncrement: true,
       primaryKey: true,
       type: Sequelize.INTEGER,

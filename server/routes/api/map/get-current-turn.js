@@ -6,7 +6,7 @@ module.exports = function (router, models) {
       attributes: ['currentTurn']
     })
       .then(log => {
-        const turnNumber = (log.length) ? log[0].currentTurn : 1
+        const turnNumber = (log.length) ? log[0].turn + 1 : 1
 
         models.mapTurnData.findOne({
           where: {turnNumber},
