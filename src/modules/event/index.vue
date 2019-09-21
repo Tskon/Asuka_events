@@ -6,7 +6,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import Map from './components/Map'
 
 export default {
