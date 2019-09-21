@@ -29,7 +29,6 @@ export default {
         .post('/api/map/get-current-turn')
         .then(({data}) => {
           if (data.status !== 'ok') return
-          console.log(data.data)
           context.commit('setCurrentTurn', data.data)
         })
     },

@@ -17,7 +17,6 @@ export default {
   },
   mounted() {
     axios.post('/api/user/get-user').then(resp => {
-      console.log(resp)
       this.data = resp.data.message
     })
   }
