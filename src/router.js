@@ -20,7 +20,7 @@ export default new Router({
     {
       path: '/personalPanel',
       name: 'personalPanel',
-      component: () => import(/* webpackChunkName: "personalPanel" */ './modules/About.vue')
+      component: () => import(/* webpackChunkName: "personalPanel" */ './modules/PersonalPanel.vue')
     },
     {
       path: '/adminPanel',
