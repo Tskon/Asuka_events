@@ -16,7 +16,7 @@
       href="#"
       variant="primary"
     >
-      Go somewhere
+      <i class="fas fa-user-cog"/>
     </b-button>
   </b-card>
 </template>
