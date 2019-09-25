@@ -66,10 +66,33 @@
 export default {
   data () {
     return {
-      clanTag: 'TAG',
-      clanName: 'Name',
-      imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfq5YrLJG8oFkpyvOtQFdkdjov3oK1C1ZWl7sJl3C6dZGoAgn8',
       editMode: false
+    }
+  },
+  computed: {
+    clanTag: {
+      get () {
+        return this.$store.state.user.personalData.clanTag
+      },
+      set (clanTag) {
+        this.$store.commit('user/setPersonalData', {clanTag})
+      }
+    },
+    clanName: {
+      get () {
+        return this.$store.state.user.personalData.clanName
+      },
+      set (clanName) {
+        this.$store.commit('user/setPersonalData', {clanName})
+      }
+    },
+    imageUrl: {
+      get () {
+        return this.$store.state.user.personalData.imageUrl
+      },
+      set (imageUrl) {
+        this.$store.commit('user/setPersonalData', {imageUrl})
+      }
     }
   },
   methods: {
