@@ -96,8 +96,9 @@ export default {
     }
   },
   methods: {
-    submitHandler (event) {
+    submitHandler () {
       this.editMode = !this.editMode
+      this.$store.dispatch('user/setPersonalData')
     }
   }
 }

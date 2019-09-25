@@ -53,6 +53,16 @@ export default {
           if (data.status !== 'ok') return
           context.commit('setUser', stateInit)
         })
+    },
+
+    setPersonalData(context) {
+      console.log(context)
+      axios
+        .post('/api/user/set-lk-data', {
+          clanTag: context.state.personalData.clanTag,
+          clanName: context.state.personalData.clanName,
+          imageUrl: context.state.personalData.imageUrl
+        })
     }
   }
 }
