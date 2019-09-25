@@ -1,23 +1,64 @@
 <template>
   <b-card
-    title="Card Title"
-    img-src="https://picsum.photos/600/300/?image=25"
-    img-alt="Image"
+    :img-src="imageUrl"
+    img-alt="Avatar"
     img-top
-    tag="article"
-    style="max-width: 20rem;"
     class="mb-2"
   >
-    <b-card-text>
-      Some quick example text to build on the card title and make up the bulk of the card's content.
-    </b-card-text>
+    <template v-if="!editMode">
+      <b-card-title>[ {{ clanTag }} ] {{ clanName }}</b-card-title>
+      <b-card-text>
+        Some quick example text to build on the card title and make up the bulk of the card's content.
+      </b-card-text>
 
-    <b-button
-      href="#"
-      variant="primary"
+      <b-button
+        variant="primary"
+        class="w-100"
+        @click="()=>{editMode = !editMode}"
+      >
+        <i class="fas fa-user-cog"/>
+      </b-button>
+    </template>
+
+    <b-form
+      v-if="editMode"
+      @submit.prevent="submitHandler"
     >
-      <i class="fas fa-user-cog"/>
-    </b-button>
+      <b-form-group
+        label="Клан тэг"
+        description="Максимум 6 символов"
+      >
+        <b-form-input
+          v-model="clanTag"
+          :maxlength="6"
+        />
+      </b-form-group>
+      <b-form-group
+        label="Название клана"
+        description="Максимум 20 символов"
+      >
+        <b-form-input
+          v-model="clanName"
+          :maxlength="20"
+        />
+      </b-form-group>
+      <b-form-group
+        label="Изображение"
+      >
+        <b-form-input
+          v-model="imageUrl"
+        />
+      </b-form-group>
+      <b-button
+        v-if="editMode"
+        variant="success"
+        class="w-100"
+        type="submit"
+      >
+        <i class="far fa-save"/>
+        Сохранить
+      </b-button>
+    </b-form>
   </b-card>
 </template>
 
@@ -25,12 +66,23 @@
 export default {
   data () {
     return {
-        
+      clanTag: 'TAG',
+      clanName: 'Name',
+      imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfq5YrLJG8oFkpyvOtQFdkdjov3oK1C1ZWl7sJl3C6dZGoAgn8',
+      editMode: false
+    }
+  },
+  methods: {
+    submitHandler (event) {
+      this.editMode = !this.editMode
     }
   }
 }
 </script>
 
 <style scoped>
-
+.card {
+  width: 400px;
+  margin: 20px auto;
+}
 </style>
