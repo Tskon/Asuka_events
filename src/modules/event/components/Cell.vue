@@ -12,6 +12,9 @@
         <i class="far fa-user"/> {{ playersCount }}
       </div>
       {{ cell.id.toUpperCase() }}
+      <div>
+        +{{cell.bonus}}
+      </div>
     </button>
     <CellPopover :cell="cell"/>
   </div>

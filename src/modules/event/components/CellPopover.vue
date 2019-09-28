@@ -21,10 +21,11 @@
     <span v-if="isNoActions">Доступных действий нет</span>
     <b-button
       v-if="isStartSectorAvailable"
+      :disabled="isSectorChoosen"
       variant="info"
       @click="setSector(cell.id)"
     >
-      Выбрать сектор стартовым
+      {{isSectorChoosen ? 'Этот сектор уже выбран' : 'Выбрать сектор стартовым'}}
     </b-button>
   </b-popover>
 </template>
@@ -41,13 +42,18 @@ export default {
   },
   computed: {
     ...mapState({
-      turnName: state => state.map.currentTurn.turnName
+      turnName: state => state.map.currentTurn.turnName,
+      playerCellId: state => state.user.playerData.cellId
     }),
     isNoActions () {
       return !this.isStartSectorAvailable
     },
     isStartSectorAvailable () {
-      return this.turnName === 'selectStartSector' && this.cell.isStarted
+      return this.turnName === 'selectStartSector'
+        && this.cell.isStarted
+    },
+    isSectorChoosen () {
+      return this.playerCellId === this.cell.id
     }
   },
   methods: {
