@@ -7,16 +7,13 @@
   >
     <template v-if="!editMode">
       <b-card-title>[ {{ clanTag }} ] {{ clanName }}</b-card-title>
-      <b-card-text>
-        Some quick example text to build on the card title and make up the bulk of the card's content.
-      </b-card-text>
-
       <b-button
         variant="primary"
         class="w-100"
         @click="()=>{editMode = !editMode}"
       >
         <i class="fas fa-user-cog"/>
+        Редактировать
       </b-button>
     </template>
 
