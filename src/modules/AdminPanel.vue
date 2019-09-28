@@ -10,6 +10,21 @@
 
       <b-button variant="success">Следующий ход</b-button>
     </div>
+
+    <div class="card card-body d-inline-block">
+      <h5>Игроки:</h5>
+
+    </div>
+
+    <div class="card card-body d-inline-block">
+      <h5>Ходы:</h5>
+
+    </div>
+
+    <div class="card card-body d-inline-block">
+      <h5>Пользователи:</h5>
+
+    </div>
   </div>
 </template>
 
@@ -33,10 +48,12 @@ export default {
   },
   created() {
     this.getCurrentTurn()
+    this.getAdminData()
   },
   methods: {
     ...mapActions({
-      getCurrentTurn: 'map/getCurrentTurn'
+      getCurrentTurn: 'map/getCurrentTurn',
+      getAdminData: 'admin/getAdminData'
     })
   }
 }
