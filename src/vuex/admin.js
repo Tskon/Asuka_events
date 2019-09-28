@@ -24,6 +24,17 @@ export default {
           if (data.status !== 'ok') return
           context.commit('setAdminData', data.data)
         })
+    },
+    setPlayerStatus (context, payload) {
+      axios
+        .post('/api/admin/set-player-status', {
+          userId: payload.userId,
+          status: payload.status
+        })
+        .then(({data}) => {
+          if (data.status !== 'ok') return
+          context.dispatch('getAdminData')
+        })
     }
   }
 }

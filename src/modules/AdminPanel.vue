@@ -49,7 +49,15 @@
             :key="player.id"
           >
             {{ player.username }}
-            <b-button variant="danger">Удалить права</b-button>
+            <b-button
+              variant="danger"
+              @click="setPlayerStatus({
+                userId: player.id,
+                status: 0
+              })"
+            >
+              Удалить права
+            </b-button>
           </b-list-group-item>
         </b-list-group>
       </b-card>
@@ -65,7 +73,15 @@
             :key="user.id"
           >
             {{ user.username }}
-            <b-button variant="success">Сделать игроком</b-button>
+            <b-button
+              variant="success"
+              @click="setPlayerStatus({
+                userId: user.id,
+                status: 1
+              })"
+            >
+              Сделать игроком
+            </b-button>
           </b-list-group-item>
         </b-list-group>
       </b-card>
@@ -99,7 +115,8 @@ export default {
   methods: {
     ...mapActions({
       getCurrentTurn: 'map/getCurrentTurn',
-      getAdminData: 'admin/getAdminData'
+      getAdminData: 'admin/getAdminData',
+      setPlayerStatus: 'admin/setPlayerStatus'
     })
   }
 }
@@ -118,7 +135,7 @@ export default {
   margin-bottom: 20px;
 
   .list-group-item {
-    padding: 7px 0 7px 10px;
+    padding: 7px 0 7px 1.25rem;
   }
 }
 
@@ -129,7 +146,7 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 0 0 10px;
+    padding: 0 0 0 1.25rem;
 
     .btn {
       border-top-right-radius: 0;
