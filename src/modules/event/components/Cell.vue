@@ -8,6 +8,9 @@
     <button
       :id="'cell-popover-' + cell.id"
     >
+      <div v-if="playersCount">
+        <i class="far fa-user"/> {{ playersCount }}
+      </div>
       {{ cell.id.toUpperCase() }}
     </button>
     <CellPopover :cell="cell"/>
@@ -25,6 +28,14 @@ export default {
     cell: {
       type: Object,
       required: true
+    }
+  },
+  computed: {
+    playerDataCellId () {
+      return this.$store.state.user.playerData.cellId
+    },
+    playersCount () {
+      return this.cell.players.length + +(this.playerDataCellId === this.cell.id)
     }
   }
 }

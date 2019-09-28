@@ -49,6 +49,7 @@ export default {
         .then(({data}) => {
           if (data.status !== 'ok') return
 
+          context.commit('user/setPlayerData', {cellId}, { root: true })
           context.dispatch('getCells')
         })
     }

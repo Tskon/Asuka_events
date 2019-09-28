@@ -12,7 +12,7 @@ const stateInit = {
   },
   playerData: {
     cellId: '',
-    points: 0
+    score: 0
   }
 }
 
@@ -29,7 +29,7 @@ export default {
       state.personalData = {...state.personalData, ...payload}
     },
     setPlayerData (state, payload) {
-      state.player = {...payload}
+      state.playerData = {...state.playerData, ...payload}
     }
   },
   actions: {
