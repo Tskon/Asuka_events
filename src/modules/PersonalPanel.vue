@@ -63,6 +63,8 @@
 </template>
 
 <script>
+import {mapActions} from 'vuex'
+
 export default {
   data () {
     return {
@@ -95,7 +97,13 @@ export default {
       }
     }
   },
+  created () {
+    this.getPersonalData()
+  },
   methods: {
+    ...mapActions({
+      getPersonalData: 'user/getPersonalData'
+    }),
     submitHandler () {
       this.editMode = !this.editMode
       this.$store.dispatch('user/setPersonalData')

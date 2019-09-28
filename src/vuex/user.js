@@ -55,8 +55,16 @@ export default {
         })
     },
 
+    getPersonalData(context) {
+      axios
+        .post('/api/user/get-lk-data')
+        .then(({data}) => {
+          if (data.status !== 'ok') return
+          context.commit('setPersonalData', data.data)
+        })
+    },
+
     setPersonalData(context) {
-      console.log(context)
       axios
         .post('/api/user/set-lk-data', {
           clanTag: context.state.personalData.clanTag,
