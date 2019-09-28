@@ -21,6 +21,5 @@ module.exports = function (router, models) {
             })
           })
       })
-
   })
 }

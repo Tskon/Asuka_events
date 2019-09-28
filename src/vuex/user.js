@@ -9,6 +9,10 @@ const stateInit = {
     clanName: 'Unknown clan',
     clanTag: 'UNKNWN',
     imageUrl: 'https://avatanplus.com/files/resources/mid/58e0ccb473a4915b2e1fa0fa.png'
+  },
+  playerData: {
+    cellId: '',
+    points: 0
   }
 }
 
@@ -23,6 +27,9 @@ export default {
     },
     setPersonalData (state, payload) {
       state.personalData = {...state.personalData, ...payload}
+    },
+    setPlayerData (state, payload) {
+      state.player = {...payload}
     }
   },
   actions: {
@@ -41,6 +48,8 @@ export default {
         .post('/api/user/get-user')
         .then(({data}) => {
           if (data.status !== 'ok') return
+
+          if (data.data.isPlayer) context.dispatch('getPlayerData')
 
           context.commit('setUser', data.data)
         })
@@ -61,6 +70,15 @@ export default {
         .then(({data}) => {
           if (data.status !== 'ok') return
           context.commit('setPersonalData', data.data)
+        })
+    },
+
+    getPlayerData(context) {
+      axios
+        .post('/api/map/get-player-data')
+        .then(({data}) => {
+          if (data.status !== 'ok') return
+          context.commit('setPlayerData', data.data)
         })
     },
 

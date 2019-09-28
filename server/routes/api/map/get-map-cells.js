@@ -10,24 +10,24 @@ module.exports = function (router, models) {
           data.push({id: cell.cellName, ...JSON.parse(cell.dataJson)})
         })
 
-        models.userMapData.findAll({
-          attributes: ['cellId', 'score'],
-          include: [
-            {model: models.mapCell, attributes: ['cellName']},
-            {model: models.userLkData, attributes: ['clanTag','clanName', 'imageUrl', 'userId']}
-          ]
-        }).then(userCells => {
-          data.map(cell => {
-            const userCellsFiltered = userCells.filter(userCell => userCell.cellId === cell.id)
-            userCellsFiltered.forEach(userCell => cell.players.push(userCell.userLkDatum))
-            return cell
-          })
-
-          res.send({
-            status: 'ok',
-            data
-          })
+        // models.userMapData.findAll({
+        //   attributes: ['cellId', 'score'],
+        //   include: [
+        //     {model: models.mapCell, attributes: ['cellName']},
+        //     {model: models.userLkData, attributes: ['clanTag','clanName', 'imageUrl', 'userId']}
+        //   ]
+        // }).then(userCells => {
+        //   data.map(cell => {
+        //     const userCellsFiltered = userCells.filter(userCell => userCell.cellId === cell.id)
+        //     userCellsFiltered.forEach(userCell => cell.players.push(userCell.userLkDatum))
+        //     return cell
+        //   })
+        //
+        res.send({
+          status: 'ok',
+          data
         })
+        // })
       })
   })
 }
