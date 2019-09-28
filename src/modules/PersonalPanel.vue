@@ -6,7 +6,7 @@
     class="mb-2"
   >
     <template v-if="!editMode">
-      <b-card-title>[ {{ clanTag }} ] {{ clanName }}</b-card-title>
+      <b-card-title class="text-center">[ {{ clanTag }} ] {{ clanName }}</b-card-title>
       <b-button
         variant="primary"
         class="w-100"

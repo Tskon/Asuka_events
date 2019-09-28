@@ -9,7 +9,7 @@
     <b-button
       v-if="isStartSectorAvailable"
       variant="info"
-      @click="setStartSector(cell.id)"
+      @click="setSector(cell.id)"
     >
       Выбрать сектор стартовым
     </b-button>
@@ -39,7 +39,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      setStartSector: 'map/setStartSector'
+      setSector: 'map/setSector'
     })
   }
 }

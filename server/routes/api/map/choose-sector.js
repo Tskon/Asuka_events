@@ -1,5 +1,5 @@
 module.exports = function (router, models) {
-  router.post('/map/choose-start-sector', (req, res) => {
+  router.post('/map/choose-sector', (req, res) => {
     models.userMapData.findByPk(req.user.id)
       .then((userMapData) => {
         if (!userMapData) {

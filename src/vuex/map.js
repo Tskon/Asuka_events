@@ -41,9 +41,9 @@ export default {
           context.commit('setCells', data.data)
         })
     },
-    setStartSector (context, cellId) {
+    setSector (context, cellId) {
       axios
-        .post('/api/map/choose-start-sector', {
+        .post('/api/map/choose-sector', {
           cellId: cellId
         })
         .then(({data}) => {
