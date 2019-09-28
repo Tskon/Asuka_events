@@ -5,6 +5,19 @@
     triggers="focus"
     placement="rightbottom"
   >
+    <template v-if="cell.players.length">
+      <ol>
+        Игроки в секторе:
+        <li
+          v-for="player in cell.players"
+          :key="player.id"
+        >
+          {{ player.clanTag }}
+          {{ player.id }}
+        </li>
+      </ol>
+      <hr>
+    </template>
     <span v-if="isNoActions">Доступных действий нет</span>
     <b-button
       v-if="isStartSectorAvailable"
