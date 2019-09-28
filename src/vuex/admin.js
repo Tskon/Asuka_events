@@ -23,7 +23,6 @@ export default {
         .then(({data}) => {
           if (data.status !== 'ok') return
           context.commit('setAdminData', data.data)
-          console.log(data)
         })
     }
   }
