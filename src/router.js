@@ -25,7 +25,7 @@ export default new Router({
     {
       path: '/adminPanel',
       name: 'adminPanel',
-      component: () => import(/* webpackChunkName: "adminPanel" */ './modules/About.vue')
+      component: () => import(/* webpackChunkName: "adminPanel" */ './modules/AdminPanel.vue')
     }
   ]
 })
