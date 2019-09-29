@@ -43,15 +43,15 @@ app.use(cors())
    */
   .use('/api/user', (req, res, next) => {
     if (req.isAuthenticated()) next()
-    else res.send({status: 'error', message: 'Вы не авторизованы'})
+    else res.send({status: 'error', message: 'Вы не авторизованы. User'})
   })
   .use('/api/admin', (req, res, next) => {
     if (req.user && req.user.isAdmin) next()
-    else res.send({status: 'error', message: 'Не достаточно прав'})
+    else res.send({status: 'error', message: 'Не достаточно прав. Admin'})
   })
   .use('/api/map', (req, res, next) => {
     if (req.user && req.user.isPlayer) next()
-    else res.send({status: 'error', message: 'Не достаточно прав'})
+    else res.send({status: 'error', message: 'Не достаточно прав. Player'})
   })
   .use('/api', require('./routes/api/index')(passport, app))
 
