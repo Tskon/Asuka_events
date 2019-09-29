@@ -2,8 +2,8 @@ module.exports = function (router, models) {
   router.post('/map/get-current-turn', (req, res) => {
     models.mapLog.findAll({
       limit: 1,
-      order: [['currentTurn', 'DESC']],
-      attributes: ['currentTurn']
+      order: [['turn', 'DESC']],
+      attributes: ['turn']
     })
       .then(log => {
         const turnNumber = (log.length) ? log[0].turn + 1 : 1

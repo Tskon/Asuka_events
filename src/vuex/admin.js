@@ -35,6 +35,10 @@ export default {
           if (data.status !== 'ok') return
           context.dispatch('getAdminData')
         })
+    },
+    nextTurn (context) {
+      axios
+        .post('/api/admin/next-turn')
     }
   }
 }
