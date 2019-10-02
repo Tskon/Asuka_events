@@ -17,14 +17,6 @@
     </div>
 
     <div class="card card-body">
-      <h5>Игроки:</h5>
-    </div>
-
-    <div class="card card-body">
-      <h5>Ходы:</h5>
-    </div>
-
-    <div class="card card-body">
       <h5>Пользователи:</h5>
       <b-card
         no-body
@@ -88,6 +80,47 @@
           </b-list-group-item>
         </b-list-group>
       </b-card>
+    </div>
+
+    <div class="card card-body">
+      <h5>Игроки:</h5>
+    </div>
+
+    <div class="card card-body">
+      <h5>Ходы:</h5>
+      <div
+        v-for="(log, i) in adminData.logs"
+        :key="i"
+      >
+        <b-button
+          v-b-toggle="'collapse-' + i"
+          variant="outline-info"
+          class="w-100"
+        >
+          Ход {{ i + 1 }}
+        </b-button>
+        <b-collapse
+          :id="'collapse-' + i"
+          class="mt-2"
+        >
+          <b-card>
+            <div
+              v-for="cell in log.map"
+              :key="cell.cellName"
+            >
+              {{ cell.cellName }}:
+              бонус {{ cell.bonus }}
+              <ul v-if="cell.players.length">
+                игроки в секторе:
+                <li
+                  v-for="player in cell.players"
+                  :key="player.id"
+                />
+              </ul>
+            </div>
+          </b-card>
+        </b-collapse>
+      </div>
     </div>
   </div>
 </template>
