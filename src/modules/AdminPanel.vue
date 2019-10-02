@@ -114,12 +114,14 @@ export default {
   created() {
     this.getCurrentTurn()
     this.getAdminData()
+    this.getLogs()
   },
   methods: {
     ...mapActions({
       getCurrentTurn: 'map/getCurrentTurn',
       getAdminData: 'admin/getAdminData',
       setPlayerStatus: 'admin/setPlayerStatus',
+      getLogs: 'admin/getLogs',
       nextTurn: 'admin/nextTurn'
     })
   }

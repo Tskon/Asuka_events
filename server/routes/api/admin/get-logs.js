@@ -1,5 +1,5 @@
 module.exports = function (router, models) {
-  router.post('/map/get-logs', (req, res) => {
+  router.post('/admin/get-logs', (req, res) => {
     models.mapLog.findAll({
       attributes: ['playersJson', 'cellsJson']
     }).then(logs => {

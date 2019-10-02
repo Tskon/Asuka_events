@@ -5,7 +5,8 @@ const stateInit = {
     admins: [],
     commonUsers: [],
     players: []
-  }
+  },
+  logs: []
 }
 
 export default {
@@ -14,6 +15,9 @@ export default {
   mutations: {
     setAdminData (state, payload) {
       state.users = {...payload}
+    },
+    setLogs (state, payload) {
+      state.logs = [...payload]
     }
   },
   actions: {
@@ -23,6 +27,14 @@ export default {
         .then(({data}) => {
           if (data.status !== 'ok') return
           context.commit('setAdminData', data.data)
+        })
+    },
+    getLogs (context) {
+      axios
+        .post('/api/admin/get-logs')
+        .then(({data}) => {
+          if (data.status !== 'ok') return
+          context.commit('setLogs', data.data)
         })
     },
     setPlayerStatus (context, payload) {
