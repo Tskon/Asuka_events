@@ -8,7 +8,10 @@
         <li><b>Туман войны:</b> {{ currentTurn.fog ? 'Вкл': 'Выкл' }}</li>
       </ul>
 
-      <b-button variant="success" @click="nextTurn">
+      <b-button
+        variant="success"
+        @click="nextTurn"
+      >
         Следующий ход
       </b-button>
     </div>
