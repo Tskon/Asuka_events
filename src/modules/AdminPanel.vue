@@ -84,9 +84,14 @@
 
     <div class="card card-body">
       <h5>Игроки:</h5>
+      <div v-for="player in players">
+        <b>Имя:</b> {{ player.username }}
+        <b>Очки:</b> {{ player.score }}
+        <b>Сектор:</b> {{ player.cellId }}
+      </div>
     </div>
 
-    <div class="card card-body">
+    <div class="card card-body logs">
       <h5>Ходы:</h5>
       <div
         v-for="(log, i) in adminData.logs"
@@ -94,7 +99,7 @@
       >
         <b-button
           v-b-toggle="'collapse-' + i"
-          variant="outline-info"
+          variant="outline-dark"
           class="w-100"
         >
           Ход {{ i + 1 }}
@@ -142,7 +147,14 @@ export default {
     ...mapState({
       currentTurn: state => state.map.currentTurn,
       adminData: state => state.admin
-    })
+    }),
+    players() {
+      if (!this.adminData.logs.length) return []
+      return this.adminData.logs[this.adminData.logs.length - 1].players.map(player => {
+        const playerData = this.adminData.users.players.find((p => p.id === player.userId))
+        return {...player, ...playerData}
+      })
+    }
   },
   created() {
     this.getCurrentTurn()
@@ -168,6 +180,11 @@ export default {
   grid-template-rows: auto;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 20px;
+}
+
+.logs {
+  grid-row: 2;
+  grid-column: 1 / span 3;
 }
 
 .admins-list {
