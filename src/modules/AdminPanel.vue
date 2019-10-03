@@ -17,6 +17,18 @@
     </div>
 
     <div class="card card-body">
+      <h5>Игроки:</h5>
+      <div
+        v-for="player in players"
+        :key="player.id"
+      >
+        <b>Имя:</b> {{ player.username }}
+        <b>Очки:</b> {{ player.score }}
+        <b>Сектор:</b> {{ player.cellId }}
+      </div>
+    </div>
+
+    <div class="card card-body">
       <h5>Пользователи:</h5>
       <b-card
         no-body
@@ -80,15 +92,6 @@
           </b-list-group-item>
         </b-list-group>
       </b-card>
-    </div>
-
-    <div class="card card-body">
-      <h5>Игроки:</h5>
-      <div v-for="player in players">
-        <b>Имя:</b> {{ player.username }}
-        <b>Очки:</b> {{ player.score }}
-        <b>Сектор:</b> {{ player.cellId }}
-      </div>
     </div>
 
     <div class="card card-body logs">
