@@ -111,13 +111,24 @@
           :id="'collapse-' + i"
           class="mt-2"
         >
-          <b-card>
+          <b-card
+            no-body
+            class="cells-grid p-2"
+          >
             <div
               v-for="cell in log.map"
               :key="cell.cellName"
+              class="d-flex justify-content-between pl-4 cells-grid-item"
             >
               {{ cell.cellName }}:
-              бонус {{ cell.bonus }}
+              <span>
+                <i class="fas fa-trophy text-black-50" title="Очков в секторе за удержание"/>
+              {{ cell.bonus }}
+              </span>
+              <span>
+                <i class="fas fa-user-alt text-black-50" title="Игроков в секторе"/>
+              {{ cell.players.length }}
+              </span>
               <ul v-if="cell.players.length">
                 игроки в секторе:
                 <li
@@ -214,6 +225,17 @@ export default {
     &:not(:last-child) .btn {
       border-bottom-right-radius: 0;
     }
+  }
+}
+
+.cells-grid {
+  display: grid;
+  grid-template-rows: repeat(6, 1fr);
+  grid-template-columns: repeat(8, 1fr);
+  grid-auto-flow: column;
+
+  .cells-grid-item {
+    width: 160px;
   }
 }
 
