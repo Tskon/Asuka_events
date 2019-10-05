@@ -33,6 +33,16 @@ export default {
     }
   },
   actions: {
+    signUp (context, body) {
+      axios
+        .post('/api/signup', body)
+        .then(({data}) => {
+          if (data.status !== 'ok') return
+
+          context.commit('setUser', data.data)
+        })
+    },
+
     signIn (context, body) {
       axios
         .post('/api/signin', body)
@@ -40,6 +50,15 @@ export default {
           if (data.status !== 'ok') return
 
           context.commit('setUser', data.data)
+        })
+    },
+
+    logout (context) {
+      axios
+        .post('/api/user/logout')
+        .then(({data}) => {
+          if (data.status !== 'ok') return
+          context.commit('setUser', stateInit)
         })
     },
 
@@ -52,15 +71,6 @@ export default {
           if (data.data.isPlayer) context.dispatch('getPlayerData')
 
           context.commit('setUser', data.data)
-        })
-    },
-
-    logout (context) {
-      axios
-        .post('/api/user/logout')
-        .then(({data}) => {
-          if (data.status !== 'ok') return
-          context.commit('setUser', stateInit)
         })
     },
 

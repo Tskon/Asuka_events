@@ -16,6 +16,7 @@
       <MainMenu/>
       <b-navbar-nav class="ml-auto">
         <Login v-if="!user.id"/>
+        <SignUp v-if="!user.id"/>
         <b-nav-item-dropdown
           v-else
           right
@@ -42,11 +43,13 @@
 <script>
 import {mapActions, mapState} from 'vuex'
 import Login from './Login'
+import SignUp from './SignUp'
 import MainMenu from '../MainMenu'
 
 export default {
   components: {
     Login,
+    SignUp,
     MainMenu
   },
   computed: {

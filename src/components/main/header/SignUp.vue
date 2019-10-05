@@ -1,11 +1,11 @@
 <template>
   <div>
-    <b-button v-b-modal.login-modal>
-      Войти
+    <b-button v-b-modal.sign-up-modal>
+      Зарегистрироваться
     </b-button>
     <b-modal
-      id="login-modal"
-      title="Вход"
+      id="sign-up-modal"
+      title="Регистрация"
       @ok="submit"
       @hidden="resetForm"
     >
@@ -54,7 +54,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      signIn: 'user/signIn',
+      signUp: 'user/signUp',
     }),
     submit() {
       const body = {
@@ -62,7 +62,7 @@ export default {
         password: this.form.password
       }
 
-      this.signIn(body)
+      this.signUp(body)
     },
     resetForm() {
       this.form.username = ''
