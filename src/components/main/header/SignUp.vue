@@ -1,6 +1,9 @@
 <template>
   <div>
-    <b-button v-b-modal.sign-up-modal>
+    <b-button
+      v-b-modal.sign-up-modal
+      variant="outline-info"
+    >
       Зарегистрироваться
     </b-button>
     <b-modal

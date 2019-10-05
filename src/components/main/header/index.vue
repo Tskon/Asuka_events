@@ -15,7 +15,10 @@
     >
       <MainMenu/>
       <b-navbar-nav class="ml-auto">
-        <Login v-if="!user.id"/>
+        <Login
+          v-if="!user.id"
+          class="mr-1"
+        />
         <SignUp v-if="!user.id"/>
         <b-nav-item-dropdown
           v-else
