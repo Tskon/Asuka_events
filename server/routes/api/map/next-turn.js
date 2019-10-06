@@ -26,7 +26,7 @@ function getJson (mapData, usersData) {
   return {
     playersJson: JSON.stringify(usersData),
     cellsJson: JSON.stringify(
-      values[0].map(cell => {
+      mapData.map(cell => {
         return {
           cellName: cell.cellName,
           ...JSON.parse(cell.dataJson)
