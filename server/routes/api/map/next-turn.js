@@ -10,24 +10,28 @@ module.exports = function (router, models) {
       })
     ])
       .then(values => {
-        models.mapLog.create({
-          playersJson: JSON.stringify(values[1]),
-          cellsJson: JSON.stringify(
-            values[0].map(cell => {
-              return {
-                cellName: cell.cellName,
-                ...JSON.parse(cell.dataJson)
-              }
-            })
-          )
-        })
+        const {playersJson, cellsJson} = getJson(values[0], values[1])
+
+        models.mapLog.create({playersJson, cellsJson})
 
         res.send({
           status: 'ok'
         })
       })
 
-
-
   })
+}
+
+function getJson (mapData, usersData) {
+  return {
+    playersJson: JSON.stringify(usersData),
+    cellsJson: JSON.stringify(
+      values[0].map(cell => {
+        return {
+          cellName: cell.cellName,
+          ...JSON.parse(cell.dataJson)
+        }
+      })
+    )
+  }
 }
