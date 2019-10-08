@@ -49,6 +49,8 @@ function getJson (mapData, usersData) {
 }
 
 function smartSectorChoose (player, mapData) {
+  // TODO после обработки турнирных таблиц: Проигравшего отбрасывает на случайный стартовый, если он не выбрал сам.
+  // TODO Из стартового выбрасывать автоматом если победил и не выбрал соседний
   if (player.cellId) {
     mapData.find(cell => {
       if (cell.cellName === player.cellId) {
