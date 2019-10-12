@@ -39,6 +39,20 @@
           placeholder="Password"
         />
       </b-form-group>
+
+      <b-form-group
+        label="Кодовое слово:"
+        label-for="secret-input"
+        description="Требуется для восстановления пароля"
+      >
+        <b-form-input
+          id="secret-input"
+          v-model="form.secret"
+          type="password"
+          required
+          placeholder="Password"
+        />
+      </b-form-group>
     </b-modal>
   </div>
 </template>
@@ -51,7 +65,8 @@ export default {
     return {
       form: {
         username: '',
-        password: ''
+        password: '',
+        secret: ''
       }
     }
   },
@@ -62,7 +77,8 @@ export default {
     submit() {
       const body = {
         username: this.form.username,
-        password: this.form.password
+        password: this.form.password,
+        secret: this.form.secret
       }
 
       this.signUp(body)
@@ -70,6 +86,7 @@ export default {
     resetForm() {
       this.form.username = ''
       this.form.password = ''
+      this.form.secret = ''
     }
   }
 }
