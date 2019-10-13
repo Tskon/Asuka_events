@@ -39,6 +39,9 @@
           placeholder="Password"
         />
       </b-form-group>
+      <b-button variant="link" class="p-0 text-dark">
+        Забыли пароль?
+      </b-button>
     </b-modal>
   </div>
 </template>
