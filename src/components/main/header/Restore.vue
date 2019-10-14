@@ -72,7 +72,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      signUp: 'user/signUp',
+      restore: 'user/restore',
     }),
     submit() {
       const body = {
@@ -81,7 +81,7 @@ export default {
         secret: this.form.secret
       }
 
-      this.signUp(body)
+      this.restore(body)
     },
     resetForm() {
       this.form.username = ''
