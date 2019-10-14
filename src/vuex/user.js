@@ -53,6 +53,16 @@ export default {
         })
     },
 
+    restore (context, body) {
+      axios
+        .post('/api/restore', body)
+        .then(({data}) => {
+          if (data.status !== 'ok') return
+
+          context.commit('setUser', data.data)
+        })
+    },
+
     logout (context) {
       axios
         .post('/api/user/logout')
