@@ -9,6 +9,7 @@
     <b-modal
       id="sign-up-modal"
       title="Регистрация"
+      centered
       @ok="submit"
       @hidden="resetForm"
     >

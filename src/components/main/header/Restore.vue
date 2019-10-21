@@ -1,14 +1,9 @@
 <template>
   <div>
-    <b-button
-      v-b-modal.sign-up-modal
-      variant="outline-info"
-    >
-      Сменить пароль
-    </b-button>
     <b-modal
-      id="sign-up-modal"
-      title="Регистрация"
+      id="restore-modal"
+      title="Восстановление пароля"
+      centered
       @ok="submit"
       @hidden="resetForm"
     >

@@ -7,8 +7,10 @@
       Войти
     </b-button>
     <b-modal
+      ref="login-modal"
       id="login-modal"
       title="Вход"
+      centered
       @ok="submit"
       @hidden="resetForm"
     >
@@ -39,7 +41,12 @@
           placeholder="Password"
         />
       </b-form-group>
-      <b-button variant="link" class="p-0 text-dark">
+      <b-button
+        v-b-modal.restore-modal
+        variant="link"
+        class="p-0 text-dark"
+        @click="restore"
+      >
         Забыли пароль?
       </b-button>
     </b-modal>
@@ -73,6 +80,9 @@ export default {
     resetForm() {
       this.form.username = ''
       this.form.password = ''
+    },
+    restore() {
+      this.$refs['login-modal'].hide()
     }
   }
 }

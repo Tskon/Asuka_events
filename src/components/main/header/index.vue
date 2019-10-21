@@ -19,6 +19,10 @@
           v-if="!user.id"
           class="mr-1"
         />
+        <Restore
+          v-if="!user.id"
+          class="mr-1"
+        />
         <SignUp v-if="!user.id"/>
         <b-nav-item-dropdown
           v-else
@@ -46,12 +50,14 @@
 <script>
 import {mapActions, mapState} from 'vuex'
 import Login from './Login'
+import Restore from './Restore'
 import SignUp from './SignUp'
 import MainMenu from '../MainMenu'
 
 export default {
   components: {
     Login,
+    Restore,
     SignUp,
     MainMenu
   },
