@@ -15,7 +15,7 @@
       @hidden="resetForm"
     >
       <b-form-group
-        label="Email address:"
+        label="Login:"
         label-for="login-input"
         description="Не менее 6 символов"
       >
