@@ -52,15 +52,15 @@
 </template>
 
 <script>
-  import {mapActions, mapState} from 'vuex'
-  import Login from './Login'
-  import Restore from './Restore'
-  import SignUp from './SignUp'
-  import MainMenu from '../MainMenu'
-  import Message from '../../Message'
-  import Modal from '../../Modal'
+import {mapActions, mapState} from 'vuex'
+import Login from './Login'
+import Restore from './Restore'
+import SignUp from './SignUp'
+import MainMenu from '../MainMenu'
+import Message from '../../Message'
+import Modal from '../../Modal'
 
-  export default {
+export default {
   components: {
     Login,
     Restore,
