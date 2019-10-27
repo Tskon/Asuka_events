@@ -4,7 +4,7 @@
     @change="change"
   >
     <div class="wrapper">
-      {{ body }}
+      <div :is="component"></div>
     </div>
   </b-modal>
 </template>
@@ -14,6 +14,9 @@ export default {
   computed: {
     show () {
       return this.$store.state.modal.show
+    },
+    component () {
+      return this.$store.state.modal.component
     }
   },
   methods: {
