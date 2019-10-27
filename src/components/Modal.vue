@@ -3,24 +3,22 @@
     :visible="show"
     @change="change"
   >
-    <div class="wrapper">
-      <div :is="component"></div>
-    </div>
+    <div :is="component"/>
   </b-modal>
 </template>
 
 <script>
 export default {
   computed: {
-    show () {
+    show() {
       return this.$store.state.modal.show
     },
-    component () {
+    component() {
       return this.$store.state.modal.component
     }
   },
   methods: {
-    change (newState) {
+    change(newState) {
       if (!newState) {
         this.$store.commit('modal/hide')
       }
@@ -28,11 +26,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-  .wrapper {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-  }
-</style>
