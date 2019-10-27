@@ -23,15 +23,24 @@
       v-if="isStartSectorAvailable"
       :disabled="isSectorChoosen"
       variant="info"
+      class="w-100 mb-1"
       @click="setSector(cell.id)"
     >
       {{isSectorChoosen ? 'Этот сектор уже выбран' : 'Выбрать сектор стартовым'}}
+    </b-button>
+    <b-button
+      variant="info"
+      class="w-100"
+      @click="openBattleTable"
+    >
+      Указать результаты боя
     </b-button>
   </b-popover>
 </template>
 
 <script>
 import {mapActions, mapState} from 'vuex'
+import BattleTable from './BattleTable'
   
 export default {
   props: {
@@ -59,7 +68,12 @@ export default {
   methods: {
     ...mapActions({
       setSector: 'map/setSector'
-    })
+    }),
+    openBattleTable () {
+      this.$store.commit('modal/show', {
+        component: BattleTable
+      })
+    }
   }
 }
 </script>
