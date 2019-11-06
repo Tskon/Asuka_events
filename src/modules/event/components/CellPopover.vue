@@ -41,7 +41,7 @@
 <script>
 import {mapActions, mapState} from 'vuex'
 import BattleTable from './BattleTable'
-  
+
 export default {
   props: {
     cell: {
@@ -71,6 +71,7 @@ export default {
     }),
     openBattleTable () {
       this.$store.commit('modal/show', {
+        title: "Турнирная таблица",
         component: BattleTable
       })
     }
