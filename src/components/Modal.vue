@@ -4,7 +4,10 @@
     :title="title"
     @change="change"
   >
-    <div :is="component"/>
+    <div
+      :is="component"
+      :payload="payload"
+    />
   </b-modal>
 </template>
 
@@ -19,6 +22,9 @@ export default {
     },
     title() {
       return this.$store.state.modal.title
+    },
+    payload() {
+      return this.$store.state.modal.payload
     }
   },
   methods: {
