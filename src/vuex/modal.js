@@ -3,13 +3,15 @@ export default {
   state: {
     component: null,
     title: '',
-    show: false
+    show: false,
+    payload: {}
   },
   mutations: {
-    show (state, {component, title}) {
+    show (state, {component, title, payload}) {
       state.component = component
       state.title = title
       state.show = true
+      state.payload = payload
     },
     hide (state) {
       state.component = ''

@@ -29,7 +29,16 @@
 
 <script>
 export default {
+  computed: {
+    // players: this.$store.modal.state.payload.players
+  },
 
+  mounted () {
+    console.log(this)
+    setInterval(() => {
+      if (this.players.length) console.log(this.players)
+    }, 1000)
+  }
 }
 </script>
 

@@ -49,36 +49,39 @@ export default {
       required: true
     }
   },
+
   computed: {
     ...mapState({
       turnName: state => state.map.currentTurn.turnName,
       playerCellId: state => state.user.playerData.cellId
     }),
+
     isNoActions () {
       return !this.isStartSectorAvailable
     },
+
     isStartSectorAvailable () {
       return this.turnName === 'selectStartSector'
         && this.cell.isStarted
     },
+
     isSectorChoosen () {
       return this.playerCellId === this.cell.id
     }
   },
+
   methods: {
     ...mapActions({
       setSector: 'map/setSector'
     }),
+
     openBattleTable () {
       this.$store.commit('modal/show', {
         title: "Турнирная таблица",
-        component: BattleTable
+        component: BattleTable,
+        payload: { players: this.cell.players }
       })
     }
   }
 }
 </script>
-
-<style scoped>
-
-</style>
