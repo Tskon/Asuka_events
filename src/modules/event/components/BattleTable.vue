@@ -5,17 +5,16 @@
       <span class="divider-2">Полуфинал (BO-1)</span>
       <span class="final-label">Финал (BO-3)</span>
       <div class="cell semi-final-1">
-        1
+        {{ playersInBattle[0] ? playersInBattle[0].username : '' }}
       </div>
       <div class="cell semi-final-2">
-        2
+        {{ playersInBattle[1] ? playersInBattle[1].username : '' }}
       </div>
       <div class="cell semi-final-3">
-        3
+        {{ playersInBattle[2] ? playersInBattle[2].username : '' }}
       </div>
-
       <div class="cell semi-final-4">
-        4
+        {{ playersInBattle[3] ? playersInBattle[3].username : '' }}
       </div>
       <div class="cell final-1">
         final1
@@ -34,6 +33,23 @@ export default {
       type: Object,
       required: true
     }
+  },
+
+  data() {
+    return {
+      playersInBattle: [
+        {"id":1,"username":"player1","isAdmin":false,"isPlayer":true},
+        {"id":2,"username":"player2","isAdmin":false,"isPlayer":true},
+        {"id":3,"username":"player3","isAdmin":false,"isPlayer":true},
+        {"id":4,"username":"player4","isAdmin":false,"isPlayer":true}
+      ]
+    }
+  },
+
+  mounted() {
+    setInterval(() => {
+      console.log(this.payload)
+    }, 1000)
   }
 }
 </script>
