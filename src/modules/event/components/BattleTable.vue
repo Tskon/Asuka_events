@@ -17,10 +17,10 @@
         {{ playersInBattle[3] ? playersInBattle[3].username : '' }}
       </div>
       <div class="cell final-1">
-        final1
+        {{ finalist1 ? finalist1.username : '------' }}
       </div>
       <div class="cell final-2">
-        final2
+        {{ finalist2 ? finalist2.username : '------' }}
       </div>
     </div>
   </div>
@@ -42,14 +42,10 @@ export default {
         {"id":2,"username":"player2","isAdmin":false,"isPlayer":true},
         {"id":3,"username":"player3","isAdmin":false,"isPlayer":true},
         {"id":4,"username":"player4","isAdmin":false,"isPlayer":true}
-      ]
+      ],
+      finalist1: null,
+      finalist2: null
     }
-  },
-
-  mounted() {
-    setInterval(() => {
-      console.log(this.payload)
-    }, 1000)
   }
 }
 </script>
