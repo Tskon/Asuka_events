@@ -2,6 +2,7 @@
   <b-modal
     :visible="show"
     :title="title"
+    :hide-footer="options.hideFooter"
     @change="change"
   >
     <div
@@ -25,6 +26,9 @@ export default {
     },
     payload() {
       return this.$store.state.modal.payload
+    },
+    options() {
+      return this.$store.state.modal.options
     }
   },
   methods: {

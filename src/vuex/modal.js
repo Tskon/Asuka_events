@@ -1,22 +1,31 @@
-export default {
-  namespaced: true,
-  state: {
+function getInitialState () {
+  return {
     component: null,
     title: '',
     show: false,
+    options: {
+      hideFooter: false
+    },
     payload: {}
-  },
+  }
+}
+
+export default {
+  namespaced: true,
+  state: getInitialState(),
   mutations: {
-    show (state, {component, title, payload}) {
+    show (state, {component, title, options, payload}) {
       state.component = component
       state.title = title
       state.show = true
+      state.options = options
       state.payload = payload
     },
     hide (state) {
-      state.component = ''
-      state.title = ''
-      state.show = false
+      const initState = getInitialState()
+      Object.keys(initState).forEach(key => {
+        state[key] = initState[key]
+      })
     }
   }
 }
