@@ -23,6 +23,15 @@
         {{ finalist2 ? finalist2.username : '------' }}
       </div>
     </div>
+    <div class="pt-3">
+      <hr>
+      <b-button
+        variant="success"
+        class="mr-2"
+      >
+        Победа (Загрузить скриншот)
+      </b-button>
+    </div>
   </div>
 </template>
 

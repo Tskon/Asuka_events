@@ -79,6 +79,9 @@ export default {
       this.$store.commit('modal/show', {
         title: "Турнирная таблица",
         component: BattleTable,
+        options: {
+          hideFooter: true
+        },
         payload: { players: this.cell.players }
       })
     }
