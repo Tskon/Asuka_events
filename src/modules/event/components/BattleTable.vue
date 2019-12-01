@@ -25,12 +25,26 @@
     </div>
     <div class="pt-3">
       <hr>
-      <b-button
-        variant="success"
-        class="mr-2"
-      >
-        Победа (Загрузить скриншот)
-      </b-button>
+      <b-input-group>
+        <b-form-file
+          v-model="screenshot"
+          :state="Boolean(screenshot)"
+          name="screenshot"
+          accept="image/*"
+          placeholder="Перетащите сюда изображение"
+          drop-placeholder="Бросьте сюда..."
+          class="image-form-file text-nowrap"
+          size="sm"
+        />
+        <template v-slot:append>
+          <b-button
+            variant="success"
+            size="sm"
+          >
+            Отправить
+          </b-button>
+        </template>
+      </b-input-group>
     </div>
   </div>
 </template>
@@ -53,7 +67,8 @@ export default {
         {"id":4,"username":"player4","isAdmin":false,"isPlayer":true}
       ],
       finalist1: null,
-      finalist2: null
+      finalist2: null,
+      screenshot: null
     }
   }
 }
@@ -190,6 +205,20 @@ export default {
       font-size: 10px;
       bottom: -12px;
       left: 50%;
+    }
+  }
+</style>
+
+<style lang="scss">
+  .image-form-file {
+    .custom-file-input ~ .custom-file-label[data-browse] {
+      padding-left: 80px;
+      &:after {
+        right: auto;
+        left: 0;
+        border-right: inherit;
+        border-left: none;
+      }
     }
   }
 </style>
