@@ -15,15 +15,15 @@ export default {
     ...mapInit
   },
   mutations: {
-    setCells (state, cellsList) {
+    setCells(state, cellsList) {
       state.cells = [...cellsList]
     },
-    setCurrentTurn (state, turn) {
+    setCurrentTurn(state, turn) {
       state.currentTurn = turn
     }
   },
   actions: {
-    getCurrentTurn (context) {
+    getCurrentTurn(context) {
       axios
         .post('/api/map/get-current-turn')
         .then(({data}) => {
@@ -31,7 +31,7 @@ export default {
           context.commit('setCurrentTurn', data.data)
         })
     },
-    getCells (context) {
+    getCells(context) {
       axios
         .post('/api/map/get-map-cells')
         .then(({data}) => {
@@ -40,7 +40,7 @@ export default {
           context.commit('setCells', data.data)
         })
     },
-    setSector (context, cellId) {
+    setSector(context, cellId) {
       axios
         .post('/api/map/choose-sector', {
           cellId: cellId
@@ -48,8 +48,17 @@ export default {
         .then(({data}) => {
           if (data.status !== 'ok') return
 
-          context.commit('user/setPlayerData', {cellId}, { root: true })
+          context.commit('user/setPlayerData', {cellId}, {root: true})
           context.dispatch('getCells')
+        })
+    },
+    uploadVictoryScreenshot(context, formdata) {
+      return axios.post(
+        '/api/map/battle-table-upload-victory-screenshot',
+        {formdata}, {
+          // headers: {
+          //   'Content-Type': 'multipart/form-data'
+          // }
         })
     }
   }

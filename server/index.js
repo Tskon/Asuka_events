@@ -1,5 +1,6 @@
 const express = require('express')
 const passport = require('passport')
+const fileUpload = require('express-fileupload');
 const session = require('express-session')
 const MySQLStore = require('express-mysql-session')(session)
 const bodyParser = require('body-parser')
@@ -21,6 +22,7 @@ const options = {
 
 const app = express()
 app.use(cors())
+  .use(fileUpload({ createParentPath: true }))
   .use(bodyParser.json())
   .use(bodyParser.urlencoded({ extended: true }))
   .use(cookieParser())

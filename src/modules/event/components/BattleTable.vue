@@ -25,31 +25,35 @@
     </div>
     <div class="pt-3">
       <hr>
-      <b-input-group>
-        <b-form-file
-          v-model="screenshot"
-          :state="Boolean(screenshot)"
-          name="screenshot"
-          accept="image/*"
-          placeholder="Перетащите сюда изображение"
-          drop-placeholder="Бросьте сюда..."
-          class="image-form-file text-nowrap"
-          size="sm"
-        />
-        <template v-slot:append>
-          <b-button
-            variant="success"
+      <b-form @submit="onSubmit">
+        <b-input-group>
+          <b-form-file
+            v-model="screenshot"
+            :state="Boolean(screenshot)"
+            name="screenshot"
+            accept="image/*"
+            placeholder="Перетащите сюда изображение"
+            drop-placeholder="Бросьте сюда..."
+            class="image-form-file text-nowrap"
             size="sm"
-          >
-            Отправить
-          </b-button>
-        </template>
-      </b-input-group>
+          />
+          <template v-slot:append>
+            <b-button
+              variant="success"
+              size="sm"
+              type="submit"
+            >
+              Отправить
+            </b-button>
+          </template>
+        </b-input-group>
+      </b-form>
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   props: {
     payload: {
@@ -70,6 +74,19 @@ export default {
       finalist2: null,
       screenshot: null
     }
+  },
+
+  methods: {
+    onSubmit (e) {
+      e.preventDefault()
+      const formData = new FormData()
+      formData.append('file', this.screenshot)
+      this.uploadVictoryScreenshot(formData)
+      // this.uploadVictoryScreenshot(this.screenshot)
+    },
+    ...mapActions({
+      uploadVictoryScreenshot: 'map/uploadVictoryScreenshot'
+    })
   }
 }
 </script>
