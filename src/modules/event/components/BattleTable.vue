@@ -76,11 +76,19 @@ export default {
     }
   },
 
+  computed: {
+    playerData() { return this.$store.state.user.playerData },
+    personalData() { return this.$store.state.user.personalData }
+  },
+
   methods: {
     onSubmit (e) {
       e.preventDefault()
       const formData = new FormData()
-      formData.append('file', this.screenshot)
+      formData.append('cellId', this.playerData.cellId)
+      formData.append('clanTag', this.personalData.clanTag)
+      formData.append('isFinal', false)
+      formData.append('screenshot', this.screenshot)
       this.uploadVictoryScreenshot(formData)
       // this.uploadVictoryScreenshot(this.screenshot)
     },
