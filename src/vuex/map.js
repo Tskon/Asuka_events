@@ -55,10 +55,10 @@ export default {
     uploadVictoryScreenshot(context, formdata) {
       return axios.post(
         '/api/map/battle-table-upload-victory-screenshot',
-        {formdata}, {
-          // headers: {
-          //   'Content-Type': 'multipart/form-data'
-          // }
+        formdata, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
         })
     }
   }
