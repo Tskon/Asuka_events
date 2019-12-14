@@ -13,6 +13,8 @@
       centered
       @ok="submit"
       @hidden="resetForm"
+      @show="onShow"
+      @hide="onHide"
     >
       <b-form-group
         label="Login:"
@@ -70,6 +72,8 @@ export default {
       signIn: 'user/signIn',
     }),
     submit() {
+      if (!this.validate()) return
+
       const body = {
         username: this.form.username,
         password: this.form.password
@@ -77,12 +81,30 @@ export default {
 
       this.signIn(body)
     },
+    validate() {
+      if (this.form.username !== '' && this.form.password !== '') return true
+      // TODO add noty
+
+      return false
+    },
     resetForm() {
       this.form.username = ''
       this.form.password = ''
     },
     restore() {
       this.$refs['login-modal'].hide()
+    },
+    okByEnterHandler(e) {
+      if(e.code === 'Enter') {
+        this.submit()
+      }
+    },
+    onShow() {
+      document.addEventListener('keydown', this.okByEnterHandler)
+    },
+    onHide() {
+      document.removeEventListener('keydown', this.okByEnterHandler)
+      this.resetForm()
     }
   }
 }
