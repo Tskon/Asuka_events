@@ -71,8 +71,11 @@ export default {
     ...mapActions({
       signIn: 'user/signIn',
     }),
-    submit() {
-      if (!this.validate()) return
+    submit(e) {
+      if (!this.validate()) {
+        e.preventDefault()
+        return
+      }
 
       const body = {
         username: this.form.username,
