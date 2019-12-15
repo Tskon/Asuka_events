@@ -7,33 +7,34 @@ module.exports = function (router, models) {
     })
     const turnNumber = (mapLog.length) ? mapLog[0].turn + 1 : 1
 
-    models.battleTable.findOne({
+    const battleTable = await models.battleTable.findOne({
       where: {
         turnNumber,
         cellId: req.body.cellId
-      }
-    })
-      .then((battleTable) => {
-        if (!battleTable) {
-          const screenshots = {final:{}, semifinal:{}}
-          if (req.body.isFinal) {
-            screenshots.final[req.body.clanTag] = req.files.screenshot
-          } else {
-            screenshots.semifinals[req.body.clanTag] = req.files.screenshot
-          }
+      }})
 
-          models.battleTable.create({
-            turnNumber,
-            cellId: req.body.cellId,
-            screenshots: JSON.stringify(screenshots)
-          })
-        } else {
-          // TODO получать уже имеющиеся данные, расширять пришедшими
-        }
+    if (!battleTable) {
+      const screenName = req.body.clanTag
 
-        res.send({
-          status: 'ok'
-        })
+      models.battleTable.create({
+        turnNumber,
+        cellId: req.body.cellId,
+        finalist1Screen: getScreenshotName(req.files.screenshot, 'semifinal-' + req.body.clanTag)
       })
+    } else {
+      // TODO получать уже имеющиеся данные, расширять пришедшими
+    }
+
+    res.send({
+      status: 'ok'
+    })
+
   })
+}
+
+function getScreenshotName(file, name) {
+  const fileExtention = file.mimetype.split('/')[1]
+  const fileName = name.replace(' ', '-')
+
+  return `${fileName}.${fileExtention}`
 }
