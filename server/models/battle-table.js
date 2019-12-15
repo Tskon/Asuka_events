@@ -1,6 +1,7 @@
 module.exports = function (sequelize, Sequelize) {
   const BattleTable = sequelize.define('battleTable', {
     id: {
+      autoIncrement: true,
       primaryKey: true,
       type: Sequelize.INTEGER,
     },
