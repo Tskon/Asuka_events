@@ -1,15 +1,21 @@
 module.exports = function (router, models) {
-  router.post('/map/battle-table-upload-victory-screenshot', (req, res) => {
-    console.log(req.files)
+  router.post('/map/battle-table-upload-victory-screenshot', async (req, res) => {
+    const mapLog = await models.mapLog.findAll({
+      limit: 1,
+      order: [['turn', 'DESC']],
+      attributes: ['turn']
+    })
+    const turnNumber = (mapLog.length) ? mapLog[0].turn + 1 : 1
+
     models.battleTable.findOne({
       where: {
-        // turnNumber: req.body.turnNumber, // заранее получать turnNumber
+        turnNumber,
         cellId: req.body.cellId
       }
     })
       .then((battleTable) => {
         if (!battleTable) {
-          const screenshots = {}
+          const screenshots = {final:{}, semifinal:{}}
           if (req.body.isFinal) {
             screenshots.final[req.body.clanTag] = req.files.screenshot
           } else {
@@ -17,7 +23,7 @@ module.exports = function (router, models) {
           }
 
           models.battleTable.create({
-            // TODO запрашивать turnNumber: NUM,
+            turnNumber,
             cellId: req.body.cellId,
             screenshots: JSON.stringify(screenshots)
           })
