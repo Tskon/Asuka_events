@@ -14,15 +14,24 @@ module.exports = function (router, models) {
       }})
 
     if (!battleTable) {
-      const screenName = req.body.clanTag
-
       models.battleTable.create({
         turnNumber,
         cellId: req.body.cellId,
         finalist1Screen: getScreenshotName(req.files.screenshot, 'semifinal-' + req.body.clanTag)
       })
     } else {
-      // TODO получать уже имеющиеся данные, расширять пришедшими
+      const data = {
+        turnNumber,
+        cellId: req.body.cellId,
+      }
+
+      if (!battleTable.dataValues.finalist2Screen) {
+        data.finalist2Screen = getScreenshotName(req.files.screenshot, 'semifinal-' + req.body.clanTag)
+      } else if (!battleTable.dataValues.winner) {
+        data.winnerScreen = getScreenshotName(req.files.screenshot, 'semifinal-' + req.body.clanTag)
+      }
+
+      models.battleTable.create(data)
     }
 
     res.send({
