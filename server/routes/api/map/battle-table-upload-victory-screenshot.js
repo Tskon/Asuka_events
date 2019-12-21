@@ -20,10 +20,7 @@ module.exports = function (router, models) {
         finalist1Screen: getScreenshotName(req.files.screenshot, 'semifinal-' + req.body.clanTag)
       })
     } else {
-      const data = {
-        turnNumber,
-        cellId: req.body.cellId,
-      }
+      const data = {}
 
       if (!battleTable.dataValues.finalist2Screen) {
         data.finalist2Screen = getScreenshotName(req.files.screenshot, 'semifinal-' + req.body.clanTag)
@@ -31,7 +28,11 @@ module.exports = function (router, models) {
         data.winnerScreen = getScreenshotName(req.files.screenshot, 'semifinal-' + req.body.clanTag)
       }
 
-      models.battleTable.create(data)
+      models.battleTable.update(data)
+        .where({
+          turnNumber,
+          cellId: req.body.cellId,
+        })
     }
 
     res.send({
