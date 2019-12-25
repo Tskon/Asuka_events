@@ -110,5 +110,10 @@ export default {
           imageUrl: context.state.personalData.imageUrl
         })
     }
+  },
+  getters: {
+    isAuth(state) {
+      return state.id
+    }
   }
 }
