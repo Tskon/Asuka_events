@@ -148,6 +148,7 @@
 import {mapActions, mapState} from 'vuex'
 
 export default {
+  name: 'AdminPanelPage',
   data() {
     return {
       data: null,
