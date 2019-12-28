@@ -1,6 +1,9 @@
 <template>
   <b-navbar-nav>
-    <b-nav-item to="/event">
+    <b-nav-item
+      v-if="isAuth"
+      to="/event"
+    >
       Эвент
     </b-nav-item>
     <b-nav-item to="/personalPanel">
