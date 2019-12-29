@@ -39,7 +39,7 @@
               Участник&nbsp;эвента
             </b-dropdown-text>
             <b-dropdown-divider v-if="user.isAdmin || user.isPlayer"/>
-            <b-dropdown-item-button @click="logout">
+            <b-dropdown-item-button @click="onLogout">
               Выход
             </b-dropdown-item-button>
           </b-nav-item-dropdown>
@@ -81,7 +81,11 @@ export default {
     ...mapActions({
       getUser: 'user/getUser',
       logout: 'user/logout'
-    })
+    }),
+    onLogout() {
+      this.logout()
+      this.$router.push({name: 'home'})
+    }
   }
 }
 </script>
