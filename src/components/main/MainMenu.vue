@@ -6,10 +6,16 @@
     >
       Эвент
     </b-nav-item>
-    <b-nav-item to="/personalPanel">
+    <b-nav-item
+      v-if="isAuth"
+      to="/personalPanel"
+    >
       Личный кабинет
     </b-nav-item>
-    <b-nav-item to="/adminPanel">
+    <b-nav-item
+      v-if="isAuth"
+      to="/adminPanel"
+    >
       Админка
     </b-nav-item>
   </b-navbar-nav>
