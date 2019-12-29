@@ -10,6 +10,8 @@ import './assets/scss/global.scss'
 import App from './App.vue'
 import router from './router'
 import store from './vuex/store'
+import './utils/axios'
+
 
 Vue.config.productionTip = false
 
@@ -19,6 +21,7 @@ Vue.use(ModalPlugin)
 Vue.use(CardPlugin)
 Vue.use(DropdownPlugin)
 Vue.use(TablePlugin)
+Vue.use(VueNoty)
 
 Vue.mixin({
   data() {
