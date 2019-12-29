@@ -10,6 +10,7 @@ import './assets/scss/global.scss'
 import App from './App.vue'
 import router from './router'
 import store from './vuex/store'
+import noty from './plugins/noty'
 import './utils/axios'
 
 
@@ -21,7 +22,7 @@ Vue.use(ModalPlugin)
 Vue.use(CardPlugin)
 Vue.use(DropdownPlugin)
 Vue.use(TablePlugin)
-Vue.use(VueNoty)
+Vue.use(noty)
 
 Vue.mixin({
   data() {
