@@ -1,4 +1,5 @@
 import axios from 'axios'
+import Vue from 'vue'
 
 const stateInit = {
   name: '',
@@ -38,7 +39,6 @@ export default {
         .post('/api/signup', body)
         .then(({data}) => {
           if (data.status !== 'ok') return
-
           context.commit('setUser', data.data)
         })
     },

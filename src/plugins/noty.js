@@ -1,8 +1,6 @@
-import AWN from 'vue-awesome-notifications'
-const noty = new AWN({}) // options
+import Noty from "awesome-notifications";
 
 export default Noty.install = function (Vue) {
-  Vue.$noty = function (message = '', type = 'info') {
-    noty[type](message)
-  }
+  const options = {}
+  Vue.$noty = new Noty(options)
 }
