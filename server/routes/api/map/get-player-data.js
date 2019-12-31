@@ -7,8 +7,11 @@ module.exports = function (router, models) {
         res.send({
           status: 'ok',
           data: {
+            currentCellId: 'a1', // TODO add logic
             selectedCellId: userMapData.selectedCellId,
-            score: userMapData.score
+            score: userMapData.score,
+            inBattle: false, // TODO add logic
+            battleResults: [], // TODO add logic [true, false]
           }
         })
       })
