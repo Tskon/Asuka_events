@@ -10,7 +10,7 @@ module.exports = function (sequelize, Sequelize) {
       defaultValue: 0,
     },
 
-    selectedCellId: { // TODO обработать на фронте после get-player-data
+    selectedCellId: {
       type: Sequelize.CHAR(4),
       defaultValue: '',
     },
