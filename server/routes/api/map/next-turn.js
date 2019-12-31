@@ -6,7 +6,7 @@ module.exports = function (router, models) {
         attributes: ['cellName', 'dataJson']
       }),
       models.userMapData.findAll({
-        attributes: ['userId', 'score', 'cellId']
+        attributes: ['userId', 'score', 'selectedCellId']
       })
     ])
       .then(values => {

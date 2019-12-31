@@ -7,7 +7,7 @@ module.exports = function (router, models) {
         res.send({
           status: 'ok',
           data: {
-            cellId: userMapData.cellId,
+            selectedCellId: userMapData.selectedCellId,
             score: userMapData.score
           }
         })
