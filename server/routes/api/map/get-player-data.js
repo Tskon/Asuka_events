@@ -9,6 +9,7 @@ module.exports = function (router, models) {
           data: {
             currentCellId: 'a1', // TODO add logic
             selectedCellId: userMapData.selectedCellId, // TODO changes on front-end
+            selectableCellIds: [], // TODO add logic
             score: userMapData.score,
             inBattle: false, // TODO add logic
             battleResults: [], // TODO add logic [true, false]
