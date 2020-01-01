@@ -4,7 +4,7 @@ module.exports = function (router, models) {
       .then(async (userMapData) => {
         if (!userMapData) {
           res.send({
-            status: 'error',
+            status: 'warning',
             message: 'Не найдены данные пользователя'
           })
           return
