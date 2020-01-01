@@ -1,5 +1,4 @@
-import axios from 'axios'
-import Vue from 'vue'
+import axios from 'axios';
 
 const stateInit = {
   name: '',
@@ -9,97 +8,102 @@ const stateInit = {
   personalData: {
     clanName: 'Unknown clan',
     clanTag: 'UNKNWN',
-    imageUrl: 'https://avatanplus.com/files/resources/mid/58e0ccb473a4915b2e1fa0fa.png'
+    imageUrl: 'https://avatanplus.com/files/resources/mid/58e0ccb473a4915b2e1fa0fa.png',
   },
   playerData: {
     cellId: '',
-    score: 0
-  }
-}
+    score: 0,
+  },
+};
 
 export default {
   namespaced: true,
-  state: {...stateInit},
+  state: { ...stateInit },
   mutations: {
-    setUser (state, user) {
-      Object.keys(user).forEach(key => {
-        state[key] = user[key]
-      })
+    setUser(state, user) {
+      Object.keys(user).forEach((key) => {
+        state[key] = user[key];
+      });
     },
-    setPersonalData (state, payload) {
-      state.personalData = {...state.personalData, ...payload}
+    setPersonalData(state, payload) {
+      state.personalData = { ...state.personalData, ...payload };
     },
-    setPlayerData (state, payload) {
-      state.playerData = {...state.playerData, ...payload}
-    }
+    setPlayerData(state, payload) {
+      state.playerData = { ...state.playerData, ...payload };
+    },
   },
   actions: {
-    signUp (context, body) {
+    signUp(context, body) {
       axios
         .post('/api/signup', body)
-        .then(({data}) => {
-          if (data.status !== 'ok') return
-          context.commit('setUser', data.data)
-        })
+        .then(({ data }) => {
+          if (data.status !== 'ok') return;
+          context.commit('setUser', data.data);
+        });
     },
 
-    signIn (context, body) {
+    signIn(context, body) {
       axios
         .post('/api/signin', body)
-        .then(({data}) => {
-          if (data.status !== 'ok') return
+        .then(({ data }) => {
+          if (data.status !== 'ok') return;
 
-          context.commit('setUser', data.data)
-        })
+          context.commit('setUser', data.data);
+        });
     },
 
-    restore (context, body) {
+    restore(context, body) {
       axios
         .post('/api/restore', body)
-        .then(({data}) => {
-          if (data.status !== 'ok') return
+        .then(({ data }) => {
+          if (data.status !== 'ok') return;
 
-          context.commit('setUser', data.data)
-        })
+          context.commit('setUser', data.data);
+        });
     },
 
-    logout (context) {
+    logout(context) {
       axios
         .post('/api/user/logout')
-        .then(({data}) => {
-          if (data.status !== 'ok') return
-          context.commit('setUser', stateInit)
-        })
+        .then(({ data }) => {
+          if (data.status !== 'ok') return;
+          context.commit('setUser', stateInit);
+        });
     },
 
-    getUser (context) {
+    getUser(context) {
       axios
         .post('/api/user/get-user')
-        .then(({data}) => {
-          if (data.status !== 'ok') return
+        .then(({ data }) => {
+          if (data.status !== 'ok') return;
 
-          if (data.data.isPlayer) context.dispatch('getPlayerData')
+          if (data.data.isPlayer) {
+            context.dispatch('getPlayerData');
+            setInterval(() => {
+              context.dispatch('getPlayerData');
+            }, 5000);
+          }
 
-          context.commit('setUser', data.data)
-        })
+          context.commit('setUser', data.data);
+        });
     },
 
     getPersonalData(context) {
       axios
         .post('/api/user/get-lk-data')
-        .then(({data}) => {
-          if (data.status !== 'ok') return
-          context.commit('setPersonalData', data.data)
-        })
+        .then(({ data }) => {
+          if (data.status !== 'ok') return;
+          context.commit('setPersonalData', data.data);
+        });
     },
 
     getPlayerData(context) {
       axios
         .post('/api/map/get-player-data')
-        .then(({data}) => {
-          if (data.status !== 'ok') return
-          context.commit('setPlayerData', data.data)
-        })
+        .then(({ data }) => {
+          if (data.status !== 'ok') return;
+          context.commit('setPlayerData', data.data);
+        });
     },
 
     setPersonalData(context) {
@@ -107,13 +111,13 @@ export default {
         .post('/api/user/set-lk-data', {
           clanTag: context.state.personalData.clanTag,
           clanName: context.state.personalData.clanName,
-          imageUrl: context.state.personalData.imageUrl
-        })
-    }
+          imageUrl: context.state.personalData.imageUrl,
+        });
+    },
   },
   getters: {
     isAuth(state) {
-      return state.id
-    }
-  }
-}
+      return state.id;
+    },
+  },
+};
