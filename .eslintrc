@@ -1,5 +1,5 @@
 {
-  "extends": ["plugin:vue/recommended"],
+  "extends": ["airbnb", "plugin:vue/recommended"],
   "rules": {
     "indent": ["error", 2],
     "no-console": "off",
