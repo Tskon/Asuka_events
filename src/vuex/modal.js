@@ -14,9 +14,7 @@ export default {
   namespaced: true,
   state: getInitialState(),
   mutations: {
-    show(state, {
-      component, title, options, payload
-    }) {
+    show(state, { component, title, options, payload }) {
       state.component = component
       state.title = title
       state.show = true
@@ -25,7 +23,7 @@ export default {
     },
     hide(state) {
       const initState = getInitialState()
-      Object.keys(initState).forEach((key) => {
+      Object.keys(initState).forEach(key => {
         state[key] = initState[key]
       })
     }

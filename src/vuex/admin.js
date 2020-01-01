@@ -22,20 +22,16 @@ export default {
   },
   actions: {
     getAdminData(context) {
-      axios
-        .post('/api/admin/get-admin-panel-data')
-        .then(({ data }) => {
-          if (data.status !== 'ok') return
-          context.commit('setAdminData', data.data)
-        })
+      axios.post('/api/admin/get-admin-panel-data').then(({ data }) => {
+        if (data.status !== 'ok') return
+        context.commit('setAdminData', data.data)
+      })
     },
     getLogs(context) {
-      axios
-        .post('/api/admin/get-logs')
-        .then(({ data }) => {
-          if (data.status !== 'ok') return
-          context.commit('setLogs', data.data)
-        })
+      axios.post('/api/admin/get-logs').then(({ data }) => {
+        if (data.status !== 'ok') return
+        context.commit('setLogs', data.data)
+      })
     },
     setPlayerStatus(context, payload) {
       axios
@@ -49,8 +45,7 @@ export default {
         })
     },
     nextTurn() {
-      axios
-        .post('/api/admin/next-turn')
+      axios.post('/api/admin/next-turn')
     }
   }
 }

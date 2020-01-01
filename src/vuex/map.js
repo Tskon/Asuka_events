@@ -24,21 +24,17 @@ export default {
   },
   actions: {
     getCurrentTurn(context) {
-      axios
-        .post('/api/map/get-current-turn')
-        .then(({ data }) => {
-          if (data.status !== 'ok') return
-          context.commit('setCurrentTurn', data.data)
-        })
+      axios.post('/api/map/get-current-turn').then(({ data }) => {
+        if (data.status !== 'ok') return
+        context.commit('setCurrentTurn', data.data)
+      })
     },
     getCells(context) {
-      axios
-        .post('/api/map/get-map-cells')
-        .then(({ data }) => {
-          if (data.status !== 'ok') return
+      axios.post('/api/map/get-map-cells').then(({ data }) => {
+        if (data.status !== 'ok') return
 
-          context.commit('setCells', data.data)
-        })
+        context.commit('setCells', data.data)
+      })
     },
     setSector(context, cellId) {
       axios
@@ -53,14 +49,11 @@ export default {
         })
     },
     uploadVictoryScreenshot(context, formdata) {
-      return axios.post(
-        '/api/map/battle-table-upload-victory-screenshot',
-        formdata, {
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
+      return axios.post('/api/map/battle-table-upload-victory-screenshot', formdata, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
         }
-      )
+      })
     }
   }
 }
