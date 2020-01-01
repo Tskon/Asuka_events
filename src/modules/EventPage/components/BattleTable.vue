@@ -54,6 +54,7 @@
 
 <script>
 import { mapActions } from 'vuex'
+
 export default {
   props: {
     payload: {
@@ -65,10 +66,18 @@ export default {
   data() {
     return {
       playersInBattle: [
-        {"id":1,"username":"player1","isAdmin":false,"isPlayer":true},
-        {"id":2,"username":"player2","isAdmin":false,"isPlayer":true},
-        {"id":3,"username":"player3","isAdmin":false,"isPlayer":true},
-        {"id":4,"username":"player4","isAdmin":false,"isPlayer":true}
+        {
+          id: 1, username: 'player1', isAdmin: false, isPlayer: true
+        },
+        {
+          id: 2, username: 'player2', isAdmin: false, isPlayer: true
+        },
+        {
+          id: 3, username: 'player3', isAdmin: false, isPlayer: true
+        },
+        {
+          id: 4, username: 'player4', isAdmin: false, isPlayer: true
+        }
       ],
       finalist1: null,
       finalist2: null,
@@ -82,7 +91,7 @@ export default {
   },
 
   methods: {
-    onSubmit (e) {
+    onSubmit(e) {
       e.preventDefault()
       const formData = new FormData()
       formData.append('cellId', this.playerData.cellId)

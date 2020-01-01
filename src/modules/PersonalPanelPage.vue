@@ -6,7 +6,9 @@
     class="mb-2"
   >
     <template v-if="!editMode">
-      <b-card-title class="text-center">[ {{ clanTag }} ] {{ clanName }}</b-card-title>
+      <b-card-title class="text-center">
+        [ {{ clanTag }} ] {{ clanName }}
+      </b-card-title>
       <b-button
         variant="primary"
         class="w-100"
@@ -60,48 +62,48 @@
 </template>
 
 <script>
-import {mapActions} from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
-  data () {
+  data() {
     return {
       editMode: false
     }
   },
   computed: {
     clanTag: {
-      get () {
+      get() {
         return this.$store.state.user.personalData.clanTag
       },
-      set (clanTag) {
-        this.$store.commit('user/setPersonalData', {clanTag})
+      set(clanTag) {
+        this.$store.commit('user/setPersonalData', { clanTag })
       }
     },
     clanName: {
-      get () {
+      get() {
         return this.$store.state.user.personalData.clanName
       },
-      set (clanName) {
-        this.$store.commit('user/setPersonalData', {clanName})
+      set(clanName) {
+        this.$store.commit('user/setPersonalData', { clanName })
       }
     },
     imageUrl: {
-      get () {
+      get() {
         return this.$store.state.user.personalData.imageUrl
       },
-      set (imageUrl) {
-        this.$store.commit('user/setPersonalData', {imageUrl})
+      set(imageUrl) {
+        this.$store.commit('user/setPersonalData', { imageUrl })
       }
     }
   },
-  created () {
+  created() {
     this.getPersonalData()
   },
   methods: {
     ...mapActions({
       getPersonalData: 'user/getPersonalData'
     }),
-    submitHandler () {
+    submitHandler() {
       this.editMode = !this.editMode
       this.$store.dispatch('user/setPersonalData')
     }

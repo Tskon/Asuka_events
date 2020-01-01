@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import {mapActions, mapState} from 'vuex'
+import { mapActions, mapState } from 'vuex'
 import Login from './Login'
 import Restore from './Restore'
 import SignUp from './SignUp'
@@ -71,10 +71,10 @@ export default {
   },
   computed: {
     ...mapState({
-      user: state => state.user
+      user: (state) => state.user
     })
   },
-  created () {
+  created() {
     this.getUser()
   },
   methods: {
@@ -84,7 +84,7 @@ export default {
     }),
     onLogout() {
       this.logout()
-      this.$router.push({name: 'home'})
+      this.$router.push({ name: 'home' })
     }
   }
 }

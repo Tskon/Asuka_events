@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import {mapActions} from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
   data() {
@@ -73,7 +73,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      signUp: 'user/signUp',
+      signUp: 'user/signUp'
     }),
     submit() {
       const body = {

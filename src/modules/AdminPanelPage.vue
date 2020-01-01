@@ -122,12 +122,18 @@
             >
               {{ cell.cellName }}:
               <span>
-                <i class="fas fa-trophy text-black-50" title="Очков в секторе за удержание"/>
-              {{ cell.bonus }}
+                <i
+                  class="fas fa-trophy text-black-50"
+                  title="Очков в секторе за удержание"
+                />
+                {{ cell.bonus }}
               </span>
               <span>
-                <i class="fas fa-user-alt text-black-50" title="Игроков в секторе"/>
-              {{ cell.players.length }}
+                <i
+                  class="fas fa-user-alt text-black-50"
+                  title="Игроков в секторе"
+                />
+                {{ cell.players.length }}
               </span>
               <ul v-if="cell.players.length">
                 игроки в секторе:
@@ -145,7 +151,7 @@
 </template>
 
 <script>
-import {mapActions, mapState} from 'vuex'
+import { mapActions, mapState } from 'vuex'
 
 export default {
   name: 'AdminPanelPage',
@@ -154,20 +160,20 @@ export default {
       data: null,
       turnNames: {
         selectStartSector: 'Выбор стартового сектора',
-        commonTurn: `Обычный ход`
+        commonTurn: 'Обычный ход'
       }
     }
   },
   computed: {
     ...mapState({
-      currentTurn: state => state.map.currentTurn,
-      adminData: state => state.admin
+      currentTurn: (state) => state.map.currentTurn,
+      adminData: (state) => state.admin
     }),
     players() {
       if (!this.adminData.logs.length) return []
-      return this.adminData.logs[this.adminData.logs.length - 1].players.map(player => {
-        const playerData = this.adminData.users.players.find((p => p.id === player.userId))
-        return {...player, ...playerData}
+      return this.adminData.logs[this.adminData.logs.length - 1].players.map((player) => {
+        const playerData = this.adminData.users.players.find(((p) => p.id === player.userId))
+        return { ...player, ...playerData }
       })
     }
   },

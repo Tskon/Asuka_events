@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import {mapActions} from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
   data() {
@@ -67,7 +67,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      restore: 'user/restore',
+      restore: 'user/restore'
     }),
     submit() {
       const body = {

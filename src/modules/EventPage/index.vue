@@ -6,14 +6,14 @@
 </template>
 
 <script>
-import {mapActions} from 'vuex'
+import { mapActions } from 'vuex'
 import Map from './components/Map'
 
 export default {
   components: {
     Map
   },
-  created () {
+  created() {
     this.getCurrentTurn()
   },
   methods: {

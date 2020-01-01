@@ -13,7 +13,7 @@
       </div>
       {{ cell.id.toUpperCase() }}
       <div>
-        +{{cell.bonus}}
+        +{{ cell.bonus }}
       </div>
     </button>
     <CellPopover :cell="cell"/>
@@ -34,10 +34,10 @@ export default {
     }
   },
   computed: {
-    playerDataCellId () {
+    playerDataCellId() {
       return this.$store.state.user.playerData.cellId
     },
-    playersCount () {
+    playersCount() {
       return this.cell.players.length + +(this.playerDataCellId === this.cell.id)
     }
   }

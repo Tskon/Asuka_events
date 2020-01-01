@@ -11,8 +11,8 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex'
 import Cell from './Cell'
-import {mapActions, mapState} from 'vuex'
 
 export default {
   components: {
@@ -21,17 +21,17 @@ export default {
 
   data() {
     return {
-      selectedCell: 'a1',
+      selectedCell: 'a1'
     }
   },
 
   computed: {
     ...mapState({
-      cells: state => state.map.cells
+      cells: (state) => state.map.cells
     })
   },
 
-  created () {
+  created() {
     this.getCells()
   },
 

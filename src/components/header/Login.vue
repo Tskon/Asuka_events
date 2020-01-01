@@ -7,8 +7,8 @@
       Войти
     </b-button>
     <b-modal
-      ref="login-modal"
       id="login-modal"
+      ref="login-modal"
       title="Вход"
       centered
       @ok="submit"
@@ -56,7 +56,7 @@
 </template>
 
 <script>
-import {mapActions} from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
   data() {
@@ -69,7 +69,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      signIn: 'user/signIn',
+      signIn: 'user/signIn'
     }),
     submit(e) {
       if (!this.validate()) {
@@ -98,7 +98,7 @@ export default {
       this.$refs['login-modal'].hide()
     },
     okByEnterHandler(e) {
-      if(e.code === 'Enter') {
+      if (e.code === 'Enter') {
         this.submit()
       }
     },

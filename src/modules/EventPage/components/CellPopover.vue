@@ -26,7 +26,7 @@
       class="w-100 mb-1"
       @click="setSector(cell.id)"
     >
-      {{isSectorChoosen ? 'Этот сектор уже выбран' : 'Выбрать сектор стартовым'}}
+      {{ isSectorChoosen ? 'Этот сектор уже выбран' : 'Выбрать сектор стартовым' }}
     </b-button>
     <b-button
       variant="info"
@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import {mapActions, mapState} from 'vuex'
+import { mapActions, mapState } from 'vuex'
 import BattleTable from './BattleTable'
 
 export default {
@@ -52,20 +52,20 @@ export default {
 
   computed: {
     ...mapState({
-      turnName: state => state.map.currentTurn.turnName,
-      playerCellId: state => state.user.playerData.cellId
+      turnName: (state) => state.map.currentTurn.turnName,
+      playerCellId: (state) => state.user.playerData.cellId
     }),
 
-    isNoActions () {
+    isNoActions() {
       return !this.isStartSectorAvailable
     },
 
-    isStartSectorAvailable () {
+    isStartSectorAvailable() {
       return this.turnName === 'selectStartSector'
         && this.cell.isStarted
     },
 
-    isSectorChoosen () {
+    isSectorChoosen() {
       return this.playerCellId === this.cell.id
     }
   },
@@ -75,9 +75,9 @@ export default {
       setSector: 'map/setSector'
     }),
 
-    openBattleTable () {
+    openBattleTable() {
       this.$store.commit('modal/show', {
-        title: "Турнирная таблица",
+        title: 'Турнирная таблица',
         component: BattleTable,
         options: {
           hideFooter: true
