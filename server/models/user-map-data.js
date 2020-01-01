@@ -2,18 +2,18 @@ module.exports = function (sequelize, Sequelize) {
   const UserMapData = sequelize.define('userMapData', {
     userId: {
       primaryKey: true,
-      type: Sequelize.INTEGER,
+      type: Sequelize.INTEGER
     },
 
     score: {
       type: Sequelize.INTEGER,
-      defaultValue: 0,
+      defaultValue: 0
     },
 
     selectedCellId: {
       type: Sequelize.CHAR(4),
-      defaultValue: '',
-    },
+      defaultValue: ''
+    }
   })
 
   return UserMapData

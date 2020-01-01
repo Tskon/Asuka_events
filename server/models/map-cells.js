@@ -3,7 +3,7 @@ module.exports = function (sequelize, Sequelize) {
     id: {
       autoIncrement: true,
       primaryKey: true,
-      type: Sequelize.INTEGER,
+      type: Sequelize.INTEGER
     },
 
     cellName: {
@@ -13,8 +13,8 @@ module.exports = function (sequelize, Sequelize) {
 
     dataJson: {
       type: Sequelize.TEXT,
-      defaultValue: '{"connectedCells":[],"bonus":0, "controlledTurnsCount": 0, "players": [], "owner": null}',
-    },
+      defaultValue: '{"connectedCells":[], "isStarted": false, "bonus":0, "controlledTurnsCount": 0, "players": [], "owner": null}'
+    }
   })
 
   return Map
