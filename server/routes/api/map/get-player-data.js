@@ -13,7 +13,7 @@ module.exports = function (router, models) {
             score: userMapData.score,
             inBattle: false, // TODO add logic
             battleResults: [], // TODO add logic [true, false]
-          }
+          },
         })
       })
   })
