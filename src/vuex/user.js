@@ -75,7 +75,7 @@ export default {
           context.dispatch('getPlayerData')
           setInterval(() => {
             context.dispatch('getPlayerData')
-          }, 5000)
+          }, 15000)
         }
 
         context.commit('setUser', data.data)

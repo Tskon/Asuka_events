@@ -2,7 +2,13 @@ module.exports = function (router, models) {
   router.post('/map/get-player-data', (req, res) => {
     models.userMapData.findByPk(req.user.id)
       .then(async (userMapData) => {
-        if (!userMapData) return
+        if (!userMapData) {
+          res.send({
+            status: 'error',
+            message: 'Не найдены данные пользователя'
+          })
+          return
+        }
 
         const rawCellList = await models.mapCell.findAll({
           attributes: ['cellName', 'dataJson']
