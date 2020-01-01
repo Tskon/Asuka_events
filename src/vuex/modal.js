@@ -1,4 +1,4 @@
-function getInitialState () {
+function getInitialState() {
   return {
     component: null,
     title: '',
@@ -14,16 +14,18 @@ export default {
   namespaced: true,
   state: getInitialState(),
   mutations: {
-    show (state, {component, title, options, payload}) {
+    show(state, {
+      component, title, options, payload
+    }) {
       state.component = component
       state.title = title
       state.show = true
       state.options = options
       state.payload = payload
     },
-    hide (state) {
+    hide(state) {
       const initState = getInitialState()
-      Object.keys(initState).forEach(key => {
+      Object.keys(initState).forEach((key) => {
         state[key] = initState[key]
       })
     }

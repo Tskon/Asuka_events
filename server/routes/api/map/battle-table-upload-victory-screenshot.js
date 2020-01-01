@@ -12,7 +12,7 @@ module.exports = function (router, models) {
     })
     const turnNumber = (mapLog.length) ? mapLog[0].turn + 1 : 1
 
-    screenName += turnNumber + '--' + req.body.cellId + '--'
+    screenName += `${turnNumber}--${req.body.cellId}--`
 
     const battleTable = await models.battleTable.findOne({
       where: {
@@ -25,21 +25,21 @@ module.exports = function (router, models) {
       models.battleTable.create({
         turnNumber,
         cellId: req.body.cellId,
-        finalist1Screen: getScreenshotName(req.files.screenshot, 'semifinal--' + req.body.clanTag)
+        finalist1Screen: getScreenshotName(req.files.screenshot, `semifinal--${req.body.clanTag}`)
       })
     } else {
       const data = {}
 
       if (!battleTable.dataValues.finalist2Screen) {
-        data.finalist2Screen = getScreenshotName(req.files.screenshot, 'semifinal--' + req.body.clanTag)
+        data.finalist2Screen = getScreenshotName(req.files.screenshot, `semifinal--${req.body.clanTag}`)
       } else if (!battleTable.dataValues.winner) {
-        data.winnerScreen = getScreenshotName(req.files.screenshot, 'final--' + req.body.clanTag)
+        data.winnerScreen = getScreenshotName(req.files.screenshot, `final--${req.body.clanTag}`)
       }
 
       models.battleTable.update(data, {
         where: {
           turnNumber,
-          cellId: req.body.cellId,
+          cellId: req.body.cellId
         }
       })
     }

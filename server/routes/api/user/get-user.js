@@ -1,4 +1,4 @@
-module.exports = function (router, models, passport) {
+module.exports = function (router) {
   router.post('/user/get-user', (req, res) => {
     res.send({
       status: 'ok',
@@ -6,8 +6,8 @@ module.exports = function (router, models, passport) {
         name: req.user.username,
         id: req.user.id,
         isAdmin: req.user.isAdmin,
-        isPlayer: req.user.isPlayer,
-      },
+        isPlayer: req.user.isPlayer
+      }
     })
   })
 }

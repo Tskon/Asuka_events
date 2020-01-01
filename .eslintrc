@@ -1,9 +1,19 @@
 {
   "extends": ["airbnb", "plugin:vue/recommended"],
+  "parserOptions": {
+    "parser": "babel-eslint",
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
   "rules": {
     "indent": ["error", 2],
     "no-console": "off",
     "no-use-before-define": "off",
+    "no-param-reassign": "off",
+    "no-plusplus": "off",
+    "global-require": "off",
+    "func-names": "off",
+    "import/no-dynamic-require": "off",
     "semi": [2, "never"],
     "comma-dangle": ["error", "never"],
     "vue/html-closing-bracket-spacing)": "off",

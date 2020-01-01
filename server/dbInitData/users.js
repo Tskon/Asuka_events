@@ -1,5 +1,5 @@
 module.exports = (models) => {
-  models.user.findOne({where: {username: 'beatxd'}})
+  models.user.findOne({ where: { username: 'beatxd' } })
     .then((userDataObject) => {
       if (!userDataObject) {
         models.user.create({

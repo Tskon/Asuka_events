@@ -7,7 +7,7 @@ module.exports = function (router, models) {
       .then((cells) => {
         const data = []
         cells.forEach((cell) => {
-          data.push({id: cell.cellName, ...JSON.parse(cell.dataJson)})
+          data.push({ id: cell.cellName, ...JSON.parse(cell.dataJson) })
         })
 
         res.send({

@@ -2,17 +2,14 @@ module.exports = function (router, models) {
   router.post('/admin/get-logs', (req, res) => {
     models.mapLog.findAll({
       attributes: ['playersJson', 'cellsJson']
-    }).then(logs => {
+    }).then((logs) => {
       res.send({
         status: 'ok',
-        data: logs.map(log => {
-          return {
-            players: JSON.parse(log.playersJson),
-            map: JSON.parse(log.cellsJson)
-          }
-        })
+        data: logs.map((log) => ({
+          players: JSON.parse(log.playersJson),
+          map: JSON.parse(log.cellsJson)
+        }))
       })
     })
   })
 }
-

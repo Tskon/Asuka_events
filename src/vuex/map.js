@@ -26,7 +26,7 @@ export default {
     getCurrentTurn(context) {
       axios
         .post('/api/map/get-current-turn')
-        .then(({data}) => {
+        .then(({ data }) => {
           if (data.status !== 'ok') return
           context.commit('setCurrentTurn', data.data)
         })
@@ -34,7 +34,7 @@ export default {
     getCells(context) {
       axios
         .post('/api/map/get-map-cells')
-        .then(({data}) => {
+        .then(({ data }) => {
           if (data.status !== 'ok') return
 
           context.commit('setCells', data.data)
@@ -43,12 +43,12 @@ export default {
     setSector(context, cellId) {
       axios
         .post('/api/map/choose-sector', {
-          cellId: cellId
+          cellId
         })
-        .then(({data}) => {
+        .then(({ data }) => {
           if (data.status !== 'ok') return
 
-          context.commit('user/setPlayerData', {cellId}, {root: true})
+          context.commit('user/setPlayerData', { cellId }, { root: true })
           context.dispatch('getCells')
         })
     },
@@ -59,8 +59,8 @@ export default {
           headers: {
             'Content-Type': 'multipart/form-data'
           }
-        })
+        }
+      )
     }
   }
 }
-

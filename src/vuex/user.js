@@ -8,7 +8,7 @@ const stateInit = {
   personalData: {
     clanName: 'Unknown clan',
     clanTag: 'UNKNWN',
-    imageUrl: 'https://avatanplus.com/files/resources/mid/58e0ccb473a4915b2e1fa0fa.png',
+    imageUrl: 'https://avatanplus.com/files/resources/mid/58e0ccb473a4915b2e1fa0fa.png'
   },
   playerData: {
     currentCellId: '',
@@ -16,8 +16,8 @@ const stateInit = {
     selectableCellIds: '',
     score: 0,
     inBattle: false,
-    battleResults: [],
-  },
+    battleResults: []
+  }
 }
 
 export default {
@@ -34,7 +34,7 @@ export default {
     },
     setPlayerData(state, payload) {
       state.playerData = { ...state.playerData, ...payload }
-    },
+    }
   },
   actions: {
     signUp(context, body) {
@@ -115,13 +115,13 @@ export default {
         .post('/api/user/set-lk-data', {
           clanTag: context.state.personalData.clanTag,
           clanName: context.state.personalData.clanName,
-          imageUrl: context.state.personalData.imageUrl,
+          imageUrl: context.state.personalData.imageUrl
         })
-    },
+    }
   },
   getters: {
     isAuth(state) {
       return state.id
-    },
-  },
+    }
+  }
 }

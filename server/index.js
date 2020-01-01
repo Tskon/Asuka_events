@@ -1,6 +1,6 @@
 const express = require('express')
 const passport = require('passport')
-const fileUpload = require('express-fileupload');
+const fileUpload = require('express-fileupload')
 const session = require('express-session')
 const MySQLStore = require('express-mysql-session')(session)
 const bodyParser = require('body-parser')
@@ -17,7 +17,7 @@ const options = {
   port: dbConfig.dbOptions.port,
   user: dbConfig.dbUser,
   password: dbConfig.dbPassword,
-  database: dbConfig.dbName,
+  database: dbConfig.dbName
 }
 
 const app = express()
@@ -31,7 +31,7 @@ app.use(cors())
     secret: 'asuka and ray',
     resave: true,
     saveUninitialized: false,
-    cookie: { maxAge: 1000 * 60 * 60 * 24 * 7 }, // 7 суток живут сессии
+    cookie: { maxAge: 1000 * 60 * 60 * 24 * 7 } // 7 суток живут сессии
   }))
   .use(passport.initialize())
   .use(passport.session())
@@ -45,15 +45,15 @@ app.use(cors())
    */
   .use('/api/user', (req, res, next) => {
     if (req.isAuthenticated()) next()
-    else res.send({status: 'error', message: 'Вы не авторизованы. User'})
+    else res.send({ status: 'error', message: 'Вы не авторизованы. User' })
   })
   .use('/api/admin', (req, res, next) => {
     if (req.user && req.user.isAdmin) next()
-    else res.send({status: 'error', message: 'Не достаточно прав. Admin'})
+    else res.send({ status: 'error', message: 'Не достаточно прав. Admin' })
   })
   .use('/api/map', (req, res, next) => {
     if (req.user && req.user.isPlayer) next()
-    else res.send({status: 'error', message: 'Не достаточно прав. Player'})
+    else res.send({ status: 'error', message: 'Не достаточно прав. Player' })
   })
   .use('/api', require('./routes/api/index')(passport, app))
 

@@ -8,23 +8,23 @@ module.exports = function (router, models) {
             data: {
               clanTag: userDataObject.clanTag,
               clanName: userDataObject.clanName,
-              imageUrl: userDataObject.imageUrl,
-            },
+              imageUrl: userDataObject.imageUrl
+            }
           })
 
           models.userLkData.update({
             clanTag: req.body.clanTag,
             clanName: req.body.clanName,
-            imageUrl: req.body.imageUrl,
+            imageUrl: req.body.imageUrl
           }, {
-            where: { userId: req.user.id },
+            where: { userId: req.user.id }
           })
         } else {
           models.userLkData.create({
             userId: req.user.id,
             clanTag: req.body.clanTag,
             clanName: req.body.clanName,
-            imageUrl: req.body.imageUrl,
+            imageUrl: req.body.imageUrl
           })
         }
       })

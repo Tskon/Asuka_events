@@ -8,14 +8,14 @@ module.exports = function (router, models) {
 
         users.forEach((user) => {
           const {
-            id, username, isAdmin: isAdmin, isPlayer: isPlayer,
+            id, username, isAdmin, isPlayer
           } = user
 
           const userObject = {
             id,
             username,
             isAdmin,
-            isPlayer,
+            isPlayer
           }
 
           if (isAdmin) admins.push(userObject)
@@ -28,8 +28,8 @@ module.exports = function (router, models) {
           data: {
             commonUsers,
             players,
-            admins,
-          },
+            admins
+          }
         })
       })
   })

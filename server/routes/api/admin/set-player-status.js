@@ -4,14 +4,14 @@ module.exports = function (router, models) {
       .then((userDataObject) => {
         if (userDataObject) {
           models.user.update({
-            isPlayer: req.body.status,
+            isPlayer: req.body.status
           }, {
-            where: {id: req.body.userId},
+            where: { id: req.body.userId }
           })
         }
       })
     res.send({
-      status: 'ok',
+      status: 'ok'
     })
   })
 }

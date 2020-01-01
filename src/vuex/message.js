@@ -6,12 +6,12 @@ export default {
     show: false
   },
   mutations: {
-    show (state, message = '', type = 'info') {
+    show(state, message = '', type = 'info') {
       state.message = message
       state.type = type
       state.show = true
     },
-    hide (state) {
+    hide(state) {
       state.message = ''
       state.type = 'info'
       state.show = false

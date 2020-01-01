@@ -1,6 +1,8 @@
 import Vue from 'vue'
-import BootstrapVue from 'bootstrap-vue'
-import { LayoutPlugin, ModalPlugin, DropdownPlugin, TablePlugin, CardPlugin } from 'bootstrap-vue'
+import {
+  LayoutPlugin, ModalPlugin, DropdownPlugin, TablePlugin, CardPlugin
+} from 'bootstrap-vue'
+
 import '@fortawesome/fontawesome-free/js/fontawesome'
 import '@fortawesome/fontawesome-free/js/solid'
 import '@fortawesome/fontawesome-free/js/regular'
@@ -17,7 +19,6 @@ import './utils/axios'
 
 Vue.config.productionTip = false
 
-Vue.use(BootstrapVue)
 Vue.use(LayoutPlugin)
 Vue.use(ModalPlugin)
 Vue.use(CardPlugin)
@@ -36,5 +37,5 @@ Vue.mixin({
 new Vue({
   router,
   store,
-  render: h => h(App)
+  render: (h) => h(App)
 }).$mount('#app')

@@ -5,14 +5,14 @@ module.exports = function (router, models) {
       order: [['turn', 'DESC']],
       attributes: ['turn']
     })
-      .then(log => {
+      .then((log) => {
         const turnNumber = (log.length) ? log[0].turn + 1 : 1
 
         models.mapTurnData.findOne({
-          where: {turnNumber},
+          where: { turnNumber },
           attributes: ['turnNumber', 'turnName', 'fog']
         })
-          .then(turn => {
+          .then((turn) => {
             res.send({
               status: 'ok',
               data: turn

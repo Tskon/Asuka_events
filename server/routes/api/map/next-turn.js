@@ -9,10 +9,10 @@ module.exports = function (router, models) {
         attributes: ['userId', 'score', 'selectedCellId']
       })
     ])
-      .then(values => {
-        const {playersJson, cellsJson} = getJson(values[0], values[1])
+      .then((values) => {
+        const { playersJson, cellsJson } = getJson(values[0], values[1])
 
-        models.mapLog.create({playersJson, cellsJson})
+        models.mapLog.create({ playersJson, cellsJson })
 
         res.send({
           status: 'ok',
@@ -20,23 +20,19 @@ module.exports = function (router, models) {
           map: JSON.parse(cellsJson)
         })
       })
-
   })
 }
 
-function getJson (mapData, usersData) {
+function getJson(mapData, usersData) {
   console.log(mapData, usersData)
 
-  const parcedMapData = mapData.map(cell => {
+  const parcedMapData = mapData.map((cell) => ({
+    cellName: cell.cellName,
+    ...JSON.parse(cell.dataJson)
+  }))
 
-    return {
-      cellName: cell.cellName,
-      ...JSON.parse(cell.dataJson)
-    }
-  })
-
-  const parcedUsersData = usersData.map(user => {
-    smartSectorChoose (user, parcedMapData)
+  const parcedUsersData = usersData.map((user) => {
+    smartSectorChoose(user, parcedMapData)
 
     user.cellId = ''
     return user
@@ -48,11 +44,9 @@ function getJson (mapData, usersData) {
   }
 }
 
-function smartSectorChoose (player, mapData) {
-  // TODO после обработки турнирных таблиц: Проигравшего отбрасывает на случайный стартовый, если он не выбрал сам.
-  // TODO Из стартового выбрасывать автоматом если победил и не выбрал соседний
+function smartSectorChoose(player, mapData) {
   if (player.cellId) {
-    mapData.find(cell => {
+    mapData.find((cell) => {
       if (cell.cellName === player.cellId) {
         cell.players.push(player.userId)
         return true
@@ -61,12 +55,12 @@ function smartSectorChoose (player, mapData) {
       return false
     })
   } else {
-    const startedSectors = mapData.filter(cell => cell.isStarted)
+    const startedSectors = mapData.filter((cell) => cell.isStarted)
 
-    const cellWithPlayer = mapData.find(cell => cell.players.includes(player.userId))
+    const cellWithPlayer = mapData.find((cell) => cell.players.includes(player.userId))
 
     if (!cellWithPlayer) {
-      const randomSector = startedSectors[Math.floor(Math.random()*startedSectors.length)]
+      const randomSector = startedSectors[Math.floor(Math.random() * startedSectors.length)]
       randomSector.players.push(player.userId)
     }
   }

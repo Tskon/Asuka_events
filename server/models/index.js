@@ -13,7 +13,7 @@ const sequelize = new Sequelize(
 
 fs
   .readdirSync(__dirname)
-  .filter(file => (file.indexOf('.') !== 0 && (file !== 'index.js')))
+  .filter((file) => (file.indexOf('.') !== 0 && (file !== 'index.js')))
   .forEach((file) => {
     const model = sequelize.import(path.join(__dirname, file))
     db[model.name] = model
@@ -31,8 +31,8 @@ db.Sequelize = Sequelize
 // TODO исправить. Ошибка при создании таблиц без фикса
 //  + Unhandled rejection SequelizeEagerLoadingError: mapCell is not associated to userMapData!
 setTimeout(() => {
-  db.userMapData.hasOne(db.mapCell, {foreignKey: 'cellName', sourceKey: 'selectedCellId'})
-  db.userMapData.hasOne(db.userLkData, {foreignKey: 'userId', sourceKey: 'userId'})
+  db.userMapData.hasOne(db.mapCell, { foreignKey: 'cellName', sourceKey: 'selectedCellId' })
+  db.userMapData.hasOne(db.userLkData, { foreignKey: 'userId', sourceKey: 'userId' })
 }, 1000)
 
 

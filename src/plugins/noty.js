@@ -1,6 +1,6 @@
-import Noty from "awesome-notifications";
+import Noty from 'awesome-notifications'
 
-export default Noty.install = function (Vue) {
+export default Noty.install = (Vue) => {
   const options = {}
   Vue.$noty = new Noty(options)
 }

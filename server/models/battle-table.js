@@ -1,36 +1,32 @@
-module.exports = function (sequelize, Sequelize) {
-  const BattleTable = sequelize.define('battleTable', {
-    id: {
-      autoIncrement: true,
-      primaryKey: true,
-      type: Sequelize.INTEGER,
-    },
+module.exports = (sequelize, Sequelize) => sequelize.define('battleTable', {
+  id: {
+    autoIncrement: true,
+    primaryKey: true,
+    type: Sequelize.INTEGER
+  },
 
-    turnNumber: {
-      type: Sequelize.INTEGER,
-      defaultValue: 0,
-    },
+  turnNumber: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0
+  },
 
-    cellId: {
-      type: Sequelize.CHAR(4),
-      defaultValue: '',
-    },
+  cellId: {
+    type: Sequelize.CHAR(4),
+    defaultValue: ''
+  },
 
-    finalist1Screen: {
-      type: Sequelize.STRING,
-      defaultValue: '',
-    },
+  finalist1Screen: {
+    type: Sequelize.STRING,
+    defaultValue: ''
+  },
 
-    finalist2Screen: {
-      type: Sequelize.STRING,
-      defaultValue: '',
-    },
+  finalist2Screen: {
+    type: Sequelize.STRING,
+    defaultValue: ''
+  },
 
-    winnerScreen: {
-      type: Sequelize.STRING,
-      defaultValue: '',
-    },
-  })
-
-  return BattleTable
-}
+  winnerScreen: {
+    type: Sequelize.STRING,
+    defaultValue: ''
+  }
+})

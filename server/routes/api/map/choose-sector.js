@@ -13,7 +13,7 @@ module.exports = function (router, models) {
         models.userMapData.update({
           selectedCellId: req.body.cellId
         }, {
-          where: { userId: req.user.id },
+          where: { userId: req.user.id }
         })
           .then(() => {
             res.send({

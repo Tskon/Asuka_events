@@ -5,14 +5,14 @@ const fs = require('fs')
 const path = require('path')
 const models = require('../../models/index')
 
-module.exports = function (passport, app) {
+module.exports = function (passport) {
   /**
    * Auto-import all files from directories
    */
   const getRoutesByFolder = (folder) => {
     fs
       .readdirSync(path.join(__dirname, folder))
-      .filter(file => (file.indexOf('.') !== 0 && file !== 'index.js' && file.includes('.js')))
+      .filter((file) => (file.indexOf('.') !== 0 && file !== 'index.js' && file.includes('.js')))
       .forEach((file) => {
         require(path.join(__dirname, folder, file))(router, models, passport)
       })
