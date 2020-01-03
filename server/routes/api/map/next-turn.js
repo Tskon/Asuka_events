@@ -1,6 +1,6 @@
 module.exports = function (router, models) {
-  router.post('/admin/next-turn', (req, res) => {
-    Promise.all([
+  router.post('/admin/next-turn', async (req, res) => {
+    const values = await Promise.all([
       models.mapCell.findAll({
         order: [['cellName']],
         attributes: ['cellName', 'dataJson']
@@ -9,45 +9,77 @@ module.exports = function (router, models) {
         attributes: ['userId', 'score', 'selectedCellId']
       })
     ])
-      .then((values) => {
-        const { playersJson, cellsJson } = getJson(values[0], values[1])
 
-        models.mapLog.create({ playersJson, cellsJson })
+    const { playersData, cellsData } = getData(values[0], values[1])
+    await models.mapLog.create({
+      playersJson: JSON.stringify(playersData),
+      cellsJson: JSON.stringify(cellsData)
+    })
 
-        res.send({
-          status: 'ok',
-          pl: JSON.parse(playersJson),
-          map: JSON.parse(cellsJson)
-        })
-      })
+    const mapLog = await models.mapLog.findAll({
+      limit: 1,
+      order: [['turn', 'DESC']],
+      attributes: ['turn']
+    })
+    const turnNumber = mapLog[0].turn
+
+    createBattleTables({models, mapData: cellsData, turnNumber})
+
+    res.send({
+      status: 'success',
+      message: `Начат ход №${turnNumber + 1}`
+    })
   })
 }
 
-function getJson(mapData, usersData) {
-  console.log(mapData, usersData)
+function createBattleTables({models, mapData, turnNumber}) {
+  mapData.forEach((cell) => {
+    if (cell.players.length < 2) return
 
+    const dataJson = JSON.stringify({
+      screenshots: {
+        finalist1: "",
+        finalist2: "",
+        winner: ""
+      },
+      pair1: [cell.players[0], cell.players[1]],
+      pair2: [cell.players[2], cell.players[3]],
+      finalPair: [],
+      winner: ""
+    })
+
+    models.battleTable.create({
+      turnNumber,
+      cellId: cell.cellName,
+      dataJson
+    })
+  })
+}
+
+function getData(mapData, usersData) {
   const parcedMapData = mapData.map((cell) => ({
     cellName: cell.cellName,
     ...JSON.parse(cell.dataJson)
   }))
 
   const parcedUsersData = usersData.map((user) => {
+    const changedUser = user
     smartSectorChoose(user, parcedMapData)
 
-    user.cellId = ''
-    return user
+    changedUser.selectedCellId = ''
+    return changedUser
   })
 
   return {
-    playersJson: JSON.stringify(parcedUsersData),
-    cellsJson: JSON.stringify(parcedMapData)
+    playersData: parcedUsersData,
+    cellsData: parcedMapData
   }
 }
 
 function smartSectorChoose(player, mapData) {
-  if (player.cellId) {
+  if (player.selectedCellId) {
     mapData.find((cell) => {
-      if (cell.cellName === player.cellId) {
+      if (cell.cellName === player.selectedCellId) {
         cell.players.push(player.userId)
         return true
       }
