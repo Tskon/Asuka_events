@@ -43,7 +43,7 @@ module.exports = function (router, models) {
           let inBattle = false
           if (currentCell && currentCell.players.length > 1) {
             rawBattleTableList.some(rawBattleTable => {
-              const battleTable = JSON.parse(rawBattleTable)
+              const battleTable = JSON.parse(rawBattleTable.dataJson)
               if (battleTable.pair1.includes(req.user.id) && battleTable.pair1.length > 1) {
                 if (!battleTable.winner) inBattle = true
                 return true
