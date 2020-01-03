@@ -24,6 +24,7 @@ module.exports = function (router, models) {
     const turnNumber = mapLog[0].turn
 
     createBattleTables({models, mapData: cellsData, turnNumber})
+    updateCellsData({models, cellsData, cellsFromDB: values[0]})
 
     res.send({
       status: 'success',
@@ -54,6 +55,19 @@ function createBattleTables({models, mapData, turnNumber}) {
       dataJson
     })
   })
+}
+
+function updateCellsData({models, cellsData, cellsFromDB}) {
+  cellsData.filter((cell) => cell.players.length).forEach((cell) => {
+    const currentCell = cellsFromDB.find(oldCell => oldCell.cellName === cell.cellName)
+    models.mapCell.update({
+      dataJson: JSON.stringify({
+        ...JSON.parse(currentCell.dataJson),
+        players: cell.players
+      })
+    }, {where: {cellName: cell.cellName}})
+  })
+
 }
 
 function getData(mapData, usersData) {

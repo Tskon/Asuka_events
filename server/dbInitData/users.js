@@ -89,6 +89,23 @@ module.exports = (models) => {
           isAdmin: 1,
           isPlayer: 1
         })
+
+        models.userMapData.create({
+          userId: 1,
+          selectedCellId: 'a4'
+        })
+        models.userMapData.create({
+          userId: 2,
+          selectedCellId: 'a4'
+        })
+        models.userMapData.create({
+          userId: 3,
+          selectedCellId: 'a4'
+        })
+        models.userMapData.create({
+          userId: 4,
+          selectedCellId: 'a4'
+        })
       }
     })
 }
