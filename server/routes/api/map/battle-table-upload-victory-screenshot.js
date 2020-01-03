@@ -21,22 +21,18 @@ module.exports = function (router, models) {
       }
     })
 
-    if (!battleTable) {
-      models.battleTable.create({
-        turnNumber,
-        cellId: req.body.cellId,
-        finalist1Screen: getScreenshotName(req.files.screenshot, `semifinal--${req.body.clanTag}`)
-      })
-    } else {
-      const data = {}
+    if (battleTable) {
+      const data = JSON.parse(battleTable.dataJson)
 
-      if (!battleTable.dataValues.finalist2Screen) {
-        data.finalist2Screen = getScreenshotName(req.files.screenshot, `semifinal--${req.body.clanTag}`)
-      } else if (!battleTable.dataValues.winner) {
-        data.winnerScreen = getScreenshotName(req.files.screenshot, `final--${req.body.clanTag}`)
+      if (data.finalPair.includes(req.user.id)) {
+        data.screenshots.winner = getScreenshotName(req.files.screenshot, `final--${req.body.clanTag}`)
+      } else if (data.pair1.includes(req.user.id)) {
+        data.screenshots.finalist1 = getScreenshotName(req.files.screenshot, `semifinal--${req.body.clanTag}`)
+      } else if (data.pair2.includes(req.user.id)) {
+        data.screenshots.finalist2 = getScreenshotName(req.files.screenshot, `semifinal--${req.body.clanTag}`)
       }
 
-      models.battleTable.update(data, {
+      models.battleTable.update({dataJson: JSON.stringify(data)}, {
         where: {
           turnNumber,
           cellId: req.body.cellId
