@@ -15,18 +15,18 @@ module.exports = (sequelize, Sequelize) => sequelize.define('battleTable', {
     defaultValue: ''
   },
 
-  finalist1Screen: {
-    type: Sequelize.STRING,
-    defaultValue: ''
-  },
-
-  finalist2Screen: {
-    type: Sequelize.STRING,
-    defaultValue: ''
-  },
-
-  winnerScreen: {
-    type: Sequelize.STRING,
-    defaultValue: ''
+  dataJson: {
+    type: Sequelize.TEXT,
+    defaultValue: `{
+      "screenshots": {
+        "finalist1": "",
+        "finalist2": "",
+        "winner": ""
+      },
+      "pair1": [],
+      "pair2": [],
+      "finalPair": [],
+      "winner": ""
+    }`
   }
 })
