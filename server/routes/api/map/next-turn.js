@@ -1,6 +1,18 @@
 module.exports = function (router, models) {
   router.post('/admin/next-turn', async (req, res) => {
-    const [cellsDataFromDB, playersDataFromDB, playersList] = await Promise.all([
+    const [mapLog] = await models.mapLog.findAll({
+      limit: 1,
+      order: [['turn', 'DESC']],
+      attributes: ['turn']
+    })
+    const turnNumber = mapLog ? mapLog.turn + 1 : 1
+    
+    const [
+      cellsDataFromDB,
+      playersDataFromDB,
+      playersList,
+      battleTableListFromDB
+    ] = await Promise.all([
       models.mapCell.findAll({
         order: [['cellName']],
         attributes: ['cellName', 'dataJson']
@@ -11,7 +23,10 @@ module.exports = function (router, models) {
       models.user.findAll({
         attributes: ['id'],
         where: {isPlayer: true}
-      })
+      }),
+      models.battleTable.findAll({where: {
+        turnNumber
+      }})
     ])
 
     const { playersData, cellsData } = getData(cellsDataFromDB, playersDataFromDB, playersList)
@@ -20,12 +35,22 @@ module.exports = function (router, models) {
       cellsJson: JSON.stringify(cellsData)
     })
 
-    const [mapLog] = await models.mapLog.findAll({
-      limit: 1,
-      order: [['turn', 'DESC']],
-      attributes: ['turn']
+    const battleTableList = battleTableListFromDB.map(battleTable => {
+      return {
+        cellId: battleTable.cellId,
+        ...JSON.parse(battleTable.dataJson)
+      }
     })
-    const turnNumber = mapLog.turn
+
+    const cellsDataCopy = JSON.parse(JSON.stringify(cellsData))
+    cellsData.forEach(cellData => {
+      cellData.players = []
+    })
+
+    playersData.forEach(playerData => {
+      smartSectorChoose(playerData, cellsData, cellsDataCopy, battleTableList)
+      playerData.selectedCellId = ''
+    })
 
     createBattleTables({cellsData, turnNumber})
     updateCellsData({cellsData, cellsDataFromDB})
@@ -62,7 +87,7 @@ module.exports = function (router, models) {
   }
 
   function updateCellsData({cellsData, cellsDataFromDB}) {
-    cellsData.filter((cell) => cell.players.length).forEach((cell) => {
+    cellsData.forEach((cell) => {
       const currentCell = cellsDataFromDB.find(cellFromDB => cellFromDB.cellName === cell.cellName)
       models.mapCell.update({
         dataJson: JSON.stringify({
@@ -98,8 +123,6 @@ module.exports = function (router, models) {
         selectedCellId: ''
       }
 
-      smartSectorChoose(changedUser, parcedCellsData)
-      changedUser.selectedCellId = ''
       return changedUser
     })
 
@@ -109,19 +132,21 @@ module.exports = function (router, models) {
     }
   }
 
-  function smartSectorChoose(player, mapData) {
+  function smartSectorChoose(player, mapDataClear, mapData, battleTableList) {
     if (player.selectedCellId) {
       mapData.some((cell) => {
         if (cell.cellName === player.selectedCellId) {
-          cell.players.push(player.userId)
+          const newCellData = mapDataClear.find(cellData => cellData.cellName === player.selectedCellId)
+          newCellData.players.push(player.userId)
           return true
         }
         return false
       })
     } else {
-      const startedSectors = mapData.filter((cell) => cell.isStarted)
+      const startedSectors = mapDataClear.filter((cell) => cell.isStarted)
       const cellWithPlayer = mapData.find((cell) => cell.players.includes(player.userId))
-      if (!cellWithPlayer) {
+      const currentBattleTable = battleTableList.find(battleTable => battleTable.cellId === cellWithPlayer.cellName)
+      if (!cellWithPlayer || !currentBattleTable || currentBattleTable.winner !== player.userId) {
         const randomSector = startedSectors[Math.floor(Math.random() * startedSectors.length)]
         randomSector.players.push(player.userId)
       }
