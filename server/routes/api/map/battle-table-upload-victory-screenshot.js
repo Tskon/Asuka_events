@@ -2,7 +2,7 @@ const fs = require('fs')
 const path = require('path')
 
 let screenName = ''
-
+// TODO заменить req.body.cellId данными из БД
 module.exports = function (router, models) {
   router.post('/map/battle-table-upload-victory-screenshot', async (req, res) => {
     const mapLog = await models.mapLog.findAll({
