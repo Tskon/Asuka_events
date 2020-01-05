@@ -99,7 +99,6 @@ export default {
       formData.append('isFinal', false)
       formData.append('screenshot', this.screenshot)
       this.uploadVictoryScreenshot(formData)
-      // this.uploadVictoryScreenshot(this.screenshot)
     },
     ...mapActions({
       uploadVictoryScreenshot: 'map/uploadVictoryScreenshot'

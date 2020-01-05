@@ -7,7 +7,7 @@
   >
     <template v-if="cell.players.length">
       <ol>
-        Игроки в секторе:
+        Команды в секторе:
         <li
           v-for="player in cell.players"
           :key="player.id"
