@@ -13,7 +13,6 @@
           :key="player.id"
         >
           {{ player.clanTag }}
-          {{ player.id }}
         </li>
       </ol>
       <hr>
