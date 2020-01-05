@@ -26,7 +26,7 @@ module.exports = function (router, models) {
         }
       })
       : null
-    console.log(turnNumber)
+
     if (battleTable) {
       res.send({
         status: 'ok',
