@@ -52,7 +52,7 @@ module.exports = function (router, models) {
       playerData.selectedCellId = ''
     })
 
-    createBattleTables({cellsData, turnNumber})
+    createBattleTables({cellsData, turnNumber: turnNumber + 1})
     updateCellsData({cellsData, cellsDataFromDB})
     updatePlayersData({playersData})
 
