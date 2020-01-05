@@ -54,6 +54,7 @@
 
 <script>
 import { mapActions } from 'vuex'
+import axios from 'axios'
 
 export default {
   props: {
@@ -88,6 +89,11 @@ export default {
   computed: {
     playerData() { return this.$store.state.user.playerData },
     personalData() { return this.$store.state.user.personalData }
+  },
+
+  async created() {
+    const battleTable = axios.post('/api/map/get-battle-table-data')
+    console.log(battleTable)
   },
 
   methods: {
