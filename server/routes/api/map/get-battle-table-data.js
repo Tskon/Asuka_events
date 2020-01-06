@@ -30,7 +30,9 @@ module.exports = function (router, models) {
     if (battleTable) {
       res.send({
         status: 'ok',
-        data: battleTable
+        data: {
+          ...JSON.parse(battleTable.dataJson)
+        }
       })
     } else {
       res.send({
@@ -38,6 +40,5 @@ module.exports = function (router, models) {
         message: `${req.user.username}, ты не участвуешь в этом бою`
       })
     }
-
   })
 }

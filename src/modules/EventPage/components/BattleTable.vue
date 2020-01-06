@@ -1,30 +1,30 @@
 <template>
   <div>
     <div class="table-wrapper">
-      <span class="divider-1">Полуфинал (BO-1)</span>
-      <span class="divider-2">Полуфинал (BO-1)</span>
-      <span class="final-label">Финал (BO-3)</span>
+      <span class="divider-1">Полуфинал</span>
+      <span class="divider-2">Полуфинал</span>
+      <span class="final-label">Финал</span>
       <div class="cell semi-final-1">
-        {{ playersInBattle[0] ? playersInBattle[0].username : '' }}
+        {{ getPlayerName(pair1[0]) }}
       </div>
       <div class="cell semi-final-2">
-        {{ playersInBattle[1] ? playersInBattle[1].username : '' }}
+        {{ getPlayerName(pair1[1]) }}
       </div>
       <div class="cell semi-final-3">
-        {{ playersInBattle[2] ? playersInBattle[2].username : '' }}
+        {{ getPlayerName(pair2[0]) }}
       </div>
       <div class="cell semi-final-4">
-        {{ playersInBattle[3] ? playersInBattle[3].username : '' }}
+        {{ getPlayerName(pair2[1]) }}
       </div>
       <div class="cell final-1">
-        {{ finalist1 ? finalist1.username : '------' }}
+        {{ getPlayerName(finalPair[0]) }}
       </div>
       <div class="cell final-2">
-        {{ finalist2 ? finalist2.username : '------' }}
+        {{ getPlayerName(finalPair[1]) }}
       </div>
     </div>
     <div class="pt-3">
-      <hr>
+      <hr/>
       <b-form @submit="onSubmit">
         <b-input-group>
           <b-form-file
@@ -66,49 +66,52 @@ export default {
 
   data() {
     return {
-      playersInBattle: [
-        {
-          id: 1, username: 'player1', isAdmin: false, isPlayer: true
-        },
-        {
-          id: 2, username: 'player2', isAdmin: false, isPlayer: true
-        },
-        {
-          id: 3, username: 'player3', isAdmin: false, isPlayer: true
-        },
-        {
-          id: 4, username: 'player4', isAdmin: false, isPlayer: true
-        }
-      ],
-      finalist1: null,
-      finalist2: null,
+      pair1: [],
+      pair2: [],
+      finalPair: [],
+      winner: '',
       screenshot: null
     }
   },
 
   computed: {
     playerData() { return this.$store.state.user.playerData },
-    personalData() { return this.$store.state.user.personalData }
+    personalData() { return this.$store.state.user.personalData },
+    playerList() {
+      const currentCell = this.$store.state.map.cells.find(cell => {
+        return cell.id === this.playerData.currentCellId
+      })
+      return currentCell ? currentCell.players : []
+    }
   },
 
   async created() {
-    const battleTable = axios.post('/api/map/get-battle-table-data')
-    console.log(battleTable)
+    const {data: {data: battleTable}} = await axios.post('/api/map/get-battle-table-data')
+    this.pair1 = battleTable.pair1
+    this.pair2 = battleTable.pair2
+    this.finalPair = battleTable.finalPair
+    this.winner = battleTable.winner
   },
 
   methods: {
+    ...mapActions({
+      uploadVictoryScreenshot: 'map/uploadVictoryScreenshot'
+    }),
     onSubmit(e) {
       e.preventDefault()
       const formData = new FormData()
       formData.append('cellId', this.playerData.cellId)
       formData.append('clanTag', this.personalData.clanTag)
-      formData.append('isFinal', false)
       formData.append('screenshot', this.screenshot)
       this.uploadVictoryScreenshot(formData)
     },
-    ...mapActions({
-      uploadVictoryScreenshot: 'map/uploadVictoryScreenshot'
-    })
+    getPlayerName(id) {
+      if (id) {
+        const currentPlayer = this.playerList.find(player => player.id === id)
+        return currentPlayer ? currentPlayer.clanTag : 'Н/Д'
+      }
+      return '------'
+    }
   }
 }
 </script>
