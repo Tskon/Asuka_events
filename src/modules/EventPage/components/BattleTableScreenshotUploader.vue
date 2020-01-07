@@ -1,6 +1,7 @@
 <template>
   <b-form @submit="onSubmit">
-    <b-input-group>
+    <b-form-group label="Отправить скриншот победы (Только победившая команда!):">
+      <b-input-group label="">
       <b-form-file
         v-model="screenshot"
         :state="Boolean(screenshot)"
@@ -21,6 +22,7 @@
         </b-button>
       </template>
     </b-input-group>
+    </b-form-group>
   </b-form>
 </template>
 
