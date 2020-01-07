@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "eslint --fix ./src && eslint --fix ./server && vue-cli-service serve",
     "build": "eslint --fix ./src && eslint --fix ./server && vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "test": "jest"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.11.2",
@@ -41,6 +42,7 @@
     "eslint": "^6.1.0",
     "eslint-plugin-import": "^2.19.1",
     "eslint-plugin-vue": "^5.0.0",
+    "jest": "^24.9.0",
     "node-sass": "^4.12.0",
     "sass-loader": "^8.0.0",
     "style-resources-loader": "^1.2.1",
