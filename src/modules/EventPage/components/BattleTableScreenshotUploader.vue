@@ -47,7 +47,7 @@ export default {
     onSubmit(e) {
       e.preventDefault()
       const formData = new FormData()
-      formData.append('cellId', this.playerData.cellId)
+      formData.append('cellId', this.playerData.currentCellId)
       formData.append('clanTag', this.personalData.clanTag)
       formData.append('screenshot', this.screenshot)
       this.uploadVictoryScreenshot(formData)
