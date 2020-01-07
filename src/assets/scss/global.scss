@@ -1,3 +1,7 @@
 .custom-file-input ~ .custom-file-label[data-browse]:after {
   content: 'Выбрать';
 }
+
+.popover {
+  max-width: 450px;
+}

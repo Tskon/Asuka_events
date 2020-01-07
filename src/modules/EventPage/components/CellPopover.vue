@@ -2,8 +2,9 @@
   <b-popover
     :target="'cell-popover-' + cell.id"
     :title="'Действия для сектора ' + cell.id.toUpperCase()"
-    triggers="focus"
+    triggers="focus click"
     placement="rightbottom"
+    custom-class="w-100"
   >
     <template v-if="cell.players.length">
       <ol>
@@ -16,6 +17,9 @@
         </li>
       </ol>
       <hr>
+      <BattleTable class="pb-3"/>
+      <BattleTableScreenshotUploader/>
+      <hr>
     </template>
     <span v-if="isNoActions">Доступных действий нет</span>
     <b-button
@@ -27,21 +31,19 @@
     >
       {{ isSectorChoosen ? 'Этот сектор уже выбран' : 'Выбрать сектор стартовым' }}
     </b-button>
-    <b-button
-      variant="info"
-      class="w-100"
-      @click="openBattleTable"
-    >
-      Указать результаты боя
-    </b-button>
   </b-popover>
 </template>
 
 <script>
 import { mapActions, mapState } from 'vuex'
 import BattleTable from './BattleTable'
+import BattleTableScreenshotUploader from './BattleTableScreenshotUploader'
 
 export default {
+  components: {
+    BattleTable,
+    BattleTableScreenshotUploader
+  },
   props: {
     cell: {
       type: Object,
@@ -72,18 +74,7 @@ export default {
   methods: {
     ...mapActions({
       setSector: 'map/setSector'
-    }),
-
-    openBattleTable() {
-      this.$store.commit('modal/show', {
-        title: 'Турнирная таблица',
-        component: BattleTable,
-        options: {
-          hideFooter: true
-        },
-        payload: { players: this.cell.players }
-      })
-    }
+    })
   }
 }
 </script>

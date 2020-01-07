@@ -23,66 +23,30 @@
         {{ getPlayerName(finalPair[1]) }}
       </div>
     </div>
-    <div class="pt-3">
-      <hr/>
-      <b-form @submit="onSubmit">
-        <b-input-group>
-          <b-form-file
-            v-model="screenshot"
-            :state="Boolean(screenshot)"
-            name="screenshot"
-            accept="image/*"
-            placeholder="Перетащите сюда изображение"
-            drop-placeholder="Бросьте сюда..."
-            class="image-form-file text-nowrap"
-            size="sm"
-          />
-          <template v-slot:append>
-            <b-button
-              variant="success"
-              size="sm"
-              type="submit"
-            >
-              Отправить
-            </b-button>
-          </template>
-        </b-input-group>
-      </b-form>
-    </div>
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
 import axios from 'axios'
 
 export default {
-  props: {
-    payload: {
-      type: Object,
-      required: true
-    }
-  },
-
   data() {
     return {
       pair1: [],
       pair2: [],
       finalPair: [],
-      winner: '',
-      screenshot: null
+      winner: ''
     }
   },
 
   computed: {
-    playerData() { return this.$store.state.user.playerData },
-    personalData() { return this.$store.state.user.personalData },
     playerList() {
       const currentCell = this.$store.state.map.cells.find(cell => {
         return cell.id === this.playerData.currentCellId
       })
       return currentCell ? currentCell.players : []
-    }
+    },
+    playerData() { return this.$store.state.user.playerData }
   },
 
   async created() {
@@ -94,17 +58,6 @@ export default {
   },
 
   methods: {
-    ...mapActions({
-      uploadVictoryScreenshot: 'map/uploadVictoryScreenshot'
-    }),
-    onSubmit(e) {
-      e.preventDefault()
-      const formData = new FormData()
-      formData.append('cellId', this.playerData.cellId)
-      formData.append('clanTag', this.personalData.clanTag)
-      formData.append('screenshot', this.screenshot)
-      this.uploadVictoryScreenshot(formData)
-    },
     getPlayerName(id) {
       if (id) {
         const currentPlayer = this.playerList.find(player => player.id === id)
@@ -247,20 +200,6 @@ export default {
       font-size: 10px;
       bottom: -12px;
       left: 50%;
-    }
-  }
-</style>
-
-<style lang="scss">
-  .image-form-file {
-    .custom-file-input ~ .custom-file-label[data-browse] {
-      padding-left: 80px;
-      &:after {
-        right: auto;
-        left: 0;
-        border-right: inherit;
-        border-left: none;
-      }
     }
   }
 </style>
