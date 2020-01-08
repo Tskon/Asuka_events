@@ -46,7 +46,6 @@
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
-    <Message/>
     <Modal/>
   </div>
 </template>
@@ -66,7 +65,6 @@ export default {
     Restore,
     SignUp,
     MainMenu,
-    Message,
     Modal
   },
   computed: {
