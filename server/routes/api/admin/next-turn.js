@@ -6,7 +6,7 @@ module.exports = function (router, models) {
       attributes: ['turn']
     })
     const turnNumber = mapLog ? mapLog.turn + 1 : 1
-    
+
     const [
       cellsDataFromDB,
       playersDataFromDB,
@@ -143,7 +143,9 @@ module.exports = function (router, models) {
         return false
       })
     } else {
-      const startedSectors = mapDataClear.filter((cell) => cell.isStarted)
+      const startedSectors = mapDataClear.filter((cell) => {
+        return cell.isStarted && cell.players.length < 4
+      })
       const cellWithPlayer = mapData.find((cell) => cell.players.includes(player.userId))
       const currentBattleTable = battleTableList.find(battleTable => battleTable.cellId === cellWithPlayer.cellName)
       if (!cellWithPlayer || !currentBattleTable || currentBattleTable.winner !== player.userId) {
