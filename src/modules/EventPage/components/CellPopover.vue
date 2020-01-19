@@ -2,7 +2,7 @@
   <b-popover
     :target="'cell-popover-' + cell.id"
     :title="'Действия для сектора ' + cell.id.toUpperCase()"
-    triggers="focus click"
+    triggers="focus"
     placement="rightbottom"
     custom-class="w-100"
   >
@@ -17,9 +17,11 @@
         </li>
       </ol>
       <hr>
-      <BattleTable class="pb-3"/>
-      <BattleTableScreenshotUploader/>
-      <hr>
+      <template v-if="cell.players.length > 1">
+        <BattleTable class="pb-3"/>
+        <BattleTableScreenshotUploader v-if="isPlayerInThisSector"/>
+        <hr>
+      </template>
     </template>
     <span v-if="isNoActions">Доступных действий нет</span>
     <b-button
@@ -54,7 +56,8 @@ export default {
   computed: {
     ...mapState({
       turnName: (state) => state.map.currentTurn.turnName,
-      playerCellId: (state) => state.user.playerData.cellId
+      playerSelectedCellId: (state) => state.user.playerData.selectedCellId,
+      playerCurrentCellId: (state) => state.user.playerData.currentCellId
     }),
 
     isNoActions() {
@@ -67,7 +70,11 @@ export default {
     },
 
     isSectorChoosen() {
-      return this.playerCellId === this.cell.id
+      return this.playerSelectedCellId === this.cell.id
+    },
+
+    isPlayerInThisSector() {
+      return this.playerCurrentCellId === this.cell.id
     }
   },
 
