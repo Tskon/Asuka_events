@@ -30,10 +30,15 @@
 import axios from 'axios'
 
 export default {
+  props: {
+    cellId: {
+      type: String,
+      default: ''
+    }
+  },
+
   data() {
     return {
-      pair1: [],
-      pair2: [],
       finalPair: [],
       winner: ''
     }
@@ -42,26 +47,30 @@ export default {
   computed: {
     playerList() {
       const currentCell = this.$store.state.map.cells.find(cell => {
-        return cell.id === this.playerData.currentCellId
+        return cell.id === this.cellId
       })
       return currentCell ? currentCell.players : []
     },
-    playerData() { return this.$store.state.user.playerData }
+    pair1() {
+      return [this.playerList[0], this.playerList[1]]
+    },
+    pair2() {
+      return [this.playerList[2], this.playerList[3]]
+    }
   },
 
   async created() {
     const {data: {data: battleTable}} = await axios.post('/api/map/get-battle-table-data')
-    this.pair1 = battleTable.pair1
-    this.pair2 = battleTable.pair2
-    this.finalPair = battleTable.finalPair
-    this.winner = battleTable.winner
+    if (battleTable) {
+      this.finalPair = battleTable.finalPair
+      this.winner = battleTable.winner
+    }
   },
 
   methods: {
-    getPlayerName(id) {
-      if (id) {
-        const currentPlayer = this.playerList.find(player => player.id === id)
-        return currentPlayer ? currentPlayer.clanTag : 'Н/Д'
+    getPlayerName(player) {
+      if (player) {
+        return player.clanTag
       }
       return '------'
     }

@@ -2,7 +2,7 @@
   <b-popover
     :target="'cell-popover-' + cell.id"
     :title="'Действия для сектора ' + cell.id.toUpperCase()"
-    triggers="focus"
+    triggers="click"
     placement="rightbottom"
     custom-class="w-100"
   >
@@ -16,11 +16,14 @@
           {{ player.clanTag }}
         </li>
       </ol>
-      <hr>
+      <hr/>
       <template v-if="cell.players.length > 1">
-        <BattleTable class="pb-3"/>
+        <BattleTable
+          class="pb-3"
+          :cell-id="cell.id"
+        />
         <BattleTableScreenshotUploader v-if="isPlayerInThisSector"/>
-        <hr>
+        <hr/>
       </template>
     </template>
     <span v-if="isNoActions">Доступных действий нет</span>
