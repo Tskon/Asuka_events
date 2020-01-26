@@ -52,10 +52,10 @@ export default {
       return currentCell ? currentCell.players : []
     },
     pair1() {
-      return [this.playerList[0], this.playerList[1]]
+      return [this.playerList[0].id, this.playerList[1].id]
     },
     pair2() {
-      return [this.playerList[2], this.playerList[3]]
+      return [this.playerList[2].id, this.playerList[3].id]
     }
   },
 
@@ -68,9 +68,10 @@ export default {
   },
 
   methods: {
-    getPlayerName(player) {
-      if (player) {
-        return player.clanTag
+    getPlayerName(id) {
+      if (id) {
+        const currentPlayer = this.playerList.find(player => player.id === id)
+        return currentPlayer ? currentPlayer.clanTag : 'Н/Д'
       }
       return '------'
     }
