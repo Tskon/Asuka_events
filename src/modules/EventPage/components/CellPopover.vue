@@ -24,7 +24,7 @@
           :battle-table-data="battleTableData"
           :cell-id="cell.id"
         />
-        <BattleTableScreenshotUploader v-if="isPlayerInThisSector"/>
+        <BattleTableScreenshotUploader v-if="isPlayerInThisSector && !battleTableData.winner"/>
         <hr/>
       </template>
     </template>
@@ -102,7 +102,9 @@ export default {
     }),
     async fetchBattleTable() {
       const {data: {data: battleTableData}} = await axios
-        .post('/api/map/get-battle-table-data', this.cell.id)
+        .post('/api/map/get-battle-table-data', {
+          cellId: this.cell.id
+        })
       if (battleTableData) this.battleTableData = battleTableData
     }
   }
