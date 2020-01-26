@@ -49,10 +49,19 @@ export default {
     BattleTable,
     BattleTableScreenshotUploader
   },
+
   props: {
     cell: {
       type: Object,
       required: true
+    }
+  },
+
+  data() {
+    return {
+      battleTableData: {
+
+      }
     }
   },
 
@@ -79,6 +88,10 @@ export default {
     isPlayerInThisSector() {
       return this.playerCurrentCellId === this.cell.id
     }
+  },
+
+  created() {
+
   },
 
   methods: {

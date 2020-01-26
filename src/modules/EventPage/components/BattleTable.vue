@@ -39,6 +39,8 @@ export default {
 
   data() {
     return {
+      pair1: [],
+      pair2: [],
       finalPair: [],
       winner: ''
     }
@@ -50,18 +52,14 @@ export default {
         return cell.id === this.cellId
       })
       return currentCell ? currentCell.players : []
-    },
-    pair1() {
-      return [this.playerList[0].id, this.playerList[1].id]
-    },
-    pair2() {
-      return [this.playerList[2].id, this.playerList[3].id]
     }
   },
 
   async created() {
     const {data: {data: battleTable}} = await axios.post('/api/map/get-battle-table-data')
     if (battleTable) {
+      this.pair1 = battleTable.pair1
+      this.pair2 = battleTable.pair2
       this.finalPair = battleTable.finalPair
       this.winner = battleTable.winner
     }
