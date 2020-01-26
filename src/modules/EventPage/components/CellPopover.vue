@@ -5,6 +5,7 @@
     triggers="click"
     placement="rightbottom"
     custom-class="w-100"
+    @show="fetchBattleTable"
   >
     <template v-if="cell.players.length">
       <ol>
@@ -20,6 +21,7 @@
       <template v-if="cell.players.length > 1">
         <BattleTable
           class="pb-3"
+          :battle-table-data="battleTableData"
           :cell-id="cell.id"
         />
         <BattleTableScreenshotUploader v-if="isPlayerInThisSector"/>
@@ -41,6 +43,7 @@
 
 <script>
 import { mapActions, mapState } from 'vuex'
+import axios from "axios"
 import BattleTable from './BattleTable'
 import BattleTableScreenshotUploader from './BattleTableScreenshotUploader'
 
@@ -60,7 +63,10 @@ export default {
   data() {
     return {
       battleTableData: {
-
+        pair1: [],
+        pair2: [],
+        finalPair: [],
+        winner: null
       }
     }
   },
@@ -90,14 +96,15 @@ export default {
     }
   },
 
-  created() {
-
-  },
-
   methods: {
     ...mapActions({
       setSector: 'map/setSector'
-    })
+    }),
+    async fetchBattleTable() {
+      const {data: {data: battleTableData}} = await axios
+        .post('/api/map/get-battle-table-data', this.cell.id)
+      if (battleTableData) this.battleTableData = battleTableData
+    }
   }
 }
 </script>

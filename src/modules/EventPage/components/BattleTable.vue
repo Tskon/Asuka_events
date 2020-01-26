@@ -27,13 +27,15 @@
 </template>
 
 <script>
-import axios from 'axios'
-
 export default {
   props: {
     cellId: {
       type: String,
       default: ''
+    },
+    battleTableData: {
+      type: Object,
+      required: true
     }
   },
 
@@ -55,13 +57,12 @@ export default {
     }
   },
 
-  async created() {
-    const {data: {data: battleTable}} = await axios.post('/api/map/get-battle-table-data')
-    if (battleTable) {
-      this.pair1 = battleTable.pair1
-      this.pair2 = battleTable.pair2
-      this.finalPair = battleTable.finalPair
-      this.winner = battleTable.winner
+  watch: {
+    battleTableData() {
+      this.pair1 = this.battleTableData.pair1
+      this.pair2 = this.battleTableData.pair2
+      this.finalPair = this.battleTableData.finalPair
+      this.winner = this.battleTableData.winner
     }
   },
 
