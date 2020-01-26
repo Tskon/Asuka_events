@@ -4,6 +4,10 @@
       <span class="divider-1">Полуфинал</span>
       <span class="divider-2">Полуфинал</span>
       <span class="final-label">Финал</span>
+      <span
+        v-if="winner"
+        class="winner"
+      >Победитель: {{ getPlayerName(winner) }}</span>
       <div class="cell semi-final-1">
         {{ getPlayerName(pair1[0]) }}
       </div>
@@ -84,7 +88,7 @@ export default {
     grid-template-areas:
     'semi-final-1 final-label final-label semi-final-3'
     'divider-1 final-1 final-2 divider-2'
-    'semi-final-2 . . semi-final-4';
+    'semi-final-2 winner winner semi-final-4';
     grid-gap: 10px;
 
     .cell {
@@ -178,6 +182,11 @@ export default {
 
   .final-2 {
     grid-area: final-2;
+  }
+
+  .winner {
+    text-align: center;
+    grid-area: winner;
   }
 
   .divider-1 {
