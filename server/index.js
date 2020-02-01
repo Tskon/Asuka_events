@@ -10,7 +10,7 @@ const path = require('path')
 const models = require('./models/index')
 const dbConfig = require('./db-config')
 
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 12345
 
 const options = {
   host: dbConfig.dbOptions.host,
