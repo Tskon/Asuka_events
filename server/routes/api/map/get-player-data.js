@@ -22,8 +22,9 @@ module.exports = function (router, models) {
     }))
 
     const currentCell = cellList.find((cell) => cell.players.includes(userMapData.userId))
+    const battleStatus = checkBattleStatus()
 
-    const selectableCellIds = currentCell
+    const selectableCellIds = (currentCell && battleStatus.winner)
       ? currentCell.connectedCells
       : cellList.filter((cell) => cell.isStarted)
 
@@ -34,7 +35,7 @@ module.exports = function (router, models) {
         selectedCellId: userMapData.selectedCellId,
         selectableCellIds,
         score: userMapData.score,
-        battleStatus: checkBattleStatus()
+        battleStatus
       }
     })
 

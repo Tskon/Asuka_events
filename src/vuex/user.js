@@ -15,7 +15,10 @@ const stateInit = {
     selectedCellId: '',
     selectableCellIds: '',
     score: 0,
-    inBattle: false,
+    battleStatus: {
+      inBattle: false,
+      winner: false
+    },
     battleResults: []
   }
 }
