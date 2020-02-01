@@ -13,7 +13,7 @@ const stateInit = {
   playerData: {
     currentCellId: '',
     selectedCellId: '',
-    selectableCellIds: '',
+    selectableCellIds: [],
     score: 0,
     battleStatus: {
       inBattle: false,

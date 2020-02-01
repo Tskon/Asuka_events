@@ -38,6 +38,11 @@
     >
       {{ isSectorChoosen ? 'Этот сектор уже выбран' : 'Выбрать сектор стартовым' }}
     </b-button>
+    <b-button
+      v-if="isSectorAvailable"
+    >
+      Выбрать сектор
+    </b-button>
   </b-popover>
 </template>
 
@@ -75,16 +80,23 @@ export default {
     ...mapState({
       turnName: (state) => state.map.currentTurn.turnName,
       playerSelectedCellId: (state) => state.user.playerData.selectedCellId,
-      playerCurrentCellId: (state) => state.user.playerData.currentCellId
+      playerCurrentCellId: (state) => state.user.playerData.currentCellId,
+      selectableCellIds: (state) => state.user.playerData.selectableCellIds,
+      playerBattleStatus: (state) => state.user.playerData.battleStatus
     }),
 
     isNoActions() {
-      return !this.isStartSectorAvailable
+      return !this.isStartSectorAvailable && !this.isSectorAvailable
     },
 
     isStartSectorAvailable() {
-      return this.turnName === 'selectStartSector'
+      return (this.turnName === 'selectStartSector')
         && this.cell.isStarted
+    },
+
+    isSectorAvailable() {
+      console.log(this.selectableCellIds.includes(this.cell.id), this.selectableCellIds, this.cell.id)
+      return this.selectableCellIds.includes(this.cell.id) && !this.playerBattleStatus.inBattle
     },
 
     isSectorChoosen() {

@@ -26,7 +26,7 @@ module.exports = function (router, models) {
 
     const selectableCellIds = (currentCell && battleStatus.winner)
       ? currentCell.connectedCells
-      : cellList.filter((cell) => cell.isStarted)
+      : cellList.filter((cell) => cell.isStarted).map(cell => cell.cellName)
 
     res.send({
       status: 'ok',
