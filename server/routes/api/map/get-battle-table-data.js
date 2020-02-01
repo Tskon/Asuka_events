@@ -24,8 +24,7 @@ module.exports = function (router, models) {
       })
     } else {
       res.send({
-        status: 'warning',
-        message: `${req.user.username}, ты не участвуешь в этом бою`
+        status: 'ok'
       })
     }
   })

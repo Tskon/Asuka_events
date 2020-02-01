@@ -2,7 +2,7 @@
   <b-popover
     :target="'cell-popover-' + cell.id"
     :title="'Действия для сектора ' + cell.id.toUpperCase()"
-    triggers="click"
+    triggers="focus"
     placement="rightbottom"
     custom-class="w-100"
     @show="fetchBattleTable"
