@@ -1,7 +1,9 @@
 <template>
   <div
     :class="{
-      'started-cell': cell.isStarted
+      'started-cell': cell.isStarted,
+      'selectable-cell': isSectorSelectable,
+      'chosen-cell': isSectorChosen
     }"
     class="map-cell"
   >
@@ -41,11 +43,12 @@ export default {
     playersCount() {
       return this.cell.players.length + +this.isSectorChoosen
     },
-    isSectorChoosen() {
-      return this.playerData.cellId === this.cell.id
+    isSectorChosen() {
+      return this.playerData.selectedCellId === this.cell.id
     },
     isSectorSelectable() {
-      return true
+      return this.playerData.selectableCellIds.includes(this.cell.id)
+        && !this.playerData.battleStatus.inBattle
     }
   }
 }
@@ -72,5 +75,13 @@ export default {
 
   .started-cell {
     background-color: rgba(green, 0.5);
+  }
+
+  .selectable-cell {
+    box-shadow: inset 0 0 10px green
+  }
+
+  .chosen-cell {
+    box-shadow: inset 0 0 10px blue
   }
 </style>

@@ -31,12 +31,12 @@
     <span v-if="isNoActions">Доступных действий нет</span>
     <b-button
       v-if="isStartSectorAvailable"
-      :disabled="isSectorChoosen"
+      :disabled="isSectorChosen"
       variant="info"
       class="w-100 mb-1"
       @click="setSector(cell.id)"
     >
-      {{ isSectorChoosen ? 'Этот сектор уже выбран' : 'Выбрать сектор стартовым' }}
+      {{ isSectorChosen ? 'Этот сектор уже выбран' : 'Выбрать сектор стартовым' }}
     </b-button>
     <b-button
       v-else-if="isSectorAvailable"
@@ -98,7 +98,7 @@ export default {
       return this.selectableCellIds.includes(this.cell.id) && !this.playerBattleStatus.inBattle
     },
 
-    isSectorChoosen() {
+    isSectorChosen() {
       return this.playerSelectedCellId === this.cell.id
     },
 
