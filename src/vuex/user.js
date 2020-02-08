@@ -110,6 +110,7 @@ export default {
   getters: {
     isAuth(state) {
       return state.id
-    }
+    },
+    playerData: state => state.playerData
   }
 }

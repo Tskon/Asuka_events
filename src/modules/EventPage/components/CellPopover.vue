@@ -39,7 +39,7 @@
       {{ isSectorChoosen ? 'Этот сектор уже выбран' : 'Выбрать сектор стартовым' }}
     </b-button>
     <b-button
-      v-if="isSectorAvailable"
+      v-else-if="isSectorAvailable"
     >
       Выбрать сектор
     </b-button>
@@ -95,7 +95,6 @@ export default {
     },
 
     isSectorAvailable() {
-      console.log(this.selectableCellIds.includes(this.cell.id), this.selectableCellIds, this.cell.id)
       return this.selectableCellIds.includes(this.cell.id) && !this.playerBattleStatus.inBattle
     },
 

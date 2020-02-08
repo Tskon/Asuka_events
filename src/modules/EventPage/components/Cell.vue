@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import CellPopover from './CellPopover'
 
 export default {
@@ -34,11 +35,17 @@ export default {
     }
   },
   computed: {
-    playerDataCellId() {
-      return this.$store.state.user.playerData.cellId
-    },
+    ...mapGetters({
+      playerData: 'user/playerData'
+    }),
     playersCount() {
-      return this.cell.players.length + +(this.playerDataCellId === this.cell.id)
+      return this.cell.players.length + +this.isSectorChoosen
+    },
+    isSectorChoosen() {
+      return this.playerData.cellId === this.cell.id
+    },
+    isSectorSelectable() {
+      return true
     }
   }
 }
