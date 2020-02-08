@@ -42,7 +42,6 @@ export default {
           cellId
         })
         .then(({ data }) => {
-          console.log(context)
           if (data.status !== 'success') return
 
           context.commit('user/setPlayerData', { cellId }, { root: true })
