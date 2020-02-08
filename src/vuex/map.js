@@ -42,10 +42,12 @@ export default {
           cellId
         })
         .then(({ data }) => {
-          if (data.status !== 'ok') return
+          console.log(context)
+          if (data.status !== 'success') return
 
           context.commit('user/setPlayerData', { cellId }, { root: true })
           context.dispatch('getCells')
+          context.dispatch('user/getPlayerData', null, { root: true })
         })
     },
     uploadVictoryScreenshot(context, formdata) {
