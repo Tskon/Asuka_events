@@ -3,7 +3,8 @@
     :class="{
       'started-cell': cell.isStarted,
       'selectable-cell': isSectorSelectable,
-      'chosen-cell': isSectorChosen
+      'chosen-cell': isSectorChosen,
+      'active-battle-cell': isActiveBattle
     }"
     class="map-cell"
   >
@@ -48,7 +49,11 @@ export default {
     },
     isSectorSelectable() {
       return this.playerData.selectableCellIds.includes(this.cell.id)
-        && !this.playerData.battleStatus.inBattle
+
+    },
+    isActiveBattle() {
+      return this.playerData.currentCellId === this.cell.id
+        && this.playerData.battleStatus.inBattle
     }
   }
 }
@@ -83,5 +88,9 @@ export default {
 
   .chosen-cell {
     box-shadow: inset 0 0 10px blue
+  }
+
+  .active-battle-cell {
+    box-shadow: inset 0 0 10px red
   }
 </style>
