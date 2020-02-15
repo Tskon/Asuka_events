@@ -117,6 +117,7 @@ export default {
     isAuth(state) {
       return state.id
     },
-    playerData: state => state.playerData
+    playerData: state => state.playerData,
+    personalData: state => state.personalData
   }
 }

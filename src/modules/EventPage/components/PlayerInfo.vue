@@ -1,5 +1,8 @@
 <template>
   <div class="player-info-wrapper">
+    <h2 class="info-title">
+      Информация о клане {{ personalData.clanName }}:
+    </h2>
     <div class="info-table">
       <PlayerInfoRow
         name="Количество очков"
@@ -32,14 +35,21 @@ export default {
   },
   computed: {
     ...mapGetters({
-      playerData: 'user/playerData'
+      playerData: 'user/playerData',
+      personalData: 'user/personalData'
     })
   }
 }
 </script>
 
 <style scoped>
-  .info-table {
+  .player-info-wrapper {
+    padding-top: 20px;
+  }
 
+  .info-table {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
   }
 </style>

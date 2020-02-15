@@ -1,13 +1,12 @@
 <template>
-  <p>
+  <div class="player-info-row">
     <span class="name">
       {{ name }}
     </span>
-    &nbsp;-&nbsp;
     <span class="value">
       {{ value }}
     </span>
-  </p>
+  </div>
 </template>
 
 <script>
@@ -27,11 +26,17 @@ export default {
 </script>
 
 <style scoped>
+  .player-info-row {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+  }
+
   .name {
-    padding-right: 10px;
+    width: 100%;
   }
 
   .value {
-    padding-left: 10px;
+    width: 100%;
   }
 </style>
