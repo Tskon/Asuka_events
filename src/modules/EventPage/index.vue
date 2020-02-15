@@ -2,16 +2,19 @@
   <div>
     <h1>Event</h1>
     <Map/>
+    <PlayerInfo/>
   </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
 import Map from './components/Map'
+import PlayerInfo from "./components/PlayerInfo"
 
 export default {
   components: {
-    Map
+    Map,
+    PlayerInfo
   },
   created() {
     this.getCurrentTurn()
