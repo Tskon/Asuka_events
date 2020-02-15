@@ -1,5 +1,7 @@
 import axios from 'axios'
 
+let getUserIntervalId = null
+
 const stateInit = {
   name: '',
   id: 0,
@@ -52,6 +54,7 @@ export default {
         if (data.status !== 'ok') return
 
         context.commit('setUser', data.data)
+        context.dispatch('getUser')
       })
     },
 
@@ -68,6 +71,9 @@ export default {
         if (data.status !== 'ok') return
         context.commit('setUser', stateInit)
       })
+        .then(() => {
+          clearInterval(getUserIntervalId)
+        })
     },
 
     getUser(context) {
@@ -76,7 +82,7 @@ export default {
 
         if (data.data.isPlayer) {
           context.dispatch('getPlayerData')
-          setInterval(() => {
+          getUserIntervalId = setInterval(() => {
             context.dispatch('getPlayerData')
           }, 15000)
         }
