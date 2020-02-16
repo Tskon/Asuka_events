@@ -27,12 +27,15 @@ module.exports = function (router, models) {
       if (data.finalPair.includes(req.user.id)) {
         data.screenshots.winner = getScreenshotName(req.files.screenshot, `final--${req.body.clanTag}`)
         data.winner = req.user.id
+        addUserScore(3)
       } else if (data.pair1.includes(req.user.id)) {
         data.screenshots.finalist1 = getScreenshotName(req.files.screenshot, `semifinal--${req.body.clanTag}`)
         data.finalPair[0] = req.user.id
+        addUserScore(3)
       } else if (data.pair2.includes(req.user.id)) {
         data.screenshots.finalist2 = getScreenshotName(req.files.screenshot, `semifinal--${req.body.clanTag}`)
         data.finalPair[1] = req.user.id
+        addUserScore(3)
       }
 
       models.battleTable.update({dataJson: JSON.stringify(data)}, {
@@ -50,12 +53,19 @@ module.exports = function (router, models) {
     })
 
     screenName = ''
-  })
-}
 
-function getScreenshotName(file, name) {
-  const fileExtention = file.mimetype.split('/')[1]
-  const fileName = name.replace(' ', '-')
-  screenName += `${fileName}.${fileExtention}`
-  return screenName
+    function addUserScore(num) {
+      models.userMapData.increment('score', {
+        by: num,
+        where: { userId: req.user.id }
+      })
+    }
+
+    function getScreenshotName(file, name) {
+      const fileExtention = file.mimetype.split('/')[1]
+      const fileName = name.replace(' ', '-')
+      screenName += `${fileName}.${fileExtention}`
+      return screenName
+    }
+  })
 }
