@@ -24,7 +24,7 @@
           :battle-table-data="battleTableData"
           :cell-id="cell.id"
         />
-        <BattleTableScreenshotUploader v-if="isPlayerInThisSector && !battleTableData.winner"/>
+        <BattleTableScreenshotUploader v-if="isUploaderAvailable"/>
         <hr/>
       </template>
     </template>
@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapActions, mapState, mapGetters } from 'vuex'
 import axios from "axios"
 import BattleTable from './BattleTable'
 import BattleTableScreenshotUploader from './BattleTableScreenshotUploader'
@@ -85,6 +85,10 @@ export default {
       playerBattleStatus: (state) => state.user.playerData.battleStatus
     }),
 
+    ...mapGetters({
+      playerId: 'user/playerId'
+    }),
+
     isNoActions() {
       return !this.isStartSectorAvailable && !this.isSectorAvailable
     },
@@ -104,6 +108,18 @@ export default {
 
     isPlayerInThisSector() {
       return this.playerCurrentCellId === this.cell.id
+    },
+
+    isUploaderAvailable() {
+      const isFinalPairIncludePlayer = this.battleTableData.finalPair.includes(this.playerId)
+      const isPair1Valid = this.battleTableData.pair1.length > 1 && this.battleTableData.pair1.includes(this.playerId)
+      const isPair2Valid = this.battleTableData.pair2.length > 1 && this.battleTableData.pair2.includes(this.playerId)
+
+      const hasValidPair = isFinalPairIncludePlayer ? this.battleTableData.finalPair > 1 : isPair1Valid || isPair2Valid
+
+      return this.isPlayerInThisSector
+        && !this.battleTableData.winner
+        && hasValidPair
     }
   },
 

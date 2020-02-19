@@ -118,6 +118,7 @@ export default {
       return state.id
     },
     playerData: state => state.playerData,
-    personalData: state => state.personalData
+    personalData: state => state.personalData,
+    playerId: state => state.id
   }
 }
