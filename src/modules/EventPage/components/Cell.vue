@@ -11,11 +11,11 @@
     <button
       :id="'cell-popover-' + cell.id"
     >
-      <div v-if="playersCount">
+      <div v-if="playersCount" class="players-count">
         <i class="far fa-user"/> {{ playersCount }}
       </div>
       {{ cell.id.toUpperCase() }}
-      <div>
+      <div class="bonus-amount">
         +{{ cell.bonus }}
       </div>
     </button>
