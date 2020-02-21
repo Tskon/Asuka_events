@@ -11,10 +11,13 @@
     <button
       :id="'cell-popover-' + cell.id"
     >
-      <div v-if="playersCount" class="players-count">
+      <div
+        v-if="playersCount"
+        class="players-count"
+      >
         <i class="far fa-user"/> {{ playersCount }}
       </div>
-      {{ cell.id.toUpperCase() }}
+      <div class="cell-name">{{ cell.id.toUpperCase() }}</div>
       <div class="bonus-amount">
         +{{ cell.bonus }}
       </div>
@@ -71,10 +74,27 @@ export default {
     }
 
     button {
+      display: grid;
+      grid-template-areas:
+        'cell-name players-count'
+        '. .'
+        '. bonus-amount';
       border: none;
       width: 100%;
       height: 100%;
       background-color: transparent;
+
+      .players-count {
+        grid-area: players-count;
+      }
+
+      .bonus-amount {
+        grid-area: bonus-amount;
+      }
+
+      .cell-name {
+        grid-area: cell-name;
+      }
     }
   }
 
