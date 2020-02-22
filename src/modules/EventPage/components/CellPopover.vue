@@ -2,10 +2,11 @@
   <b-popover
     :target="'cell-popover-' + cell.id"
     :title="'Действия для сектора ' + cell.id.toUpperCase()"
-    triggers="focus click"
+    triggers="focus"
     placement="rightbottom"
     custom-class="w-100"
     @show="fetchBattleTable"
+    @hide="onHide"
   >
     <template v-if="cell.players.length">
       <ol>
@@ -24,7 +25,10 @@
           :battle-table-data="battleTableData"
           :cell-id="cell.id"
         />
-        <BattleTableScreenshotUploader v-if="isUploaderAvailable"/>
+        <BattleTableScreenshotUploader
+          v-if="isUploaderAvailable"
+          @togglePopoverHidePrevent="togglePopoverHidePrevent"
+        />
         <hr/>
       </template>
     </template>
@@ -72,7 +76,8 @@ export default {
         pair2: [],
         finalPair: [],
         winner: null
-      }
+      },
+      isPopoverHidePrevent: false
     }
   },
 
@@ -127,12 +132,21 @@ export default {
     ...mapActions({
       setSector: 'map/setSector'
     }),
+
     async fetchBattleTable() {
       const {data: {data: battleTableData}} = await axios
         .post('/api/map/get-battle-table-data', {
           cellId: this.cell.id
         })
       if (battleTableData) this.battleTableData = battleTableData
+    },
+
+    togglePopoverHidePrevent() {
+      this.isPopoverHidePrevent = !this.isPopoverHidePrevent
+    },
+
+    onHide(e) {
+      if (this.isPopoverHidePrevent) e.preventDefault()
     }
   }
 }

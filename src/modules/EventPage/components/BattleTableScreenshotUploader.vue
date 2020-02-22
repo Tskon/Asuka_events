@@ -1,27 +1,34 @@
 <template>
   <b-form @submit="onSubmit">
     <b-form-group label="Отправить скриншот победы (Только победившая команда!):">
-      <b-input-group label="">
-      <b-form-file
-        v-model="screenshot"
-        :state="Boolean(screenshot)"
-        name="screenshot"
-        accept="image/*"
-        placeholder="Перетащите скрин сюда"
-        drop-placeholder="Бросьте сюда..."
-        class="image-form-file text-nowrap"
-        size="sm"
-      />
-      <template v-slot:append>
-        <b-button
-          variant="success"
+      <b-input-group class="uploader-wrapper">
+        <button
+          v-if="isHelperActive"
+          class="uploader-helper"
+          @click="beforeUpload"
+        />
+        <b-form-file
+          ref="formFile"
+          v-model="screenshot"
+          :state="Boolean(screenshot)"
+          name="screenshot"
+          accept="image/*"
+          placeholder="Перетащите скрин сюда"
+          drop-placeholder="Бросьте сюда..."
+          class="image-form-file text-nowrap"
           size="sm"
-          type="submit"
-        >
-          Отправить
-        </b-button>
-      </template>
-    </b-input-group>
+          @input="onInput"
+        />
+        <template v-slot:append>
+          <b-button
+            variant="success"
+            size="sm"
+            type="submit"
+          >
+            Отправить
+          </b-button>
+        </template>
+      </b-input-group>
     </b-form-group>
   </b-form>
 </template>
@@ -33,7 +40,8 @@ export default {
   name: "BattleTableScreenshotUploader",
   data() {
     return {
-      screenshot: null
+      screenshot: null,
+      isHelperActive: true
     }
   },
   computed: {
@@ -44,6 +52,15 @@ export default {
     ...mapActions({
       uploadVictoryScreenshot: 'map/uploadVictoryScreenshot'
     }),
+    beforeUpload() {
+      this.$emit('togglePopoverHidePrevent')
+      console.log(this.$refs.formFile.$refs.input.click())
+      this.isHelperActive = false
+    },
+    onInput() {
+      this.$emit('togglePopoverHidePrevent')
+      this.isHelperActive = true
+    },
     onSubmit(e) {
       e.preventDefault()
       const formData = new FormData()
@@ -67,5 +84,18 @@ export default {
         border-left: none;
       }
     }
+  }
+
+  .uploader-wrapper {
+    position: relative;
+  }
+  .uploader-helper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    opacity: 0;
   }
 </style>
