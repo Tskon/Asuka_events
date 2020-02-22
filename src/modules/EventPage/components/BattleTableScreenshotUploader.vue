@@ -6,6 +6,7 @@
           v-if="isHelperActive"
           class="uploader-helper"
           @click="beforeUpload"
+          title="загрузить изображение"
         />
         <b-form-file
           ref="formFile"
@@ -13,10 +14,10 @@
           :state="Boolean(screenshot)"
           name="screenshot"
           accept="image/*"
-          placeholder="Перетащите скрин сюда"
-          drop-placeholder="Бросьте сюда..."
+          placeholder="Выбрать файл"
           class="image-form-file text-nowrap"
           size="sm"
+          :no-drop="true"
           @input="onInput"
         />
         <template v-slot:append>
