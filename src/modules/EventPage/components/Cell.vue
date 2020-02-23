@@ -24,6 +24,11 @@
       <div class="bonus-amount">
         +{{ cell.bonus }}
       </div>
+      <i
+        v-if="cell.players.length > 1"
+        class="battle fas fa-crosshairs"
+        title="Сражение за сектор"
+      />
     </button>
     <CellPopover :cell="cell"/>
   </div>
@@ -103,6 +108,13 @@ export default {
       position: absolute;
       top: 5px;
       left: 10px;
+    }
+
+    .battle {
+      position: absolute;
+      bottom: 5px;
+      left: 10px;
+      font-size: 22px;
     }
   }
 
