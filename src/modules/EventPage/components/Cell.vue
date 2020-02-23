@@ -10,18 +10,19 @@
   >
     <button
       :id="'cell-popover-' + cell.id"
+      class="cell-content"
     >
-      <div class="cell-grid-wrapper">
-        <div
-          v-if="playersCount"
-          class="players-count"
-        >
-          <i class="far fa-user"/> {{ playersCount }}
-        </div>
-        <div class="cell-name">{{ cell.id.toUpperCase() }}</div>
-        <div class="bonus-amount">
-          +{{ cell.bonus }}
-        </div>
+      <div
+        v-if="playersCount"
+        class="players-count"
+      >
+        <i class="far fa-user"/> {{ playersCount }}
+      </div>
+      <div class="cell-name">
+        {{ cell.id.toUpperCase() }}
+      </div>
+      <div class="bonus-amount">
+        +{{ cell.bonus }}
       </div>
     </button>
     <CellPopover :cell="cell"/>
@@ -83,27 +84,25 @@ export default {
     }
   }
 
-  .cell-grid-wrapper {
-    display: grid;
-    width: 100%;
-    height: 100%;
-    grid-template-areas:
-      'cell-name players-count'
-      '. .'
-      '. bonus-amount';
-    grid-template-rows: 1fr;
-    grid-template-columns: 1fr;
+  .cell-content {
+    position: relative;
 
     .players-count {
-      grid-area: players-count;
+      position: absolute;
+      top: 5px;
+      right: 10px;
     }
 
     .bonus-amount {
-      grid-area: bonus-amount;
+      position: absolute;
+      bottom: 5px;
+      right: 10px;
     }
 
     .cell-name {
-      grid-area: cell-name;
+      position: absolute;
+      top: 5px;
+      left: 10px;
     }
   }
 
