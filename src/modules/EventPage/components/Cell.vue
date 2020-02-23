@@ -48,7 +48,7 @@ export default {
       playerData: 'user/playerData'
     }),
     playersCount() {
-      return this.cell.players.length + +this.isSectorChoosen
+      return this.cell.players.length
     },
     isSectorChosen() {
       return this.playerData.selectedCellId === this.cell.id
