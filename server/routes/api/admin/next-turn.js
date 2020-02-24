@@ -44,7 +44,17 @@ module.exports = function (router, models) {
 
     const cellsDataCopy = JSON.parse(JSON.stringify(cellsData))
     cellsData.forEach(cellData => {
-      // TODO find winner in battleTables, add like owner
+      // TODO find winner in battleTables, add like owner (NEED TEST)
+      cellData.players.forEach(player => {
+        battleTableList.some((battleTable) => {
+          if (battleTable.winner === player) {
+            cellData.owner = player
+            return true
+          }
+          return false
+        })
+      })
+
       cellData.players = []
     })
 
@@ -93,7 +103,8 @@ module.exports = function (router, models) {
       models.mapCell.update({
         dataJson: JSON.stringify({
           ...JSON.parse(currentCell.dataJson),
-          players: cell.players
+          players: cell.players,
+          owner: cell.owner
         })
       }, {where: {cellName: cell.cellName}})
     })
