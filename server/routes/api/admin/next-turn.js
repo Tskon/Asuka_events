@@ -44,6 +44,7 @@ module.exports = function (router, models) {
 
     const cellsDataCopy = JSON.parse(JSON.stringify(cellsData))
     cellsData.forEach(cellData => {
+      // TODO find winner in battleTables, add like owner
       cellData.players = []
     })
 
