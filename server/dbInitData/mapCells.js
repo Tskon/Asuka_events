@@ -57,10 +57,14 @@ function getConnectedCells(cellName = 'a1') {
   if (letterIndex > 0) {
     const nearLetter = letters[letterIndex - 1]
     result.push(nearLetter + cellNumber)
+    if (cellNumber > 1) result.push(nearLetter + (cellNumber - 1))
+    if (cellNumber < numbers.length) result.push(nearLetter + (cellNumber + 1))
   }
   if (letterIndex < letters.length - 1) {
     const nearLetter = letters[letterIndex + 1]
     result.push(nearLetter + cellNumber)
+    if (cellNumber > 1) result.push(nearLetter + (cellNumber - 1))
+    if (cellNumber < numbers.length) result.push(nearLetter + (cellNumber + 1))
   }
   if (cellNumber > 1) {
     const nearNumber = cellNumber - 1
