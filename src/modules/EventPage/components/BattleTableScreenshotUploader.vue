@@ -5,8 +5,8 @@
         <button
           v-if="isHelperActive"
           class="uploader-helper"
-          @click="beforeUpload"
           title="загрузить изображение"
+          @click="beforeUpload"
         />
         <b-form-file
           ref="formFile"
@@ -18,7 +18,6 @@
           class="image-form-file text-nowrap"
           size="sm"
           :no-drop="true"
-          @change="onInput"
         />
         <template v-slot:append>
           <b-button
@@ -55,10 +54,12 @@ export default {
     }),
     beforeUpload() {
       this.$emit('togglePopoverHidePrevent')
-      console.log(this.$refs.formFile.$refs.input.click())
+      this.$refs.formFile.$refs.input.click()
       this.isHelperActive = false
+      document.body.onfocus = this.onDialogClose
     },
-    onInput() {
+    onDialogClose() {
+      document.body.onfocus = null
       this.$emit('togglePopoverHidePrevent')
       this.isHelperActive = true
     },
@@ -94,9 +95,9 @@ export default {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
+    width: calc(100% - 86px);
     height: 100%;
-    z-index: 2;
+    z-index: 5;
     opacity: 0;
   }
 </style>
