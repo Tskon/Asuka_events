@@ -121,7 +121,7 @@ export default {
       const isPair2Valid = this.battleTableData.pair2.length > 1 && this.battleTableData.pair2.includes(this.playerId)
 
       const hasValidPair = isFinalPairIncludePlayer ? this.battleTableData.finalPair.length > 1 : isPair1Valid || isPair2Valid
-      console.log(this.cell.id, {hasValidPair})
+
       return this.isPlayerInThisSector
         && !this.battleTableData.winner
         && hasValidPair

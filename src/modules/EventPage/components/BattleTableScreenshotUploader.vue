@@ -18,7 +18,7 @@
           class="image-form-file text-nowrap"
           size="sm"
           :no-drop="true"
-          @input="onInput"
+          @change="onInput"
         />
         <template v-slot:append>
           <b-button
