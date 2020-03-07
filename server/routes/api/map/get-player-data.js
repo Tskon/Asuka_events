@@ -48,18 +48,17 @@ module.exports = function (router, models) {
         rawBattleTableList.some(rawBattleTable => {
           const battleTable = JSON.parse(rawBattleTable.dataJson)
 
-
+          if (battleTable.finalPair.includes(req.user.id) && battleTable.finalPair.length > 1) {
+            if (!battleTable.winner) inBattle = true
+            if (battleTable.winner === req.user.id) winner = true
+            return true
+          }
           if (battleTable.pair1.includes(req.user.id) && battleTable.pair1.length > 1) {
             if (!battleTable.winner) inBattle = true
             return true
           }
           if (battleTable.pair2.includes(req.user.id) && battleTable.pair2.length > 1) {
             if (!battleTable.winner) inBattle = true
-            return true
-          }
-          if (battleTable.finalPair.includes(req.user.id) && battleTable.finalPair.length > 1) {
-            if (!battleTable.winner) inBattle = true
-            if (battleTable.winner === req.user.id) winner = true
             return true
           }
 
