@@ -44,6 +44,7 @@
     </b-button>
     <b-button
       v-else-if="isSectorAvailable"
+      @click="setSector(cell.id)"
     >
       Выбрать сектор
     </b-button>
