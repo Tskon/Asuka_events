@@ -12,5 +12,5 @@ axios.interceptors.response.use(
     Vue.$noty.alert('Ошибка сервера. Попрбуйте позже или обратитесь к администратору')
     console.warn(error.message)
     return Promise.reject(error)
-  },
+  }
 )
