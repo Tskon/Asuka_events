@@ -49,7 +49,8 @@ module.exports = function (router, models) {
     fs.appendFileSync(path.resolve(__dirname, '../../../../upload/', screenName), req.files.screenshot.data)
 
     res.send({
-      status: 'ok'
+      status: 'success',
+      message: 'Скриншот загружен'
     })
 
     screenName = ''
