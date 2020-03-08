@@ -47,7 +47,6 @@ module.exports = function (router, models) {
 
         rawBattleTableList.some(rawBattleTable => {
           const battleTable = JSON.parse(rawBattleTable.dataJson)
-
           if (battleTable.finalPair.includes(req.user.id) && battleTable.finalPair.length > 1) {
             if (!battleTable.winner) inBattle = true
             if (battleTable.winner === req.user.id) winner = true
@@ -62,9 +61,10 @@ module.exports = function (router, models) {
             return true
           }
 
-          winner = true
           return false
         })
+      } else if (currentCell.players.length === 1) {
+        winner = true
       }
 
       return {
