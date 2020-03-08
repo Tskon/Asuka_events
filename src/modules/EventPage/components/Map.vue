@@ -52,7 +52,6 @@ export default {
     /*background-image: url(../../static/map-indonesia.svg);*/
     background-size: 100%;
     background-repeat: no-repeat;
-    background-color: #bcdaff;
     width: 1200px;
     height: 480px;
   }

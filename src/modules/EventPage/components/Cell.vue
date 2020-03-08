@@ -60,7 +60,6 @@ export default {
     },
     isSectorSelectable() {
       return this.playerData.selectableCellIds.includes(this.cell.id)
-
     },
     isActiveBattle() {
       return this.playerData.currentCellId === this.cell.id
@@ -76,6 +75,8 @@ export default {
     border: none;
     box-shadow: 0 0 1px rgba(0,0,0,0.1);
     transition: 0.3s;
+    background-color: #bcdaff;
+    filter: blur(2px) grayscale(1);
 
     &:hover{
      background-color: rgba(0,0,0,0.3);
@@ -123,7 +124,7 @@ export default {
   }
 
   .selectable-cell {
-    box-shadow: inset 0 0 10px green
+    filter: blur(0);
   }
 
   .chosen-cell {
