@@ -4,7 +4,8 @@
       'started-cell': cell.isStarted,
       'selectable-cell': isSectorSelectable,
       'chosen-cell': isSectorChosen,
-      'active-battle-cell': isActiveBattle
+      'active-battle-cell': isActiveBattle,
+      'fog': !isSectorSelectable
     }"
     class="map-cell"
   >
@@ -76,7 +77,6 @@ export default {
     box-shadow: 0 0 1px rgba(0,0,0,0.1);
     transition: 0.3s;
     background-color: #bcdaff;
-    filter: blur(2px) grayscale(1);
 
     &:hover{
      background-color: rgba(0,0,0,0.3);
@@ -123,9 +123,7 @@ export default {
     background-color: rgba(green, 0.5);
   }
 
-  .selectable-cell {
-    filter: blur(0);
-  }
+  .selectable-cell {}
 
   .chosen-cell {
     box-shadow: inset 0 0 10px blue
@@ -133,5 +131,9 @@ export default {
 
   .active-battle-cell {
     box-shadow: inset 0 0 10px red
+  }
+
+  .fog {
+    filter: blur(2px) grayscale(1);
   }
 </style>
