@@ -28,6 +28,10 @@ module.exports = function (router, models) {
       ? currentCell.connectedCells
       : cellList.filter((cell) => cell.isStarted).map(cell => cell.cellName)
 
+    if (currentCell && !currentCell.isStarted) {
+      selectableCellIds.push(currentCell.cellName)
+    }
+
     res.send({
       status: 'ok',
       data: {
@@ -72,6 +76,5 @@ module.exports = function (router, models) {
         winner
       }
     }
-
   })
 }
