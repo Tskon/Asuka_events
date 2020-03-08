@@ -12,6 +12,7 @@
     <button
       :id="'cell-popover-' + cell.id"
       class="cell-content"
+      :disabled="!isSectorSelectable"
     >
       <div
         v-if="playersCount"
@@ -78,10 +79,6 @@ export default {
     transition: 0.3s;
     background-color: #bcdaff;
 
-    &:hover{
-     background-color: rgba(0,0,0,0.3);
-    }
-
     button {
       border: none;
       width: 100%;
@@ -123,7 +120,11 @@ export default {
     background-color: rgba(green, 0.5);
   }
 
-  .selectable-cell {}
+  .selectable-cell {
+    &:hover{
+      background-color: rgba(0,0,0,0.3);
+    }
+  }
 
   .chosen-cell {
     box-shadow: inset 0 0 10px blue
@@ -135,5 +136,9 @@ export default {
 
   .fog {
     filter: blur(2px) grayscale(1);
+
+    & .cell-content:hover{
+      cursor: not-allowed;
+    }
   }
 </style>
