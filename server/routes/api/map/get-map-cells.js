@@ -28,10 +28,26 @@ module.exports = function (router, models) {
       return parsedCell
     })
 
+    const currentCell = data.find((cell) => {
+      return cell.players.some(player => player.id === req.user.id)
+    })
+
+
+    const filteredData = data.map((cell) => {
+      return (cell.id === currentCell.id || cell.connectedCells.includes(currentCell.id))
+        ? cell
+        : {
+          id: cell.id,
+          connectedCells: cell.connectedCells,
+          players: [],
+          bonus: cell.bonus
+        }
+    })
+
     res.send({
       status: 'ok',
-      data
+      data: filteredData
     })
-    
+
   })
 }
