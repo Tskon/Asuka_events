@@ -56,5 +56,9 @@ export default {
         }
       })
     }
+  },
+
+  getters: {
+    isNeedFog: state => state.currentTurn.fog
   }
 }

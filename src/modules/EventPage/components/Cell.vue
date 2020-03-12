@@ -5,14 +5,14 @@
       'selectable-cell': isSectorSelectable,
       'chosen-cell': isSectorChosen,
       'active-battle-cell': isActiveBattle,
-      'fog': !isSectorSelectable
+      'fog': isNeedFog && !isSectorSelectable
     }"
     class="map-cell"
   >
     <button
       :id="'cell-popover-' + cell.id"
       class="cell-content"
-      :disabled="!isSectorSelectable"
+      :disabled="isNeedFog && !isSectorSelectable"
     >
       <div
         v-if="playersCount"
@@ -52,7 +52,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      playerData: 'user/playerData'
+      playerData: 'user/playerData',
+      isNeedFog: 'map/isNeedFog'
     }),
     playersCount() {
       return this.cell.players.length
