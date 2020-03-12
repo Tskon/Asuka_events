@@ -33,7 +33,7 @@ module.exports = function (router, models) {
     })
 
 
-    const filteredData = data.map((cell) => {
+    const filteredData = currentCell ? data.map((cell) => {
       return (cell.id === currentCell.id || cell.connectedCells.includes(currentCell.id))
         ? cell
         : {
@@ -42,11 +42,11 @@ module.exports = function (router, models) {
           players: [],
           bonus: cell.bonus
         }
-    })
+    }) : null
 
     res.send({
       status: 'ok',
-      data: filteredData
+      data: currentCell ? filteredData : data
     })
 
   })
