@@ -40,7 +40,8 @@ module.exports = function (router, models) {
           id: cell.id,
           connectedCells: cell.connectedCells,
           players: [],
-          bonus: cell.bonus
+          bonus: cell.bonus,
+          isStarted: cell.isStarted
         }
     }) : null
 
