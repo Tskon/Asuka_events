@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
+import {mapActions, mapGetters} from 'vuex'
 import PlayerInfoRow from "./PlayerInfoRow"
 
 export default {
@@ -37,6 +37,14 @@ export default {
     ...mapGetters({
       playerData: 'user/playerData',
       personalData: 'user/personalData'
+    })
+  },
+  created() {
+    this.getPersonalData()
+  },
+  methods: {
+    ...mapActions({
+      getPersonalData: 'user/getPersonalData'
     })
   }
 }
