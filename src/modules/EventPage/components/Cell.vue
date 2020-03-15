@@ -5,14 +5,14 @@
       'selectable-cell': isSectorSelectable,
       'chosen-cell': isSectorChosen,
       'active-battle-cell': isActiveBattle,
-      'fog': isNeedFog && !isSectorSelectable
+      'fog': showFog
     }"
     class="map-cell"
   >
     <button
       :id="'cell-popover-' + cell.id"
       class="cell-content"
-      :disabled="isNeedFog && !isSectorSelectable"
+      :disabled="showFog"
     >
       <div
         v-if="playersCount"
@@ -67,6 +67,12 @@ export default {
     isActiveBattle() {
       return this.playerData.currentCellId === this.cell.id
         && this.playerData.battleStatus.inBattle
+    },
+    showFog() {
+      if (this.playerData.currentCellId === this.cell.id) {
+        return false
+      }
+      return this.isNeedFog && !this.isSectorSelectable
     }
   }
 }
