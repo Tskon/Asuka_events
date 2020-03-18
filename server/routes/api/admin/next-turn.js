@@ -29,6 +29,8 @@ module.exports = function (router, models) {
       }})
     ])
 
+    // TODO добавить score пользователя до сохранения в userMapData, если пользователь owner
+
     const { playersData, cellsData } = getData(cellsDataFromDB, playersDataFromDB, playersList)
     await models.mapLog.create({
       playersJson: JSON.stringify(playersData),
