@@ -147,6 +147,10 @@ module.exports = function (router, models) {
         selectedCellId: ''
       }
 
+      if (owners.has(changedUser.userId)) {
+        changedUser.score += owners.get(changedUser.userId)
+      }
+
       return changedUser
     })
 
