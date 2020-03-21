@@ -29,8 +29,6 @@ module.exports = function (router, models) {
       }})
     ])
 
-    // TODO добавить score пользователя (до сохранения в лог) в userMapData, если пользователь owner
-
     const { playersData, cellsData } = getData(cellsDataFromDB, playersDataFromDB, playersList)
     await models.mapLog.create({
       playersJson: JSON.stringify(playersData),
@@ -46,7 +44,7 @@ module.exports = function (router, models) {
 
     const cellsDataCopy = JSON.parse(JSON.stringify(cellsData))
     cellsData.forEach(cellData => {
-      // TODO find winner in battleTables, add like owner (NEED TEST)
+      // TODO find winner in battleTables, add like owner (FAILED TEST)
       cellData.players.forEach(player => {
         battleTableList.some((battleTable) => {
           if (battleTable.winner === player) {
