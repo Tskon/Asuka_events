@@ -124,10 +124,20 @@ module.exports = function (router, models) {
   }
 
   function getData(cellsDataFromDB, playersDataFromDB, players) {
-    const parcedCellsData = cellsDataFromDB.map((cellDataFromDB) => ({
-      cellName: cellDataFromDB.cellName,
-      ...JSON.parse(cellDataFromDB.dataJson)
-    }))
+    const owners = new Map() // [{userId: bonus}]
+
+    const parcedCellsData = cellsDataFromDB.map((cellDataFromDB) => {
+      const parcedCell = {
+        cellName: cellDataFromDB.cellName,
+        ...JSON.parse(cellDataFromDB.dataJson)
+      }
+
+      if (parcedCell.owner) {
+        owners.set(parcedCell.owner, parcedCell.bonus)
+      }
+
+      return parcedCell
+    })
 
     const parcedUsersData = players.map(player => {
       let changedUser = playersDataFromDB.find(user => user.userId === player.id)
