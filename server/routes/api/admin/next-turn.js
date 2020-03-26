@@ -46,13 +46,19 @@ module.exports = function (router, models) {
     cellsData.forEach(cellData => {
       // TODO find winner in battleTables, add like owner (NEED TEST)
       if (cellData.players.length === 1) {
-        [cellData.owner] = cellData.players // TODO add check to player selected cell
+        const playerData = playersData.find(player => player.userId === cellData.players[0])
+        if (playerData.selectedCellId === cellData.cellName) {
+          [cellData.owner] = cellData.players
+        }
       }
 
       cellData.players.forEach(player => {
         battleTableList.some((battleTable) => {
-          if (battleTable.winner === player) { // TODO add check to player selected cell
-            cellData.owner = player
+          if (battleTable.winner === player) {
+            const playerData = playersData.find(player => player.userId === cellData.players[0])
+            if (playerData.selectedCellId === cellData.cellName) {
+              cellData.owner = player
+            }
             return true
           }
           return false
