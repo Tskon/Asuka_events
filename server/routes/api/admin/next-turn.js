@@ -44,7 +44,6 @@ module.exports = function (router, models) {
 
     const cellsDataCopy = JSON.parse(JSON.stringify(cellsData))
     cellsData.forEach(cellData => {
-      // TODO find winner in battleTables, add like owner (NEED TEST)
       if (cellData.players.length === 1) {
         const playerData = playersData.find(player => player.userId === cellData.players[0])
         if (playerData.selectedCellId === cellData.cellName) {
