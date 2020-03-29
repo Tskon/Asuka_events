@@ -71,7 +71,7 @@ module.exports = function (router, models) {
 
           return false
         })
-      } else if (currentCell.players.length === 1) {
+      } else if (currentCell && currentCell.players.length === 1) {
         winner = true
       }
 
