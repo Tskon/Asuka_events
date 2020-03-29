@@ -65,9 +65,6 @@ module.exports = function (router, models) {
       })
 
       cellData.players = []
-      if (cellData.owner) {
-        cellData.players.push(cellData.owner)
-      }
     })
 
     playersData.forEach(playerData => {
