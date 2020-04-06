@@ -46,6 +46,16 @@ export default {
     },
     nextTurn() {
       axios.post('/api/admin/next-turn')
+    },
+    cleanEventData() {
+      axios
+        .post('/api/admin/clean-event-data')
+        .then(() => {
+          this.$noty.info('Все данные эвента удалены')
+        })
+        .catch(() => {
+          this.$noty.error('Ошибка. Данные не были удалены')
+        })
     }
   }
 }
