@@ -14,6 +14,13 @@
       >
         Следующий ход
       </b-button>
+
+      <b-button
+        variant="danger"
+        @click="deleteEventData"
+      >
+        Сбросить данные эвента
+      </b-button>
     </div>
 
     <div class="card card-body">
@@ -189,7 +196,17 @@ export default {
       setPlayerStatus: 'admin/setPlayerStatus',
       getLogs: 'admin/getLogs',
       nextTurn: 'admin/nextTurn'
-    })
+    }),
+    deleteEventData() {
+      this.$bvModal.msgBoxConfirm('Вы уверены что хотите удалить все данные эвента? Не будут затронуты данные пользователей и их права')
+        .then(() => {
+          console.log(this)
+          this.$noty.info('Все данные эвента удалены')
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
   }
 }
 </script>
