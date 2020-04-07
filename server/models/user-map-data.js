@@ -1,16 +1,3 @@
-module.exports = (sequelize, Sequelize) => sequelize.define('userMapData', {
-  userId: {
-    primaryKey: true,
-    type: Sequelize.INTEGER
-  },
+const {userMapData} = require('./init-data')
 
-  score: {
-    type: Sequelize.INTEGER,
-    defaultValue: 0
-  },
-
-  selectedCellId: {
-    type: Sequelize.CHAR(4),
-    defaultValue: ''
-  }
-})
+module.exports = (sequelize) => sequelize.define('userMapData', userMapData)

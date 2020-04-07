@@ -1,17 +1,3 @@
-module.exports = (sequelize, Sequelize) => sequelize.define('mapTurnData', {
-  turnNumber: {
-    autoIncrement: true,
-    primaryKey: true,
-    type: Sequelize.INTEGER
-  },
+const {mapTurnData} = require('./init-data')
 
-  turnName: {
-    type: Sequelize.CHAR(20),
-    defaultValue: ''
-  },
-
-  fog: {
-    type: Sequelize.BOOLEAN,
-    defaultValue: true
-  }
-})
+module.exports = (sequelize) => sequelize.define('mapTurnData', mapTurnData)

@@ -1,21 +1,3 @@
-module.exports = (sequelize, Sequelize) => sequelize.define('userLkData', {
-  userId: {
-    primaryKey: true,
-    type: Sequelize.INTEGER
-  },
+const {userLkData} = require('./init-data')
 
-  clanTag: {
-    type: Sequelize.TEXT,
-    defaultValue: 'UNKWN'
-  },
-
-  clanName: {
-    type: Sequelize.STRING,
-    defaultValue: 'Unknown clan'
-  },
-
-  imageUrl: {
-    type: Sequelize.STRING,
-    defaultValue: false
-  }
-})
+module.exports = (sequelize) => sequelize.define('userLkData', userLkData)

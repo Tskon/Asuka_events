@@ -13,7 +13,7 @@ const sequelize = new Sequelize(
 
 fs
   .readdirSync(__dirname)
-  .filter((file) => (file.indexOf('.') !== 0 && (file !== 'index.js')))
+  .filter((file) => (file.indexOf('.') !== 0 && (file !== 'index.js' && file !== 'init-data.js')))
   .forEach((file) => {
     const model = sequelize.import(path.join(__dirname, file))
     db[model.name] = model
