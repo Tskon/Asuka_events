@@ -1,4 +1,3 @@
-//TODO наладить корректный сброс данных
 module.exports = function (router, models) {
   router.post('/admin/clean-event-data', async (req, res) => {
     models.mapCell.destroy({
@@ -18,6 +17,8 @@ module.exports = function (router, models) {
       where: {},
       truncate: true
     })
+
+    require('../../../dbInitData/mapCells')(models)
 
     res.send({
       status: 'info',
