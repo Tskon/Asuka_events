@@ -3,8 +3,8 @@ module.exports = function (router, models) {
     const userMapData = await models.userMapData.findByPk(req.user.id)
     if (!userMapData) {
       res.send({
-        status: 'warning',
-        message: 'Не найдены данные пользователя'
+        status: 'warning'
+        // message: 'Не найдены данные пользователя'
       })
       return
     }
