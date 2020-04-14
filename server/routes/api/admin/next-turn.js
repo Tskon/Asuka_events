@@ -46,6 +46,11 @@ module.exports = function (router, models) {
 
     const cellsDataCopy = JSON.parse(JSON.stringify(cellsData))
     cellsData.forEach(cellData => {
+      if (cellData.owner) {
+        const owner = playersData.find(player => player.userId === cellData.owner)
+        owner.score += cellData.bonus
+      }
+
       if (cellData.players.length === 1) {
         const playerData = playersData.find(player => player.userId === cellData.players[0])
         if (playerData.selectedCellId === cellData.cellName) {
