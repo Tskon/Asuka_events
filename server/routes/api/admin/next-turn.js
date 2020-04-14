@@ -130,7 +130,10 @@ module.exports = function (router, models) {
     playersData.forEach(async (playerData) => {
       const playerDataFromDB = await models.userMapData.findOne({where: {userId: playerData.userId}})
       if (playerDataFromDB) {
-        models.userMapData.update({selectedCellId: ''}, {where: {userId: playerData.userId}})
+        models.userMapData.update(
+          {selectedCellId: '', score: playerData.score},
+          {where: {userId: playerData.userId}}
+        )
       } else {
         models.userMapData.create(playerData)
       }
@@ -138,19 +141,11 @@ module.exports = function (router, models) {
   }
 
   function getData(cellsDataFromDB, playersDataFromDB, players) {
-    const owners = new Map() // [{userId: bonus}]
-
     const parcedCellsData = cellsDataFromDB.map((cellDataFromDB) => {
-      const parcedCell = {
+      return {
         cellName: cellDataFromDB.cellName,
         ...JSON.parse(cellDataFromDB.dataJson)
       }
-
-      if (parcedCell.owner) {
-        owners.set(parcedCell.owner, parcedCell.bonus)
-      }
-
-      return parcedCell
     })
 
     const parcedUsersData = players.map(player => {
@@ -159,10 +154,6 @@ module.exports = function (router, models) {
         userId: player.id,
         score: 0,
         selectedCellId: ''
-      }
-
-      if (owners.has(changedUser.userId)) {
-        changedUser.score += owners.get(changedUser.userId)
       }
 
       return changedUser
