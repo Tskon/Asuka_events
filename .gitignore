@@ -2,6 +2,7 @@
 node_modules
 /dist
 /docker/docker-compose.yml
+/server/db-config.js
 
 # local env files
 .env.local
