@@ -44,8 +44,13 @@ export default {
           context.dispatch('getAdminData')
         })
     },
-    nextTurn() {
-      axios.post('/api/admin/next-turn')
+    nextTurn(context) {
+      axios
+        .post('/api/admin/next-turn')
+        .then(() => {
+          context.dispatch('map/getCurrentTurn', null, { root: true })
+          context.dispatch('user/getPlayerData', null, { root: true })
+        })
     },
     cleanEventData() {
       axios
