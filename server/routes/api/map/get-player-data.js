@@ -1,12 +1,14 @@
 module.exports = function (router, models) {
   router.post('/map/get-player-data', async(req, res) => {
-    const userMapData = await models.userMapData.findByPk(req.user.id)
+    let userMapData = await models.userMapData.findByPk(req.user.id)
+
     if (!userMapData) {
-      res.send({
-        status: 'warning'
-        // message: 'Не найдены данные пользователя'
-      })
-      return
+      userMapData = {
+        userId: req.user.id,
+        score: 0,
+        selectedCellId: ''
+      }
+      await models.userMapData.create(userMapData)
     }
 
     const [rawCellList, rawBattleTableList] = await Promise.all([
