@@ -179,9 +179,13 @@ module.exports = function (router, models) {
       })
       const cellWithPlayer = mapData.find((cell) => cell.players.includes(player.userId))
       const currentBattleTable = battleTableList.find(battleTable => battleTable.cellId === cellWithPlayer.cellName)
-      if (!cellWithPlayer || !currentBattleTable || currentBattleTable.winner !== player.userId) {
+      if (!cellWithPlayer || (currentBattleTable && currentBattleTable.winner !== player.userId)) {
         const randomSector = startedSectors[Math.floor(Math.random() * startedSectors.length)]
         randomSector.players.push(player.userId)
+      } else if (cellWithPlayer) {
+        // TODO добавить в условии выше выбрасывание с текущего стартового сектора на нормальный, если ничего не выбрано
+        const newCellData = mapDataClear.find(cellData => cellData.cellName === cellWithPlayer.cellName)
+        newCellData.players.push(player.userId)
       }
     }
   }
