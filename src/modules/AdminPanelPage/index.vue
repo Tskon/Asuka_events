@@ -162,8 +162,15 @@ export default {
   padding-top: 20px;
   display: grid;
   grid-template-rows: auto;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr;
   grid-gap: 20px;
+
+  @media (min-width: $md) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media (min-width: $xl) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 }
 
 .logs {
