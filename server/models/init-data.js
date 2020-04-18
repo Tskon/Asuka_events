@@ -33,6 +33,7 @@ module.exports = {
     }`
     }
   },
+
   mapCells: {
     id: {
       autoIncrement: true,
@@ -50,6 +51,7 @@ module.exports = {
       defaultValue: '{"connectedCells":[], "isStarted": false, "bonus":0, "controlledTurnsCount": 0, "players": [], "owner": null}'
     }
   },
+
   mapLog: {
     turn: {
       autoIncrement: true,
@@ -65,9 +67,9 @@ module.exports = {
       defaultValue: ''
     }
   },
+
   mapTurnData: {
     turnNumber: {
-      autoIncrement: true,
       primaryKey: true,
       type: Sequelize.INTEGER
     },
@@ -82,6 +84,7 @@ module.exports = {
       defaultValue: true
     }
   },
+
   user: {
     id: {
       autoIncrement: true,
@@ -113,6 +116,7 @@ module.exports = {
       defaultValue: ''
     }
   },
+
   userLkData: {
     userId: {
       primaryKey: true,
