@@ -107,17 +107,8 @@ export default {
       getCurrentTurn: 'map/getCurrentTurn',
       getAdminData: 'admin/getAdminData',
       setPlayerStatus: 'admin/setPlayerStatus',
-      getLogs: 'admin/getLogs',
-      nextTurn: 'admin/nextTurn',
-      cleanEventData: 'admin/cleanEventData'
-    }),
-    deleteEventData() {
-      this.$bvModal.msgBoxConfirm('Вы уверены что хотите удалить все данные эвента? Не будут затронуты данные пользователей и их права')
-        .then((isOk) => {
-          if (!isOk) return
-          this.cleanEventData()
-        })
-    }
+      getLogs: 'admin/getLogs'
+    })
   }
 }
 </script>

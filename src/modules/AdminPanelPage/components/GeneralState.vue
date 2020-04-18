@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
+import {mapState, mapActions} from 'vuex'
 
 export default {
   name: 'GeneralState',
@@ -44,6 +44,20 @@ export default {
     ...mapState({
       currentTurn: (state) => state.map.currentTurn
     })
+  },
+
+  methods: {
+    ...mapActions({
+      nextTurn: 'admin/nextTurn',
+      cleanEventData: 'admin/cleanEventData'
+    }),
+    deleteEventData() {
+      this.$bvModal.msgBoxConfirm('Вы уверены что хотите удалить все данные эвента? Не будут затронуты данные пользователей и их права')
+        .then((isOk) => {
+          if (!isOk) return
+          this.cleanEventData()
+        })
+    }
   }
 }
 </script>
