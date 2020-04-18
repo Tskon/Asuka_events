@@ -47,11 +47,14 @@ module.exports = function (router, models) {
       if (cellData.owner) {
         const owner = playersData.find(player => player.userId === cellData.owner)
         owner.score += cellData.bonus
+        if (!cellData.players.includes(cellData.owner)) {
+          cellData.owner = null
+        }
       }
 
       if (cellData.players.length === 1) {
         const playerData = playersData.find(player => player.userId === cellData.players[0])
-        if (playerData.selectedCellId === cellData.cellName) {
+        if (playerData.selectedCellId === cellData.cellName || !playerData.selectedCellId) {
           [cellData.owner] = cellData.players
         }
       }
@@ -60,7 +63,7 @@ module.exports = function (router, models) {
         battleTableList.some((battleTable) => {
           if (battleTable.winner === player) {
             const playerData = playersData.find(player => player.userId === cellData.players[0])
-            if (playerData.selectedCellId === cellData.cellName) {
+            if (playerData.selectedCellId === cellData.cellName || !playerData.selectedCellId) {
               cellData.owner = player
             }
             return true
