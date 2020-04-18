@@ -1,7 +1,7 @@
 <template>
   <div class="admin-panel">
+    <PlayersTable class="players-table"/>
     <GeneralState/>
-    <PlayersTable/>
 
     <div class="card card-body">
       <h5>Пользователи:</h5>
@@ -172,4 +172,10 @@ export default {
   }
 }
 
+.players-table {
+  @media (min-width: $md) {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+}
 </style>
