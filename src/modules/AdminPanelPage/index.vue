@@ -1,41 +1,7 @@
 <template>
   <div class="admin-panel">
-    <div class="card card-body d-flex flex-column justify-content-between">
-      <div class="d-flex flex-column mb-2">
-        <ul class="list-unstyled">
-          <h5>Текущий ход:</h5>
-          <li><b>Номер хода:</b> {{ currentTurn.turnNumber }}</li>
-          <li><b>Тип:</b> {{ turnNames[currentTurn.turnName] }}</li>
-          <li><b>Туман войны:</b> {{ currentTurn.fog ? 'Вкл': 'Выкл' }}</li>
-        </ul>
-
-        <b-button
-          variant="success"
-          @click="nextTurn"
-        >
-          Следующий ход
-        </b-button>
-      </div>
-
-      <b-button
-        variant="danger"
-        @click="deleteEventData"
-      >
-        Сбросить данные эвента
-      </b-button>
-    </div>
-
-    <div class="card card-body">
-      <h5>Игроки:</h5>
-      <div
-        v-for="player in players"
-        :key="player.id"
-      >
-        <b>Имя:</b> {{ player.username }}
-        <b>Очки:</b> {{ player.score }}
-        <b>Выбранный сектор:</b> {{ player.selectedCellId }}
-      </div>
-    </div>
+    <GeneralState/>
+    <PlayersTable/>
 
     <div class="card card-body">
       <h5>Пользователи:</h5>
@@ -107,36 +73,35 @@
 
 <script>
 import { mapActions, mapState } from 'vuex'
+import GeneralState from './components/GeneralState'
+import PlayersTable from './components/PlayersTable'
 
 export default {
   name: 'AdminPanelPage',
+
+  components: {
+    GeneralState,
+    PlayersTable
+  },
+
   data() {
     return {
-      data: null,
-      turnNames: {
-        selectStartSector: 'Выбор стартового сектора',
-        commonTurn: 'Обычный ход'
-      }
+      data: null
     }
   },
+
   computed: {
     ...mapState({
-      currentTurn: (state) => state.map.currentTurn,
       adminData: (state) => state.admin
-    }),
-    players() {
-      if (!this.adminData.logs.length) return []
-      return this.adminData.logs[this.adminData.logs.length - 1].players.map((player) => {
-        const playerData = this.adminData.users.players.find(((p) => p.id === player.userId))
-        return { ...player, ...playerData }
-      })
-    }
+    })
   },
+
   created() {
     this.getCurrentTurn()
     this.getAdminData()
     this.getLogs()
   },
+
   methods: {
     ...mapActions({
       getCurrentTurn: 'map/getCurrentTurn',
