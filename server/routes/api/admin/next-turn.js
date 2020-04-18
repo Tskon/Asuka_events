@@ -1,5 +1,3 @@
-// TODO добавлять очки оунерам клеток
-
 module.exports = function (router, models) {
   router.post('/admin/next-turn', async (req, res) => {
     const [mapLog] = await models.mapLog.findAll({
