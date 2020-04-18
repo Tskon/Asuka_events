@@ -9,7 +9,15 @@ module.exports = (models) => {
           isAdmin: 1,
           isPlayer: 0
         })
-        //
+
+        models.user.create({
+          username: 'drobotov.92@mail.ru',
+          password: '$2a$08$PSAu6YvLoJxSUF4njjnT0umDPet4OCFGC8cuSCdOhnjEiyHHsk6CS',
+          secret: '$2a$08$PSAu6YvLoJxSUF4njjnT0umDPet4OCFGC8cuSCdOhnjEiyHHsk6CS',
+          isAdmin: 1,
+          isPlayer: 0
+        })
+
         // models.user.create({
         //   username: 'user1',
         //   password: '$2a$08$Dygxt1hYXnEcEvaWOQqSv.m/U4XHbfeGbE1Oo17SsTQM99wdRWvTi',
