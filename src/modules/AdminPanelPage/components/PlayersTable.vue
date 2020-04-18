@@ -50,10 +50,10 @@ export default {
     items() {
       return this.players.map(player => ({
         username: player.username,
-        score: player.score || 47,
-        currentCell: player.currentCellId || 'a1',
-        selectedCell: player.currentCellId || 'b2',
-        ownedCell: player.ownedCell
+        score: player.score || 0,
+        currentCell: player.currentCellId || '',
+        selectedCell: player.currentCellId || '',
+        ownedCell: player.ownedCell || ''
       }))
     }
   }
