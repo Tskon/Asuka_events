@@ -1,19 +1,21 @@
 <template>
   <div class="admin-panel">
-    <div class="card card-body d-inline-block">
-      <ul class="list-unstyled">
-        <h5>Текущий ход:</h5>
-        <li><b>Номер хода:</b> {{ currentTurn.turnNumber }}</li>
-        <li><b>Тип:</b> {{ turnNames[currentTurn.turnName] }}</li>
-        <li><b>Туман войны:</b> {{ currentTurn.fog ? 'Вкл': 'Выкл' }}</li>
-      </ul>
+    <div class="card card-body d-flex flex-column justify-content-between">
+      <div class="d-flex flex-column mb-2">
+        <ul class="list-unstyled">
+          <h5>Текущий ход:</h5>
+          <li><b>Номер хода:</b> {{ currentTurn.turnNumber }}</li>
+          <li><b>Тип:</b> {{ turnNames[currentTurn.turnName] }}</li>
+          <li><b>Туман войны:</b> {{ currentTurn.fog ? 'Вкл': 'Выкл' }}</li>
+        </ul>
 
-      <b-button
-        variant="success"
-        @click="nextTurn"
-      >
-        Следующий ход
-      </b-button>
+        <b-button
+          variant="success"
+          @click="nextTurn"
+        >
+          Следующий ход
+        </b-button>
+      </div>
 
       <b-button
         variant="danger"
@@ -31,7 +33,7 @@
       >
         <b>Имя:</b> {{ player.username }}
         <b>Очки:</b> {{ player.score }}
-        <b>Сектор:</b> {{ player.cellId }}
+        <b>Выбранный сектор:</b> {{ player.selectedCellId }}
       </div>
     </div>
 
@@ -99,60 +101,6 @@
           </b-list-group-item>
         </b-list-group>
       </b-card>
-    </div>
-
-    <div class="card card-body logs">
-      <h5>Ходы:</h5>
-      <div
-        v-for="(log, i) in adminData.logs"
-        :key="i"
-      >
-        <b-button
-          v-b-toggle="'collapse-' + i"
-          variant="outline-dark"
-          class="w-100"
-        >
-          Ход {{ i + 1 }}
-        </b-button>
-        <b-collapse
-          :id="'collapse-' + i"
-          class="mt-2"
-        >
-          <b-card
-            no-body
-            class="cells-grid p-2"
-          >
-            <div
-              v-for="cell in log.map"
-              :key="cell.cellName"
-              class="d-flex justify-content-between pl-4 cells-grid-item"
-            >
-              {{ cell.cellName }}:
-              <span>
-                <i
-                  class="fas fa-trophy text-black-50"
-                  title="Очков в секторе за удержание"
-                />
-                {{ cell.bonus }}
-              </span>
-              <span>
-                <i
-                  class="fas fa-user-alt text-black-50"
-                  title="Игроков в секторе"
-                />
-                {{ cell.players.length }}
-              </span>
-              <ul v-if="cell.players.length">
-                игроки в секторе:
-                <li
-                  v-for="player in cell.players"
-                  :key="player.id"
-                />
-              </ul>
-            </div>
-          </b-card>
-        </b-collapse>
-      </div>
     </div>
   </div>
 </template>
