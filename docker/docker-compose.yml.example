@@ -1,21 +1,18 @@
 version: '3.1'
 
 services:
-
-  db:
-    image: mysql
-    container_name: mysql
-    command: --default-authentication-plugin=mysql_native_password
-    restart: always
-    ports:
-      - 3306:3306
+  database:
+    image: mongo
+    container_name: mongo-events
     environment:
-      MYSQL_ROOT_PASSWORD: root-password
-      MYSQL_DATABASE: db-name
-      MYSQL_USER: username
-      MYSQL_PASSWORD: password
-#    volumes:
-#      - $PWD/databaseBackup:/var/lib/mysql
+      - MONGO_INITDB_DATABASE=db-name
+      - MONGO_INITDB_ROOT_USERNAME=root-user
+      - MONGO_INITDB_ROOT_PASSWORD=root-password
+    volumes:
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+      - ./mongo-volume:/data/db
+    ports:
+      - '27017-27019:27017-27019'
 
   adminer:
     image: adminer
