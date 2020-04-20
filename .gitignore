@@ -6,6 +6,7 @@ node_modules
 /server/db-config.js
 
 # local env files
+.env
 .env.local
 .env.*.local
 
