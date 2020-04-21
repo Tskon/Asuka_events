@@ -3,7 +3,7 @@ const express = require('express')
 const router = express.Router()
 const fs = require('fs')
 const path = require('path')
-const models = require('../../models/index')
+const models = require('../../dbModels/index')
 
 module.exports = function (passport) {
   /**
@@ -19,8 +19,8 @@ module.exports = function (passport) {
   }
 
   getRoutesByFolder('common')
-  getRoutesByFolder('user')
-  getRoutesByFolder('admin')
-  getRoutesByFolder('map')
+  // getRoutesByFolder('user')
+  // getRoutesByFolder('admin')
+  // getRoutesByFolder('map')
   return router
 }

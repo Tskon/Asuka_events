@@ -37,7 +37,7 @@ module.exports = function (passport, User) {
         return done(null, false)
       }
       return done(null, newUser)
-    }),
+    })
   ))
 
   passport.use('local-signin', new LocalStrategy(
@@ -61,21 +61,24 @@ module.exports = function (passport, User) {
             message: 'Неверные имя пользователя или пароль'
           })
         })
-    }),
+    })
   ))
 
-  passport.serializeUser((user, done) => {
-    done(null, user.id)
-  })
+  passport.serializeUser(User.serializeUser())
+  passport.deserializeUser(User.deserializeUser())
 
-  passport.deserializeUser((id, done) => {
-    User.findOne({
-      where: {
-        id
-      }
-    })
-      .then((user) => {
-        done(null, user)
-      })
-  })
+  // passport.serializeUser((user, done) => {
+  //   done(null, user.id)
+  // })
+  //
+  // passport.deserializeUser((id, done) => {
+  //   User.findOne({
+  //     where: {
+  //       id
+  //     }
+  //   })
+  //     .then((user) => {
+  //       done(null, user)
+  //     })
+  // })
 }

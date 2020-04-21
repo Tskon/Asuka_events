@@ -1,49 +1,42 @@
 require('dotenv').config()
+const cors = require('cors')
+const path = require('path')
 const express = require('express')
 const passport = require('passport')
 const fileUpload = require('express-fileupload')
 const session = require('express-session')
-const MySQLStore = require('express-mysql-session')(session)
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
-const cors = require('cors')
-const path = require('path')
 const mongoose = require('mongoose')
-const models = require('./models/index')
-const dbConfig = require('./db-config')
+
+const models = require('./dbModels')
+
+mongoose.Promise = global.Promise
 
 mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
+  .then(() => {
+    console.log('connection successful')
+  })
+  .catch((err) => {console.log(err)})
 
-
-
-const PORT = process.env.PORT || 12345
-//
-// const options = {
-//   host: dbConfig.dbOptions.host,
-//   port: dbConfig.dbOptions.port,
-//   user: dbConfig.dbUser,
-//   password: dbConfig.dbPassword,
-//   database: dbConfig.dbName
-// }
-//
 const app = express()
-// app.use(cors())
-//   .use(fileUpload({ createParentPath: true }))
-//   .use(bodyParser.json())
-//   .use(bodyParser.urlencoded({ extended: true }))
-//   .use(cookieParser())
-//   .use(session({
-//     store: new MySQLStore(options),
-//     secret: 'asuka and ray',
-//     resave: true,
-//     saveUninitialized: false,
-//     cookie: { maxAge: 1000 * 60 * 60 * 24 * 7 } // 7 суток живут сессии
-//   }))
-//   .use(passport.initialize())
-//   .use(passport.session())
+app
+  .use(cors())
+  .use(fileUpload({ createParentPath: true }))
+  .use(bodyParser.json())
+  .use(bodyParser.urlencoded({ extended: true }))
+  .use(cookieParser())
+  .use(session({
+    secret: process.env.PASSPORT_SECRET,
+    resave: true,
+    saveUninitialized: false,
+    cookie: { maxAge: 1000 * 60 * 60 * 24 * 7 } // 7 суток живут сессии
+  }))
+  .use(passport.initialize())
+  .use(passport.session())
 //
 //   // Serve the static files from the React app
 //   .use(express.static(path.resolve(__dirname, '../dist')))
@@ -64,7 +57,7 @@ const app = express()
 //     if (req.user && (req.user.isAdmin || req.user.isPlayer)) next()
 //     else res.send({ status: 'error', message: 'Не достаточно прав. Player' })
 //   })
-//   .use('/api', require('./routes/api/index')(passport, app))
+  .use('/api', require('./routes/api/index')(passport, app))
 //
 //   /**
 //    * for all the react stuff
@@ -77,7 +70,7 @@ const app = express()
 //  * Load passport strategies
 //  *
 //  */
-// require('./passport/passport.js')(passport, models.user)
+require('./passport/passport.js')(passport, models.User)
 //
 // /**
 //  * Sync with database
@@ -96,6 +89,7 @@ const app = express()
 /**
  * Listening port by express
  */
+const PORT = process.env.PORT || 12345
 app.listen(PORT, (err) => {
   if (err) throw err
   console.log(`ready at http://localhost:${PORT}`)
