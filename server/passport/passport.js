@@ -27,7 +27,9 @@ module.exports = function (passport, User) {
       const data = {
         username,
         password: userPassword,
-        secret: userSecret
+        secret: userSecret,
+        isAdmin: false,
+        isPlayer: false
       }
 
       const newUser = await User.create(data)

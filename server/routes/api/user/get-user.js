@@ -1,12 +1,12 @@
 module.exports = function (router) {
   router.post('/user/get-user', (req, res) => {
+    const user = req.user || {}
     res.send({
       status: 'ok',
       data: {
-        name: req.user.username,
-        id: req.user.id,
-        isAdmin: req.user.isAdmin,
-        isPlayer: req.user.isPlayer
+        name: user.username,
+        isAdmin: user.isAdmin,
+        isPlayer: user.isPlayer
       }
     })
   })
