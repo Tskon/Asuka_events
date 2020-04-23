@@ -15,6 +15,7 @@ module.exports = {
     "no-shadow": "off",
     "no-use-before-define": "off",
     "no-param-reassign": "off",
+    "consistent-return": "off",
     "no-plusplus": "off",
     "global-require": "off",
     "prettier/prettier": "off",

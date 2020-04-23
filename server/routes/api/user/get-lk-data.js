@@ -1,8 +1,16 @@
 module.exports = function (router, models) {
   router.post('/user/get-lk-data', (req, res) => {
-    models.User.findOne(req.user.name)
+    if (!req.user || !req.user.isPlayer) {
+      return res.send({
+        status: 'error',
+        message: 'Нет прав игрока',
+        goTo: '/'
+      })
+    }
+
+    models.User.findOne(req.user.username)
       .then((userDataObject) => {
-        if (userDataObject && (req.user.isPlayer)) {
+        if (userDataObject) {
           res.send({
             status: 'ok',
             data: {
@@ -14,7 +22,7 @@ module.exports = function (router, models) {
         } else {
           res.send({
             status: 'error',
-            message: 'Нет прав игрока',
+            message: 'Не найден пользователь',
             goTo: '/'
           })
         }
