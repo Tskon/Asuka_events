@@ -115,10 +115,11 @@ export default {
   },
   getters: {
     isAuth(state) {
-      return state.id
+      return !!state.name
     },
+    isAdmin: state => state.isAdmin,
+    isPlayer: state => state.isPlayer,
     playerData: state => state.playerData,
-    personalData: state => state.personalData,
-    playerId: state => state.id
+    personalData: state => state.personalData
   }
 }

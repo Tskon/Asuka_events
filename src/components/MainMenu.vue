@@ -7,13 +7,13 @@
       Эвент
     </b-nav-item>
     <b-nav-item
-      v-if="isAuth"
+      v-if="isPlayer"
       to="/personalPanel"
     >
       Личный кабинет
     </b-nav-item>
     <b-nav-item
-      v-if="isAuth"
+      v-if="isAdmin"
       to="/adminPanel"
     >
       Админка
@@ -27,7 +27,9 @@ import { mapGetters } from 'vuex'
 export default {
   computed: {
     ...mapGetters({
-      isAuth: 'user/isAuth'
+      isAuth: 'user/isAuth',
+      isAdmin: 'user/isAdmin',
+      isPlayer: 'user/isPlayer'
     })
   }
 }
