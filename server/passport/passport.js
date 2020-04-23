@@ -13,9 +13,7 @@ module.exports = function (passport, User) {
 
     (async (req, username, password, done) => {
       const user = await User.findOne({
-        where: {
-          username
-        }
+        username
       })
 
       if (user) {
@@ -49,9 +47,7 @@ module.exports = function (passport, User) {
 
     ((req, username, password, done) => {
       User.findOne({
-        where: {
-          username
-        }
+        username
       })
         .then((user) => {
           if (user && bCrypt.compareSync(password, user.password)) {
