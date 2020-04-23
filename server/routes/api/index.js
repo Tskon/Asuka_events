@@ -21,6 +21,6 @@ module.exports = function (passport) {
   getRoutesByFolder('common')
   getRoutesByFolder('user')
   // getRoutesByFolder('admin')
-  // getRoutesByFolder('map')
+  getRoutesByFolder('map')
   return router
 }

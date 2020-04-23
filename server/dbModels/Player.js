@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 const {Schema} = mongoose
 
-const UserSchema = new Schema({
+const PlayerSchema = new Schema({
   username: String,
   score: { type: Number, default: 0 },
   currentCellId: { type: String, default: '' },
@@ -11,4 +11,4 @@ const UserSchema = new Schema({
 })
 
 
-module.exports = mongoose.model('Player', UserSchema)
+module.exports = mongoose.model('Player', PlayerSchema)

@@ -1,86 +1,64 @@
 module.exports = function (router, models) {
   router.post('/map/get-player-data', async(req, res) => {
-    let userMapData = await models.userMapData.findByPk(req.user.id)
+    let playerData = await models.Player.findOne({username: req.user.username})
 
-    if (!userMapData) {
-      userMapData = {
-        userId: req.user.id,
-        score: 0,
-        selectedCellId: ''
-      }
-      await models.userMapData.create(userMapData)
+    if (!playerData) {
+      await models.Player.create({ username: req.user.username })
+      playerData = await models.Player.findOne({username: req.user.username})
     }
 
-    const [rawCellList, rawBattleTableList] = await Promise.all([
-      models.mapCell.findAll({
-        attributes: ['cellName', 'dataJson']
-      }),
-      models.battleTable.findAll()
-    ])
-
-    const cellList = rawCellList.map((cell) => ({
-      cellName: cell.cellName,
-      ...JSON.parse(cell.dataJson)
-    }))
-
-    const currentCell = cellList.find((cell) => cell.players.includes(userMapData.userId))
-    const battleStatus = checkBattleStatus()
-
-    const selectableCellIds = (currentCell && battleStatus.winner)
-      ? currentCell.connectedCells
-      : cellList.filter((cell) => cell.isStarted).map(cell => cell.cellName)
-
-    if (currentCell && !currentCell.isStarted) {
-      selectableCellIds.push(currentCell.cellName)
-    }
+    // TODO использовались списки клеток и баттл-таблиц
+    // TODO список клеток возможных к выбору selectableCellIds (winner ? connected cells : started cells)
+    // const battleStatus = checkBattleStatus()
 
     res.send({
       status: 'ok',
       data: {
-        currentCellId: currentCell ? currentCell.cellName : '',
-        selectedCellId: userMapData.selectedCellId,
-        selectableCellIds,
-        score: userMapData.score,
-        battleStatus
+        currentCellId: playerData.currentCellId,
+        selectedCellId: playerData.selectedCellId,
+        ownedCellId: playerData.ownedCellId,
+        // selectableCellIds,
+        score: playerData.score,
+        // battleStatus
       }
     })
-
-    function checkBattleStatus() {
-      let inBattle = false
-      let winner = false
-
-      if (currentCell && currentCell.players.length > 1) {
-
-        rawBattleTableList.some(rawBattleTable => {
-          const battleTable = JSON.parse(rawBattleTable.dataJson)
-          if (battleTable.finalPair.includes(req.user.id)) {
-            if(battleTable.finalPair.length === 1) {
-              winner = true
-              return true
-            }
-            if (!battleTable.winner) inBattle = true
-            if (battleTable.winner === req.user.id) winner = true
-            return true
-          }
-          if (battleTable.pair1.includes(req.user.id) && battleTable.pair1.length > 1) {
-            if (!battleTable.winner) inBattle = true
-            return true
-          }
-          if (battleTable.pair2.includes(req.user.id) && battleTable.pair2.length > 1) {
-            if (!battleTable.winner) inBattle = true
-            return true
-          }
-
-          return false
-        })
-      } else if (currentCell && currentCell.players.length === 1) {
-        winner = true
-      }
-
-      return {
-        inBattle,
-        winner
-      }
-    }
+    //
+    // function checkBattleStatus() {
+    //   let inBattle = false
+    //   let winner = false
+    //
+    //   if (currentCell && currentCell.players.length > 1) {
+    //
+    //     rawBattleTableList.some(rawBattleTable => {
+    //       const battleTable = JSON.parse(rawBattleTable.dataJson)
+    //       if (battleTable.finalPair.includes(req.user.id)) {
+    //         if(battleTable.finalPair.length === 1) {
+    //           winner = true
+    //           return true
+    //         }
+    //         if (!battleTable.winner) inBattle = true
+    //         if (battleTable.winner === req.user.id) winner = true
+    //         return true
+    //       }
+    //       if (battleTable.pair1.includes(req.user.id) && battleTable.pair1.length > 1) {
+    //         if (!battleTable.winner) inBattle = true
+    //         return true
+    //       }
+    //       if (battleTable.pair2.includes(req.user.id) && battleTable.pair2.length > 1) {
+    //         if (!battleTable.winner) inBattle = true
+    //         return true
+    //       }
+    //
+    //       return false
+    //     })
+    //   } else if (currentCell && currentCell.players.length === 1) {
+    //     winner = true
+    //   }
+    //
+    //   return {
+    //     inBattle,
+    //     winner
+    //   }
+    // }
   })
 }
