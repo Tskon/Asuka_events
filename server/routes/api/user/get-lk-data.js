@@ -8,24 +8,23 @@ module.exports = function (router, models) {
       })
     }
 
-    models.User.findOne(req.user.username)
-      .then((userDataObject) => {
-        if (userDataObject) {
-          res.send({
-            status: 'ok',
-            data: {
-              clanTag: userDataObject.clanTag,
-              clanName: userDataObject.clanName,
-              imageUrl: userDataObject.imageUrl
-            }
-          })
-        } else {
-          res.send({
-            status: 'error',
-            message: 'Не найден пользователь',
-            goTo: '/'
-          })
-        }
-      })
+    models.User.findOne({ username: req.user.username }, (err, user) => {
+      if (user) {
+        res.send({
+          status: 'ok',
+          data: {
+            clanTag: user.clanTag,
+            clanName: user.clanName,
+            imageUrl: user.avatar
+          }
+        })
+      } else {
+        res.send({
+          status: 'error',
+          message: 'Не найден пользователь',
+          goTo: '/'
+        })
+      }
+    })
   })
 }
