@@ -86,7 +86,6 @@ export default {
     },
     validate() {
       if (this.form.username !== '' && this.form.password !== '') return true
-      // TODO add noty
 
       return false
     },

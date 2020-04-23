@@ -17,14 +17,14 @@
         <MainMenu/>
         <b-navbar-nav class="ml-auto">
           <Login
-            v-if="!user.id"
+            v-if="!user.name"
             class="mr-1"
           />
           <Restore
-            v-if="!user.id"
+            v-if="!user.name"
             class="mr-1"
           />
-          <SignUp v-if="!user.id"/>
+          <SignUp v-if="!user.name"/>
           <b-nav-item-dropdown
             v-else
             right
