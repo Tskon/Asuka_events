@@ -1,8 +1,8 @@
 module.exports = function (router, models) {
   router.post('/user/get-lk-data', (req, res) => {
-    models.userLkData.findByPk(req.user.id)
+    models.User.findOne(req.user.name)
       .then((userDataObject) => {
-        if (userDataObject) {
+        if (userDataObject && (req.user.isPlayer)) {
           res.send({
             status: 'ok',
             data: {
@@ -11,20 +11,11 @@ module.exports = function (router, models) {
               imageUrl: userDataObject.imageUrl
             }
           })
-
-          models.userLkData.update({
-            clanTag: req.body.clanTag,
-            clanName: req.body.clanName,
-            imageUrl: req.body.imageUrl
-          }, {
-            where: { userId: req.user.id }
-          })
         } else {
-          models.userLkData.create({
-            userId: req.user.id,
-            clanTag: req.body.clanTag,
-            clanName: req.body.clanName,
-            imageUrl: req.body.imageUrl
+          res.send({
+            status: 'error',
+            message: 'Нет прав игрока',
+            goTo: '/'
           })
         }
       })
