@@ -5,6 +5,7 @@ const express = require('express')
 const passport = require('passport')
 const fileUpload = require('express-fileupload')
 const session = require('express-session')
+const MongoStore = require('connect-mongo')(session)
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const mongoose = require('mongoose')
@@ -33,7 +34,10 @@ app
     secret: process.env.PASSPORT_SECRET,
     resave: true,
     saveUninitialized: false,
-    cookie: { maxAge: 1000 * 60 * 60 * 24 * 7 } // 7 суток живут сессии
+    cookie: { maxAge: 1000 * 60 * 60 * 24 * 7 }, // 7 суток живут сессии
+    store : new MongoStore({
+      url: process.env.MONGO_SESSIONS_URL
+    })
   }))
   .use(passport.initialize())
   .use(passport.session())
