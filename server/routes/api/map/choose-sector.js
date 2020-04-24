@@ -1,30 +1,16 @@
 module.exports = function (router, models) {
   router.post('/map/choose-sector', async (req, res) => {
-    const usersInChosenSector = await models.userMapData.findAll({
-      where: {
-        selectedCellId: req.body.cellId
-      }
-    })
+    const usersInChosenSector = await models.User.find({ selectedCellId: req.body.cellId })
 
     if (usersInChosenSector.length > 3) {
       res.send({ status: 'info', message: 'В данном секторе кончились места' })
       return
     }
 
-    const userMapData = await models.userMapData.findByPk(req.user.id)
-
-    if (!userMapData) {
-      models.userMapData.create({
-        userId: req.user.id,
-        selectedCellId: req.body.cellId
-      })
-      return
-    }
-
-    await models.userMapData.update({
-      selectedCellId: req.body.cellId
+    await models.User.updateOne({
+      username: req.user.username
     }, {
-      where: { userId: req.user.id }
+      selectedCellId: req.body.cellId
     })
 
     res.send({
