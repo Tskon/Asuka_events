@@ -7,7 +7,8 @@ const PlayerSchema = new Schema({
   score: { type: Number, default: 0 },
   currentCellId: { type: String, default: '' },
   selectedCellId: { type: String, default: '' },
-  ownedCellId: { type: String, default: '' }
+  ownedCellId: { type: String, default: '' },
+  ownInRowCount: { type: Number, default: 0 }
 })
 
 
