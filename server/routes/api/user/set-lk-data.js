@@ -1,24 +1,14 @@
 module.exports = function (router, models) {
-  router.post('/user/set-lk-data', (req, res) => {
-    models.userLkData.findByPk(req.user.id)
-      .then((userDataObject) => {
-        if (userDataObject) {
-          models.userLkData.update({
-            clanTag: req.body.clanTag,
-            clanName: req.body.clanName,
-            imageUrl: req.body.imageUrl
-          }, {
-            where: { userId: req.user.id }
-          })
-        } else {
-          models.userLkData.create({
-            userId: req.user.id,
-            clanTag: req.body.clanTag,
-            clanName: req.body.clanName,
-            imageUrl: req.body.imageUrl
-          })
-        }
-      })
+  router.post('/user/set-lk-data', async (req, res) => {
+    await models.User.updateOne(
+      { username: req.user.username },
+      {
+        clanTag: req.body.clanTag,
+        clanName: req.body.clanName,
+        avatar: req.body.imageUrl
+      }
+    )
+
     res.send({
       status: 'ok'
     })
