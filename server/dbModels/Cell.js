@@ -8,4 +8,4 @@ const CellSchema = new Schema({
   bonus: { type: Number, default: 0 }
 })
 
-module.exports = mongoose.model('Cell', CellSchema) // todo init data
+module.exports = mongoose.model('Cell', CellSchema)
