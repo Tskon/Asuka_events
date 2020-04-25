@@ -4,7 +4,6 @@ module.exports = function (router, models, passport) {
       status: 'ok',
       data: {
         name: req.user.username,
-        id: req.user.id,
         isAdmin: req.user.isAdmin,
         isPlayer: req.user.isPlayer
       }

@@ -59,17 +59,17 @@ export default {
       return this.cell.players.length
     },
     isSectorChosen() {
-      return this.playerData.selectedCellId === this.cell.id
+      return this.playerData.selectedCell === this.cell.name
     },
     isSectorSelectable() {
-      return this.playerData.selectableCellIds.includes(this.cell.id)
+      return this.playerData.selectableCells.includes(this.cell.name)
     },
     isActiveBattle() {
-      return this.playerData.currentCellId === this.cell.id
+      return this.playerData.currentCell === this.cell.name
         && this.playerData.battleStatus.inBattle
     },
     showFog() {
-      if (this.playerData.currentCellId === this.cell.id) {
+      if (this.playerData.currentCell === this.cell.name) {
         return false
       }
       return this.isNeedFog && !this.isSectorSelectable

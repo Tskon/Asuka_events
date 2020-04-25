@@ -4,7 +4,7 @@ const mapInit = {
   cells: [],
   currentTurn: {
     turnNumber: 0,
-    turnName: '',
+    type: '',
     fog: false
   }
 }

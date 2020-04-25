@@ -23,17 +23,17 @@ module.exports = function (router, models) {
     })
 
     const currentCell = cellsWithPlayers.find((cell) => {
-      return cell.players.some(player => player.id === req.user.id)
+      return cell.players.some(player => player.username === req.user.username)
     })
 
 
     const filteredData = cellsWithPlayers.map((cell) => {
       const isFullData = currentCell
-        ? cell.id === currentCell.id || cell.connectedCells.includes(currentCell.id)
+        ? cell.name === currentCell.name || cell.connectedCells.includes(currentCell.name)
         : cell.started
 
       return isFullData ? cell : {
-        id: cell.id,
+        name: cell.name,
         connectedCells: cell.connectedCells,
         players: [],
         bonus: cell.bonus,

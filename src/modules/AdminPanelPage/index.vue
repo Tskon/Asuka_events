@@ -13,7 +13,7 @@
         <b-list-group flush>
           <b-list-group-item
             v-for="admin in adminData.users.admins"
-            :key="admin.id"
+            :key="admin.username"
           >
             {{ admin.username }}
           </b-list-group-item>
@@ -28,13 +28,13 @@
         <b-list-group flush>
           <b-list-group-item
             v-for="player in adminData.users.players"
-            :key="player.id"
+            :key="player.username"
           >
             {{ player.username }}
             <b-button
               variant="danger"
               @click="setPlayerStatus({
-                userId: player.id,
+                username: player.username,
                 status: 0
               })"
             >
@@ -52,13 +52,13 @@
         <b-list-group flush>
           <b-list-group-item
             v-for="user in adminData.users.commonUsers"
-            :key="user.id"
+            :key="user.username"
           >
             {{ user.username }}
             <b-button
               variant="success"
               @click="setPlayerStatus({
-                userId: user.id,
+                username: user.username,
                 status: 1
               })"
             >

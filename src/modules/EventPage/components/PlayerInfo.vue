@@ -14,11 +14,11 @@
       />
       <PlayerInfoRow
         name="Текущий сектор"
-        :value="playerData.currentCellId.toUpperCase() || 'Отсутствует'"
+        :value="playerData.currentCell || 'Отсутствует'"
       />
       <PlayerInfoRow
         name="Выбранный сектор"
-        :value="playerData.selectedCellId.toUpperCase() || 'Не выбран'"
+        :value="playerData.selectedCell || 'Не выбран'"
       />
     </div>
   </div>

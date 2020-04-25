@@ -1,8 +1,8 @@
 <template>
   <b-popover
-    :target="'cell-popover-' + cell.id"
-    :title="'Действия для сектора ' + cell.id.toUpperCase()"
-    triggers="focus"
+    :target="'cell-popover-' + cell.name"
+    :title="'Действия для сектора ' + cell.name.toUpperCase()"
+    triggers="click"
     placement="rightbottom"
     custom-class="w-100"
     @show="fetchBattleTable"
@@ -13,7 +13,7 @@
         Команды в секторе:
         <li
           v-for="player in cell.players"
-          :key="player.id"
+          :key="player.username"
         >
           {{ player.clanTag }}
         </li>
@@ -23,7 +23,7 @@
         <BattleTable
           class="pb-3"
           :battle-table-data="battleTableData"
-          :cell-id="cell.id"
+          :cell-id="cell.name"
         />
         <BattleTableScreenshotUploader
           v-if="isUploaderAvailable"
@@ -38,13 +38,13 @@
       :disabled="isSectorChosen"
       variant="info"
       class="w-100 mb-1"
-      @click="setSector(cell.id)"
+      @click="setSector(cell.name)"
     >
       {{ isSectorChosen ? 'Этот сектор уже выбран' : 'Выбрать сектор стартовым' }}
     </b-button>
     <b-button
       v-else-if="isSectorAvailable"
-      @click="setSector(cell.id)"
+      @click="setSector(cell.name)"
     >
       Выбрать сектор
     </b-button>
@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import { mapActions, mapState, mapGetters } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 import axios from "axios"
 import BattleTable from './BattleTable'
 import BattleTableScreenshotUploader from './BattleTableScreenshotUploader'
@@ -84,15 +84,11 @@ export default {
 
   computed: {
     ...mapState({
-      turnName: (state) => state.map.currentTurn.turnName,
-      playerSelectedCellId: (state) => state.user.playerData.selectedCellId,
-      playerCurrentCellId: (state) => state.user.playerData.currentCellId,
-      selectableCellIds: (state) => state.user.playerData.selectableCellIds,
+      turnType: (state) => state.map.currentTurn.type,
+      playerSelectedCell: (state) => state.user.playerData.selectedCell,
+      playerCurrentCell: (state) => state.user.playerData.currentCell,
+      selectableCells: (state) => state.user.playerData.selectableCells,
       playerBattleStatus: (state) => state.user.playerData.battleStatus
-    }),
-
-    ...mapGetters({
-      playerId: 'user/playerId'
     }),
 
     isNoActions() {
@@ -100,20 +96,20 @@ export default {
     },
 
     isStartSectorAvailable() {
-      return (this.turnName === 'selectStartSector')
+      return (this.turnType === 'selectStartSector')
         && this.cell.started
     },
 
     isSectorAvailable() {
-      return this.selectableCellIds.includes(this.cell.id) && !this.playerBattleStatus.inBattle
+      return this.selectableCells.includes(this.cell.name) && !this.playerBattleStatus.inBattle
     },
 
     isSectorChosen() {
-      return this.playerSelectedCellId === this.cell.id
+      return this.playerSelectedCell === this.cell.name
     },
 
     isPlayerInThisSector() {
-      return this.playerCurrentCellId === this.cell.id
+      return this.playerCurrentCell === this.cell.name
     },
 
     isUploaderAvailable() {

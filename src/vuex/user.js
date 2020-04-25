@@ -4,7 +4,6 @@ let getUserIntervalId = null
 
 const stateInit = {
   name: '',
-  id: 0,
   isAdmin: false,
   isPlayer: false,
   personalData: {
@@ -13,9 +12,9 @@ const stateInit = {
     imageUrl: 'https://avatanplus.com/files/resources/mid/58e0ccb473a4915b2e1fa0fa.png'
   },
   playerData: {
-    currentCellId: '',
-    selectedCellId: '',
-    selectableCellIds: [],
+    currentCell: '',
+    selectedCell: '',
+    selectableCells: [],
     score: 0,
     battleStatus: {
       inBattle: false,

@@ -10,9 +10,9 @@ module.exports = function (router, models) {
       username: req.body.username
     }).then((data) => {
       if (bCrypt.compareSync(req.body.secret, data.secret)) {
-        models.user.update({
+        models.user.updateOne({username: data.username}, {
           password: generateHash(req.body.newPassword)
-        }).where({ id: data.id })
+        })
 
         res.send({
           status: 'ok'

@@ -2,7 +2,7 @@ module.exports = function (router, models) {
   router.post('/map/get-battle-table-data', async (req, res) => {
     const turnsCount = await models.Log.countDocuments()
 
-    const battleTable = await models.battleTable.findOne({
+    const battleTable = await models.BattleTable.findOne({
       turnNumber: turnsCount + 1,
       cellName: req.body.cellName
     })

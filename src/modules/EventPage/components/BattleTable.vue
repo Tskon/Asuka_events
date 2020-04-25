@@ -33,7 +33,7 @@
 <script>
 export default {
   props: {
-    cellId: {
+    cellName: {
       type: String,
       default: ''
     },
@@ -55,7 +55,7 @@ export default {
   computed: {
     playerList() {
       const currentCell = this.$store.state.map.cells.find(cell => {
-        return cell.id === this.cellId
+        return cell.name === this.cellName
       })
       return currentCell ? currentCell.players : []
     }
@@ -71,9 +71,9 @@ export default {
   },
 
   methods: {
-    getPlayerName(id) {
-      if (id) {
-        const currentPlayer = this.playerList.find(player => player.id === id)
+    getPlayerName(username) {
+      if (username) {
+        const currentPlayer = this.playerList.find(player => player.username === username)
         return currentPlayer ? currentPlayer.clanTag : 'Н/Д'
       }
       return '------'
