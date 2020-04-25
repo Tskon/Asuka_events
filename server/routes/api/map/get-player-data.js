@@ -7,9 +7,19 @@ module.exports = function (router, models) {
       playerData = await models.Player.findOne({username: req.user.username})
     }
 
-    // TODO использовались списки клеток и баттл-таблиц
-    // TODO список клеток возможных к выбору selectableCellIds (winner ? connected cells : started cells)
-    // const battleStatus = checkBattleStatus()
+    const turnsCount = await models.Log.count()
+
+    const [battleTable, cells] = await Promise.all([
+      models.BattleTable.findOne({ turnNumber: turnsCount, cellName: playerData.currentCell }),
+      models.Cell.find()
+    ])
+
+    const currentCell = cells.find(cell => cell.name === playerData.currentCell)
+    const battleStatus = checkBattleStatus(battleTable, req.user.username)
+    const filter = battleStatus.winner
+      ? cell => cell.name === currentCell.name || currentCell.connectedCells.includes(cell.name)
+      : cell => cell.isStarted
+    const selectableCells = cells.filter(filter)
 
     res.send({
       status: 'ok',
@@ -17,48 +27,33 @@ module.exports = function (router, models) {
         currentCellId: playerData.currentCellId,
         selectedCellId: playerData.selectedCellId,
         ownedCellId: playerData.ownedCellId,
-        // selectableCellIds,
+        selectableCells,
         score: playerData.score,
-        // battleStatus
+        battleStatus
       }
     })
-    //
-    // function checkBattleStatus() {
-    //   let inBattle = false
-    //   let winner = false
-    //
-    //   if (currentCell && currentCell.players.length > 1) {
-    //
-    //     rawBattleTableList.some(rawBattleTable => {
-    //       const battleTable = JSON.parse(rawBattleTable.dataJson)
-    //       if (battleTable.finalPair.includes(req.user.id)) {
-    //         if(battleTable.finalPair.length === 1) {
-    //           winner = true
-    //           return true
-    //         }
-    //         if (!battleTable.winner) inBattle = true
-    //         if (battleTable.winner === req.user.id) winner = true
-    //         return true
-    //       }
-    //       if (battleTable.pair1.includes(req.user.id) && battleTable.pair1.length > 1) {
-    //         if (!battleTable.winner) inBattle = true
-    //         return true
-    //       }
-    //       if (battleTable.pair2.includes(req.user.id) && battleTable.pair2.length > 1) {
-    //         if (!battleTable.winner) inBattle = true
-    //         return true
-    //       }
-    //
-    //       return false
-    //     })
-    //   } else if (currentCell && currentCell.players.length === 1) {
-    //     winner = true
-    //   }
-    //
-    //   return {
-    //     inBattle,
-    //     winner
-    //   }
-    // }
+
+    function checkBattleStatus(battleTable, username) {
+      let inBattle = false
+      let winner = false
+
+      if (!battleTable) {
+        return{
+          inBattle,
+          winner: true
+        }
+      }
+
+      if (battleTable.finalPair.winner === username) {
+        winner = true
+      } else if (battleTable.firstPair.winner === username || battleTable.secondPair.winner === username) {
+        inBattle = true
+      }
+
+      return {
+        inBattle,
+        winner
+      }
+    }
   })
 }
