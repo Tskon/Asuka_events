@@ -101,7 +101,7 @@ export default {
 
     isStartSectorAvailable() {
       return (this.turnName === 'selectStartSector')
-        && this.cell.isStarted
+        && this.cell.started
     },
 
     isSectorAvailable() {

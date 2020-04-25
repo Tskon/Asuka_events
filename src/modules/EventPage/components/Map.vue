@@ -1,9 +1,9 @@
 <template>
   <div class="map-wrapper">
     <div class="event-map">
-      <cell
+      <Cell
         v-for="cell in cells"
-        :key="cell.id"
+        :key="cell.name"
         :cell="cell"
       />
     </div>

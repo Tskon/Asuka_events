@@ -1,7 +1,7 @@
 <template>
   <div
     :class="{
-      'started-cell': cell.isStarted,
+      'started-cell': cell.started,
       'selectable-cell': isSectorSelectable,
       'chosen-cell': isSectorChosen,
       'active-battle-cell': isActiveBattle,
@@ -10,7 +10,7 @@
     class="map-cell"
   >
     <button
-      :id="'cell-popover-' + cell.id"
+      :id="'cell-popover-' + cell.name"
       class="cell-content"
       :disabled="showFog"
     >
@@ -21,7 +21,7 @@
         <i class="far fa-user"/> {{ playersCount }}
       </div>
       <div class="cell-name">
-        {{ cell.id.toUpperCase() }}
+        {{ cell.name.toUpperCase() }}
       </div>
       <div class="bonus-amount">
         +{{ cell.bonus }}

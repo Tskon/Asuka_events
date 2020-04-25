@@ -18,7 +18,7 @@ module.exports = function (router, models) {
     const battleStatus = checkBattleStatus(battleTable, req.user.username)
     const filter = (battleStatus.winner && currentCell)
       ? cell => cell.name === currentCell.name || currentCell.connectedCells.includes(cell.name)
-      : cell => cell.isStarted
+      : cell => cell.started
     const selectableCells = cells.filter(filter)
 
     res.send({

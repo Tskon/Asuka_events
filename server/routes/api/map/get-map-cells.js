@@ -1,7 +1,7 @@
 module.exports = function (router, models) {
   router.post('/map/get-map-cells', async (req, res) => {
     const [cells, players] = await Promise.all([
-      models.Cell.find(),
+      models.Cell.find().sort({name: 1}),
       models.Player.find()
     ])
 
@@ -30,14 +30,14 @@ module.exports = function (router, models) {
     const filteredData = cellsWithPlayers.map((cell) => {
       const isFullData = currentCell
         ? cell.id === currentCell.id || cell.connectedCells.includes(currentCell.id)
-        : cell.isStarted
+        : cell.started
 
       return isFullData ? cell : {
         id: cell.id,
         connectedCells: cell.connectedCells,
         players: [],
         bonus: cell.bonus,
-        isStarted: cell.isStarted
+        started: cell.started
       }
     })
 
