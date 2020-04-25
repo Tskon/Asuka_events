@@ -37,7 +37,7 @@ module.exports = function (router, models) {
 
     res.send({
       status: 'ok',
-      data: currentTurn.fog ? filteredData : cellsWithPlayers
+      data: (currentTurn && currentTurn.fog) ? filteredData : cellsWithPlayers
     })
 
   })

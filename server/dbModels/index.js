@@ -3,11 +3,13 @@ const Player = require('./Player')
 const Cell = require('./Cell')
 const TurnType = require('./TurnType')
 const Log = require('./Log')
+const BattleTable = require('./BattleTable')
 
 module.exports = {
   User,
   Player,
   Cell,
   TurnType,
-  Log
+  Log,
+  BattleTable
 }
