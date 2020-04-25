@@ -1,15 +1,12 @@
 const basicCell = {
   bonus: 0,
-  players: [],
   connectedCells: [],
-  controlledTurnsCount: 0,
-  isStarted: false,
-  owner: null
+  started: false
 }
 
 const starterCell = {
   ...basicCell,
-  isStarted: true
+  started: true
 }
 
 const lowEconomyCell = {
@@ -78,16 +75,13 @@ function getConnectedCells(cellName = 'a1') {
   return result
 }
 
-module.exports = (models) => {
-  cellsMap.forEach((cell, cellName) => {
-    models.mapCell.findOne({ where: { cellName } })
-      .then((userDataObject) => {
-        if (!userDataObject) {
-          models.mapCell.create({
-            cellName,
-            dataJson: JSON.stringify(cell)
-          })
-        }
-      })
+module.exports = async (models) => {
+  if (await models.Cell.countDocuments()) return
+
+  cellsMap.forEach((cell, name) => {
+    models.Cell.create({
+      name,
+      ...cell
+    })
   })
 }

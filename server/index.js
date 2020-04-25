@@ -81,7 +81,7 @@ require('./passport/passport.js')(passport, models.User)
 //  */
 // models.sequelize.sync()
 //   .then(() => {
-//     require('./dbInitData/mapCells')(models)
+require('./dbInitData/mapCells')(models)
 //     require('./dbInitData/users')(models)
 //     require('./dbInitData/mapTurnsData')(models)
 //     console.log('Nice! Database looks fine')
