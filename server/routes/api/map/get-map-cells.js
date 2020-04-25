@@ -11,9 +11,15 @@ module.exports = function (router, models) {
     }, 'number fog type')
 
     const cellsWithPlayers = cells.map((cell) => {
-      const cellCopy = {...cell}
-      cellCopy.players = players.filter(player => player.currentCell === cell.name)
-      return cellCopy
+      const {name, started, bonus, connectedCells} = cell
+
+      return {
+        name,
+        started,
+        bonus,
+        connectedCells,
+        players: players.filter(player => player.currentCell === cell.name)
+      }
     })
 
     const currentCell = cellsWithPlayers.find((cell) => {
