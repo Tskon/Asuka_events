@@ -7,10 +7,10 @@ module.exports = function (router, models) {
       return
     }
 
-    await models.User.updateOne({
+    await models.Player.updateOne({
       username: req.user.username
     }, {
-      selectedCell: req.body.cellId
+      selectedCell: req.body.cellName
     })
 
     res.send({

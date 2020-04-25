@@ -14,6 +14,8 @@ const stateInit = {
   playerData: {
     currentCell: '',
     selectedCell: '',
+    ownedCell: '',
+    ownInRowCount: 0,
     selectableCells: [],
     score: 0,
     battleStatus: {

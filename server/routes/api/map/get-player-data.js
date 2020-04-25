@@ -19,14 +19,15 @@ module.exports = function (router, models) {
     const filter = (battleStatus.winner && currentCell)
       ? cell => cell.name === currentCell.name || currentCell.connectedCells.includes(cell.name)
       : cell => cell.started
-    const selectableCells = cells.filter(filter)
+    const selectableCells = cells.filter(filter).map(cell => cell.name)
 
     res.send({
       status: 'ok',
       data: {
-        currentCellId: playerData.currentCellId,
-        selectedCellId: playerData.selectedCellId,
-        ownedCellId: playerData.ownedCellId,
+        currentCell: playerData.currentCell,
+        selectedCell: playerData.selectedCell,
+        ownedCell: playerData.ownedCell,
+        ownInRowCount: playerData.ownInRowCount,
         selectableCells,
         score: playerData.score,
         battleStatus
