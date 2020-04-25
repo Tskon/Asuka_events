@@ -1,53 +1,43 @@
 module.exports = function (router, models) {
   router.post('/map/get-map-cells', async (req, res) => {
     const [cells, players] = await Promise.all([
-      models.mapCell.findAll({
-        order: [['cellName', 'ASC']],
-        attributes: ['cellName', 'dataJson']
-      }),
-      models.userLkData.findAll({
-        attributes: ['userId', 'clanTag']
-      })
+      models.Cell.find(),
+      models.Player.find()
     ])
 
-    const data = cells.map((cell) => {
-      const parsedCell = {
-        id: cell.cellName,
-        ...JSON.parse(cell.dataJson)
-      }
+    const turnsCount = await models.Log.count()
+    const currentTurn = await models.TurnType.findOne({
+      turnNumber: turnsCount + 1
+    }, 'number fog type')
 
-      parsedCell.players = parsedCell.players.map(playerId => {
-        const player = players.find((player) => {
-          return player.userId === playerId
-        })
-        return player
-          ? {id: player.userId, clanTag: player.clanTag}
-          : {id: playerId, clanTag: 'UNKWN'}
-      })
-
-      return parsedCell
+    const cellsWithPlayers = cells.map((cell) => {
+      const cellCopy = {...cell}
+      cellCopy.players = players.filter(player => player.currentCell === cell.name)
+      return cellCopy
     })
 
-    const currentCell = data.find((cell) => {
+    const currentCell = cellsWithPlayers.find((cell) => {
       return cell.players.some(player => player.id === req.user.id)
     })
 
 
-    const filteredData = currentCell ? data.map((cell) => {
-      return (cell.id === currentCell.id || cell.connectedCells.includes(currentCell.id))
-        ? cell
-        : {
-          id: cell.id,
-          connectedCells: cell.connectedCells,
-          players: [],
-          bonus: cell.bonus,
-          isStarted: cell.isStarted
-        }
-    }) : null
+    const filteredData = cellsWithPlayers.map((cell) => {
+      const isFullData = currentCell
+        ? cell.id === currentCell.id || cell.connectedCells.includes(currentCell.id)
+        : cell.isStarted
+
+      return isFullData ? cell : {
+        id: cell.id,
+        connectedCells: cell.connectedCells,
+        players: [],
+        bonus: cell.bonus,
+        isStarted: cell.isStarted
+      }
+    })
 
     res.send({
       status: 'ok',
-      data: currentCell ? filteredData : data
+      data: currentTurn.fog ? filteredData : cellsWithPlayers
     })
 
   })

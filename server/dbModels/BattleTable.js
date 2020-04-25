@@ -4,6 +4,7 @@ const { Schema } = mongoose
 
 const BattleTableSchema = new Schema({
   turnNumber: Number,
+  cellName: String,
   players: Array,
   firstPair: {
     winner: String,

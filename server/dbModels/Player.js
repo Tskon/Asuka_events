@@ -5,9 +5,9 @@ const {Schema} = mongoose
 const PlayerSchema = new Schema({
   username: String,
   score: { type: Number, default: 0 },
-  currentCellId: { type: String, default: '' },
-  selectedCellId: { type: String, default: '' },
-  ownedCellId: { type: String, default: '' },
+  currentCell: { type: String, default: '' },
+  selectedCell: { type: String, default: '' },
+  ownedCell: { type: String, default: '' },
   ownInRowCount: { type: Number, default: 0 }
 })
 

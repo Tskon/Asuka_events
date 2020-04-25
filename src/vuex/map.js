@@ -39,7 +39,7 @@ export default {
     setSector(context, cellId) {
       axios
         .post('/api/map/choose-sector', {
-          cellId
+          cellName: cellId
         })
         .then(({ data }) => {
           if (data.status !== 'success') return

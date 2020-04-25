@@ -137,7 +137,7 @@ export default {
     async fetchBattleTable() {
       const {data: {data: battleTableData}} = await axios
         .post('/api/map/get-battle-table-data', {
-          cellId: this.cell.id
+          cellName: this.cell.name
         })
       if (battleTableData) this.battleTableData = battleTableData
     },

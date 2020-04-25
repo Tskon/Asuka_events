@@ -1,26 +1,16 @@
 module.exports = function (router, models) {
   router.post('/map/get-battle-table-data', async (req, res) => {
-    const mapLog = await models.mapLog.findAll({
-      limit: 1,
-      order: [['turn', 'DESC']],
-      attributes: ['turn']
-    })
-
-    const turnNumber = (mapLog.length) ? mapLog[0].turn + 1 : 1
+    const turnsCount = await models.Log.count()
 
     const battleTable = await models.battleTable.findOne({
-      where: {
-        turnNumber,
-        cellId: req.body.cellId
-      }
+      turnNumber: turnsCount + 1,
+      cellName: req.body.cellName
     })
 
     if (battleTable) {
       res.send({
         status: 'ok',
-        data: {
-          ...JSON.parse(battleTable.dataJson)
-        }
+        data: battleTable
       })
     } else {
       res.send({
