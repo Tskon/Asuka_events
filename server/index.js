@@ -73,7 +73,7 @@ app
 require('./passport/passport.js')(passport, models.User)
 
 require('./dbInitData/mapCells')(models)
-//     require('./dbInitData/users')(models)
+require('./dbInitData/users')(models)
 require('./dbInitData/mapTurnsData')(models)
 
 /**
