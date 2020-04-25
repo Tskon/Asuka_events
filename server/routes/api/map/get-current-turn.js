@@ -1,6 +1,6 @@
 module.exports = function (router, models) {
   router.post('/map/get-current-turn', async (req, res) => {
-    const turnsCount = await models.Log.count()
+    const turnsCount = await models.Log.countDocuments()
 
     const currentTurn = await models.TurnType.findOne({
       turnNumber: turnsCount + 1

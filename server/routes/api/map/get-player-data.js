@@ -7,7 +7,7 @@ module.exports = function (router, models) {
       playerData = await models.Player.findOne({username: req.user.username})
     }
 
-    const turnsCount = await models.Log.count()
+    const turnsCount = await models.Log.countDocuments()
 
     const [battleTable, cells] = await Promise.all([
       models.BattleTable.findOne({ turnNumber: turnsCount, cellName: playerData.currentCell }),

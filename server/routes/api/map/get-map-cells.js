@@ -5,7 +5,7 @@ module.exports = function (router, models) {
       models.Player.find()
     ])
 
-    const turnsCount = await models.Log.count()
+    const turnsCount = await models.Log.countDocuments()
     const currentTurn = await models.TurnType.findOne({
       turnNumber: turnsCount + 1
     }, 'number fog type')
