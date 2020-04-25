@@ -41,54 +41,40 @@ app
   }))
   .use(passport.initialize())
   .use(passport.session())
-//
-//   // Serve the static files from the React app
-//   .use(express.static(path.resolve(__dirname, '../dist')))
-//
-//   /**
-//    * Routes. use path /api + path in routes.
-//    * For example: /api/auth
-//    */
-//   .use('/api/user', (req, res, next) => {
-//     if (req.isAuthenticated()) next()
-//     else res.send({ status: 'error', message: 'Вы не авторизованы. User' })
-//   })
-//   .use('/api/admin', (req, res, next) => {
-//     if (req.user && req.user.isAdmin) next()
-//     else res.send({ status: 'error', message: 'Не достаточно прав. Admin' })
-//   })
-//   .use('/api/map', (req, res, next) => {
-//     if (req.user && (req.user.isAdmin || req.user.isPlayer)) next()
-//     else res.send({ status: 'error', message: 'Не достаточно прав. Player' })
-//   })
+
+  // Serve the static files from the React app
+  .use(express.static(path.resolve(__dirname, '../dist')))
+
+  /**
+   * Routes. use path /api + path in routes.
+   * For example: /api/auth
+   */
+  .use('/api/user', (req, res, next) => {
+    if (req.isAuthenticated()) next()
+    else res.send({ status: 'error', message: 'Вы не авторизованы. User' })
+  })
+  .use('/api/admin', (req, res, next) => {
+    if (req.user && req.user.isAdmin) next()
+    else res.send({ status: 'error', message: 'Не достаточно прав. Admin' })
+  })
+  .use('/api/map', (req, res, next) => {
+    if (req.user && (req.user.isAdmin || req.user.isPlayer)) next()
+    else res.send({ status: 'error', message: 'Не достаточно прав. Player' })
+  })
   .use('/api', require('./routes/api/index')(passport, app))
-//
-//   /**
-//    * for all the react stuff
-//    */
-//   .get('*', (req, res) => {
-//     res.sendFile(path.resolve(__dirname, '../dist/index.html'))
-//   })
-//
-// /**
-//  * Load passport strategies
-//  *
-//  */
+
+  /**
+   * for all the react stuff
+   */
+  .get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../dist/index.html'))
+  })
+
 require('./passport/passport.js')(passport, models.User)
-//
-// /**
-//  * Sync with database
-//  */
-// models.sequelize.sync()
-//   .then(() => {
+
 require('./dbInitData/mapCells')(models)
 //     require('./dbInitData/users')(models)
-//     require('./dbInitData/mapTurnsData')(models)
-//     console.log('Nice! Database looks fine')
-//   })
-//   .catch((err) => {
-//     console.log(err, 'Something went wrong with the Database Update!')
-//   })
+require('./dbInitData/mapTurnsData')(models)
 
 /**
  * Listening port by express

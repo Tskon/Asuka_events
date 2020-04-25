@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const { Schema } = mongoose
 
 const TurnSchema = new Schema({
-  number: Number,
+  turnNumber: Number,
   fog: Boolean,
   type: { type: String, default: 'common' }
 })

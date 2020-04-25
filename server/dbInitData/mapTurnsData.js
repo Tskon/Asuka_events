@@ -1,26 +1,21 @@
-module.exports = (models) => {
+module.exports = async (models) => {
   const turns = [
-    { name: 'selectStartSector', count: 1, fog: false },
-    { name: 'commonTurn', count: 99, fog: true }
+    { type: 'selectStartSector', count: 1, fog: false },
+    { type: 'commonTurn', count: 9, fog: true }
   ]
 
-  models.mapTurnData.findAll({
-    limit: 1
-  })
-    .then(((turnsInDb) => {
-      if (turnsInDb[0]) return
+  if (await models.TurnType.countDocuments()) return
 
-      let turnNumber = 0
+  let turnNumber = 0
 
-      turns.forEach((turn) => {
-        for (let i = 0; i < turn.count; i++) {
-          turnNumber++
-          models.mapTurnData.create({
-            turnNumber,
-            turnName: turn.name,
-            fog: turn.fog
-          })
-        }
+  turns.forEach((turn) => {
+    for (let i = 0; i < turn.count; i++) {
+      turnNumber++
+      models.TurnType.create({
+        turnNumber,
+        type: turn.type,
+        fog: turn.fog
       })
-    }))
+    }
+  })
 }
