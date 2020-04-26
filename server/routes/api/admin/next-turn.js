@@ -4,81 +4,46 @@ module.exports = function (router, models) {
     const turnNumber = turnsCount + 1
 
     const [
-      cellsDataFromDB,
-      playersDataFromDB,
-      playersList,
-      battleTableListFromDB
+      cells,
+      players,
+      battleTables
     ] = await Promise.all([
-      models.mapCell.findAll({
-        order: [['cellName']],
-        attributes: ['cellName', 'dataJson']
-      }),
-      models.userMapData.findAll({
-        attributes: ['userId', 'score', 'selectedCellId']
-      }),
-      models.user.findAll({
-        attributes: ['id'],
-        where: {isPlayer: true}
-      }),
-      models.battleTable.findAll({where: {
-        turnNumber
-      }})
+      models.Cell.find().sort({name: 1}),
+      models.Player.find(),
+      models.BattleTable.find({ turnNumber })
     ])
 
-    const { playersData, cellsData } = getData(cellsDataFromDB, playersDataFromDB, playersList)
-    await models.mapLog.create({
-      playersJson: JSON.stringify(playersData),
-      cellsJson: JSON.stringify(cellsData)
+    await models.Log.create({
+      turnNumber,
+      players
     })
 
-    const battleTableList = battleTableListFromDB.map(battleTable => {
-      return {
-        cellId: battleTable.cellId,
-        ...JSON.parse(battleTable.dataJson)
+    players.forEach(playerData => {
+      const isWinner = checkIsWinner(battleTables, playerData)
+
+      if (playerData.ownedCell) {
+        const cell = cells.find(cellData => cellData.name === playerData.currentCell)
+        const bonusCoef = (playerData.ownInRowCount < 3) ? 1 : 0
+        playerData.score += cell.bonus * bonusCoef
       }
+
+      if (!isWinner) {
+        playerData.ownedCell = ''
+        playerData.ownInRowCount = 0
+      }
+
+      smartSectorChoose(playerData, isWinner, cells, players)
+
+      playerData.selectedCell = ''
     })
 
-    const cellsDataCopy = JSON.parse(JSON.stringify(cellsData))
-    cellsData.forEach(cellData => {
-      if (cellData.owner) {
-        const owner = playersData.find(player => player.userId === cellData.owner)
-        owner.score += cellData.bonus
-        if (!cellData.players.includes(cellData.owner)) {
-          cellData.owner = null
-        }
-      }
+    createBattleTables({cells, players, turnNumber: turnNumber + 1})
 
-      if (cellData.players.length === 1) {
-        const playerData = playersData.find(player => player.userId === cellData.players[0])
-        if (playerData.selectedCellId === cellData.cellName || !playerData.selectedCellId) {
-          [cellData.owner] = cellData.players
-        }
-      }
-
-      cellData.players.forEach(player => {
-        battleTableList.some((battleTable) => {
-          if (battleTable.winner === player) {
-            const playerData = playersData.find(player => player.userId === cellData.players[0])
-            if (playerData.selectedCellId === cellData.cellName || !playerData.selectedCellId) {
-              cellData.owner = player
-            }
-            return true
-          }
-          return false
-        })
+    await Promise.all(
+      players.map(player => {
+        return models.Player.updateOne({ username: player.username }, player)
       })
-
-      cellData.players = []
-    })
-
-    playersData.forEach(playerData => {
-      smartSectorChoose(playerData, cellsData, cellsDataCopy, battleTableList)
-      playerData.selectedCellId = ''
-    })
-
-    createBattleTables({cellsData, turnNumber: turnNumber + 1})
-    updateCellsData({cellsData, cellsDataFromDB})
-    updatePlayersData({playersData})
+    )
 
     res.send({
       status: 'success',
@@ -86,106 +51,67 @@ module.exports = function (router, models) {
     })
   })
 
-  function createBattleTables({cellsData, turnNumber}) {
-    cellsData.forEach((cellData) => {
-      if (cellData.players.length < 2) return
+  function createBattleTables({cells, players, turnNumber}) {
+    cells.forEach((cell) => {
+      const playerList = players.filter(player => player.currentCell === cell.name)
+      if (playerList.length < 2) return
 
-      const dataJson = JSON.stringify({
-        screenshots: {
-          finalist1: "",
-          finalist2: "",
-          winner: ""
-        },
-        pair1: [cellData.players[0], cellData.players[1]],
-        pair2: [cellData.players[2], cellData.players[3]],
-        finalPair: [],
-        winner: ""
-      })
+      const firstPair = { winner: '', looser: '' }
+      const secondPair = { winner: '', looser: '' }
+      const finalPair = { winner: '', looser: '' }
 
-      models.battleTable.create({
+      if (playerList.length === 2) {
+        [firstPair.winner, secondPair.winner] = playerList
+        firstPair.looser = '---'
+        secondPair.looser = '---'
+      }
+
+      if (playerList.length === 3) {
+        // eslint-disable-next-line prefer-destructuring
+        secondPair.winner = playerList[2]
+        secondPair.looser = '---'
+      }
+
+      models.BattleTable.create({
         turnNumber,
-        cellId: cellData.cellName,
-        dataJson
+        cellName: cell.name,
+        players: playerList,
+        firstPair,
+        secondPair,
+        finalPair
       })
     })
   }
 
-  function updateCellsData({cellsData, cellsDataFromDB}) {
-    cellsData.forEach((cell) => {
-      const currentCell = cellsDataFromDB.find(cellFromDB => cellFromDB.cellName === cell.cellName)
-      models.mapCell.update({
-        dataJson: JSON.stringify({
-          ...JSON.parse(currentCell.dataJson),
-          players: cell.players,
-          owner: cell.owner
-        })
-      }, {where: {cellName: cell.cellName}})
-    })
-  }
-
-  function updatePlayersData({playersData}) {
-    playersData.forEach(async (playerData) => {
-      const playerDataFromDB = await models.userMapData.findOne({where: {userId: playerData.userId}})
-      if (playerDataFromDB) {
-        models.userMapData.update(
-          {selectedCellId: '', score: playerData.score},
-          {where: {userId: playerData.userId}}
-        )
-      } else {
-        models.userMapData.create(playerData)
-      }
-    })
-  }
-
-  function getData(cellsDataFromDB, playersDataFromDB, players) {
-    const parcedCellsData = cellsDataFromDB.map((cellDataFromDB) => {
-      return {
-        cellName: cellDataFromDB.cellName,
-        ...JSON.parse(cellDataFromDB.dataJson)
-      }
+  function smartSectorChoose(player, isWinner, cells, players) {
+    const availableSectors = cells.filter((cell) => {
+      const playersCount = players.filter(playerData => {
+        return playerData.currentCell === cell.name && playerData.username !== player.username
+      }).length
+      return cell.started && playersCount < 4
     })
 
-    const parcedUsersData = players.map(player => {
-      let changedUser = playersDataFromDB.find(user => user.userId === player.id)
-      changedUser = changedUser || {
-        userId: player.id,
-        score: 0,
-        selectedCellId: ''
-      }
-
-      return changedUser
-    })
-
-    return {
-      playersData: parcedUsersData,
-      cellsData: parcedCellsData
+    if (isWinner) {
+      if (player.selectedCell) player.currentCell = player.selectedCell
+      return
     }
-  }
 
-  function smartSectorChoose(player, mapDataClear, mapData, battleTableList) {
-    if (player.selectedCellId) {
-      mapData.some((cell) => {
-        if (cell.cellName === player.selectedCellId) {
-          const newCellData = mapDataClear.find(cellData => cellData.cellName === player.selectedCellId)
-          newCellData.players.push(player.userId)
-          return true
-        }
-        return false
-      })
+    const randomSector = availableSectors[Math.floor(Math.random() * availableSectors.length)]
+
+    if (!player.selectedCell) {
+      player.currentCell = randomSector.name
+      return
+    }
+
+    if (availableSectors.some(cell => cell.name === player.selectedCell)) {
+      player.currentCell = player.selectedCell
     } else {
-      const startedSectors = mapDataClear.filter((cell) => {
-        return cell.isStarted && cell.players.length < 4
-      })
-      const cellWithPlayer = mapData.find((cell) => cell.players.includes(player.userId))
-      const currentBattleTable = battleTableList.find(battleTable => battleTable.cellId === cellWithPlayer.cellName)
-      if (!cellWithPlayer || (currentBattleTable && currentBattleTable.winner !== player.userId)) {
-        const randomSector = startedSectors[Math.floor(Math.random() * startedSectors.length)]
-        randomSector.players.push(player.userId)
-      } else if (cellWithPlayer) {
-        // TODO добавить в условии выше выбрасывание с текущего стартового сектора на нормальный, если ничего не выбрано
-        const newCellData = mapDataClear.find(cellData => cellData.cellName === cellWithPlayer.cellName)
-        newCellData.players.push(player.userId)
-      }
+      player.currentCell = randomSector.name
     }
+  }
+
+  function checkIsWinner(battleTables, player) {
+    const battleTable = battleTables.find(bt => bt.cellName === player.currentCell)
+    return !battleTable || battleTable.finalPair.winner === player.username
   }
 }
