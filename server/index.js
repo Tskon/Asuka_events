@@ -1,6 +1,6 @@
-require('dotenv').config()
 const cors = require('cors')
 const path = require('path')
+require('dotenv').config({path:path.resolve(__dirname, '../.env')})
 const express = require('express')
 const passport = require('passport')
 const fileUpload = require('express-fileupload')
