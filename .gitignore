@@ -3,6 +3,7 @@ node_modules
 /dist
 /docker/docker-compose.yml
 /docker/init-mongo.js
+/docker/mongodbStorage/
 /server/db-config.js
 
 # local env files
