@@ -30,6 +30,9 @@ module.exports = function (router, models) {
       if (!isWinner) {
         playerData.ownedCell = ''
         playerData.ownInRowCount = 0
+      } else if (playerData.selectedCell === playerData.currentCell || !playerData.selectedCell) {
+        playerData.ownedCell = playerData.currentCell
+        playerData.ownInRowCount++
       }
 
       smartSectorChoose(playerData, isWinner, cells, players)
@@ -41,6 +44,7 @@ module.exports = function (router, models) {
 
     await Promise.all(
       players.map(player => {
+        console.log('updated player info: ', player)
         return models.Player.updateOne({ username: player.username }, player)
       })
     )
