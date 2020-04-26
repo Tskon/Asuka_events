@@ -2,13 +2,17 @@ module.exports = function (router, models) {
   router.post('/map/get-current-turn', async (req, res) => {
     const turnsCount = await models.Log.countDocuments()
 
-    const currentTurn = await models.TurnType.findOne({
+    const {turnNumber, fog, type} = await models.TurnType.findOne({
       turnNumber: turnsCount + 1
-    }, 'number fog type')
+    }, 'turnNumber fog type')
 
     res.send({
       status: 'ok',
-      data: currentTurn
+      data: {
+        turnNumber,
+        fog,
+        type
+      }
     })
   })
 }

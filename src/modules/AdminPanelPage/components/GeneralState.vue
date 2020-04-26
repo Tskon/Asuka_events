@@ -4,7 +4,7 @@
       <ul class="list-unstyled">
         <h5>Текущий ход:</h5>
         <li><b>Номер хода:</b> {{ currentTurn.turnNumber }}</li>
-        <li><b>Тип:</b> {{ turnNames[currentTurn.turnName] }}</li>
+        <li><b>Тип:</b> {{ turnNames[currentTurn.type] || currentTurn.type }}</li>
         <li><b>Туман войны:</b> {{ currentTurn.fog ? 'Вкл': 'Выкл' }}</li>
       </ul>
 
