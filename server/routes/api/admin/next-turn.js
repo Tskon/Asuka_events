@@ -33,6 +33,9 @@ module.exports = function (router, models) {
       } else if (playerData.selectedCell === playerData.currentCell || !playerData.selectedCell) {
         playerData.ownedCell = playerData.currentCell
         playerData.ownInRowCount++
+      } else if (playerData.selectedCell !== playerData.currentCell) {
+        playerData.ownedCell = ''
+        playerData.ownInRowCount = 0
       }
 
       smartSectorChoose(playerData, isWinner, cells, players)
