@@ -1,15 +1,10 @@
 module.exports = function (router, models) {
-  router.post('/admin/get-logs', (req, res) => {
-    models.mapLog.findAll({
-      attributes: ['playersJson', 'cellsJson']
-    }).then((logs) => {
-      res.send({
-        status: 'ok',
-        data: logs.map((log) => ({
-          players: JSON.parse(log.playersJson),
-          map: JSON.parse(log.cellsJson)
-        }))
-      })
+  router.post('/admin/get-logs', async (req, res) => {
+    const logs = await models.Log.find({}, 'turnNumber players cells')
+
+    res.send({
+      status: 'ok',
+      data: logs
     })
   })
 }

@@ -36,7 +36,7 @@ export default {
     setPlayerStatus(context, payload) {
       axios
         .post('/api/admin/set-player-status', {
-          userId: payload.userId,
+          username: payload.username,
           status: payload.status
         })
         .then(({ data }) => {

@@ -1,11 +1,7 @@
 module.exports = function (router, models) {
   router.post('/admin/next-turn', async (req, res) => {
-    const [mapLog] = await models.mapLog.findAll({
-      limit: 1,
-      order: [['turn', 'DESC']],
-      attributes: ['turn']
-    })
-    const turnNumber = mapLog ? mapLog.turn + 1 : 1
+    const turnsCount = await models.Log.countDocuments()
+    const turnNumber = turnsCount + 1
 
     const [
       cellsDataFromDB,
