@@ -31,13 +31,15 @@ export default {
         },
         {
           key: 'selectedCell',
-          label: 'Выбр.',
-          sortable: false
+          label: 'Выбр.'
         },
         {
           key: 'ownedCell',
-          label: 'Принадл.',
-          sortable: false
+          label: 'Влад.'
+        },
+        {
+          key: 'ownInRowCount',
+          label: 'Ход.Влад.'
         }
       ]
     }
@@ -51,9 +53,10 @@ export default {
       return this.players.map(player => ({
         username: player.username,
         score: player.score || 0,
-        currentCell: player.currentCellId || '',
-        selectedCell: player.currentCellId || '',
-        ownedCell: player.ownedCell || ''
+        currentCell: player.currentCell || '',
+        selectedCell: player.selectedCell || '',
+        ownedCell: player.ownedCell || '',
+        ownInRowCount: player.ownInRowCount || 0
       }))
     }
   }
