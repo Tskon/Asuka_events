@@ -6,7 +6,6 @@
     placement="rightbottom"
     custom-class="w-100"
     @show="fetchBattleTable"
-    @hide="onHide"
   >
     <template v-if="cell.players.length">
       <ol>
@@ -25,10 +24,7 @@
           :battle-table-data="battleTableData"
           :cell-id="cell.name"
         />
-        <BattleTableScreenshotUploader
-          v-if="isUploaderAvailable"
-          @togglePopoverHidePrevent="togglePopoverHidePrevent"
-        />
+        <BattleTableResultBlock/>
         <hr/>
       </template>
     </template>
@@ -55,12 +51,12 @@
 import { mapActions, mapState } from 'vuex'
 import axios from "axios"
 import BattleTable from './BattleTable'
-import BattleTableScreenshotUploader from './BattleTableScreenshotUploader'
+import BattleTableResultBlock from './BattleTableResultBlock'
 
 export default {
   components: {
     BattleTable,
-    BattleTableScreenshotUploader
+    BattleTableResultBlock
   },
 
   props: {
@@ -112,7 +108,7 @@ export default {
       return this.playerCurrentCell === this.cell.name
     },
 
-    isUploaderAvailable() {
+    isResultBlockAvailable() {
       // const isFinalPairIncludePlayer = this.battleTableData.finalPair.includes(this.playerId)
       // const isPair1Valid = this.battleTableData.pair1.length > 1 && this.battleTableData.pair1.includes(this.playerId)
       // const isPair2Valid = this.battleTableData.pair2.length > 1 && this.battleTableData.pair2.includes(this.playerId)
@@ -137,14 +133,6 @@ export default {
           cellName: this.cell.name
         })
       if (data) this.battleTableData = data.data
-    },
-
-    togglePopoverHidePrevent() {
-      this.isPopoverHidePrevent = !this.isPopoverHidePrevent
-    },
-
-    onHide(e) {
-      if (this.isPopoverHidePrevent) e.preventDefault()
     }
   }
 }

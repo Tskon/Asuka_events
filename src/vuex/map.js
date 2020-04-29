@@ -49,12 +49,8 @@ export default {
           context.dispatch('user/getPlayerData', null, { root: true })
         })
     },
-    uploadVictoryScreenshot(context, formdata) {
-      return axios.post('/api/map/battle-table-upload-victory-screenshot', formdata, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      })
+    setBattleStatus(context, isWinner) {
+      return axios.post('/api/map/battle-table-upload-victory-screenshot', { isWinner })
     }
   },
 
