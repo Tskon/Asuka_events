@@ -4,10 +4,6 @@
       <span class="divider-1">Полуфинал</span>
       <span class="divider-2">Полуфинал</span>
       <span class="final-label">Финал</span>
-      <span
-        v-if="winner"
-        class="winner"
-      >Победитель: {{ getPlayerName(winner) }}</span>
       <div class="cell semi-final-1">
         {{ getPlayerName(pair1[0]) }}
       </div>
@@ -47,45 +43,38 @@ export default {
     return {
       pair1: [],
       pair2: [],
-      finalPair: [],
-      winner: ''
-    }
-  },
-
-  computed: {
-    playerList() {
-      const currentCell = this.$store.state.map.cells.find(cell => {
-        return cell.name === this.cellName
-      })
-      return currentCell ? currentCell.players : []
+      finalPair: []
     }
   },
 
   watch: {
     battleTableData() {
       const { players, firstPair, secondPair } = this.battleTableData
+      const findPlayer = username => {
+        return this.battleTableData.players.find(player => player.username === username)
+      }
 
       if (players.length === 2) {
-        this.pair1 = [firstPair.winner]
-        this.pair2 = [secondPair.winner]
-        this.finalPair = [firstPair.winner, secondPair.winner]
+        this.pair1 = [findPlayer(firstPair.winner)]
+        this.pair2 = [findPlayer(secondPair.winner)]
+        this.finalPair = [findPlayer(firstPair.winner), findPlayer(secondPair.winner)]
       }
       if (players.length === 3) {
         this.pair1 = [players[0], players[1]]
-        this.pair2 = [secondPair.winner]
-        this.finalPair = [firstPair.winner, secondPair.winner]
+        this.pair2 = [findPlayer(secondPair.winner)]
+        this.finalPair = [findPlayer(firstPair.winner), findPlayer(secondPair.winner)]
       }
       if (players.length === 4) {
         this.pair1 = [players[0], players[1]]
         this.pair2 = [players[3], players[4]]
-        this.finalPair = [firstPair.winner, secondPair.winner]
+        this.finalPair = [findPlayer(firstPair.winner), findPlayer(secondPair.winner)]
       }
     }
   },
 
   methods: {
-    getPlayerName(player) {
-      return player ? player.clanTag : '------'
+    getPlayerName(playerObject) {
+      return playerObject ? playerObject.clanTag : '------'
     }
   }
 }
@@ -97,7 +86,7 @@ export default {
     grid-template-areas:
     'semi-final-1 final-label final-label semi-final-3'
     'divider-1 final-1 final-2 divider-2'
-    'semi-final-2 winner winner semi-final-4';
+    'semi-final-2 . . semi-final-4';
     grid-gap: 10px;
 
     .cell {

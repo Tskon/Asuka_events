@@ -45,7 +45,7 @@ module.exports = function (router, models) {
       playerData.selectedCell = ''
     })
 
-    createBattleTables({cells, players, turnNumber: turnNumber + 1, users})
+    createBattleTables({ cells, players, turnNumber: turnNumber + 1, users })
 
     await Promise.all(
       players.map(player => {
@@ -59,20 +59,11 @@ module.exports = function (router, models) {
     })
   })
 
-  function createBattleTables({cells, players, turnNumber, users}) {
+  function createBattleTables({ cells, players, turnNumber, users }) {
     cells.forEach((cell) => {
       const playerList = players
         .filter(player => player.currentCell === cell.name)
-        .map(player => {
-          const user = users.find(user => user.username === player.username)
-          return {
-            username: user.username,
-            clanTag: user.clanTag,
-            clanName: user.clanName,
-            avatar: user.avatar,
-            currentCell: player.currentCell
-          }
-        })
+        .map(player => player.username)
       if (playerList.length < 2) return
 
       const firstPair = { winner: null, looser: null }
@@ -94,7 +85,15 @@ module.exports = function (router, models) {
       models.BattleTable.create({
         turnNumber,
         cellName: cell.name,
-        players: playerList,
+        players: playerList.map(player => {
+          const { username, clanName, clanTag, avatar } = users.find(user => user.username === player)
+          return {
+            username,
+            clanName,
+            clanTag,
+            avatar
+          }
+        }),
         firstPair,
         secondPair,
         finalPair
