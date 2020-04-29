@@ -63,20 +63,29 @@ export default {
 
   watch: {
     battleTableData() {
-      this.pair1 = this.battleTableData.pair1
-      this.pair2 = this.battleTableData.pair2
-      this.finalPair = this.battleTableData.finalPair
-      this.winner = this.battleTableData.winner
+      const { players, firstPair, secondPair } = this.battleTableData
+
+      if (players.length === 2) {
+        this.pair1 = [firstPair.winner]
+        this.pair2 = [secondPair.winner]
+        this.finalPair = [firstPair.winner, secondPair.winner]
+      }
+      if (players.length === 3) {
+        this.pair1 = [players[0], players[1]]
+        this.pair2 = [secondPair.winner]
+        this.finalPair = [firstPair.winner, secondPair.winner]
+      }
+      if (players.length === 4) {
+        this.pair1 = [players[0], players[1]]
+        this.pair2 = [players[3], players[4]]
+        this.finalPair = [firstPair.winner, secondPair.winner]
+      }
     }
   },
 
   methods: {
-    getPlayerName(username) {
-      if (username) {
-        const currentPlayer = this.playerList.find(player => player.username === username)
-        return currentPlayer ? currentPlayer.clanTag : 'Н/Д'
-      }
-      return '------'
+    getPlayerName(player) {
+      return player ? player.clanTag : '------'
     }
   }
 }

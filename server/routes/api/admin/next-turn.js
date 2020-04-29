@@ -6,11 +6,13 @@ module.exports = function (router, models) {
     const [
       cells,
       players,
-      battleTables
+      battleTables,
+      users
     ] = await Promise.all([
       models.Cell.find().sort({name: 1}),
       models.Player.find(),
-      models.BattleTable.find({ turnNumber })
+      models.BattleTable.find({ turnNumber }),
+      models.User.find({ isPlayer: true })
     ])
 
     await models.Log.create({
@@ -43,11 +45,10 @@ module.exports = function (router, models) {
       playerData.selectedCell = ''
     })
 
-    createBattleTables({cells, players, turnNumber: turnNumber + 1})
+    createBattleTables({cells, players, turnNumber: turnNumber + 1, users})
 
     await Promise.all(
       players.map(player => {
-        console.log('updated player info: ', player)
         return models.Player.updateOne({ username: player.username }, player)
       })
     )
@@ -58,25 +59,33 @@ module.exports = function (router, models) {
     })
   })
 
-  function createBattleTables({cells, players, turnNumber}) {
+  function createBattleTables({cells, players, turnNumber, users}) {
     cells.forEach((cell) => {
-      const playerList = players.filter(player => player.currentCell === cell.name)
+      const playerList = players
+        .filter(player => player.currentCell === cell.name)
+        .map(player => {
+          const user = users.find(user => user.username === player.username)
+          return {
+            ...player._doc,
+            ...user._doc
+          }
+        })
       if (playerList.length < 2) return
 
-      const firstPair = { winner: '', looser: '' }
-      const secondPair = { winner: '', looser: '' }
-      const finalPair = { winner: '', looser: '' }
+      const firstPair = { winner: null, looser: null }
+      const secondPair = { winner: null, looser: null }
+      const finalPair = { winner: null, looser: null }
 
       if (playerList.length === 2) {
         [firstPair.winner, secondPair.winner] = playerList
-        firstPair.looser = '---'
-        secondPair.looser = '---'
+        firstPair.looser = null
+        secondPair.looser = null
       }
 
       if (playerList.length === 3) {
         // eslint-disable-next-line prefer-destructuring
         secondPair.winner = playerList[2]
-        secondPair.looser = '---'
+        secondPair.looser = null
       }
 
       models.BattleTable.create({

@@ -5,12 +5,18 @@ module.exports = function (router, models) {
     const battleTable = await models.BattleTable.findOne({
       turnNumber: turnsCount + 1,
       cellName: req.body.cellName
-    })
+    }, 'cellName players firstPair secondPair finalPair')
 
     if (battleTable) {
       res.send({
         status: 'ok',
-        data: battleTable
+        data: {
+          cellNames: battleTable.cellNames,
+          players: battleTable.players,
+          firstPair: battleTable.firstPair,
+          secondPair: battleTable.secondPair,
+          finalPair: battleTable.finalPair
+        }
       })
     } else {
       res.send({

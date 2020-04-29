@@ -22,6 +22,7 @@ module.exports = {
     "import/no-dynamic-require": "off",
     "import/extensions": "off",
     "import/no-unresolved": "off",
+    "no-underscore-dangle": "off",
     "func-names": "off",
     "semi": [2, "never"],
     "comma-dangle": ["error", "never"],

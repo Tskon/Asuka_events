@@ -7,16 +7,46 @@ const BattleTableSchema = new Schema({
   cellName: String,
   players: Array,
   firstPair: {
-    winner: String,
-    looser: String
+    winner: {
+      username: String,
+      clanTag: String,
+      clanName: String,
+      avatar: String
+    },
+    looser: {
+      username: String,
+      clanTag: String,
+      clanName: String,
+      avatar: String
+    }
   },
   secondPair: {
-    winner: String,
-    looser: String
+    winner: {
+      username: String,
+      clanTag: String,
+      clanName: String,
+      avatar: String
+    },
+    looser: {
+      username: String,
+      clanTag: String,
+      clanName: String,
+      avatar: String
+    }
   },
   finalPair: {
-    winner: String,
-    looser: String
+    winner: {
+      username: String,
+      clanTag: String,
+      clanName: String,
+      avatar: String
+    },
+    looser: {
+      username: String,
+      clanTag: String,
+      clanName: String,
+      avatar: String
+    }
   }
 })
 

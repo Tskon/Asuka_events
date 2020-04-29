@@ -73,10 +73,10 @@ export default {
   data() {
     return {
       battleTableData: {
-        pair1: [],
-        pair2: [],
-        finalPair: [],
-        winner: null
+        firstPair: {},
+        secondPair: {},
+        finalPair: {},
+        players: []
       },
       isPopoverHidePrevent: false
     }
@@ -113,15 +113,16 @@ export default {
     },
 
     isUploaderAvailable() {
-      const isFinalPairIncludePlayer = this.battleTableData.finalPair.includes(this.playerId)
-      const isPair1Valid = this.battleTableData.pair1.length > 1 && this.battleTableData.pair1.includes(this.playerId)
-      const isPair2Valid = this.battleTableData.pair2.length > 1 && this.battleTableData.pair2.includes(this.playerId)
-
-      const hasValidPair = isFinalPairIncludePlayer ? this.battleTableData.finalPair.length > 1 : isPair1Valid || isPair2Valid
-
-      return this.isPlayerInThisSector
-        && !this.battleTableData.winner
-        && hasValidPair
+      // const isFinalPairIncludePlayer = this.battleTableData.finalPair.includes(this.playerId)
+      // const isPair1Valid = this.battleTableData.pair1.length > 1 && this.battleTableData.pair1.includes(this.playerId)
+      // const isPair2Valid = this.battleTableData.pair2.length > 1 && this.battleTableData.pair2.includes(this.playerId)
+      //
+      // const hasValidPair = isFinalPairIncludePlayer ? this.battleTableData.finalPair.length > 1 : isPair1Valid || isPair2Valid
+      //
+      // return this.isPlayerInThisSector
+      //   && !this.battleTableData.winner
+      //   && hasValidPair
+      return true
     }
   },
 
@@ -131,11 +132,11 @@ export default {
     }),
 
     async fetchBattleTable() {
-      const {data: {data: battleTableData}} = await axios
+      const { data } = await axios
         .post('/api/map/get-battle-table-data', {
           cellName: this.cell.name
         })
-      if (battleTableData) this.battleTableData = battleTableData
+      if (data) this.battleTableData = data.data
     },
 
     togglePopoverHidePrevent() {
