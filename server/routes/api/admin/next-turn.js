@@ -66,8 +66,11 @@ module.exports = function (router, models) {
         .map(player => {
           const user = users.find(user => user.username === player.username)
           return {
-            ...player._doc,
-            ...user._doc
+            username: user.username,
+            clanTag: user.clanTag,
+            clanName: user.clanName,
+            avatar: user.avatar,
+            currentCell: player.currentCell
           }
         })
       if (playerList.length < 2) return
