@@ -1,8 +1,9 @@
 module.exports = function (router, models) {
   router.post('/map/get-map-cells', async (req, res) => {
-    const [cells, players] = await Promise.all([
+    const [cells, players, users] = await Promise.all([
       models.Cell.find().sort({name: 1}),
-      models.Player.find()
+      models.Player.find({}, 'currentCell username'),
+      models.User.find({ isPlayer: true }, 'username clanTag clanName avatar')
     ])
 
     const turnsCount = await models.Log.countDocuments()
@@ -12,13 +13,16 @@ module.exports = function (router, models) {
 
     const cellsWithPlayers = cells.map((cell) => {
       const {name, started, bonus, connectedCells} = cell
+      const filteredPlayers = players.filter(player => player.currentCell === cell.name)
 
       return {
         name,
         started,
         bonus,
         connectedCells,
-        players: players.filter(player => player.currentCell === cell.name)
+        players: filteredPlayers.map(player => {
+          return users.find(user => user.username === player.username)
+        })
       }
     })
 
