@@ -11,38 +11,35 @@ module.exports = function (router, models) {
 
     const isFirstPairWinner = battleTable.firstPair.winner === req.user.username
     const isSecondPairWinner = battleTable.secondPair.winner === req.user.username
+    const isFinalPairWinner = battleTable.finalPair.winner === req.user.username
+    const isFinalPairLooser = battleTable.finalPair.looser === req.user.username
     const playerIndex = battleTable.players.findIndex(player => player.username === req.user.username)
 
-    if (battleTable.players.length === 2) {
-      if (isWinner) battleTable.finalPair.winner = req.user.username
-      else battleTable.finalPair.looser = req.user.username
-    } else if (battleTable.players.length > 2) {
-      if (isFirstPairWinner || isSecondPairWinner) {
+    if (!isFinalPairLooser && !isFinalPairWinner) {
+      if (battleTable.players.length === 2) {
         if (isWinner) battleTable.finalPair.winner = req.user.username
         else battleTable.finalPair.looser = req.user.username
-      } else {
-        const pair = (playerIndex < 2) ? 'firstPair' : 'secondPair'
-        if (isWinner) battleTable[pair].winner = req.user.username
-        else battleTable[pair].looser = req.user.username
+      } else if (battleTable.players.length > 2) {
+        if (isFirstPairWinner || isSecondPairWinner) {
+          if (isWinner) battleTable.finalPair.winner = req.user.username
+          else battleTable.finalPair.looser = req.user.username
+        } else {
+          const pair = (playerIndex < 2) ? 'firstPair' : 'secondPair'
+          if (isWinner) battleTable[pair].winner = req.user.username
+          else battleTable[pair].looser = req.user.username
+        }
       }
     }
 
-    const usersInChosenSector = await models.User.find({ selectedCell: req.body.cellName })
 
-    if (usersInChosenSector.length > 3) {
-      res.send({ status: 'info', message: 'В данном секторе кончились места' })
-      return
-    }
-
-    await models.Player.updateOne({
-      username: req.user.username
-    }, {
-      selectedCell: req.body.cellName
-    })
+    await models.BattleTable.updateOne({
+      turnNumber: turnsCount + 1,
+      cellName: player.currentCell
+    }, battleTable)
 
     res.send({
       status: 'success',
-      message: 'Сектор успешно выбран'
+      message: 'Результат записан'
     })
   })
 }

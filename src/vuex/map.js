@@ -50,7 +50,7 @@ export default {
         })
     },
     setBattleStatus(context, isWinner) {
-      return axios.post('/api/map/battle-table-upload-victory-screenshot', { isWinner })
+      return axios.post('/api/map/set-match-result', { isWinner })
     }
   },
 
