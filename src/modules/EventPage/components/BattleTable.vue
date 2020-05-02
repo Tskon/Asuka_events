@@ -1,6 +1,16 @@
 <template>
-  <div>
-    <div class="table-wrapper">
+  <div class="position-relative">
+    <button
+      class="edit-btn"
+      @click="editBtnClick"
+    >
+      <i class="fas fa-edit"/>
+      Редактировать таблицу
+    </button>
+    <div
+      v-if="!isEditMode"
+      class="table-wrapper"
+    >
       <span class="divider-1">Полуфинал</span>
       <span class="divider-2">Полуфинал</span>
       <span class="final-label">Финал</span>
@@ -109,7 +119,8 @@ export default {
     return {
       pair1: [],
       pair2: [],
-      finalPair: []
+      finalPair: [],
+      isEditMode: false
     }
   },
 
@@ -141,6 +152,10 @@ export default {
   methods: {
     getPlayerName(playerObject) {
       return playerObject ? playerObject.clanTag : '------'
+    },
+
+    editBtnClick() {
+      this.isEditMode = !this.isEditMode
     }
   }
 }
@@ -289,5 +304,16 @@ export default {
 
   .pair-winner {
     color: $warning;
+  }
+
+  .edit-btn {
+    background-color: transparent;
+    border: none;
+    margin-bottom: 10px;
+    transition: color .2s;
+
+    &:hover {
+      color: lighten($dark, 20%);
+    }
   }
 </style>
