@@ -24,7 +24,7 @@
           :battle-table-data="battleTableData"
           :cell-id="cell.name"
         />
-        <BattleTableResultBlock/>
+        <BattleTableResultBlock v-if="isResultBlockAvailable"/>
         <hr/>
       </template>
     </template>
@@ -84,7 +84,8 @@ export default {
       playerSelectedCell: (state) => state.user.playerData.selectedCell,
       playerCurrentCell: (state) => state.user.playerData.currentCell,
       selectableCells: (state) => state.user.playerData.selectableCells,
-      playerBattleStatus: (state) => state.user.playerData.battleStatus
+      playerBattleStatus: (state) => state.user.playerData.battleStatus,
+      username: (state) => state.user.name
     }),
 
     isNoActions() {
@@ -109,16 +110,11 @@ export default {
     },
 
     isResultBlockAvailable() {
-      // const isFinalPairIncludePlayer = this.battleTableData.finalPair.includes(this.playerId)
-      // const isPair1Valid = this.battleTableData.pair1.length > 1 && this.battleTableData.pair1.includes(this.playerId)
-      // const isPair2Valid = this.battleTableData.pair2.length > 1 && this.battleTableData.pair2.includes(this.playerId)
-      //
-      // const hasValidPair = isFinalPairIncludePlayer ? this.battleTableData.finalPair.length > 1 : isPair1Valid || isPair2Valid
-      //
-      // return this.isPlayerInThisSector
-      //   && !this.battleTableData.winner
-      //   && hasValidPair
-      return true
+      const isPlayerInBattleTable = this.battleTableData.players
+        .some(player => player.username === this.username)
+      const hasBTWinner = this.battleTableData.finalPair.winner
+
+      return isPlayerInBattleTable && !hasBTWinner
     }
   },
 
