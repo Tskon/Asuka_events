@@ -4,22 +4,88 @@
       <span class="divider-1">Полуфинал</span>
       <span class="divider-2">Полуфинал</span>
       <span class="final-label">Финал</span>
-      <div class="cell semi-final-1">
+      <div
+        class="cell semi-final-1"
+        :class="{
+          'pair-winner': battleTableData.firstPair.winner
+            && battleTableData.firstPair.winner === (pair1[0] && pair1[0].username),
+        }"
+      >
+        <i
+          v-if="battleTableData.firstPair.winner
+            && battleTableData.firstPair.winner === (pair1[0] && pair1[0].username)"
+          class="fas fa-crown"
+        />
         {{ getPlayerName(pair1[0]) }}
       </div>
-      <div class="cell semi-final-2">
+      <div
+        class="cell semi-final-2"
+        :class="{
+          'pair-winner': battleTableData.firstPair.winner
+            && battleTableData.firstPair.winner === (pair1[1] && pair1[1].username),
+        }"
+      >
+        <i
+          v-if="battleTableData.firstPair.winner
+            && battleTableData.firstPair.winner === (pair1[1] && pair1[1].username)"
+          class="fas fa-crown"
+        />
         {{ getPlayerName(pair1[1]) }}
       </div>
-      <div class="cell semi-final-3">
+      <div
+        class="cell semi-final-3"
+        :class="{
+          'pair-winner': battleTableData.secondPair.winner
+            && battleTableData.secondPair.winner === (pair2[0] && pair2[0].username),
+        }"
+      >
+        <i
+          v-if="battleTableData.secondPair.winner
+            && battleTableData.secondPair.winner === (pair2[0] && pair2[0].username)"
+          class="fas fa-crown"
+        />
         {{ getPlayerName(pair2[0]) }}
       </div>
-      <div class="cell semi-final-4">
+      <div
+        class="cell semi-final-4"
+        :class="{
+          'pair-winner': battleTableData.secondPair.winner
+            && battleTableData.secondPair.winner === (pair2[1] && pair2[1].username),
+        }"
+      >
+        <i
+          v-if="battleTableData.secondPair.winner
+            && battleTableData.secondPair.winner === (pair2[1] && pair2[1].username)"
+          class="fas fa-crown"
+        />
         {{ getPlayerName(pair2[1]) }}
       </div>
-      <div class="cell final-1">
+      <div
+        class="cell final-1"
+        :class="{
+          'pair-winner': battleTableData.finalPair.winner
+            && battleTableData.finalPair.winner === (finalPair[0] && finalPair[0].username),
+        }"
+      >
+        <i
+          v-if="battleTableData.finalPair.winner
+            && battleTableData.finalPair.winner === (finalPair[0] && finalPair[0].username)"
+          class="fas fa-crown"
+        />
         {{ getPlayerName(finalPair[0]) }}
       </div>
-      <div class="cell final-2">
+      <div
+        class="cell final-2"
+        :class="{
+          'pair-winner': battleTableData.finalPair.winner
+            && battleTableData.finalPair.winner === (finalPair[1] && finalPair[1].username),
+        }"
+      >
+        <i
+          v-if="battleTableData.finalPair.winner
+            && battleTableData.finalPair.winner === (finalPair[1] && finalPair[1].username)"
+          class="fas fa-crown"
+        />
         {{ getPlayerName(finalPair[1]) }}
       </div>
     </div>
@@ -81,6 +147,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  @import '~@fortawesome/fontawesome-free/scss/fontawesome.scss';
+
   .table-wrapper {
     display: grid;
     grid-template-areas:
@@ -217,5 +285,9 @@ export default {
       bottom: -12px;
       left: 50%;
     }
+  }
+
+  .pair-winner {
+    color: $warning;
   }
 </style>
