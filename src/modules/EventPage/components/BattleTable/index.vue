@@ -100,6 +100,10 @@
         {{ getPlayerName(finalPair[1]) }}
       </div>
     </div>
+    <BattleTableResultBlock
+      v-if="!isEditMode && isResultBlockAvailable"
+      class="pt-3"
+    />
     <EditBlock
       v-if="isEditMode"
       :battle-table-data="battleTableData"
@@ -111,10 +115,12 @@
 <script>
 import { mapState } from 'vuex'
 import EditBlock from './EditBlock'
+import BattleTableResultBlock from '../BattleTableResultBlock'
 
 export default {
   components: {
-    EditBlock
+    EditBlock,
+    BattleTableResultBlock
   },
   props: {
     cellName: {
@@ -153,8 +159,16 @@ export default {
 
   computed: {
     ...mapState({
-      isAdmin: state => state.user.isAdmin
-    })
+      isAdmin: state => state.user.isAdmin,
+      username: (state) => state.user.name
+    }),
+    isResultBlockAvailable() {
+      const isPlayerInBattleTable = this.battleTableData.players
+        .some(player => player.username === this.username)
+      const hasBTWinner = this.battleTableData.finalPair.winner
+
+      return isPlayerInBattleTable && !hasBTWinner
+    }
   },
 
   watch: {

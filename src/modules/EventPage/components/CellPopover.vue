@@ -20,11 +20,9 @@
       <hr/>
       <template v-if="cell.players.length > 1">
         <BattleTable
-          class="pb-3"
           :battle-table-data="battleTableData"
           :cell-name="cell.name"
         />
-        <BattleTableResultBlock v-if="isResultBlockAvailable"/>
         <hr/>
       </template>
     </template>
@@ -51,12 +49,10 @@
 import { mapActions, mapState } from 'vuex'
 import axios from "axios"
 import BattleTable from './BattleTable'
-import BattleTableResultBlock from './BattleTableResultBlock'
 
 export default {
   components: {
-    BattleTable,
-    BattleTableResultBlock
+    BattleTable
   },
 
   props: {
@@ -84,8 +80,7 @@ export default {
       playerSelectedCell: (state) => state.user.playerData.selectedCell,
       playerCurrentCell: (state) => state.user.playerData.currentCell,
       selectableCells: (state) => state.user.playerData.selectableCells,
-      playerBattleStatus: (state) => state.user.playerData.battleStatus,
-      username: (state) => state.user.name
+      playerBattleStatus: (state) => state.user.playerData.battleStatus
     }),
 
     isNoActions() {
@@ -107,14 +102,6 @@ export default {
 
     isPlayerInThisSector() {
       return this.playerCurrentCell === this.cell.name
-    },
-
-    isResultBlockAvailable() {
-      const isPlayerInBattleTable = this.battleTableData.players
-        .some(player => player.username === this.username)
-      const hasBTWinner = this.battleTableData.finalPair.winner
-
-      return isPlayerInBattleTable && !hasBTWinner
     }
   },
 
