@@ -103,6 +103,7 @@
     <EditBlock
       v-if="isEditMode"
       :battle-table-data="battleTableData"
+      :cell-name="cellName"
     />
   </div>
 </template>

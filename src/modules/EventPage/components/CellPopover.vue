@@ -22,7 +22,7 @@
         <BattleTable
           class="pb-3"
           :battle-table-data="battleTableData"
-          :cell-id="cell.name"
+          :cell-name="cell.name"
         />
         <BattleTableResultBlock v-if="isResultBlockAvailable"/>
         <hr/>

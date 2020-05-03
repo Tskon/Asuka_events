@@ -152,7 +152,6 @@ export default {
     battleTableData: {
       type: Object,
       default: () => ({
-        cellName: '',
         players: [],
         firstPair: {
           winner: null,
@@ -167,6 +166,10 @@ export default {
           looser: null
         }
       })
+    },
+    cellName: {
+      type: String,
+      required: true
     }
   },
 
@@ -220,13 +223,11 @@ export default {
       const finalPairWinner = formData.get('final-pair-p1-winner') || formData.get('final-pair-p2-winner')
 
       axios.post('/api/admin/change-battle-table', {
-        formData: {
-          cellName: this.cellName,
-          players,
-          firstPairWinner,
-          secondPairWinner,
-          finalPairWinner
-        }
+        cellName: this.cellName,
+        players,
+        firstPairWinner,
+        secondPairWinner,
+        finalPairWinner
       })
     }
   }
