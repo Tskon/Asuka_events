@@ -147,13 +147,15 @@ export default {
 
   computed: {
     playerOptions() {
-      return this.battleTableData.players.map(player => {
-        console.log(player)
-        return {
-          value: player.username,
-          text: player.clanTag
-        }
-      })
+      return [
+        { value: null, text: '-----' },
+        ...this.battleTableData.players.map(player => {
+          return {
+            value: player.username,
+            text: player.clanTag
+          }
+        })
+      ]
     }
   },
 
