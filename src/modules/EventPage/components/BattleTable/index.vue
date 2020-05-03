@@ -144,7 +144,7 @@ export default {
       pair1: [],
       pair2: [],
       finalPair: [],
-      isEditMode: true
+      isEditMode: false
     }
   },
 
