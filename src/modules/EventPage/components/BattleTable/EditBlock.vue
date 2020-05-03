@@ -221,6 +221,7 @@ export default {
 
       axios.post('/api/admin/change-battle-table', {
         formData: {
+          cellName: this.cellName,
           players,
           firstPairWinner,
           secondPairWinner,
