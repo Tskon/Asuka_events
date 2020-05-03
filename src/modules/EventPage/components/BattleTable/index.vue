@@ -6,7 +6,13 @@
       @click="editBtnClick"
     >
       <i class="fas fa-edit"/>
-      Редактировать таблицу
+      <span v-if="isEditMode">
+        Закрыть редактирование
+      </span>
+      <span v-else>
+        Редактировать таблицу
+      </span>
+
     </button>
     <div
       v-if="!isEditMode"
