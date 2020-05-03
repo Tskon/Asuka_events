@@ -20,7 +20,7 @@
           class="mr-2"
         />
         <b-form-checkbox
-          :checked="getCheckboxInitStatus(battleTableData.players[0], battleTableData.firstPair)"
+          :checked="isPair1Player1Checked"
           :value="getCheckboxValue(battleTableData.players[0])"
           name="pair1-p1-winner"
           size="lg"
@@ -37,7 +37,7 @@
           class="mr-2"
         />
         <b-form-checkbox
-          :checked="getCheckboxInitStatus(battleTableData.players[1], battleTableData.firstPair)"
+          :checked="isPair1Player2Checked"
           :value="getCheckboxValue(battleTableData.players[1])"
           name="pair1-p2-winner"
           size="lg"
@@ -62,7 +62,7 @@
           class="mr-2"
         />
         <b-form-checkbox
-          :checked="getCheckboxInitStatus(battleTableData.players[3], battleTableData.firstPair)"
+          :checked="isPair2Player1Checked"
           :value="getCheckboxValue(battleTableData.players[3])"
           name="pair2-p1-winner"
           size="lg"
@@ -82,7 +82,7 @@
           class="mr-2"
         />
         <b-form-checkbox
-          :checked="getCheckboxInitStatus(battleTableData.players[4], battleTableData.firstPair) || battleTableData.players.length === 3"
+          :checked="isPair2Player2Checked"
           :value="getCheckboxValue(battleTableData.players[4])"
           :disabled="battleTableData.players.length === 3"
           name="pair2-p2-winner"
@@ -107,7 +107,7 @@
           class="mr-2"
         />
         <b-form-checkbox
-          :checked="battleTableData.firstPair.winner === battleTableData.finalPair.winner"
+          :checked="isFinalPairPlayer1Checked"
           :value="battleTableData.firstPair.winner"
           name="final-pair-p1-winner"
           size="lg"
@@ -124,7 +124,7 @@
           class="mr-2"
         />
         <b-form-checkbox
-          :checked="battleTableData.secondPair.winner === battleTableData.finalPair.winner"
+          :checked="isFinalPairPlayer2Checked"
           :value="battleTableData.secondPair.winner"
           name="final-pair-p2-winner"
           size="lg"
@@ -173,10 +173,6 @@ export default {
     }
   },
 
-  data() {
-    return {}
-  },
-
   computed: {
     playerOptions() {
       return [
@@ -188,12 +184,34 @@ export default {
           }
         })
       ]
+    },
+    isPair1Player1Checked() {
+      return this.getCheckboxInitStatus(this.battleTableData.players[0], this.battleTableData.firstPair)
+    },
+    isPair1Player2Checked() {
+      return this.getCheckboxInitStatus(this.battleTableData.players[1], this.battleTableData.firstPair)
+    },
+    isPair2Player1Checked() {
+      return this.getCheckboxInitStatus(this.battleTableData.players[2], this.battleTableData.secondPair)
+    },
+    isPair2Player2Checked() {
+      return this.getCheckboxInitStatus(this.battleTableData.players[3], this.battleTableData.secondPair)
+    },
+    isFinalPairPlayer1Checked() {
+      return this.battleTableData.firstPair.winner === this.battleTableData.finalPair.winner
+        ? this.battleTableData.finalPair.winner
+        : null
+    },
+    isFinalPairPlayer2Checked() {
+      return this.battleTableData.secondPair.winner === this.battleTableData.finalPair.winner
+        ? this.battleTableData.finalPair.winner
+        : null
     }
   },
 
   methods: {
     getCheckboxInitStatus(player, pair) {
-      return player && player.username === pair.winner
+      return player && player.username === pair.winner && pair.winner
     },
     getCheckboxValue(player) {
       return player ? player.username : null
