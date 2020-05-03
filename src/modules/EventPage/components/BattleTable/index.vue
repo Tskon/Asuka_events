@@ -1,6 +1,7 @@
 <template>
-  <div class="position-relative">
+  <div>
     <button
+      v-if="isAdmin"
       class="edit-btn"
       @click="editBtnClick"
     >
@@ -107,6 +108,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import EditBlock from './EditBlock'
 
 export default {
@@ -146,6 +148,12 @@ export default {
       finalPair: [],
       isEditMode: false
     }
+  },
+
+  computed: {
+    ...mapState({
+      isAdmin: state => state.user.isAdmin
+    })
   },
 
   watch: {
