@@ -99,11 +99,20 @@
         {{ getPlayerName(finalPair[1]) }}
       </div>
     </div>
+    <EditBlock
+      v-if="isEditMode"
+      :battle-table-data="battleTableData"
+    />
   </div>
 </template>
 
 <script>
+import EditBlock from './EditBlock'
+
 export default {
+  components: {
+    EditBlock
+  },
   props: {
     cellName: {
       type: String,
@@ -111,7 +120,22 @@ export default {
     },
     battleTableData: {
       type: Object,
-      required: true
+      default: () => ({
+        cellName: '',
+        players: [],
+        firstPair: {
+          winner: null,
+          looser: null
+        },
+        secondPair: {
+          winner: null,
+          looser: null
+        },
+        finalPair: {
+          winner: null,
+          looser: null
+        }
+      })
     }
   },
 
@@ -120,13 +144,13 @@ export default {
       pair1: [],
       pair2: [],
       finalPair: [],
-      isEditMode: false
+      isEditMode: true
     }
   },
 
   watch: {
     battleTableData() {
-      const { players, firstPair, secondPair } = this.battleTableData
+      const {players, firstPair, secondPair} = this.battleTableData
       const findPlayer = username => {
         return this.battleTableData.players.find(player => player.username === username)
       }
@@ -166,10 +190,7 @@ export default {
 
   .table-wrapper {
     display: grid;
-    grid-template-areas:
-    'semi-final-1 final-label final-label semi-final-3'
-    'divider-1 final-1 final-2 divider-2'
-    'semi-final-2 . . semi-final-4';
+    grid-template-areas: 'semi-final-1 final-label final-label semi-final-3' 'divider-1 final-1 final-2 divider-2' 'semi-final-2 . . semi-final-4';
     grid-gap: 10px;
 
     .cell {
