@@ -181,9 +181,9 @@ export default {
       this.setPlayerData({
         username: row.item.username,
         score,
-        currentCell,
-        selectedCell,
-        ownedCell,
+        currentCell: currentCell.toLowerCase(),
+        selectedCell: selectedCell.toLowerCase(),
+        ownedCell: ownedCell.toLowerCase(),
         ownInRowCount
       })
 
