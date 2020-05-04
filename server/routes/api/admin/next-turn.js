@@ -109,8 +109,8 @@ module.exports = function (router, models) {
       return cell.started && playersCount < 4
     })
 
-    if (isWinner) {
-      if (player.selectedCell) player.currentCell = player.selectedCell
+    if (isWinner && player.selectedCell) {
+      player.currentCell = player.selectedCell
       return
     }
 
