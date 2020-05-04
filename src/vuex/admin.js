@@ -51,19 +51,24 @@ export default {
         })
     },
 
-    nextTurn(context) {
+    nextTurn({ dispatch }) {
       axios
         .post('/api/admin/next-turn')
         .then(() => {
-          context.dispatch('map/getCurrentTurn', null, { root: true })
-          context.dispatch('user/getPlayerData', null, { root: true })
+          dispatch('map/getCurrentTurn', null, { root: true })
+          dispatch('user/getPlayerData', null, { root: true })
+          dispatch('getAdminData')
+          dispatch('getLogs')
         })
     },
 
-    cleanEventData() {
+    cleanEventData({ dispatch }) {
       axios
         .post('/api/admin/clean-event-data')
         .then(() => {
+          dispatch('getAdminData')
+          dispatch('getLogs')
+          dispatch('map/getCurrentTurn', null, { root: true })
           this.$noty.info('Все данные эвента удалены')
         })
         .catch(() => {
