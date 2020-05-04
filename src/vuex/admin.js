@@ -11,15 +11,19 @@ const stateInit = {
 
 export default {
   namespaced: true,
+
   state: { ...stateInit },
+
   mutations: {
     setAdminData(state, payload) {
       state.users = { ...payload }
     },
+
     setLogs(state, payload) {
       state.logs = [...payload]
     }
   },
+
   actions: {
     getAdminData(context) {
       axios.post('/api/admin/get-admin-panel-data').then(({ data }) => {
@@ -27,12 +31,14 @@ export default {
         context.commit('setAdminData', data.data)
       })
     },
+
     getLogs(context) {
       axios.post('/api/admin/get-logs').then(({ data }) => {
         if (data.status !== 'ok') return
         context.commit('setLogs', data.data)
       })
     },
+
     setPlayerStatus(context, payload) {
       axios
         .post('/api/admin/set-player-status', {
@@ -44,6 +50,7 @@ export default {
           context.dispatch('getAdminData')
         })
     },
+
     nextTurn(context) {
       axios
         .post('/api/admin/next-turn')
@@ -52,6 +59,7 @@ export default {
           context.dispatch('user/getPlayerData', null, { root: true })
         })
     },
+
     cleanEventData() {
       axios
         .post('/api/admin/clean-event-data')
@@ -61,6 +69,10 @@ export default {
         .catch(() => {
           this.$noty.error('Ошибка. Данные не были удалены')
         })
+    },
+
+    setPlayerData(context, data) {
+      axios.post('/api/admin/set-player-data', data)
     }
   }
 }
