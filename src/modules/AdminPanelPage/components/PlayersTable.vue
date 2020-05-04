@@ -1,14 +1,18 @@
 <template>
-  <div class="players-table card card-body">
+  <div class="players-table-wrapper card card-body">
     <h5>Игроки:</h5>
     <b-table
       :items="items"
       :fields="fields"
+      class="players-table"
       responsive="xl"
       striped
     >
       <template v-slot:head(username)>
         <i class="fas fa-users"/>
+      </template>
+      <template v-slot:head(ownInRowCount)>
+        <i class="fas fa-clock"/>
       </template>
       <template v-slot:head(actions)>
         <i class="fas fa-user-cog"/>
@@ -128,7 +132,7 @@ export default {
         },
         {
           key: 'ownInRowCount',
-          label: 'Ход.Влад.'
+          label: 'Время Влад.'
         },
         {
           key: 'actions',
@@ -203,7 +207,7 @@ export default {
 </script>
 
 <style lang="scss">
-  .players-table {
+  .players-table-wrapper {
     .username-td {
       width: 100%;
     }
@@ -226,6 +230,14 @@ export default {
 
       @media (min-width: 1300px) {
         grid-template-columns: 1fr 1fr 1fr;
+      }
+    }
+
+    .players-table {
+      td, th {
+        &:not(:first-child){
+          text-align: center;
+        }
       }
     }
   }

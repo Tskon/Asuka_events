@@ -11,5 +11,4 @@ const PlayerSchema = new Schema({
   ownInRowCount: { type: Number, default: 0 }
 })
 
-
 module.exports = mongoose.model('Player', PlayerSchema)
