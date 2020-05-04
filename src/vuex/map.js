@@ -34,6 +34,16 @@ export default {
 
     fetchCurrentBattleTable(state, battleTable) {
       state.currentBattleTable = battleTable
+    },
+
+    clearCurrentBattleTable(state) {
+      state.currentBattleTable = {
+        cellName: '',
+        firstPair: {},
+        secondPair: {},
+        finalPair: {},
+        players: []
+      }
     }
   },
 
@@ -69,6 +79,10 @@ export default {
 
     setBattleStatus(context, isWinner) {
       return axios.post('/api/map/set-match-result', { isWinner })
+    },
+
+    clearCurrentBattleTable({ commit }) {
+      commit('clearCurrentBattleTable')
     },
 
     async fetchCurrentBattleTable({ commit }, cellName) {

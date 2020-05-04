@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="currentBattleTable">
     <button
       v-if="isAdmin"
       class="edit-btn"

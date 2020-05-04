@@ -8,4 +8,9 @@
 
 .popover {
   max-width: 450px;
+  z-index: 1040 !important;
+}
+
+.pointer-events-none {
+  pointer-events: none;
 }

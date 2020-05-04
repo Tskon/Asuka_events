@@ -2,10 +2,11 @@
   <b-popover
     :target="'cell-popover-' + cell.name"
     :title="'Действия для сектора ' + cell.name.toUpperCase()"
-    triggers="click"
+    triggers="focus"
     placement="rightbottom"
     custom-class="w-100"
-    @show="fetchCurrentBattleTable(cell.name)"
+    @show="onPopoverShown(cell.name)"
+    @hidden="onPopoverHidden"
   >
     <template v-if="cell.players.length">
       <ol>
@@ -90,18 +91,33 @@ export default {
 
     isSectorChosen() {
       return this.playerSelectedCell === this.cell.name
-    },
-
-    isPlayerInThisSector() {
-      return this.playerCurrentCell === this.cell.name
     }
   },
 
   methods: {
     ...mapActions({
       setSector: 'map/setSector',
-      fetchCurrentBattleTable: 'map/fetchCurrentBattleTable'
-    })
+      fetchCurrentBattleTable: 'map/fetchCurrentBattleTable',
+      clearCurrentBattleTable: 'map/clearCurrentBattleTable'
+    }),
+
+    onPopoverShown(cellName) {
+      const cellButtons = document.querySelectorAll('.map-cell > button')
+      cellButtons.forEach(button => {
+        button.classList.add('pointer-events-none')
+      })
+
+      this.fetchCurrentBattleTable(cellName)
+    },
+
+    onPopoverHidden() {
+      const cellButtons = document.querySelectorAll('.map-cell > button')
+      cellButtons.forEach(button => {
+        button.classList.remove('pointer-events-none')
+      })
+
+      this.clearCurrentBattleTable()
+    }
   }
 }
 </script>
