@@ -116,16 +116,24 @@ module.exports = function (router, models) {
       }
 
       const currentSector = cells.find(cell => cell.name === player.currentCell)
-      if (currentSector.started) {
+
+      if (currentSector && currentSector.started) {
         const connectedAvailableSectors = cells.filter(cell => {
-          return !cell.started && currentSector.connectedCells.includes(cell.name)
+          const playersCount = players.filter(playerData => {
+            return playerData.currentCell === cell.name && playerData.username !== player.username
+          }).length
+
+          return !cell.started && playersCount < 4 && currentSector.connectedCells.includes(cell.name)
         })
 
         const randomSector = connectedAvailableSectors[Math.floor(Math.random() * connectedAvailableSectors.length)]
-        console.log(connectedAvailableSectors, randomSector)
-        player.currentCell = randomSector.name
+        if (randomSector) {
+          player.currentCell = randomSector.name
+        }
         return
       }
+
+      if (currentSector && !currentSector.started) return
     }
 
     const randomSector = availableSectors[Math.floor(Math.random() * availableSectors.length)]
