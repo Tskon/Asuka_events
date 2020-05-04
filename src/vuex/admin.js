@@ -72,7 +72,11 @@ export default {
     },
 
     setPlayerData(context, data) {
-      axios.post('/api/admin/set-player-data', data)
+      axios
+        .post('/api/admin/set-player-data', data)
+        .then(() => {
+          context.dispatch('getAdminData')
+        })
     }
   }
 }
