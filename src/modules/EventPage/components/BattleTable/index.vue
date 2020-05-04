@@ -108,6 +108,7 @@
     <BattleTableResultBlock
       v-if="!isEditMode && isResultBlockAvailable"
       class="pt-3"
+      @resultSended="onResultSended"
     />
     <EditBlock
       v-if="isEditMode"
@@ -203,6 +204,10 @@ export default {
     async onEdit() {
       await this.fetchCurrentBattleTable(this.cellName)
       this.isEditMode = false
+    },
+
+    onResultSended() {
+      this.fetchCurrentBattleTable(this.cellName)
     }
   }
 }

@@ -3,14 +3,14 @@
     <b-button
       class="w-100 mr-2"
       variant="success"
-      @click="setBattleStatus(true)"
+      @click="onClick(true)"
     >
       Победа
     </b-button>
     <b-button
       class="w-100 ml-2"
       variant="danger"
-      @click="setBattleStatus(false)"
+      @click="onClick(false)"
     >
       Поражение
     </b-button>
@@ -25,11 +25,11 @@ export default {
   methods: {
     ...mapActions({
       setBattleStatus: 'map/setBattleStatus'
-    })
+    }),
+    async onClick(value) {
+      await this.setBattleStatus(value)
+      this.$emit('resultSended')
+    }
   }
 }
 </script>
-
-<style lang="scss">
-
-</style>
