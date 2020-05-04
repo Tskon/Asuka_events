@@ -5,7 +5,7 @@
     triggers="click"
     placement="rightbottom"
     custom-class="w-100"
-    @show="fetchBattleTable"
+    @show="fetchCurrentBattleTable(cell.name)"
   >
     <template v-if="cell.players.length">
       <ol>
@@ -20,7 +20,6 @@
       <hr/>
       <template v-if="cell.players.length > 1">
         <BattleTable
-          :battle-table-data="battleTableData"
           :cell-name="cell.name"
         />
         <hr/>
@@ -47,7 +46,6 @@
 
 <script>
 import { mapActions, mapState } from 'vuex'
-import axios from "axios"
 import BattleTable from './BattleTable'
 
 export default {
@@ -64,12 +62,6 @@ export default {
 
   data() {
     return {
-      battleTableData: {
-        firstPair: {},
-        secondPair: {},
-        finalPair: {},
-        players: []
-      },
       isPopoverHidePrevent: false
     }
   },
@@ -107,16 +99,9 @@ export default {
 
   methods: {
     ...mapActions({
-      setSector: 'map/setSector'
-    }),
-
-    async fetchBattleTable() {
-      const { data } = await axios
-        .post('/api/map/get-battle-table-data', {
-          cellName: this.cell.name
-        })
-      if (data) this.battleTableData = data.data
-    }
+      setSector: 'map/setSector',
+      fetchCurrentBattleTable: 'map/fetchCurrentBattleTable'
+    })
   }
 }
 </script>

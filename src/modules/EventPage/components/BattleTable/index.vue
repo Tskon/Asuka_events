@@ -12,7 +12,6 @@
       <span v-else>
         Редактировать таблицу
       </span>
-
     </button>
     <div
       v-if="!isEditMode"
@@ -24,13 +23,13 @@
       <div
         class="cell semi-final-1"
         :class="{
-          'pair-winner': battleTableData.firstPair.winner
-            && battleTableData.firstPair.winner === (pair1[0] && pair1[0].username),
+          'pair-winner': currentBattleTable.firstPair.winner
+            && currentBattleTable.firstPair.winner === (pair1[0] && pair1[0].username),
         }"
       >
         <i
-          v-if="battleTableData.firstPair.winner
-            && battleTableData.firstPair.winner === (pair1[0] && pair1[0].username)"
+          v-if="currentBattleTable.firstPair.winner
+            && currentBattleTable.firstPair.winner === (pair1[0] && pair1[0].username)"
           class="fas fa-crown"
         />
         {{ getPlayerName(pair1[0]) }}
@@ -38,13 +37,13 @@
       <div
         class="cell semi-final-2"
         :class="{
-          'pair-winner': battleTableData.firstPair.winner
-            && battleTableData.firstPair.winner === (pair1[1] && pair1[1].username),
+          'pair-winner': currentBattleTable.firstPair.winner
+            && currentBattleTable.firstPair.winner === (pair1[1] && pair1[1].username),
         }"
       >
         <i
-          v-if="battleTableData.firstPair.winner
-            && battleTableData.firstPair.winner === (pair1[1] && pair1[1].username)"
+          v-if="currentBattleTable.firstPair.winner
+            && currentBattleTable.firstPair.winner === (pair1[1] && pair1[1].username)"
           class="fas fa-crown"
         />
         {{ getPlayerName(pair1[1]) }}
@@ -52,13 +51,13 @@
       <div
         class="cell semi-final-3"
         :class="{
-          'pair-winner': battleTableData.secondPair.winner
-            && battleTableData.secondPair.winner === (pair2[0] && pair2[0].username),
+          'pair-winner': currentBattleTable.secondPair.winner
+            && currentBattleTable.secondPair.winner === (pair2[0] && pair2[0].username),
         }"
       >
         <i
-          v-if="battleTableData.secondPair.winner
-            && battleTableData.secondPair.winner === (pair2[0] && pair2[0].username)"
+          v-if="currentBattleTable.secondPair.winner
+            && currentBattleTable.secondPair.winner === (pair2[0] && pair2[0].username)"
           class="fas fa-crown"
         />
         {{ getPlayerName(pair2[0]) }}
@@ -66,13 +65,13 @@
       <div
         class="cell semi-final-4"
         :class="{
-          'pair-winner': battleTableData.secondPair.winner
-            && battleTableData.secondPair.winner === (pair2[1] && pair2[1].username),
+          'pair-winner': currentBattleTable.secondPair.winner
+            && currentBattleTable.secondPair.winner === (pair2[1] && pair2[1].username),
         }"
       >
         <i
-          v-if="battleTableData.secondPair.winner
-            && battleTableData.secondPair.winner === (pair2[1] && pair2[1].username)"
+          v-if="currentBattleTable.secondPair.winner
+            && currentBattleTable.secondPair.winner === (pair2[1] && pair2[1].username)"
           class="fas fa-crown"
         />
         {{ getPlayerName(pair2[1]) }}
@@ -80,13 +79,13 @@
       <div
         class="cell final-1"
         :class="{
-          'pair-winner': battleTableData.finalPair.winner
-            && battleTableData.finalPair.winner === (finalPair[0] && finalPair[0].username),
+          'pair-winner': currentBattleTable.finalPair.winner
+            && currentBattleTable.finalPair.winner === (finalPair[0] && finalPair[0].username),
         }"
       >
         <i
-          v-if="battleTableData.finalPair.winner
-            && battleTableData.finalPair.winner === (finalPair[0] && finalPair[0].username)"
+          v-if="currentBattleTable.finalPair.winner
+            && currentBattleTable.finalPair.winner === (finalPair[0] && finalPair[0].username)"
           class="fas fa-crown"
         />
         {{ getPlayerName(finalPair[0]) }}
@@ -94,13 +93,13 @@
       <div
         class="cell final-2"
         :class="{
-          'pair-winner': battleTableData.finalPair.winner
-            && battleTableData.finalPair.winner === (finalPair[1] && finalPair[1].username),
+          'pair-winner': currentBattleTable.finalPair.winner
+            && currentBattleTable.finalPair.winner === (finalPair[1] && finalPair[1].username),
         }"
       >
         <i
-          v-if="battleTableData.finalPair.winner
-            && battleTableData.finalPair.winner === (finalPair[1] && finalPair[1].username)"
+          v-if="currentBattleTable.finalPair.winner
+            && currentBattleTable.finalPair.winner === (finalPair[1] && finalPair[1].username)"
           class="fas fa-crown"
         />
         {{ getPlayerName(finalPair[1]) }}
@@ -112,14 +111,15 @@
     />
     <EditBlock
       v-if="isEditMode"
-      :battle-table-data="battleTableData"
+      :battle-table-data="currentBattleTable"
       :cell-name="cellName"
+      @edit="onEdit"
     />
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters, mapActions } from 'vuex'
 import EditBlock from './EditBlock'
 import BattleTableResultBlock from '../BattleTableResultBlock'
 
@@ -132,25 +132,6 @@ export default {
     cellName: {
       type: String,
       default: ''
-    },
-    battleTableData: {
-      type: Object,
-      default: () => ({
-        cellName: '',
-        players: [],
-        firstPair: {
-          winner: null,
-          looser: null
-        },
-        secondPair: {
-          winner: null,
-          looser: null
-        },
-        finalPair: {
-          winner: null,
-          looser: null
-        }
-      })
     }
   },
 
@@ -164,24 +145,28 @@ export default {
   },
 
   computed: {
+    ...mapGetters({
+      currentBattleTable: 'map/currentBattleTable'
+    }),
     ...mapState({
       isAdmin: state => state.user.isAdmin,
-      username: (state) => state.user.name
+      username: state => state.user.name
     }),
+
     isResultBlockAvailable() {
-      const isPlayerInBattleTable = this.battleTableData.players
+      const isPlayerInBattleTable = this.currentBattleTable.players
         .some(player => player.username === this.username)
-      const hasBTWinner = this.battleTableData.finalPair.winner
+      const hasBTWinner = this.currentBattleTable.finalPair.winner
 
       return isPlayerInBattleTable && !hasBTWinner
     }
   },
 
   watch: {
-    battleTableData() {
-      const {players, firstPair, secondPair} = this.battleTableData
+    currentBattleTable() {
+      const {players, firstPair, secondPair} = this.currentBattleTable
       const findPlayer = username => {
-        return this.battleTableData.players.find(player => player.username === username)
+        return this.currentBattleTable.players.find(player => player.username === username)
       }
 
       if (players.length === 2) {
@@ -203,12 +188,21 @@ export default {
   },
 
   methods: {
+    ...mapActions({
+      fetchCurrentBattleTable: 'map/fetchCurrentBattleTable'
+    }),
+
     getPlayerName(playerObject) {
       return playerObject ? playerObject.clanTag : '------'
     },
 
     editBtnClick() {
       this.isEditMode = !this.isEditMode
+    },
+
+    async onEdit() {
+      await this.fetchCurrentBattleTable(this.cellName)
+      this.isEditMode = false
     }
   }
 }

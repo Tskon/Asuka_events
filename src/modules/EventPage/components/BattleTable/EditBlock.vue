@@ -246,6 +246,8 @@ export default {
         firstPairWinner,
         secondPairWinner,
         finalPairWinner
+      }).then(() => {
+        this.$emit('edit')
       })
     }
   }

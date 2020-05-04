@@ -11,7 +11,7 @@ module.exports = function (router, models) {
       res.send({
         status: 'ok',
         data: {
-          cellNames: battleTable.cellNames,
+          cellName: battleTable.cellName,
           players: battleTable.players,
           firstPair: battleTable.firstPair,
           secondPair: battleTable.secondPair,
