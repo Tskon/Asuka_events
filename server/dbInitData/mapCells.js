@@ -30,6 +30,19 @@ const lowCellsList = [lowEconomyCell, 'a1', 'a2', 'a3', 'd1', 'd5', 'd6', 'f1', 
 const highCellsList = [highEconomyCell, 'b4', 'c2', 'd3', 'e1', 'e6', 'g2', 'g4']
 const richCellsList = [richEconomyCell, 'b5', 'c3', 'e4', 'h4']
 
+const mapList = [
+  'Море надежды (Турнир Превосходство)',
+  'Огненная земля (Турнир Превосходство)р﻿',
+  'Слезы пустыни (Турнир Превосходство)',
+  'Путь воина (Турнир Превосходство)',
+  'Океан (Турнир Превосходство)',
+  'Спящий гигант (Турнир Превосходство)',
+  'Соседи (Турнир Превосходство)',
+  'Раскол (Турнир Превосходство)',
+  'Греция (Ранговый, превосходство)',
+  'Ловушка (Ранговый, превосходство)'
+]
+
 const cellsMap = new Map();
 
 [starterCellsList, emptyCellsList, lowCellsList, highCellsList, richCellsList]
