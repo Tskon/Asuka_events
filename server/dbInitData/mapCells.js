@@ -30,7 +30,7 @@ const lowCellsList = [lowEconomyCell, 'a1', 'a2', 'a3', 'd1', 'd5', 'd6', 'f1', 
 const highCellsList = [highEconomyCell, 'b4', 'c2', 'd3', 'e1', 'e6', 'g2', 'g4']
 const richCellsList = [richEconomyCell, 'b5', 'c3', 'e4', 'h4']
 
-const mapList = [
+const gameMapList = [
   'Море надежды (Турнир Превосходство)',
   'Огненная земля (Турнир Превосходство)р﻿',
   'Слезы пустыни (Турнир Превосходство)',
@@ -94,6 +94,7 @@ module.exports = async (models) => {
   cellsMap.forEach((cell, name) => {
     models.Cell.create({
       name,
+      gameMap: gameMapList[Math.floor(Math.random() * gameMapList.length)],
       ...cell
     })
   })
