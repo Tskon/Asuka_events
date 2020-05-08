@@ -6,6 +6,7 @@ const CellSchema = new Schema({
   name: String,
   connectedCells: Array,
   started: Boolean,
+  gameMap: String,
   bonus: { type: Number, default: 0 }
 })
 
