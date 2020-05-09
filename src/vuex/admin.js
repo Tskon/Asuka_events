@@ -48,6 +48,9 @@ export default {
         .then(({ data }) => {
           if (data.status !== 'ok') return
           context.dispatch('getAdminData')
+          if (context.rootState.user.name === payload.username) {
+            context.dispatch('user/getUser', null, { root: true })
+          }
         })
     },
 
