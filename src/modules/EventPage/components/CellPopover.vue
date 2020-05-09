@@ -8,23 +8,26 @@
     @show="onPopoverShown(cell.name)"
     @hidden="onPopoverHidden"
   >
-    {{ cell.gameMap }}
     <template v-if="cell.players.length">
-      <ol>
-        Команды в секторе:
-        <li
-          v-for="player in cell.players"
-          :key="player.username"
-        >
-          {{ player.clanTag }}
-        </li>
-      </ol>
-      <hr/>
-      <template v-if="cell.players.length > 1">
-        <BattleTable
-          :cell-name="cell.name"
-        />
+      <b-card class="mb-2 pt-0">
+        {{ cell.gameMap }}
         <hr/>
+        Команды в секторе:
+        <ol class="pl-3 mb-0">
+          <li
+            v-for="player in cell.players"
+            :key="player.username"
+          >
+            {{ player.clanTag }}
+          </li>
+        </ol>
+      </b-card>
+      <template v-if="cell.players.length > 1">
+        <b-card class="mb-2">
+          <BattleTable
+            :cell-name="cell.name"
+          />
+        </b-card>
       </template>
     </template>
     <span v-if="isNoActions">Доступных действий нет</span>
