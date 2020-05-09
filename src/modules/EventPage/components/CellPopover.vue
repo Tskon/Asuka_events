@@ -8,6 +8,7 @@
     @show="onPopoverShown(cell.name)"
     @hidden="onPopoverHidden"
   >
+    {{ cell.gameMap }}
     <template v-if="cell.players.length">
       <ol>
         Команды в секторе:

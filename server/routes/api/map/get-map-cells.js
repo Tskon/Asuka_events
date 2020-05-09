@@ -12,11 +12,12 @@ module.exports = function (router, models) {
     }, 'number fog type')
 
     const cellsWithPlayers = cells.map((cell) => {
-      const {name, started, bonus, connectedCells} = cell
+      const {name, started, bonus, connectedCells, gameMap} = cell
       const filteredPlayers = players.filter(player => player.currentCell === cell.name)
 
       return {
         name,
+        gameMap,
         started,
         bonus,
         connectedCells,
@@ -41,7 +42,8 @@ module.exports = function (router, models) {
         connectedCells: cell.connectedCells,
         players: [],
         bonus: cell.bonus,
-        started: cell.started
+        started: cell.started,
+        gameMap: cell.gameMap
       }
     })
 
