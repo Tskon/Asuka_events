@@ -30,22 +30,25 @@
         </b-card>
       </template>
     </template>
-    <span v-if="isNoActions">Доступных действий нет</span>
-    <b-button
-      v-if="isStartSectorAvailable"
-      :disabled="isSectorChosen"
-      variant="info"
-      class="w-100 mb-1"
-      @click="setSector(cell.name)"
-    >
-      {{ isSectorChosen ? 'Этот сектор уже выбран' : 'Выбрать сектор стартовым' }}
-    </b-button>
-    <b-button
-      v-else-if="isSectorAvailable"
-      @click="setSector(cell.name)"
-    >
-      Выбрать сектор
-    </b-button>
+
+    <span v-if="isNoActions || !isPlayer">Доступных действий нет</span>
+    <template v-if="isPlayer">
+      <b-button
+        v-if="isStartSectorAvailable"
+        :disabled="isSectorChosen"
+        variant="info"
+        class="w-100 mb-1"
+        @click="setSector(cell.name)"
+      >
+        {{ isSectorChosen ? 'Этот сектор уже выбран' : 'Выбрать сектор стартовым' }}
+      </b-button>
+      <b-button
+        v-else-if="isSectorAvailable"
+        @click="setSector(cell.name)"
+      >
+        Выбрать сектор
+      </b-button>
+    </template>
   </b-popover>
 </template>
 
@@ -73,9 +76,9 @@ export default {
 
   computed: {
     ...mapState({
+      isPlayer: (state) => state.user.isPlayer,
       turnType: (state) => state.map.currentTurn.type,
       playerSelectedCell: (state) => state.user.playerData.selectedCell,
-      playerCurrentCell: (state) => state.user.playerData.currentCell,
       selectableCells: (state) => state.user.playerData.selectableCells,
       playerBattleStatus: (state) => state.user.playerData.battleStatus
     }),
