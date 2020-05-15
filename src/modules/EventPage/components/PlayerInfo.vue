@@ -5,6 +5,10 @@
     </h2>
     <div class="info-table">
       <PlayerInfoRow
+        name="Очки за дальнейшее удержание сектора"
+        :value="scoreForNextTurn"
+      />
+      <PlayerInfoRow
         name="Количество очков"
         :value="playerData.score"
       />
@@ -36,8 +40,14 @@ export default {
   computed: {
     ...mapGetters({
       playerData: 'user/playerData',
-      personalData: 'user/personalData'
-    })
+      personalData: 'user/personalData',
+      cells: 'map/cells'
+    }),
+    scoreForNextTurn() {
+      const currentCell = this.cells.find(cell => cell.name === this.playerData.ownedCell)
+      const cellBonus = currentCell ? currentCell.bonus : 0
+      return (this.playerData.ownInRowCount > 2) ? 0 : cellBonus
+    }
   },
   created() {
     this.getPersonalData()

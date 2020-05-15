@@ -97,6 +97,7 @@ export default {
 
   getters: {
     isNeedFog: state => state.currentTurn.fog,
-    currentBattleTable: state => state.currentBattleTable
+    currentBattleTable: state => state.currentBattleTable,
+    cells: state => state.cells
   }
 }
