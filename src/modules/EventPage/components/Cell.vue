@@ -53,6 +53,7 @@ export default {
   computed: {
     ...mapGetters({
       playerData: 'user/playerData',
+      isAdmin: 'user/isAdmin',
       isNeedFog: 'map/isNeedFog'
     }),
     playersCount() {
@@ -69,7 +70,7 @@ export default {
         && this.playerData.battleStatus.inBattle
     },
     showFog() {
-      if (this.playerData.currentCell === this.cell.name) {
+      if (this.isAdmin || this.playerData.currentCell === this.cell.name) {
         return false
       }
       return this.isNeedFog && !this.isSectorSelectable
