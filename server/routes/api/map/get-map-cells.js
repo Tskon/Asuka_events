@@ -35,7 +35,7 @@ module.exports = function (router, models) {
     const filteredData = cellsWithPlayers.map((cell) => {
       const isFullData = currentCell
         ? cell.name === currentCell.name || cell.connectedCells.includes(currentCell.name)
-        : cell.started
+        : cell.started || req.user.isAdmin
 
       return isFullData ? cell : {
         name: cell.name,
