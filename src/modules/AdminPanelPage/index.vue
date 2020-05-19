@@ -1,8 +1,7 @@
 <template>
-  <div class="admin-panel">
+  <div class="admin-panel pb-3">
     <PlayersTable class="players-table"/>
     <GeneralState/>
-
     <div class="card card-body">
       <h5>Пользователи:</h5>
       <b-card
@@ -68,6 +67,7 @@
         </b-list-group>
       </b-card>
     </div>
+    <EventsCRUD/>
   </div>
 </template>
 
@@ -75,13 +75,15 @@
 import { mapActions, mapState } from 'vuex'
 import GeneralState from './components/GeneralState'
 import PlayersTable from './components/PlayersTable'
+import EventsCRUD from './components/EventsCRUD'
 
 export default {
   name: 'AdminPanelPage',
 
   components: {
     GeneralState,
-    PlayersTable
+    PlayersTable,
+    EventsCRUD
   },
 
   data() {
