@@ -6,12 +6,20 @@
     >
       Создать новый эвент
     </b-button>
+
+    <CRUD/>
   </div>
 </template>
 
 <script>
+import CRUD from './CRUD'
+
 export default {
   name: "EventsCRUD",
+
+  components: {
+    CRUD
+  },
 
   data() {
     return {
