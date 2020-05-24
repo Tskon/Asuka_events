@@ -1,13 +1,12 @@
 <template>
   <div class="card card-body">
+    <CRUD/>
     <b-button
       variant="success"
       @click="openCreateEventForm"
     >
       Создать новый эвент
     </b-button>
-
-    <CRUD/>
   </div>
 </template>
 

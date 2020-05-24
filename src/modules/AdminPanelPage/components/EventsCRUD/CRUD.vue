@@ -3,7 +3,7 @@
     class="CRUD"
     @submit.prevent="submit"
   >
-    <div class="twin-inputs pt-3">
+    <div class="twin-inputs">
       <label class="edit-label pb-1">
         <span class="pb-1 pr-2">Slug эвента:</span>
         <b-form-input
