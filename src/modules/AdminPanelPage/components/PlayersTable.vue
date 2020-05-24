@@ -1,6 +1,6 @@
 <template>
   <div class="players-table-wrapper card card-body">
-    <h5>Игроки:</h5>
+    <h3>Игроки:</h3>
     <b-table
       :items="items"
       :fields="fields"

@@ -2,7 +2,7 @@
   <div class="card card-body d-flex flex-column justify-content-between">
     <div class="d-flex flex-column mb-2">
       <ul class="list-unstyled">
-        <h5>Текущий ход:</h5>
+        <h3>Текущий ход:</h3>
         <li><b>Номер хода:</b> {{ currentTurn.turnNumber }}</li>
         <li><b>Тип:</b> {{ turnNames[currentTurn.type] || currentTurn.type }}</li>
         <li><b>Туман войны:</b> {{ currentTurn.fog ? 'Вкл': 'Выкл' }}</li>

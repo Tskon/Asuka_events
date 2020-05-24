@@ -3,7 +3,7 @@
     <PlayersTable class="players-table"/>
     <GeneralState/>
     <div class="card card-body">
-      <h5>Пользователи:</h5>
+      <h3>Пользователи:</h3>
       <b-card
         no-body
         header="Администраторы"
