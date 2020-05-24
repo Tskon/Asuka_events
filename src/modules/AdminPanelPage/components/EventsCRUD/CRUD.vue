@@ -49,6 +49,15 @@
         class="edit-input"
       />
     </label>
+    <label class="edit-label pb-1">
+      <span class="pb-1 pr-2">Список игровых карт:</span>
+      <b-form-tags
+        v-model="gameMapList"
+        placeholder="Название карты"
+        type="text"
+        class="edit-input"
+      />
+    </label>
     <div class="card card-body mb-3">
       <b class="mb-2">Богатые сектора:</b>
       <div class="twin-inputs-2">
