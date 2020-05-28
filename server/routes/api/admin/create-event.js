@@ -9,7 +9,8 @@ module.exports = function (router, models) {
       richEconomyCells,
       middleEconomyCells,
       poorEconomyCells,
-      gameMapList
+      gameMapList,
+      bonusForWin
     } = req.body
 
     if (await models.Event.countDocuments({ eventSlug })) {
@@ -30,12 +31,13 @@ module.exports = function (router, models) {
       richEconomyCells,
       middleEconomyCells,
       poorEconomyCells,
-      gameMapList
+      gameMapList,
+      bonusForWin
     })
 
     res.send({
       status: 'success',
-      message: 'Данные успешно перезаписаны'
+      message: 'Эвент создан"'
     })
   })
 }

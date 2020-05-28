@@ -8,6 +8,7 @@ const EventSchema = new Schema({
   columns: Array,
   rows: Array,
   startedSectors: Array,
+  bonusForWin: Number,
   richEconomyCells: {
     list: Array,
     bonus: Number
