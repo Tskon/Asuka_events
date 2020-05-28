@@ -2,6 +2,7 @@ import axios from 'axios'
 
 const stateInit = {
   users: {
+    events: [],
     admins: [],
     commonUsers: [],
     players: []
@@ -16,11 +17,15 @@ export default {
 
   mutations: {
     setAdminData(state, payload) {
-      state.users = { ...payload }
+      state.users = payload
+    },
+
+    setEvents(state, payload) {
+      state.events = payload
     },
 
     setLogs(state, payload) {
-      state.logs = [...payload]
+      state.logs = payload
     }
   },
 
@@ -29,6 +34,14 @@ export default {
       axios.post('/api/admin/get-admin-panel-data').then(({ data }) => {
         if (data.status !== 'ok') return
         context.commit('setAdminData', data.data)
+      })
+      context.dispatch('getEvents')
+    },
+
+    getEvents(context) {
+      axios.post('/api/admin/get-events').then(({ data }) => {
+        if (data.status !== 'ok') return
+        context.commit('setEvents', data.data)
       })
     },
 
