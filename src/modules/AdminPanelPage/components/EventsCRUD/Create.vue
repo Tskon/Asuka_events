@@ -60,6 +60,14 @@
         class="edit-input"
       />
     </label>
+    <label class="edit-label pb-1">
+      <span class="pb-1 pr-2">Очки за победу:</span>
+      <b-form-input
+        v-model="bonusForWin"
+        type="number"
+        class="edit-input"
+      />
+    </label>
     <div class="card card-body mb-3">
       <b class="mb-2">Богатые сектора:</b>
       <div class="twin-inputs-2">
@@ -149,6 +157,7 @@ export default {
       columns: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'],
       rows: [1, 2, 3, 4, 5, 6],
       startedSectors: ['a1', 'h6'],
+      bonusForWin: 0
       richEconomyCells: {
         list: ['b2', 'b3'],
         bonus: 30
@@ -180,7 +189,8 @@ export default {
         richEconomyCells,
         middleEconomyCells,
         poorEconomyCells,
-        gameMapList
+        gameMapList,
+        bonusForWin
       } = this
 
       this.createEvent({
@@ -192,7 +202,8 @@ export default {
         richEconomyCells,
         middleEconomyCells,
         poorEconomyCells,
-        gameMapList
+        gameMapList,
+        bonusForWin
       })
     }
   }
