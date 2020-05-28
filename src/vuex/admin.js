@@ -85,6 +85,10 @@ export default {
         .then(() => {
           context.dispatch('getAdminData')
         })
+    },
+
+    createEvent(context, data) {
+      axios.post('/api/admin/create-event', data)
     }
   }
 }

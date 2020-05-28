@@ -3,7 +3,9 @@
     class="CRUD"
     @submit.prevent="submit"
   >
-    <h3 class="pb-2">Создание нового эвента:</h3>
+    <h3 class="pb-2">
+      Создание нового эвента:
+    </h3>
     <div class="twin-inputs">
       <label class="edit-label pb-1">
         <span class="pb-1 pr-2">Slug эвента:</span>
@@ -124,10 +126,19 @@
         </label>
       </div>
     </div>
+
+    <b-button
+      variant="success"
+      type="submit"
+    >
+      Создать новый эвент
+    </b-button>
   </form>
 </template>
 
 <script>
+import {mapActions} from 'vuex'
+
 export default {
   name: "CRUDVue",
 
@@ -155,8 +166,34 @@ export default {
   },
 
   methods: {
-    submit() {
+    ...mapActions({
+      createEvent: 'admin/createEvent'
+    }),
 
+    submit() {
+      const {
+        eventSlug,
+        eventName,
+        columns,
+        rows,
+        startedSectors,
+        richEconomyCells,
+        middleEconomyCells,
+        poorEconomyCells,
+        gameMapList
+      } = this
+
+      this.createEvent({
+        eventSlug,
+        eventName,
+        columns,
+        rows,
+        startedSectors,
+        richEconomyCells,
+        middleEconomyCells,
+        poorEconomyCells,
+        gameMapList
+      })
     }
   }
 }
@@ -186,5 +223,4 @@ export default {
       width: 120px;
     }
   }
-
 </style>
