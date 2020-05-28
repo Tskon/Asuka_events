@@ -22,6 +22,20 @@ module.exports = function (router, models) {
       return
     }
 
+    if (
+      !eventSlug
+      || !eventName
+      || !columns.length
+      || !rows.length
+      || !startedSectors.length
+      || !gameMapList.length
+    ) {
+      res.send({
+        status: 'warning',
+        message: 'Эвент не создан, переданы некорректные данные'
+      })
+    }
+
     await models.Event.create({
       eventSlug,
       eventName,
