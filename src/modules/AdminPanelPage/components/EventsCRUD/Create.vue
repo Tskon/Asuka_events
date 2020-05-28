@@ -157,7 +157,7 @@ export default {
       columns: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'],
       rows: [1, 2, 3, 4, 5, 6],
       startedSectors: ['a1', 'h6'],
-      bonusForWin: 0
+      bonusForWin: 0,
       richEconomyCells: {
         list: ['b2', 'b3'],
         bonus: 30
