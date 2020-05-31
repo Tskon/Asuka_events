@@ -16,6 +16,7 @@ module.exports = function (router, models) {
     ])
 
     await models.Log.create({
+      eventSlug: req.body.eventSlug,
       turnNumber,
       players
     })

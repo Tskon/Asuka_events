@@ -67,9 +67,9 @@ export default {
         })
     },
 
-    nextTurn({ dispatch }) {
+    nextTurn({ dispatch }, eventSlug) {
       axios
-        .post('/api/admin/next-turn')
+        .post('/api/admin/next-turn', { eventSlug })
         .then(() => {
           dispatch('map/getCurrentTurn', null, { root: true })
           dispatch('user/getPlayerData', null, { root: true })

@@ -2,7 +2,7 @@
   <div class="map-wrapper">
     <div class="event-map">
       <Cell
-        v-for="cell in cells"
+        v-for="cell in currentEvent.cellList"
         :key="cell.name"
         :cell="cell"
       />
@@ -11,7 +11,6 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
 import Cell from './Cell'
 
 export default {
@@ -19,26 +18,11 @@ export default {
     Cell
   },
 
-  data() {
-    return {
-      selectedCell: 'a1'
+  props: {
+    currentEvent: {
+      type: Object,
+      required: true
     }
-  },
-
-  computed: {
-    ...mapState({
-      cells: (state) => state.map.cells
-    })
-  },
-
-  created() {
-    this.getCells()
-  },
-
-  methods: {
-    ...mapActions({
-      getCells: 'map/getCells'
-    })
   }
 }
 </script>
