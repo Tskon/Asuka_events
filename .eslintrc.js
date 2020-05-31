@@ -31,7 +31,8 @@ module.exports = {
       "startTag": "never",
       "endTag": "never",
       "selfClosingTag": "never"
-    }]
+    }],
+    "import/no-named-as-default": 0
   },
 
   overrides: [

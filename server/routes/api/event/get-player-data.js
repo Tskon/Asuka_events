@@ -1,5 +1,5 @@
 module.exports = function (router, models) {
-  router.post('/map/get-player-data', async(req, res) => {
+  router.post('/event/get-player-data', async(req, res) => {
     let playerData = await models.Player.findOne({username: req.user.username})
 
     if (!playerData) {

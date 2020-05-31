@@ -1,8 +1,8 @@
 module.exports = function (router, models) {
   router.post('/admin/update-event', async (req, res) => {
     const {
-      eventSlug,
-      eventName,
+      slug,
+      name,
       columns,
       rows,
       startedSectors,
@@ -12,7 +12,7 @@ module.exports = function (router, models) {
       gameMapList
     } = req.body
 
-    if (!await models.Event.countDocuments({ eventSlug })) {
+    if (!await models.Event.countDocuments({ slug })) {
       res.send({
         status: 'warning',
         message: 'Такой эвент не существует'
@@ -21,8 +21,8 @@ module.exports = function (router, models) {
       return
     }
 
-    await models.Event.updateOne({ eventSlug }, {
-      eventName,
+    await models.Event.updateOne({ slug }, {
+      name,
       columns,
       rows,
       startedSectors,

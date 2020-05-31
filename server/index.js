@@ -57,7 +57,7 @@ app
     if (req.user && req.user.isAdmin) next()
     else res.send({ status: 'error', message: 'Не достаточно прав. Admin' })
   })
-  .use('/api/map', (req, res, next) => {
+  .use('/api/event', (req, res, next) => {
     if (req.user && (req.user.isAdmin || req.user.isPlayer)) next()
     else res.send({ status: 'error', message: 'Не достаточно прав. Player' })
   })

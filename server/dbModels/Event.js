@@ -3,8 +3,8 @@ const mongoose = require('mongoose')
 const { Schema } = mongoose
 
 const EventSchema = new Schema({
-  eventSlug: String,
-  eventName: String,
+  slug: String,
+  name: String,
   columns: Array,
   rows: Array,
   startedSectors: Array,

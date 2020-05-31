@@ -1,8 +1,8 @@
 module.exports = function (router, models) {
   router.post('/admin/create-event', async (req, res) => {
     const {
-      eventSlug,
-      eventName,
+      slug,
+      name,
       columns,
       rows,
       startedSectors,
@@ -13,7 +13,7 @@ module.exports = function (router, models) {
       bonusForWin
     } = req.body
 
-    if (await models.Event.countDocuments({ eventSlug })) {
+    if (await models.Event.countDocuments({ slug })) {
       res.send({
         status: 'warning',
         message: 'Такой эвент уже существует'
@@ -23,8 +23,8 @@ module.exports = function (router, models) {
     }
 
     if (
-      !eventSlug
-      || !eventName
+      !slug
+      || !name
       || !columns.length
       || !rows.length
       || !startedSectors.length
@@ -37,8 +37,8 @@ module.exports = function (router, models) {
     }
 
     await models.Event.create({
-      eventSlug,
-      eventName,
+      slug,
+      name,
       columns,
       rows,
       startedSectors,

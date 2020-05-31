@@ -1,5 +1,5 @@
 module.exports = function (router, models) {
-  router.post('/map/choose-sector', async (req, res) => {
+  router.post('/event/choose-sector', async (req, res) => {
     const usersInChosenSector = await models.User.find({ selectedCell: req.body.cellName })
 
     if (usersInChosenSector.length > 3) {

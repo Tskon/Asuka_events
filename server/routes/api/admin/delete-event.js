@@ -1,8 +1,8 @@
 module.exports = function (router, models) {
   router.post('/admin/delete-event', async (req, res) => {
-    const { eventSlug } = req.body
+    const { slug } = req.body
 
-    if (!await models.Event.countDocuments({ eventSlug })) {
+    if (!await models.Event.countDocuments({ slug })) {
       res.send({
         status: 'warning',
         message: 'Такой эвент не существует'
@@ -11,7 +11,7 @@ module.exports = function (router, models) {
       return
     }
 
-    await models.Event.deleteOne({ eventSlug })
+    await models.Event.deleteOne({ slug })
 
     res.send({
       status: 'success',

@@ -1,5 +1,5 @@
 module.exports = function (router, models) {
-  router.post('/map/set-match-result', async (req, res) => {
+  router.post('/event/set-match-result', async (req, res) => {
     const turnsCount = await models.Log.countDocuments()
     const player = await models.Player.findOne({ username: req.user.username})
     const battleTable = await models.BattleTable.findOne({

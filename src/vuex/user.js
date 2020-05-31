@@ -100,7 +100,7 @@ export default {
     },
 
     getPlayerData(context) {
-      axios.post('/api/map/get-player-data').then(({ data }) => {
+      axios.post('/api/event/get-player-data').then(({ data }) => {
         if (data.status !== 'ok') return
         context.commit('setPlayerData', data.data)
       })

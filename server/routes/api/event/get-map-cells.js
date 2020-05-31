@@ -1,5 +1,5 @@
 module.exports = function (router, models) {
-  router.post('/map/get-map-cells', async (req, res) => {
+  router.post('/event/get-map-cells', async (req, res) => {
     const [cells, players, users] = await Promise.all([
       models.Cell.find().sort({name: 1}),
       models.Player.find({}, 'currentCell username'),

@@ -49,14 +49,14 @@ export default {
 
   actions: {
     getCurrentTurn(context) {
-      axios.post('/api/map/get-current-turn').then(({ data }) => {
+      axios.post('/api/event/get-current-turn').then(({ data }) => {
         if (data.status !== 'ok') return
         context.commit('setCurrentTurn', data.data)
       })
     },
 
     getCells(context) {
-      axios.post('/api/map/get-map-cells').then(({ data }) => {
+      axios.post('/api/event/get-map-cells').then(({ data }) => {
         if (data.status !== 'ok') return
 
         context.commit('setCells', data.data)
@@ -65,7 +65,7 @@ export default {
 
     setSector(context, cellId) {
       axios
-        .post('/api/map/choose-sector', {
+        .post('/api/event/choose-sector', {
           cellName: cellId
         })
         .then(({ data }) => {
@@ -78,7 +78,7 @@ export default {
     },
 
     setBattleStatus(context, isWinner) {
-      return axios.post('/api/map/set-match-result', { isWinner })
+      return axios.post('/api/event/set-match-result', { isWinner })
     },
 
     clearCurrentBattleTable({ commit }) {
@@ -86,7 +86,7 @@ export default {
     },
 
     async fetchCurrentBattleTable({ commit }, cellName) {
-      const { data } = await axios.post('/api/map/get-battle-table-data', {
+      const { data } = await axios.post('/api/event/get-battle-table-data', {
         cellName
       })
       if (data) {

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Event</h1>
+    <h1>Event. {{ $route.params }}</h1>
     <Map/>
     <PlayerInfo/>
   </div>

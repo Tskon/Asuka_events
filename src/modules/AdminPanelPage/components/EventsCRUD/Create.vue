@@ -10,7 +10,7 @@
       <label class="edit-label pb-1">
         <span class="pb-1 pr-2">Slug эвента:</span>
         <b-form-input
-          v-model="eventSlug"
+          v-model="slug"
           type="text"
           class="edit-input"
         />
@@ -18,7 +18,7 @@
       <label class="edit-label pb-1">
         <span class="pb-1 pr-2">Имя эвента:</span>
         <b-form-input
-          v-model="eventName"
+          v-model="name"
           type="text"
           class="edit-input"
         />
@@ -152,8 +152,8 @@ export default {
 
   data() {
     return {
-      eventSlug: '',
-      eventName: '',
+      slug: '',
+      name: '',
       columns: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'],
       rows: [1, 2, 3, 4, 5, 6],
       startedSectors: ['a1', 'h6'],
@@ -181,8 +181,8 @@ export default {
 
     submit() {
       const {
-        eventSlug,
-        eventName,
+        slug,
+        name,
         columns,
         rows,
         startedSectors,
@@ -194,8 +194,8 @@ export default {
       } = this
 
       this.createEvent({
-        eventSlug,
-        eventName,
+        slug,
+        name,
         columns,
         rows,
         startedSectors,

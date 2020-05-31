@@ -4,7 +4,7 @@
       v-if="isAuth"
       to="/event"
     >
-      Эвент
+      Эвенты
     </b-nav-item>
     <b-nav-item
       v-if="isPlayer"

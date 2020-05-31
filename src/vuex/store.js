@@ -6,6 +6,7 @@ import map from './map'
 import admin from './admin'
 import modal from './modal'
 import message from './message'
+import events from './events'
 
 Vue.use(Vuex)
 
@@ -15,6 +16,7 @@ export default new Vuex.Store({
     map,
     admin,
     modal,
-    message
+    message,
+    events
   }
 })
