@@ -5,23 +5,19 @@ const { Schema } = mongoose
 const EventSchema = new Schema({
   slug: String,
   name: String,
-  columns: Array,
-  rows: Array,
-  startedSectors: Array,
   bonusForWin: Number,
-  richEconomyCells: {
-    list: Array,
-    bonus: Number
-  },
-  middleEconomyCells: {
-    list: Array,
-    bonus: Number
-  },
-  poorEconomyCells: {
-    list: Array,
-    bonus: Number
-  },
-  gameMapList: Array
+  turnList: [{
+    turnNumber: Number,
+    fog: Boolean,
+    type: { type: String, default: 'commonTurn' }
+  }],
+  cellList: [{
+    name: String,
+    connectedCells: Array,
+    started: Boolean,
+    gameMap: String,
+    bonus: { type: Number, default: 0 }
+  }]
 })
 
 module.exports = mongoose.model('Event', EventSchema)
