@@ -7,7 +7,7 @@
         :key="`link-${event.slug}`"
         :to="`/event/${event.slug}`"
       >
-        <li>{{event.name}}</li>
+        <li>{{ event.name }}</li>
       </RouterLink>
     </ul>
   </div>

@@ -1,21 +1,21 @@
 <template>
   <div v-if="currentEvent">
     <h1>{{ currentEvent.name }}</h1>
-    <Map/>
-    <PlayerInfo/>
+    <Map :current-event="currentEvent"/>
+    <PlayerInfo :event-slug="currentEvent.slug"/>
   </div>
 
   <div v-else>
     Такого эвента не найдено, список эвентов:
-      <ul>
-        <RouterLink
-          v-for="event in eventList"
-          :key="`link-${event.slug}`"
-          :to="`/event/${event.slug}`"
-        >
-          <li>{{event.name}}</li>
-        </RouterLink>
-      </ul>
+    <ul>
+      <RouterLink
+        v-for="event in eventList"
+        :key="`link-${event.slug}`"
+        :to="`/event/${event.slug}`"
+      >
+        <li>{{ event.name }}</li>
+      </RouterLink>
+    </ul>
   </div>
 </template>
 
@@ -41,12 +41,14 @@ export default {
   },
 
   created() {
-    this.getCurrentTurn()
+    if (this.currentEvent) {
+      this.fetchMap(this.currentEvent.slug)
+    }
   },
 
   methods: {
     ...mapActions({
-      getCurrentTurn: 'map/getCurrentTurn'
+      fetchMap: 'map/fetchMap'
     })
   }
 }

@@ -48,19 +48,26 @@ export default {
   },
 
   actions: {
-    getCurrentTurn(context) {
-      axios.post('/api/event/get-current-turn').then(({ data }) => {
-        if (data.status !== 'ok') return
-        context.commit('setCurrentTurn', data.data)
-      })
+    fetchMap(context, slug) {
+      context.dispatch('getCurrentTurn', slug)
+      context.dispatch('getCells', slug)
     },
 
-    getCells(context) {
-      axios.post('/api/event/get-map-cells').then(({ data }) => {
-        if (data.status !== 'ok') return
+    getCurrentTurn(context, slug) {
+      axios.post('/api/event/get-current-turn', slug)
+        .then(({ data }) => {
+          if (data.status !== 'ok') return
+          context.commit('setCurrentTurn', data.data)
+        })
+    },
 
-        context.commit('setCells', data.data)
-      })
+    getCells(context, slug) {
+      axios.post('/api/event/get-map-cells', slug)
+        .then(({ data }) => {
+          if (data.status !== 'ok') return
+
+          context.commit('setCells', data.data)
+        })
     },
 
     setSector(context, cellId) {
