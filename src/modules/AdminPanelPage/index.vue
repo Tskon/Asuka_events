@@ -1,7 +1,11 @@
 <template>
   <div class="admin-panel pb-3">
     <PlayersTable class="players-table"/>
-    <GeneralState/>
+    <GeneralState
+      v-for="event in eventList"
+      :key="event.slug"
+      :current-event="event"
+    />
     <div class="card card-body">
       <h3>Пользователи:</h3>
       <b-card
@@ -72,7 +76,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapActions, mapState, mapGetters } from 'vuex'
 import GeneralState from './components/GeneralState'
 import PlayersTable from './components/PlayersTable'
 import EventsCRUD from './components/EventsCRUD'
@@ -95,6 +99,10 @@ export default {
   computed: {
     ...mapState({
       adminData: (state) => state.admin
+    }),
+
+    ...mapGetters({
+      eventList: 'events/eventList'
     })
   },
 

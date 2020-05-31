@@ -10,7 +10,7 @@
 
       <b-button
         variant="success"
-        @click="nextTurn"
+        @click="nextTurn(currentEvent.slug)"
       >
         Следующий ход
       </b-button>
@@ -30,6 +30,13 @@ import {mapState, mapActions} from 'vuex'
 
 export default {
   name: 'GeneralState',
+
+  props: {
+    currentEvent: {
+      type: Object,
+      required: true
+    }
+  },
 
   data() {
     return {
