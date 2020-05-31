@@ -18,7 +18,7 @@ export default new Router({
       component: () => import(/* webpackChunkName: "event" */ './modules/EventsPage')
     },
     {
-      path: '/event/:eventName',
+      path: '/event/:eventSlug',
       name: 'event',
       component: () => import(/* webpackChunkName: "event" */ './modules/EventPage')
     },

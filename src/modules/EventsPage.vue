@@ -1,18 +1,20 @@
 <template>
   <div>
-    <h1>Эвенты:</h1>
-    <RouterLink
-      v-for="event in eventList"
-      :key="`link-${event.slug}`"
-      :to="`/event/${event.slug}`"
-    >
-      {{event.name}}
-    </RouterLink>
+    <h1>Эвенты</h1>
+    <ul>
+      <RouterLink
+        v-for="event in eventList"
+        :key="`link-${event.slug}`"
+        :to="`/event/${event.slug}`"
+      >
+        <li>{{event.name}}</li>
+      </RouterLink>
+    </ul>
   </div>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   name: "EventsPage",
@@ -20,16 +22,6 @@ export default {
   computed: {
     ...mapGetters({
       eventList: 'events/eventList'
-    })
-  },
-
-  created() {
-    this.fetchEvents()
-  },
-
-  methods: {
-    ...mapActions({
-      fetchEvents: 'events/fetchEvents'
     })
   }
 }

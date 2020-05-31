@@ -71,14 +71,20 @@ export default {
       user: (state) => state.user
     })
   },
+
   created() {
     this.getUser()
+    this.fetchEvents()
+
   },
+
   methods: {
     ...mapActions({
       getUser: 'user/getUser',
-      logout: 'user/logout'
+      logout: 'user/logout',
+      fetchEvents: 'events/fetchEvents'
     }),
+
     onLogout() {
       this.logout()
       this.$router.push({ name: 'home' })
