@@ -11,6 +11,8 @@ module.exports = function (router, models) {
 
       players.forEach(player => {
         const findedPlayer = player.events.find(playerEvent => playerEvent.slug === event.slug)
+        if (!findedPlayer) return
+
         const findedUser = users.find(user => user.username === findedPlayer.username)
         const findedPlayerEvent = findedPlayer.events.find(playerEvent => playerEvent.slug === event.slug)
 
@@ -76,6 +78,8 @@ module.exports = function (router, models) {
       }
     })
 
+    // TODO найти где пропал await
+    console.log(parsedEventList)
     res.send({
       status: 'ok',
       data: {
