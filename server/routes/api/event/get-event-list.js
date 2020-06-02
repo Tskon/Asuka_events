@@ -3,7 +3,7 @@ module.exports = function (router, models) {
     const [eventList, players, users] = await Promise.all([
       models.Event.find(),
       models.Player.find({}, 'username events'),
-      models.User.find({ isPlayer: true }, 'username clanTag clanName avatar'),
+      models.User.find({ isPlayer: true }, 'username clanTag clanName avatar')
     ])
 
     const parsedEventList = eventList.map(async event => {
@@ -24,15 +24,11 @@ module.exports = function (router, models) {
           ownedCell: findedPlayerEvent.ownedCell,
           ownInRowCount: findedPlayerEvent.ownInRowCount
         }
-
         eventPlayers.push(changedPlayer)
       })
 
       const turnsCount = await models.Log.countDocuments({eventSlug: event.slug})
-
-      const currentTurn = await models.TurnType.findOne({
-        turnNumber: turnsCount + 1
-      }, 'number fog type')
+      const currentTurn = event.turnList.find(turnData => turnData.turnNumber === turnsCount )
 
       const cellsWithPlayers = event.cellList.map((cell) => {
         const { name, started, bonus, connectedCells, gameMap } = cell
