@@ -73,13 +73,12 @@ module.exports = function (router, models) {
         cellList: (currentTurn && currentTurn.fog) ? filteredData : cellsWithPlayers
       }
     })
+    const data = await Promise.all(parsedEventList)
 
-    // TODO найти где пропал await
-    console.log(parsedEventList)
     res.send({
       status: 'ok',
       data: {
-        eventList: parsedEventList
+        eventList: data
       }
     })
   })
