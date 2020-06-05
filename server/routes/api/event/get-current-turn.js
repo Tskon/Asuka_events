@@ -1,6 +1,5 @@
 module.exports = function (router, models) {
   router.post('/event/get-current-turn', async (req, res) => {
-    console.log(req.body.eventSlug)
     const event = await models.Event.findOne({ slug: req.body.eventSlug })
     const turnsCount = await models.Log.countDocuments({ eventSlug: req.body.eventSlug })
 
