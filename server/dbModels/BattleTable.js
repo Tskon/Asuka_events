@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const { Schema } = mongoose
 
 const BattleTableSchema = new Schema({
+  eventSlug: String,
   turnNumber: Number,
   cellName: String,
   players: Array,

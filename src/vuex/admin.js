@@ -78,9 +78,9 @@ export default {
         })
     },
 
-    cleanEventData({ dispatch }) {
+    cleanEventData({ dispatch }, eventSlug) {
       axios
-        .post('/api/admin/clean-event-data')
+        .post('/api/admin/clean-event-data', { eventSlug })
         .then(() => {
           dispatch('getAdminData')
           dispatch('getLogs')

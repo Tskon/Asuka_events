@@ -63,7 +63,7 @@ export default {
       this.$bvModal.msgBoxConfirm('Вы уверены что хотите удалить все данные эвента? Не будут затронуты данные пользователей и их права')
         .then((isOk) => {
           if (!isOk) return
-          this.cleanEventData()
+          this.cleanEventData(this.currentEvent.slug)
         })
     }
   }
