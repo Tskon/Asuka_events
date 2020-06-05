@@ -1,8 +1,9 @@
 <template>
   <div class="card card-body d-flex flex-column justify-content-between">
     <div class="d-flex flex-column mb-2">
+      <h3>{{ currentEvent.name }}</h3>
       <ul class="list-unstyled">
-        <h3>Текущий ход:</h3>
+        <b>Текущий ход:</b>
         <li><b>Номер хода:</b> {{ currentTurn.turnNumber }}</li>
         <li><b>Тип:</b> {{ turnNames[currentTurn.type] || currentTurn.type }}</li>
         <li><b>Туман войны:</b> {{ currentTurn.fog ? 'Вкл': 'Выкл' }}</li>
