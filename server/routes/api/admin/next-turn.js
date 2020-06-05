@@ -1,17 +1,17 @@
 module.exports = function (router, models) {
   router.post('/admin/next-turn', async (req, res) => {
-    const turnsCount = await models.Log.countDocuments()
+    const turnsCount = await models.Log.countDocuments({ eventSlug: req.body.eventSlug })
     const turnNumber = turnsCount + 1
 
     const [
-      cells,
+      event,
       players,
       battleTables,
       users
     ] = await Promise.all([
-      models.Cell.find().sort({name: 1}),
-      models.Player.find(),
-      models.BattleTable.find({ turnNumber }),
+      models.Event.findOne({ slug: req.body.eventSlug}),
+      models.Player.find({ events : { $elemMatch: {  slug : { $gte: req.body.eventSlug } } } }),
+      models.BattleTable.find({ turnNumber, eventSlug: req.body.eventSlug }),
       models.User.find({ isPlayer: true })
     ])
 
@@ -25,7 +25,7 @@ module.exports = function (router, models) {
       const isWinner = checkIsWinner(battleTables, playerData)
 
       if (playerData.ownedCell) {
-        const cell = cells.find(cellData => cellData.name === playerData.currentCell)
+        const cell = event.cellList.find(cellData => cellData.name === playerData.currentCell)
         const bonusCoef = (playerData.ownInRowCount < 3) ? 1 : 0
         playerData.score += cell.bonus * bonusCoef
       }
@@ -41,12 +41,12 @@ module.exports = function (router, models) {
         playerData.ownInRowCount = 0
       }
 
-      smartSectorChoose(playerData, isWinner, cells, players)
+      smartSectorChoose(playerData, isWinner, event.cellList, players)
 
       playerData.selectedCell = ''
     })
 
-    createBattleTables({ cells, players, turnNumber: turnNumber + 1, users })
+    createBattleTables({ cells: event.cellList, players, turnNumber: turnNumber + 1, users })
 
     await Promise.all(
       players.map(player => {
