@@ -54,7 +54,9 @@ export default {
     },
 
     getCurrentTurn(context, slug) {
-      axios.post('/api/event/get-current-turn', slug)
+      axios.post('/api/event/get-current-turn', {
+        eventSlug: slug
+      })
         .then(({ data }) => {
           if (data.status !== 'ok') return
           context.commit('setCurrentTurn', data.data)
@@ -62,7 +64,9 @@ export default {
     },
 
     getCells(context, slug) {
-      axios.post('/api/event/get-map-cells', slug)
+      axios.post('/api/event/get-map-cells', {
+        eventSlug: slug
+      })
         .then(({ data }) => {
           if (data.status !== 'ok') return
 
