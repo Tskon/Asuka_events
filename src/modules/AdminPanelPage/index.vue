@@ -107,7 +107,6 @@ export default {
   },
 
   created() {
-    this.getCurrentTurn()
     this.getAdminData()
     this.getLogs()
   },

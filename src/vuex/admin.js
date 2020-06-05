@@ -71,7 +71,6 @@ export default {
       axios
         .post('/api/admin/next-turn', { eventSlug })
         .then(() => {
-          dispatch('map/getCurrentTurn', null, { root: true })
           dispatch('user/getPlayerData', null, { root: true })
           dispatch('getAdminData')
           dispatch('getLogs')
@@ -84,7 +83,6 @@ export default {
         .then(() => {
           dispatch('getAdminData')
           dispatch('getLogs')
-          dispatch('map/getCurrentTurn', null, { root: true })
           this.$noty.info('Все данные эвента удалены')
         })
         .catch(() => {
