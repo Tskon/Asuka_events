@@ -5,6 +5,7 @@
       v-for="event in eventList"
       :key="event.slug"
       :current-event="event"
+      class="event-state"
     />
     <div class="card card-body">
       <h3>Пользователи:</h3>
@@ -133,8 +134,14 @@ export default {
   @media (min-width: $md) {
     grid-template-columns: 1fr 1fr;
   }
-  @media (min-width: $xl) {
+  @media (min-width: $lg) {
     grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+.event-state {
+  @media (min-width: $lg) {
+    grid-column: 3;
   }
 }
 
