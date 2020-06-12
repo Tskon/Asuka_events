@@ -16,73 +16,11 @@
               :current-event="event"
               class="event-tab__state"
             />
-            <div class="event-tab__user-table card card-body">
-              <h3>Пользователи:</h3>
-              <b-card
-                no-body
-                header="Администраторы"
-                class="admins-list"
-              >
-                <b-list-group flush>
-                  <b-list-group-item
-                    v-for="admin in adminData.users.admins"
-                    :key="admin.username"
-                  >
-                    {{ admin.username }}
-                  </b-list-group-item>
-                </b-list-group>
-              </b-card>
-
-              <b-card
-                no-body
-                header="Игроки"
-                class="users-list"
-              >
-                <b-list-group flush>
-                  <b-list-group-item
-                    v-for="player in adminData.users.players"
-                    :key="player.username"
-                  >
-                    {{ player.username }}
-                    <b-button
-                      variant="danger"
-                      @click="setPlayerStatus({
-                        username: player.username,
-                        status: false,
-                        eventSlug: event.slug
-                      })"
-                    >
-                      Удалить права
-                    </b-button>
-                  </b-list-group-item>
-                </b-list-group>
-              </b-card>
-
-              <b-card
-                no-body
-                header="Обычные пользователи"
-                class="users-list"
-              >
-                <b-list-group flush>
-                  <b-list-group-item
-                    v-for="user in adminData.users.commonUsers"
-                    :key="user.username"
-                  >
-                    {{ user.username }}
-                    <b-button
-                      variant="success"
-                      @click="setPlayerStatus({
-                        username: user.username,
-                        status: true,
-                        eventSlug: event.slug
-                      })"
-                    >
-                      Сделать игроком
-                    </b-button>
-                  </b-list-group-item>
-                </b-list-group>
-              </b-card>
-            </div>
+            <UsersTable
+              class="event-tab__user-table"
+              :users="adminData.users"
+              :event="event"
+            />
             <PlayersTable class="event-tab__players-table"/>
           </div>
         </b-tab>
@@ -97,11 +35,13 @@ import { mapActions, mapState, mapGetters } from 'vuex'
 import GeneralState from './components/GeneralState'
 import PlayersTable from './components/PlayersTable'
 import CreateEvent from './components/CreateEvent'
+import UsersTable from "./components/UsersTable"
 
 export default {
   name: 'AdminPanelPage',
 
   components: {
+    UsersTable,
     GeneralState,
     PlayersTable,
     CreateEvent
@@ -132,7 +72,6 @@ export default {
     ...mapActions({
       getCurrentTurn: 'map/getCurrentTurn',
       getAdminData: 'admin/getAdminData',
-      setPlayerStatus: 'admin/setPlayerStatus',
       getLogs: 'admin/getLogs'
     })
   }

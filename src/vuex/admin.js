@@ -1,12 +1,7 @@
 import axios from 'axios'
 
 const stateInit = {
-  users: {
-    events: [],
-    admins: [],
-    commonUsers: [],
-    players: []
-  },
+  users: [],
   logs: []
 }
 
@@ -33,7 +28,7 @@ export default {
     getAdminData(context) {
       axios.post('/api/admin/get-admin-panel-data').then(({ data }) => {
         if (data.status !== 'ok') return
-        context.commit('setAdminData', data.data)
+        context.commit('setAdminData', data.data.users)
       })
       context.dispatch('getEvents')
     },
