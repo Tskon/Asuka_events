@@ -56,7 +56,8 @@ export default {
       axios
         .post('/api/admin/set-player-status', {
           username: payload.username,
-          status: payload.status
+          status: payload.status,
+          eventSlug: payload.eventSlug
         })
         .then(({ data }) => {
           if (data.status !== 'ok') return

@@ -48,7 +48,8 @@
                       variant="danger"
                       @click="setPlayerStatus({
                         username: player.username,
-                        status: false
+                        status: false,
+                        eventSlug: event.slug
                       })"
                     >
                       Удалить права
@@ -72,7 +73,8 @@
                       variant="success"
                       @click="setPlayerStatus({
                         username: user.username,
-                        status: true
+                        status: true,
+                        eventSlug: event.slug
                       })"
                     >
                       Сделать игроком
