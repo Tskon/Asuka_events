@@ -16,7 +16,7 @@ module.exports = function (router, models) {
         player.events = player.events.filter(event => event.slug !== req.body.eventSlug)
       }
 
-      models.Player.updateOne({ username: req.body.username })
+      models.Player.updateOne({ username: req.body.username }, player)
     }
 
     res.send({
