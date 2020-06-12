@@ -11,7 +11,6 @@ const UserSchema = new Schema({
   clanTag: { type: String, default: 'UKNWN' },
   clanName: { type: String, default: 'Unknown' },
   secret: String,
-  isPlayer: { type: Boolean, default: false },
   isAdmin: { type: Boolean, default: false },
   avatar: { type: String, default: defaultAvatar }
 })
