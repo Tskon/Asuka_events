@@ -11,7 +11,7 @@ module.exports = function (router, models) {
 
       players.forEach(player => {
         const findedPlayer = player.events.find(playerEvent => playerEvent.slug === event.slug)
-        if (!findedPlayer) return
+        if (!findedPlayer || !findedPlayer.eventList) return
 
         const findedUser = users.find(user => user.username === findedPlayer.username)
         const findedPlayerEvent = findedPlayer.events.find(playerEvent => playerEvent.slug === event.slug)
