@@ -50,7 +50,6 @@ export default {
   actions: {
     fetchMap(context, slug) {
       context.dispatch('getCurrentTurn', slug)
-      context.dispatch('getCells', slug)
     },
 
     getCurrentTurn(context, slug) {
@@ -63,17 +62,6 @@ export default {
         })
     },
 
-    getCells(context, slug) {
-      axios.post('/api/event/get-map-cells', {
-        eventSlug: slug
-      })
-        .then(({ data }) => {
-          if (data.status !== 'ok') return
-
-          context.commit('setCells', data.data)
-        })
-    },
-
     setSector(context, cellId) {
       axios
         .post('/api/event/choose-sector', {
@@ -83,7 +71,6 @@ export default {
           if (data.status !== 'success') return
 
           context.commit('user/setPlayerData', { cellId }, { root: true })
-          context.dispatch('getCells')
           context.dispatch('user/getPlayerData', null, { root: true })
         })
     },
