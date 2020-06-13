@@ -4,7 +4,7 @@
     <b-card
       no-body
       header="Администраторы"
-      class="admins-list"
+      class="admins-list mb-3"
     >
       <b-list-group flush>
         <b-list-group-item
@@ -19,16 +19,18 @@
     <b-card
       no-body
       header="Игроки"
-      class="users-list"
+      class="users-list mb-3"
     >
       <b-list-group flush>
         <b-list-group-item
           v-for="player in players"
           :key="player.username"
+          class="user-wrapper"
         >
           {{ player.username }}
           <b-button
             variant="danger"
+            size="sm"
             @click="setPlayerStatus({
               username: player.username,
               status: false,
@@ -50,10 +52,12 @@
         <b-list-group-item
           v-for="user in commonUsers"
           :key="user.username"
+          class="user-wrapper"
         >
           {{ user.username }}
           <b-button
             variant="success"
+            size="sm"
             @click="setPlayerStatus({
               username: user.username,
               status: true,
@@ -115,5 +119,11 @@ export default {
 </script>
 
 <style scoped>
-
+  .user-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 8px;
+    padding-bottom: 9px;
+  }
 </style>
