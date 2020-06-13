@@ -6,6 +6,8 @@ const EventSchema = new Schema({
   slug: String,
   name: String,
   bonusForWin: Number,
+  columns: [ String ],
+  rows: [ String ],
   turnList: [{
     turnNumber: Number,
     fog: Boolean,

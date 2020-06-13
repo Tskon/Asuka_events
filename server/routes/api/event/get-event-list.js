@@ -70,6 +70,8 @@ module.exports = function (router, models) {
         name: event.name,
         bonusForWin: event.bonusForWin,
         turnList: event.turnList,
+        columns: event.columns,
+        rows: event.rows,
         cellList: (currentTurn && currentTurn.fog) ? filteredData : cellsWithPlayers
       }
     })

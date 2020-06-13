@@ -80,10 +80,6 @@ export default {
         .then(() => {
           dispatch('getAdminData')
           dispatch('getLogs')
-          this.$noty.info('Все данные эвента удалены')
-        })
-        .catch(() => {
-          this.$noty.error('Ошибка. Данные не были удалены')
         })
     },
 

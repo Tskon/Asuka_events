@@ -48,11 +48,11 @@ module.exports = function (router, models) {
 
     const turnList = createTurns()
 
-    // TODO хранить клетки в эвенте, выпилить из проекта сущность клетки.
-    // TODO Хранить ходы в эвенте, выпилить из проекта сущность типа хода.
     await models.Event.create({
       slug,
       name,
+      columns,
+      rows,
       cellList,
       turnList,
       bonusForWin
