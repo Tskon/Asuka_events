@@ -21,7 +21,11 @@
               :users="adminData.users"
               :event="event"
             />
-            <PlayersTable class="event-tab__players-table"/>
+            <PlayersTable
+              :users="adminData.users"
+              :eventSlug="event.slug"
+              class="event-tab__players-table"
+            />
           </div>
         </b-tab>
       </b-tabs>

@@ -98,10 +98,22 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'PlayersTable',
+
+  props: {
+    users: {
+      type: Array,
+      default: () => []
+    },
+
+    eventSlug: {
+      type: String,
+      default: ''
+    }
+  },
 
   data() {
     return {
@@ -144,9 +156,14 @@ export default {
   },
 
   computed: {
-    ...mapState({
-      players: (state) => state.admin.users.players
-    }),
+    players() {
+      return this.users.filter(user => {
+        if (!user.eventList) return false
+
+        return user.eventList.some(event => event.slug === this.eventSlug)
+      })
+    },
+
     items() {
       return this.players.map(player => ({
         username: player.username,
