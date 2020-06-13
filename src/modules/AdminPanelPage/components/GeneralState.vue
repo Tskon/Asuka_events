@@ -5,7 +5,7 @@
       <ul class="list-unstyled">
         <b>Текущий ход:</b>
         <li><b>Номер хода:</b> {{ currentEvent.turnNumber }}</li>
-        <li><b>Тип:</b> {{ turnNames[currentTurn.type] || currentTurn.type }}</li>
+        <li><b>Тип:</b> {{ turnNames[currentTurn.type] }}</li>
         <li><b>Туман войны:</b> {{ currentTurn.fog ? 'Вкл': 'Выкл' }}</li>
       </ul>
 
@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import {mapState, mapActions} from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'GeneralState',
@@ -49,9 +49,9 @@ export default {
   },
 
   computed: {
-    ...mapState({
-      currentTurn: (state) => state.map.currentTurn
-    })
+    currentTurn() {
+      return this.currentEvent.turnList.find(turn => turn.turnNumber === this.currentEvent.turnNumber)
+    }
   },
 
   methods: {
@@ -59,6 +59,7 @@ export default {
       nextTurn: 'admin/nextTurn',
       cleanEventData: 'admin/cleanEventData'
     }),
+
     deleteEventData() {
       this.$bvModal.msgBoxConfirm('Вы уверены что хотите удалить все данные эвента? Не будут затронуты данные пользователей и их права')
         .then((isOk) => {

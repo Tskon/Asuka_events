@@ -1,7 +1,7 @@
 module.exports = function (router, models) {
   router.post('/admin/get-events', async (req, res) => {
     const [events, logs] = await Promise.all([
-      models.Event.find({}, 'name slug'),
+      models.Event.find({}),
       models.Log.find()
     ])
 
