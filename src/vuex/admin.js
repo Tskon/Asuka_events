@@ -2,7 +2,8 @@ import axios from 'axios'
 
 const stateInit = {
   users: [],
-  logs: []
+  logs: [],
+  events: []
 }
 
 export default {
@@ -35,8 +36,8 @@ export default {
 
     getEvents(context) {
       axios.post('/api/admin/get-events').then(({ data }) => {
-        if (data.status !== 'ok') return
-        context.commit('setEvents', data.data)
+        if (data.status !== 'success') return
+        context.commit('setEvents', data.data.events)
       })
     },
 
@@ -97,5 +98,9 @@ export default {
     createEvent(context, data) {
       axios.post('/api/admin/create-event', data)
     }
+  },
+
+  getters: {
+    eventsForAdmin: (state) => state.events
   }
 }

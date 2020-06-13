@@ -12,7 +12,7 @@ module.exports = function (router, models) {
       models.Event.findOne({ slug: req.body.eventSlug}),
       models.Player.find({ events : { $elemMatch: {  slug : { $gte: req.body.eventSlug } } } }),
       models.BattleTable.find({ turnNumber, eventSlug: req.body.eventSlug }),
-      models.User.find({ isPlayer: true })
+      models.User.find()
     ])
 
     await models.Log.create({

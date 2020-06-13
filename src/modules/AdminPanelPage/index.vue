@@ -6,10 +6,9 @@
     >
       <b-tabs card>
         <b-tab
-          v-for="event in eventList"
+          v-for="event in eventsForAdmin"
           :key="event.slug"
           :title="event.name"
-          active
         >
           <div class="event-tab">
             <GeneralState
@@ -23,7 +22,7 @@
             />
             <PlayersTable
               :users="adminData.users"
-              :eventSlug="event.slug"
+              :event-slug="event.slug"
               class="event-tab__players-table"
             />
           </div>
@@ -63,7 +62,7 @@ export default {
     }),
 
     ...mapGetters({
-      eventList: 'events/eventList'
+      eventsForAdmin: 'admin/eventsForAdmin'
     })
   },
 
