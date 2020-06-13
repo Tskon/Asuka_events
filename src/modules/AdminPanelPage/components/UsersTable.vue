@@ -101,7 +101,7 @@ export default {
 
     commonUsers() {
       return this.users.filter(user => {
-        return !user.eventList || !user.eventList.length
+        return !user.eventList || !user.eventList.some(event => event.slug === this.event.slug)
       })
     }
   },
