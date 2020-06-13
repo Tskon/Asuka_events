@@ -9,14 +9,16 @@ module.exports = function (router, models) {
           slug: req.body.eventSlug
         }]
       })
+    } else if (req.body.status) {
+      player.events.push({ slug: req.body.eventSlug })
+      await models.Player.updateOne({ username: req.body.username }, player)
     } else {
-      if (req.body.status) {
-        player.events.push({ slug: req.body.eventSlug })
-      } else {
-        player.events = player.events.filter(event => event.slug !== req.body.eventSlug)
-      }
-
-      models.Player.updateOne({ username: req.body.username }, player)
+      const eventToDelete = player.events.find(event => event.slug === req.body.eventSlug)
+      await models.Player.updateOne({ username: req.body.username }, {
+        $pull: { events: {
+          $gte: eventToDelete
+        } }
+      }, { multi: true })
     }
 
     res.send({
