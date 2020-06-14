@@ -1,5 +1,8 @@
 <template>
-  <div class="map-wrapper">
+  <div
+    :style="`--column-number: ${currentEvent.columns.length}; --row-number: ${currentEvent.rows.length}`"
+    class="map-wrapper"
+  >
     <div class="event-map">
       <Cell
         v-for="cell in currentEvent.cellList"
@@ -29,15 +32,14 @@ export default {
 
 <style scoped>
   .map-wrapper{
-    margin: 0 auto;
     position: relative;
     top: 0;
     left: 0;
     /*background-image: url(../../static/map-indonesia.svg);*/
     background-size: 100%;
     background-repeat: no-repeat;
-    width: 1200px;
-    height: 480px;
+    width: calc(var(--column-number) * 150px);
+    height: calc(var(--column-number) * 50px);
   }
 
   .event-map{
@@ -47,8 +49,8 @@ export default {
     width: 100%;
     height: 100%;
     display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    grid-template-rows: repeat(6, 1fr);
+    grid-template-columns: repeat(var(--column-number), 1fr);
+    grid-template-rows: repeat(var(--row-number), 1fr);
     grid-auto-flow: column;
   }
 </style>
