@@ -1,5 +1,5 @@
 <template>
-  <b-tabs card>
+  <b-tabs @activate-tab="tabHandler" card>
     <b-tab
       v-for="event in eventList"
       :key="event.slug"
@@ -38,8 +38,13 @@ export default {
 
   methods: {
     ...mapActions({
-      fetchMap: 'map/fetchMap'
-    })
+      fetchMap: 'map/fetchMap',
+      setCurrentEvent: 'events/setCurrentEvent'
+    }),
+
+    tabHandler(e) {
+      this.setCurrentEvent(e)
+    }
   }
 }
 </script>
