@@ -5,7 +5,6 @@ let getUserIntervalId = null
 const stateInit = {
   name: '',
   isAdmin: false,
-  isPlayer: false,
   personalData: {
     clanName: 'Unknown clan',
     clanTag: 'UNKNWN',
@@ -28,7 +27,9 @@ const stateInit = {
 
 export default {
   namespaced: true,
+
   state: { ...stateInit },
+
   mutations: {
     setUser(state, user) {
       Object.keys(user).forEach(key => {
@@ -42,6 +43,7 @@ export default {
       state.playerData = { ...state.playerData, ...payload }
     }
   },
+
   actions: {
     signUp(context, body) {
       axios.post('/api/signup', body).then(({ data }) => {
@@ -81,12 +83,10 @@ export default {
       axios.post('/api/user/get-user').then(({ data }) => {
         if (data.status !== 'ok') return
 
-        if (data.data.isPlayer) {
+        context.dispatch('getPlayerData')
+        getUserIntervalId = setInterval(() => {
           context.dispatch('getPlayerData')
-          getUserIntervalId = setInterval(() => {
-            context.dispatch('getPlayerData')
-          }, 15000)
-        }
+        }, 15000)
 
         context.commit('setUser', data.data)
       })
@@ -119,7 +119,7 @@ export default {
       return !!state.name
     },
     isAdmin: state => state.isAdmin,
-    isPlayer: state => state.isPlayer,
+    isPlayer: state => state.isPlayer, // TODO ввести currentEvent, на его основе вернуть isPlayer
     playerData: state => state.playerData,
     personalData: state => state.personalData
   }
