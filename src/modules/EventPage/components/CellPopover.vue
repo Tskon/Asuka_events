@@ -2,7 +2,7 @@
   <b-popover
     :target="'cell-popover-' + cell.name"
     :title="'Действия для сектора ' + cell.name.toUpperCase()"
-    triggers="focus"
+    triggers="click"
     placement="rightbottom"
     custom-class="w-100"
     @show="onPopoverShown(cell.name)"
@@ -75,6 +75,7 @@ export default {
   },
 
   computed: {
+    // todo переписать получение всех данных (неактуальны)
     ...mapState({
       isPlayer: (state) => state.user.isPlayer,
       turnType: (state) => state.map.currentTurn.type,

@@ -5,7 +5,7 @@ export default {
 
   state: {
     eventList: [],
-    currentEvent: 0
+    currentEventIndex: 0
   },
 
   mutations: {
@@ -14,7 +14,7 @@ export default {
     },
 
     setCurrentEvent(state, index) {
-      state.currentEvent = index
+      state.currentEventIndex = index
     }
   },
 
@@ -30,6 +30,8 @@ export default {
   },
 
   getters: {
-    eventList: state => state.eventList
+    eventList: state => state.eventList,
+    currentEventIndex: state => state.currentEventIndex,
+    currentEvent: state => state.eventList[state.currentEventIndex]
   }
 }

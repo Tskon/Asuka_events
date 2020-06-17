@@ -10,7 +10,7 @@ const stateInit = {
     clanTag: 'UNKNWN',
     imageUrl: 'https://avatanplus.com/files/resources/mid/58e0ccb473a4915b2e1fa0fa.png'
   },
-  playerData: {
+  playerData: { // todo переделать формат данных игрока
     currentCell: '',
     selectedCell: '',
     ownedCell: '',
@@ -119,7 +119,11 @@ export default {
       return !!state.name
     },
     isAdmin: state => state.isAdmin,
-    isPlayer: state => state.isPlayer, // TODO ввести currentEvent, на его основе вернуть isPlayer
+    isPlayer: (state, getters, rootState, rootGetters) => {
+      const currentEvent = rootGetters['events/currentEvent']
+      console.log('currentEvent', currentEvent)
+      return true
+    }, // TODO на основе currentEvent вернуть isPlayer
     playerData: state => state.playerData,
     personalData: state => state.personalData
   }

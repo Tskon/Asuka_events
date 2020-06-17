@@ -1,12 +1,6 @@
 import axios from 'axios'
 
 const mapInit = {
-  cells: [],
-  currentTurn: {
-    turnNumber: 0,
-    type: '',
-    fog: false
-  },
   currentBattleTable: {
     cellName: '',
     firstPair: {},
@@ -24,14 +18,6 @@ export default {
   },
 
   mutations: {
-    setCells(state, cellsList) {
-      state.cells = [...cellsList]
-    },
-
-    setCurrentTurn(state, turn) {
-      state.currentTurn = turn
-    },
-
     fetchCurrentBattleTable(state, battleTable) {
       state.currentBattleTable = battleTable
     },
@@ -48,20 +34,6 @@ export default {
   },
 
   actions: {
-    fetchMap(context, slug) {
-      context.dispatch('getCurrentTurn', slug)
-    },
-
-    getCurrentTurn(context, slug) {
-      axios.post('/api/event/get-current-turn', {
-        eventSlug: slug
-      })
-        .then(({ data }) => {
-          if (data.status !== 'ok') return
-          context.commit('setCurrentTurn', data.data)
-        })
-    },
-
     setSector(context, cellId) {
       axios
         .post('/api/event/choose-sector', {
@@ -94,8 +66,6 @@ export default {
   },
 
   getters: {
-    isNeedFog: state => state.currentTurn.fog,
-    currentBattleTable: state => state.currentBattleTable,
-    cells: state => state.cells
+    currentBattleTable: state => state.currentBattleTable
   }
 }
