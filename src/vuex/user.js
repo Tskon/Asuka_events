@@ -10,19 +10,7 @@ const stateInit = {
     clanTag: 'UNKNWN',
     imageUrl: 'https://avatanplus.com/files/resources/mid/58e0ccb473a4915b2e1fa0fa.png'
   },
-  playerData: { // todo переделать формат данных игрока
-    currentCell: '',
-    selectedCell: '',
-    ownedCell: '',
-    ownInRowCount: 0,
-    selectableCells: [],
-    score: 0,
-    battleStatus: {
-      inBattle: false,
-      winner: false
-    },
-    battleResults: []
-  }
+  events: []
 }
 
 export default {
@@ -40,7 +28,7 @@ export default {
       state.personalData = { ...state.personalData, ...payload }
     },
     setPlayerData(state, payload) {
-      state.playerData = { ...state.playerData, ...payload }
+      state.events = payload
     }
   },
 
@@ -99,11 +87,12 @@ export default {
       })
     },
 
-    getPlayerData(context) {
-      axios.post('/api/event/get-player-data').then(({ data }) => {
-        if (data.status !== 'ok') return
-        context.commit('setPlayerData', data.data)
-      })
+    async getPlayerData(context) {
+      const data = await axios.post('/api/event/get-player-data')
+      console.log(data)
+
+      if (data.status !== 'success') return
+      context.commit('setPlayerData', data.data.events)
     },
 
     setPersonalData(context) {
@@ -124,7 +113,13 @@ export default {
       console.log('currentEvent', currentEvent)
       return true
     }, // TODO на основе currentEvent вернуть isPlayer
-    playerData: state => state.playerData,
+    playerEvents: state => state.events,
+    playerCurrentEvent: (state, getters, rootState, rootGetters) => {
+      const currentEvent = rootGetters['events/currentEvent']
+      console.log(currentEvent, 1231313)
+      console.log(state.events)
+      return state.events.find(event => event.slug === currentEvent.slug) || {}
+    },
     personalData: state => state.personalData
   }
 }

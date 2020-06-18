@@ -78,9 +78,9 @@ export default {
     // todo переписать получение всех данных (неактуальны)
     ...mapState({
       isPlayer: (state) => state.user.isPlayer,
-      turnType: (state) => state.map.currentTurn.type,
+      turnType: () => 'commonTurn',
       playerSelectedCell: (state) => state.user.playerData.selectedCell,
-      selectableCells: (state) => state.user.playerData.selectableCells,
+      selectableCells: () => [],
       playerBattleStatus: (state) => state.user.playerData.battleStatus
     }),
 

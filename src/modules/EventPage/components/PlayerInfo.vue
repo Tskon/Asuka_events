@@ -10,19 +10,19 @@
       />
       <PlayerInfoRow
         name="Количество очков"
-        :value="playerData.score"
+        :value="playerCurrentEvent.score"
       />
       <PlayerInfoRow
         name="Статус"
-        :value="playerData.battleStatus.inBattle ? 'В турнирной таблице' : 'Не участувуешь в боях'"
+        :value="'Не участувуешь в боях'"
       />
       <PlayerInfoRow
         name="Текущий сектор"
-        :value="playerData.currentCell || 'Отсутствует'"
+        :value="playerCurrentEvent.currentCell || 'Отсутствует'"
       />
       <PlayerInfoRow
         name="Выбранный сектор"
-        :value="playerData.selectedCell || 'Не выбран'"
+        :value="playerCurrentEvent.selectedCell || 'Не выбран'"
       />
     </div>
   </div>
@@ -34,24 +34,35 @@ import PlayerInfoRow from "./PlayerInfoRow"
 
 export default {
   name: "PlayerInfo",
+
   components: {
     PlayerInfoRow
   },
-  computed: {
-    ...mapGetters({
-      playerData: 'user/playerData',
-      personalData: 'user/personalData',
-      cells: 'map/cells'
-    }),
-    scoreForNextTurn() {
-      const currentCell = this.cells.find(cell => cell.name === this.playerData.ownedCell)
-      const cellBonus = currentCell ? currentCell.bonus : 0
-      return (this.playerData.ownInRowCount > 2) ? 0 : cellBonus
+
+  props: {
+    event:  {
+      type: Object,
+      required: true
     }
   },
+
+  computed: {
+    ...mapGetters({
+      personalData: 'user/personalData',
+      playerCurrentEvent: 'user/playerCurrentEvent'
+    }),
+
+    scoreForNextTurn() {
+      const currentCell = this.event.cellList.find(cell => cell.name === this.event.ownedCell)
+      const cellBonus = currentCell ? currentCell.bonus : 0
+      return (this.event.ownInRowCount > 2) ? 0 : cellBonus
+    }
+  },
+
   created() {
     this.getPersonalData()
   },
+
   methods: {
     ...mapActions({
       getPersonalData: 'user/getPersonalData'

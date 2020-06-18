@@ -7,7 +7,7 @@
     >
       <div>
         <Map :current-event="event"/>
-        <PlayerInfo :event-slug="event.slug"/>
+        <PlayerInfo :event="event"/>
       </div>
     </b-tab>
   </b-tabs>

@@ -52,7 +52,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      playerData: 'user/playerData',
+      playerEvents: 'user/playerEvents',
       isAdmin: 'user/isAdmin',
       isNeedFog: 'map/isNeedFog'
     }),
@@ -60,20 +60,27 @@ export default {
       return this.cell.players.length
     },
     isSectorChosen() {
-      return this.playerData.selectedCell === this.cell.name
+      // todo переписать
+      // return this.playerData.selectedCell === this.cell.name
+      return false
     },
     isSectorSelectable() {
-      return this.playerData.selectableCells.includes(this.cell.name)
+      // todo переписать
+      return true
     },
     isActiveBattle() {
-      return this.playerData.currentCell === this.cell.name
-        && this.playerData.battleStatus.inBattle
+      // todo переписать
+      // return this.playerData.currentCell === this.cell.name
+      //   && this.playerData.battleStatus.inBattle
+      return false
     },
     showFog() {
-      if (this.isAdmin || this.playerData.currentCell === this.cell.name) {
-        return false
-      }
-      return this.isNeedFog && !this.isSectorSelectable
+      // todo переписать
+      // if (this.isAdmin || this.playerData.currentCell === this.cell.name) {
+      //   return false
+      // }
+      // return this.isNeedFog && !this.isSectorSelectable
+      return false
     }
   }
 }
