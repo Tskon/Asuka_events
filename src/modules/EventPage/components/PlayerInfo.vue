@@ -10,7 +10,7 @@
       />
       <PlayerInfoRow
         name="Количество очков"
-        :value="playerCurrentEvent.score"
+        :value="playerCurrentEvent.score || 0"
       />
       <PlayerInfoRow
         name="Статус"

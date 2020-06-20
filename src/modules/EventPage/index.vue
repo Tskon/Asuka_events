@@ -1,5 +1,8 @@
 <template>
-  <b-tabs @activate-tab="tabHandler" card>
+  <b-tabs
+    card
+    @activate-tab="tabHandler"
+  >
     <b-tab
       v-for="event in eventList"
       :key="event.slug"

@@ -116,8 +116,6 @@ export default {
     playerEvents: state => state.events,
     playerCurrentEvent: (state, getters, rootState, rootGetters) => {
       const currentEvent = rootGetters['events/currentEvent']
-      console.log(currentEvent, 1231313)
-      console.log(state.events)
       return state.events.find(event => event.slug === currentEvent.slug) || {}
     },
     personalData: state => state.personalData
