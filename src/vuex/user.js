@@ -88,8 +88,7 @@ export default {
     },
 
     async getPlayerData(context) {
-      const data = await axios.post('/api/event/get-player-data')
-      console.log(data)
+      const {data} = await axios.post('/api/event/get-player-data')
 
       if (data.status !== 'success') return
       context.commit('setPlayerData', data.data.events)
