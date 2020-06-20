@@ -31,8 +31,8 @@
       </template>
     </template>
 
-    <span v-if="isNoActions || !isPlayer">Доступных действий нет</span>
-    <template v-if="isPlayer">
+    <span v-if="isNoActions || !isCurrentEventPlayer">Доступных действий нет</span>
+    <template v-if="isCurrentEventPlayer">
       <b-button
         v-if="isStartSectorAvailable"
         :disabled="isSectorChosen"
@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapActions, mapState, mapGetters } from 'vuex'
 import BattleTable from './BattleTable'
 
 export default {
@@ -77,11 +77,14 @@ export default {
   computed: {
     // todo переписать получение всех данных (неактуальны)
     ...mapState({
-      isPlayer: (state) => state.user.isPlayer,
       turnType: () => 'commonTurn',
       playerSelectedCell: (state) => state.user.playerData.selectedCell,
       selectableCells: () => [],
       playerBattleStatus: (state) => state.user.playerData.battleStatus
+    }),
+
+    ...mapGetters({
+      isCurrentEventPlayer: 'user/isCurrentEventPlayer'
     }),
 
     isNoActions() {

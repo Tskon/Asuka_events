@@ -107,11 +107,10 @@ export default {
       return !!state.name
     },
     isAdmin: state => state.isAdmin,
-    isPlayer: (state, getters, rootState, rootGetters) => {
+    isCurrentEventPlayer: (state, getters, rootState, rootGetters) => {
       const currentEvent = rootGetters['events/currentEvent']
-      console.log('currentEvent', currentEvent)
-      return true
-    }, // TODO на основе currentEvent вернуть isPlayer
+      return state.events.some((event) => event.slug === currentEvent.slug)
+    },
     playerEvents: state => state.events,
     playerCurrentEvent: (state, getters, rootState, rootGetters) => {
       const currentEvent = rootGetters['events/currentEvent']

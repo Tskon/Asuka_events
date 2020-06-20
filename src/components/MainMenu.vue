@@ -7,7 +7,7 @@
       Эвенты
     </b-nav-item>
     <b-nav-item
-      v-if="isPlayer"
+      v-if="isAuth"
       to="/personalPanel"
     >
       Личный кабинет
@@ -28,8 +28,7 @@ export default {
   computed: {
     ...mapGetters({
       isAuth: 'user/isAuth',
-      isAdmin: 'user/isAdmin',
-      isPlayer: 'user/isPlayer'
+      isAdmin: 'user/isAdmin'
     })
   }
 }
