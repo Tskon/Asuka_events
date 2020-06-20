@@ -27,8 +27,9 @@ module.exports = function (router, models) {
         eventPlayers.push(changedPlayer)
       })
 
-      const turnsCount = await models.Log.countDocuments({eventSlug: event.slug})
-      const currentTurn = event.turnList.find(turnData => turnData.turnNumber === turnsCount )
+      const logCount = await models.Log.countDocuments({eventSlug: event.slug})
+      const turnsNumber = logCount + 1
+      const currentTurn = event.turnList.find(turnData => turnData.turnNumber === turnsNumber )
 
       const cellsWithPlayers = event.cellList.map((cell) => {
         const { name, started, bonus, connectedCells, gameMap } = cell
@@ -70,6 +71,7 @@ module.exports = function (router, models) {
         name: event.name,
         bonusForWin: event.bonusForWin,
         turnList: event.turnList,
+        currentTurn,
         columns: event.columns,
         rows: event.rows,
         cellList: (currentTurn && currentTurn.fog) ? filteredData : cellsWithPlayers

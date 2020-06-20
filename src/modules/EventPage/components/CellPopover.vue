@@ -77,14 +77,14 @@ export default {
   computed: {
     // todo переписать получение всех данных (неактуальны)
     ...mapState({
-      turnType: () => 'commonTurn',
       playerSelectedCell: (state) => state.user.playerData.selectedCell,
       selectableCells: () => [],
       playerBattleStatus: (state) => state.user.playerData.battleStatus
     }),
 
     ...mapGetters({
-      isCurrentEventPlayer: 'user/isCurrentEventPlayer'
+      isCurrentEventPlayer: 'user/isCurrentEventPlayer',
+      currentEventTurn: 'events/currentEventTurn'
     }),
 
     isNoActions() {
@@ -92,7 +92,7 @@ export default {
     },
 
     isStartSectorAvailable() {
-      return (this.turnType === 'selectStartSector')
+      return (this.currentEventTurn.type === 'selectStartSector')
         && this.cell.started
     },
 
