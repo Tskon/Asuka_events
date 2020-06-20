@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import { mapActions, mapState, mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import BattleTable from './BattleTable'
 
 export default {
@@ -75,17 +75,27 @@ export default {
   },
 
   computed: {
-    // todo переписать получение всех данных (неактуальны)
-    ...mapState({
-      playerSelectedCell: (state) => state.user.playerData.selectedCell,
-      selectableCells: () => [],
-      playerBattleStatus: (state) => state.user.playerData.battleStatus
-    }),
-
     ...mapGetters({
       isCurrentEventPlayer: 'user/isCurrentEventPlayer',
+      playerCurrentEvent: 'user/playerCurrentEvent',
       currentEventTurn: 'events/currentEventTurn'
     }),
+
+    playerSelectedCell() {
+      return this.playerCurrentEvent.selectedCell
+    },
+
+    selectableCells() {
+      // todo дописать логику
+      return []
+    },
+
+    playerBattleStatus() {
+      // todo дописать логику
+      return {
+        inBattle: true
+      }
+    },
 
     isNoActions() {
       return !this.isStartSectorAvailable && !this.isSectorAvailable

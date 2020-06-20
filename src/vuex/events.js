@@ -33,8 +33,6 @@ export default {
     eventList: state => state.eventList,
     currentEvent: state => state.eventList[state.currentEventIndex],
     currentEventIndex: state => state.currentEventIndex,
-    currentEventTurn: (state, getters) => {
-      return getters.currentEvent.currentTurn
-    }
+    currentEventTurn: (state, getters) => getters.currentEvent.currentTurn
   }
 }
