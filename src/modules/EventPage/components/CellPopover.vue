@@ -2,7 +2,7 @@
   <b-popover
     :target="'cell-popover-' + cell.name"
     :title="'Действия для сектора ' + cell.name.toUpperCase()"
-    triggers="click"
+    triggers="focus"
     placement="rightbottom"
     custom-class="w-100"
     @show="onPopoverShown(cell.name)"
@@ -86,15 +86,11 @@ export default {
     },
 
     selectableCells() {
-      // todo дописать логику
-      return []
+      return this.playerCurrentEvent.selectableCells
     },
 
     playerBattleStatus() {
-      // todo дописать логику
-      return {
-        inBattle: true
-      }
+      return this.playerCurrentEvent.battleStatus
     },
 
     isNoActions() {
