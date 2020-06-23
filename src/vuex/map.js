@@ -34,15 +34,15 @@ export default {
   },
 
   actions: {
-    setSector(context, cellId) {
+    setSector(context, payload) {
       axios
         .post('/api/event/choose-sector', {
-          cellName: cellId
+          cellName: payload.cellName,
+          eventSlug: payload.eventSlug
         })
         .then(({ data }) => {
           if (data.status !== 'success') return
 
-          context.commit('user/setPlayerData', { cellId }, { root: true })
           context.dispatch('user/getPlayerData', null, { root: true })
         })
     },

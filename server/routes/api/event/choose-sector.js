@@ -1,5 +1,6 @@
 module.exports = function (router, models) {
   router.post('/event/choose-sector', async (req, res) => {
+    // TODO переписать под req.body.cellName + req.body.eventSlug
     const usersInChosenSector = await models.User.find({ selectedCell: req.body.cellName })
 
     if (usersInChosenSector.length > 3) {

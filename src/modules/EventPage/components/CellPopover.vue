@@ -38,13 +38,13 @@
         :disabled="isSectorChosen"
         variant="info"
         class="w-100 mb-1"
-        @click="setSector(cell.name)"
+        @click="setSelectedSector(cell.name)"
       >
         {{ isSectorChosen ? 'Этот сектор уже выбран' : 'Выбрать сектор стартовым' }}
       </b-button>
       <b-button
         v-else-if="isSectorAvailable"
-        @click="setSector(cell.name)"
+        @click="setSelectedSector(cell.name)"
       >
         Выбрать сектор
       </b-button>
@@ -117,6 +117,13 @@ export default {
       fetchCurrentBattleTable: 'map/fetchCurrentBattleTable',
       clearCurrentBattleTable: 'map/clearCurrentBattleTable'
     }),
+
+    setSelectedSector(cellName) {
+      this.setSector({
+        eventSlug: this.playerCurrentEvent.slug,
+        cellName
+      })
+    },
 
     onPopoverShown(cellName) {
       const cellButtons = document.querySelectorAll('.map-cell > button')
