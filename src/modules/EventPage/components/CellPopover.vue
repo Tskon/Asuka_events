@@ -82,15 +82,15 @@ export default {
     }),
 
     playerSelectedCell() {
-      return this.playerCurrentEvent.selectedCell
+      return this.playerCurrentEvent.selectedCell || ''
     },
 
     selectableCells() {
-      return this.playerCurrentEvent.selectableCells
+      return this.playerCurrentEvent.selectableCells || []
     },
 
     playerBattleStatus() {
-      return this.playerCurrentEvent.battleStatus
+      return this.playerCurrentEvent.battleStatus || {}
     },
 
     isNoActions() {
