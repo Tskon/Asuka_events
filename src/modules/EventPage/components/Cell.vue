@@ -2,7 +2,7 @@
   <div
     :class="{
       'started-cell': cell.started,
-      'selectable-cell': isSectorSelectable,
+      'selectable-cell': isSelectable,
       'chosen-cell': isSectorChosen,
       'active-battle-cell': isActiveBattle,
       'fog': showFog
@@ -54,33 +54,34 @@ export default {
     ...mapGetters({
       playerEvents: 'user/playerEvents',
       isAdmin: 'user/isAdmin',
-      isNeedFog: 'map/isNeedFog'
+      playerCurrentEvent: 'user/playerCurrentEvent',
+      currentEventTurn: 'events/currentEventTurn'
     }),
+
     playersCount() {
       return this.cell.players.length
     },
+
     isSectorChosen() {
-      // todo переписать
-      // return this.playerData.selectedCell === this.cell.name
-      return false
+      return this.playerCurrentEvent.selectedCell === this.cell.name
     },
-    isSectorSelectable() {
-      // todo переписать
-      return true
+
+    isSelectable() {
+      if (!this.playerCurrentEvent.selectableCells) return false
+      return this.playerCurrentEvent.selectableCells.includes(this.cell.name)
     },
+
     isActiveBattle() {
-      // todo переписать
-      // return this.playerData.currentCell === this.cell.name
-      //   && this.playerData.battleStatus.inBattle
-      return false
+      if (!this.playerCurrentEvent.battleStatus) return false
+      return this.playerCurrentEvent.currentCell === this.cell.name
+        && this.playerCurrentEvent.battleStatus.inBattle
     },
+
     showFog() {
-      // todo переписать
-      // if (this.isAdmin || this.playerData.currentCell === this.cell.name) {
-      //   return false
-      // }
-      // return this.isNeedFog && !this.isSectorSelectable
-      return false
+      if (this.isAdmin || this.playerCurrentEvent.currentCell === this.cell.name) {
+        return false
+      }
+      return this.currentEventTurn.fog && !this.isSelectable
     }
   }
 }
