@@ -20,12 +20,15 @@
       >
         <i class="far fa-user"/> {{ playersCount }}
       </div>
+
       <div class="cell-name">
         {{ cell.name.toUpperCase() }}
       </div>
+
       <div class="bonus-amount">
         +{{ cell.bonus }}
       </div>
+
       <i
         v-if="cell.players.length > 1"
         class="battle fas fa-crosshairs"
@@ -40,6 +43,7 @@
 import { mapGetters } from 'vuex'
 import CellPopover from './CellPopover'
 
+// TODO разобраться почему не открываются некоторые поповеры, или открываются дважды
 export default {
   components: {
     CellPopover
