@@ -34,6 +34,8 @@ module.exports = function (router, models) {
         status: 'warning',
         message: 'Эвент не создан, переданы некорректные данные'
       })
+
+      return
     }
 
     const cellList = createCells({
