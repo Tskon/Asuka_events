@@ -1,6 +1,6 @@
 <template>
   <b-popover
-    :target="'cell-popover-' + cell.name"
+    :target="`cell-popover-${eventSlug}-${cell.name}`"
     :title="'Действия для сектора ' + cell.name.toUpperCase()"
     triggers="focus"
     placement="rightbottom"
@@ -65,6 +65,11 @@ export default {
     cell: {
       type: Object,
       required: true
+    },
+
+    eventSlug: {
+      type: String,
+      default: ''
     }
   },
 

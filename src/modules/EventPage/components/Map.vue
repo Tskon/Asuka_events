@@ -8,6 +8,7 @@
         v-for="cell in currentEvent.cellList"
         :key="cell.name"
         :cell="cell"
+        :event-slug="currentEvent.slug"
       />
     </div>
   </div>

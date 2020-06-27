@@ -10,7 +10,7 @@
     class="map-cell"
   >
     <button
-      :id="'cell-popover-' + cell.name"
+      :id="`cell-popover-${eventSlug}-${cell.name}`"
       class="cell-content"
       :disabled="showFog"
     >
@@ -35,7 +35,10 @@
         title="Сражение за сектор"
       />
     </button>
-    <CellPopover :cell="cell"/>
+    <CellPopover
+      :event-slug="eventSlug"
+      :cell="cell"
+    />
   </div>
 </template>
 
@@ -47,12 +50,19 @@ export default {
   components: {
     CellPopover
   },
+
   props: {
     cell: {
       type: Object,
       required: true
+    },
+
+    eventSlug: {
+      type: String,
+      default: ''
     }
   },
+
   computed: {
     ...mapGetters({
       playerEvents: 'user/playerEvents',
