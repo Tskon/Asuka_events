@@ -40,7 +40,7 @@ export default {
     background-size: 100%;
     background-repeat: no-repeat;
     width: calc(var(--column-number) * 150px);
-    height: calc(var(--column-number) * 50px);
+    height: calc(var(--row-number) * 50px);
   }
 
   .event-map{
