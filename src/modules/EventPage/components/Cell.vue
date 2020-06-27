@@ -43,7 +43,6 @@
 import { mapGetters } from 'vuex'
 import CellPopover from './CellPopover'
 
-// TODO разобраться почему не открываются некоторые поповеры, или открываются дважды
 export default {
   components: {
     CellPopover
