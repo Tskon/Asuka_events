@@ -11,7 +11,6 @@ module.exports = function (router, models) {
     } = req.body
 
     const playerFromDB = await models.Player.findOne({ username })
-    console.log(playerFromDB, username)
 
     if (!playerFromDB) {
       res.send({
