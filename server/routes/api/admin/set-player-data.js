@@ -1,6 +1,7 @@
 module.exports = function (router, models) {
   router.post('/admin/set-player-data', async (req, res) => {
     const {
+      eventSlug,
       username,
       score,
       currentCell,
@@ -9,13 +10,31 @@ module.exports = function (router, models) {
       ownInRowCount
     } = req.body
 
-    await models.Player.updateOne({ username } , {
-      score,
-      currentCell,
-      selectedCell,
-      ownedCell,
-      ownInRowCount
+    const playerFromDB = await models.Player.findOne({ username })
+    console.log(playerFromDB, username)
+
+    if (!playerFromDB) {
+      res.send({
+        status: 'error',
+        message: 'Пользователь не найден'
+      })
+      return
+    }
+
+    playerFromDB.events.some(event => {
+      if (event.slug === eventSlug) {
+        event.score = score
+        event.currentCell = currentCell
+        event.selectedCell = selectedCell
+        event.ownedCell = ownedCell
+        event.ownInRowCount = ownInRowCount
+        return true
+      }
+
+      return false
     })
+
+    await models.Player.updateOne({ username } , playerFromDB)
 
     res.send({
       status: 'success',

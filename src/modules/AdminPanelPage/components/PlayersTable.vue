@@ -165,14 +165,18 @@ export default {
     },
 
     items() {
-      return this.players.map(player => ({
-        username: player.username,
-        score: player.score || 0,
-        currentCell: player.currentCell || '',
-        selectedCell: player.selectedCell || '',
-        ownedCell: player.ownedCell || '',
-        ownInRowCount: player.ownInRowCount || 0
-      }))
+      return this.players.map(player => {
+        const event = player.eventList.find(({slug}) => slug === this.eventSlug)
+
+        return {
+          username: player.username,
+          score: event.score || 0,
+          currentCell: event.currentCell || '',
+          selectedCell: event.selectedCell || '',
+          ownedCell: event.ownedCell || '',
+          ownInRowCount: event.ownInRowCount || 0
+        }
+      })
     }
   },
 
@@ -200,6 +204,7 @@ export default {
       const { score, currentCell, selectedCell, ownedCell, ownInRowCount } = this.forms[row.index]
 
       this.setPlayerData({
+        eventSlug: this.eventSlug,
         username: row.item.username,
         score,
         currentCell: currentCell.toLowerCase(),
