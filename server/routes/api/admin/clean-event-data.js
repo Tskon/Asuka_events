@@ -6,17 +6,16 @@ module.exports = function (router, models) {
     const players = await models.Player.find()
 
     const updatePromises = players.map(player => {
-      player.events = player.events.forEach(event => {
-        if( event.slug !== req.body.eventSlug) {
-          event = {
-            slug: req.body.eventSlug,
-            score: 0,
-            currentCell: '',
-            selectedCell: '',
-            ownedCell: '',
-            ownInRowCount: 0
-          }
-        }
+
+      player.events.forEach(event => {
+        if( event.slug !== req.body.eventSlug) return
+
+        event.slug = req.body.eventSlug
+        event.score = 0
+        event.currentCell = ''
+        event.selectedCell = ''
+        event.ownedCell = ''
+        event.ownInRowCount = 0
       })
 
       return models.Player.updateOne({ username: player.username }, player)
