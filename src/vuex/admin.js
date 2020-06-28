@@ -83,6 +83,15 @@ export default {
         })
     },
 
+    deleteEvent({ dispatch }, slug) {
+      axios
+        .post('/api/admin/delete-event', { slug })
+        .then(() => {
+          dispatch('getAdminData')
+          dispatch('getLogs')
+        })
+    },
+
     setPlayerData(context, data) {
       axios
         .post('/api/admin/set-player-data', data)

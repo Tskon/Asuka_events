@@ -18,10 +18,18 @@
     </div>
 
     <b-button
-      variant="danger"
+      class="mt-auto mb-3"
+      variant="outline-warning"
       @click="deleteEventData"
     >
       Сбросить данные эвента
+    </b-button>
+
+    <b-button
+      variant="outline-danger"
+      @click="delEvent"
+    >
+      Удалить эвент
     </b-button>
   </div>
 </template>
@@ -57,7 +65,8 @@ export default {
   methods: {
     ...mapActions({
       nextTurn: 'admin/nextTurn',
-      cleanEventData: 'admin/cleanEventData'
+      cleanEventData: 'admin/cleanEventData',
+      deleteEvent: 'admin/deleteEvent'
     }),
 
     deleteEventData() {
@@ -65,6 +74,14 @@ export default {
         .then((isOk) => {
           if (!isOk) return
           this.cleanEventData(this.currentEvent.slug)
+        })
+    },
+
+    delEvent() {
+      this.$bvModal.msgBoxConfirm('Будет удален эвент, его логи, прогресс у пользователей. Удалить?')
+        .then((isOk) => {
+          if (!isOk) return
+          this.deleteEvent(this.currentEvent.slug)
         })
     }
   }
