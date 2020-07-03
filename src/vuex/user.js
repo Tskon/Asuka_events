@@ -41,9 +41,8 @@ export default {
     },
 
     async signIn(context, body) {
-      const data = await axios.post('/api/signin', body)
+      const {data} = await axios.post('/api/signin', body)
       if (data.status !== 'ok') return
-
       context.commit('setUser', data.data)
       context.dispatch('getUser')
       context.dispatch('events/fetchEvents', null, { root: true })
