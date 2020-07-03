@@ -40,13 +40,13 @@ export default {
       })
     },
 
-    signIn(context, body) {
-      axios.post('/api/signin', body).then(({ data }) => {
-        if (data.status !== 'ok') return
+    async signIn(context, body) {
+      const data = await axios.post('/api/signin', body)
+      if (data.status !== 'ok') return
 
-        context.commit('setUser', data.data)
-        context.dispatch('getUser')
-      })
+      context.commit('setUser', data.data)
+      context.dispatch('getUser')
+      context.dispatch('events/fetchEvents', null, { root: true })
     },
 
     restore(context, body) {
@@ -75,8 +75,8 @@ export default {
         getUserIntervalId = setInterval(() => {
           context.dispatch('getPlayerData')
         }, 15000)
-
         context.commit('setUser', data.data)
+        context.dispatch('events/fetchEvents', null, { root: true })
       })
     },
 

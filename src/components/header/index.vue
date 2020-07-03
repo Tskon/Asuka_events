@@ -16,26 +16,27 @@
       >
         <MainMenu/>
         <b-navbar-nav class="ml-auto">
-          <Login
-            v-if="!user.name"
-            class="mr-1"
-          />
-          <Restore
-            v-if="!user.name"
-            class="mr-1"
-          />
-          <SignUp v-if="!user.name"/>
+          <template v-if="!isAuth">
+            <Login
+              class="mr-1"
+            />
+            <Restore
+              class="mr-1"
+            />
+            <SignUp/>
+          </template>
+
           <b-nav-item-dropdown
             v-else
             right
           >
             <template slot="button-content">
-              {{ user.name }}
+              {{ personalData.clanTag }}
             </template>
-            <b-dropdown-text v-if="user.isAdmin">
+            <b-dropdown-text v-if="isAdmin">
               Администратор
             </b-dropdown-text>
-            <b-dropdown-divider v-if="user.isAdmin"/>
+            <b-dropdown-divider v-if="isAdmin"/>
             <b-dropdown-item-button @click="onLogout">
               Выход
             </b-dropdown-item-button>
@@ -48,7 +49,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import Login from './Login'
 import Restore from './Restore'
 import SignUp from './SignUp'
@@ -63,23 +64,23 @@ export default {
     MainMenu,
     Modal
   },
+
   computed: {
-    ...mapState({
-      user: (state) => state.user
+    ...mapGetters({
+      isAuth: 'user/isAuth',
+      isAdmin: 'user/isAdmin',
+      personalData: 'user/personalData'
     })
   },
 
   created() {
     this.getUser()
-    this.fetchEvents()
-
   },
 
   methods: {
     ...mapActions({
       getUser: 'user/getUser',
-      logout: 'user/logout',
-      fetchEvents: 'events/fetchEvents'
+      logout: 'user/logout'
     }),
 
     onLogout() {
