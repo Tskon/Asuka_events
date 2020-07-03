@@ -80,6 +80,7 @@ export default {
         .then(() => {
           dispatch('getAdminData')
           dispatch('getLogs')
+          dispatch('events/fetchEvents', null, {root: true})
         })
     },
 
@@ -89,6 +90,7 @@ export default {
         .then(() => {
           dispatch('getAdminData')
           dispatch('getLogs')
+          dispatch('events/fetchEvents', null, {root: true})
         })
     },
 
@@ -100,8 +102,13 @@ export default {
         })
     },
 
-    createEvent(context, data) {
-      axios.post('/api/admin/create-event', data)
+    async createEvent(context, data) {
+      axios
+        .post('/api/admin/create-event', data)
+        .then(() => {
+          context.dispatch('getAdminData')
+          context.dispatch('events/fetchEvents', null, {root: true})
+        })
     }
   },
 
