@@ -22,28 +22,32 @@ module.exports = function (router, models) {
     })
 
     players.forEach(playerData => {
-      const isWinner = checkIsWinner(battleTables, playerData)
+      const playerEventData = playerData.events.find(event => event.slug === req.body.eventSlug)
+      if (!playerEventData) return
 
-      if (playerData.ownedCell) {
-        const cell = event.cellList.find(cellData => cellData.name === playerData.currentCell)
-        const bonusCoef = (playerData.ownInRowCount < 3) ? 1 : 0
-        playerData.score += cell.bonus * bonusCoef
+      const isWinner = checkIsWinner(battleTables, playerData.username, playerEventData.currentCell)
+
+      if (playerEventData.ownedCell) {
+        const cell = event.cellList.find(cellData => cellData.name === playerEventData.currentCell)
+        const bonusCoef = (playerEventData.ownInRowCount < 3) ? 1 : 0
+        playerEventData.score += cell.bonus * bonusCoef
       }
 
       if (!isWinner) {
-        playerData.ownedCell = ''
-        playerData.ownInRowCount = 0
-      } else if (playerData.selectedCell === playerData.currentCell || !playerData.selectedCell) {
-        playerData.ownedCell = playerData.currentCell
-        playerData.ownInRowCount++
-      } else if (playerData.selectedCell !== playerData.currentCell) {
-        playerData.ownedCell = ''
-        playerData.ownInRowCount = 0
+        playerEventData.ownedCell = ''
+        playerEventData.ownInRowCount = 0
+      } else if (playerEventData.selectedCell === playerEventData.currentCell || !playerEventData.selectedCell) {
+        playerEventData.ownedCell = playerEventData.currentCell
+        playerEventData.ownInRowCount++
+      } else if (playerEventData.selectedCell !== playerEventData.currentCell) {
+        playerEventData.ownedCell = ''
+        playerEventData.ownInRowCount = 0
       }
 
-      smartSectorChoose(playerData, isWinner, event.cellList, players)
+      smartSectorChoose(playerData, playerEventData, isWinner, event.cellList, players)
 
-      playerData.selectedCell = ''
+      playerEventData.selectedCell = ''
+      console.log(playerData)
     })
 
     createBattleTables({
@@ -56,6 +60,7 @@ module.exports = function (router, models) {
 
     await Promise.all(
       players.map(player => {
+        // console.log(player)
         return models.Player.updateOne({ username: player.username }, player)
       })
     )
@@ -109,7 +114,7 @@ module.exports = function (router, models) {
     })
   }
 
-  function smartSectorChoose(player, isWinner, cells, players) {
+  function smartSectorChoose(player, playerEventData, isWinner, cells, players) {
     const availableSectors = cells.filter((cell) => {
       const playersCount = players.filter(playerData => {
         return playerData.currentCell === cell.name && playerData.username !== player.username
@@ -118,12 +123,12 @@ module.exports = function (router, models) {
     })
 
     if (isWinner) {
-      if (player.selectedCell) {
-        player.currentCell = player.selectedCell
+      if (playerEventData.selectedCell) {
+        playerEventData.currentCell = playerEventData.selectedCell
         return
       }
 
-      const currentSector = cells.find(cell => cell.name === player.currentCell)
+      const currentSector = cells.find(cell => cell.name === playerEventData.currentCell)
 
       if (currentSector && currentSector.started) {
         const connectedAvailableSectors = cells.filter(cell => {
@@ -136,7 +141,7 @@ module.exports = function (router, models) {
 
         const randomSector = connectedAvailableSectors[Math.floor(Math.random() * connectedAvailableSectors.length)]
         if (randomSector) {
-          player.currentCell = randomSector.name
+          playerEventData.currentCell = randomSector.name
         }
         return
       }
@@ -146,20 +151,20 @@ module.exports = function (router, models) {
 
     const randomSector = availableSectors[Math.floor(Math.random() * availableSectors.length)]
 
-    if (!player.selectedCell) {
-      player.currentCell = randomSector.name
+    if (!playerEventData.selectedCell) {
+      playerEventData.currentCell = randomSector.name
       return
     }
 
-    if (availableSectors.some(cell => cell.name === player.selectedCell)) {
-      player.currentCell = player.selectedCell
+    if (availableSectors.some(cell => cell.name === playerEventData.selectedCell)) {
+      playerEventData.currentCell = playerEventData.selectedCell
     } else {
-      player.currentCell = randomSector.name
+      playerEventData.currentCell = randomSector.name
     }
   }
 
-  function checkIsWinner(battleTables, player) {
-    const battleTable = battleTables.find(bt => bt.cellName === player.currentCell)
-    return !battleTable || battleTable.finalPair.winner === player.username
+  function checkIsWinner(battleTables, username, currentCell) {
+    const battleTable = battleTables.find(bt => bt.cellName === currentCell)
+    return !battleTable || battleTable.finalPair.winner === username
   }
 }
