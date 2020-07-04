@@ -46,7 +46,13 @@ module.exports = function (router, models) {
       playerData.selectedCell = ''
     })
 
-    createBattleTables({ cells: event.cellList, players, turnNumber: turnNumber + 1, users })
+    createBattleTables({
+      cells: event.cellList,
+      players,
+      turnNumber: turnNumber + 1,
+      users,
+      eventSlug: req.body.eventSlug
+    })
 
     await Promise.all(
       players.map(player => {
@@ -60,7 +66,7 @@ module.exports = function (router, models) {
     })
   })
 
-  function createBattleTables({ cells, players, turnNumber, users }) {
+  function createBattleTables({ cells, players, turnNumber, users, eventSlug }) {
     cells.forEach((cell) => {
       const playerList = players
         .filter(player => player.currentCell === cell.name)
@@ -84,6 +90,7 @@ module.exports = function (router, models) {
       }
 
       models.BattleTable.create({
+        eventSlug,
         turnNumber,
         cellName: cell.name,
         players: playerList.map(player => {
