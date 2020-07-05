@@ -11,9 +11,10 @@
 
       <b-button
         variant="success"
+        :disabled="isLustTurn"
         @click="nextTurn(currentEvent.slug)"
       >
-        Следующий ход
+        {{ isLustTurn ? 'Эвент окончен' : 'Следующий ход' }}
       </b-button>
     </div>
 
@@ -59,6 +60,10 @@ export default {
   computed: {
     currentTurn() {
       return this.currentEvent.turnList.find(turn => turn.turnNumber === this.currentEvent.turnNumber)
+    },
+
+    isLustTurn() {
+      return this.currentEvent.turnList.length === this.currentEvent.turnNumber
     }
   },
 
