@@ -58,8 +58,8 @@ app
     else res.send({ status: 'error', message: 'Не достаточно прав. Admin' })
   })
   .use('/api/event', (req, res, next) => {
-    if (req.user && (req.user.isAdmin || req.user.isPlayer)) next()
-    else res.send({ status: 'error', message: 'Не достаточно прав. Player' })
+    // TODO добавить проверку на участие в эвентах
+    next()
   })
   .use('/api', require('./routes/api/index')(passport, app))
 
