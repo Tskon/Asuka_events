@@ -18,6 +18,7 @@ const EventSchema = new Schema({
     connectedCells: Array,
     started: Boolean,
     gameMap: String,
+    incomeStatus: String,
     bonus: { type: Number, default: 0 }
   }]
 })

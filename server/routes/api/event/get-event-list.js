@@ -32,7 +32,7 @@ module.exports = function (router, models) {
       const currentTurn = event.turnList.find(turnData => turnData.turnNumber === turnsNumber )
 
       const cellsWithPlayers = event.cellList.map((cell) => {
-        const { name, started, bonus, connectedCells, gameMap } = cell
+        const { name, started, bonus, connectedCells, gameMap, incomeStatus } = cell
         const filteredPlayers = eventPlayers.filter(player => player.currentCell === cell.name)
 
         return {
@@ -41,6 +41,7 @@ module.exports = function (router, models) {
           started,
           bonus,
           connectedCells,
+          incomeStatus,
           players: filteredPlayers.map(player => {
             return users.find(user => user.username === player.username)
           })

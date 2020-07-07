@@ -86,21 +86,35 @@ function createCells(options) {
       const connectedCells = getConnectedCells(name, columns, rows)
       const started = startedSectors.includes(name)
       const gameMap = gameMapList[Math.floor(Math.random() * gameMapList.length)]
-      let cellBonus = 0
 
       const isReach = richEconomyCells.list.some(cellName => cellName === name)
       const isMiddle = middleEconomyCells.list.some(cellName => cellName === name)
       const isPoor = poorEconomyCells.list.some(cellName => cellName === name)
 
-      if (isReach) cellBonus = richEconomyCells.bonus
-      if (isMiddle) cellBonus = middleEconomyCells.bonus
-      if (isPoor) cellBonus = poorEconomyCells.bonus
+      let cellBonus = 0
+      let incomeStatus
+
+      if (isReach) {
+        cellBonus = richEconomyCells.bonus
+        incomeStatus = 'reach'
+      }
+
+      if (isMiddle) {
+        cellBonus = middleEconomyCells.bonus
+        incomeStatus = 'middle'
+      }
+
+      if (isPoor) {
+        cellBonus = poorEconomyCells.bonus
+        incomeStatus = 'poor'
+      }
 
       cells.push({
         name,
         connectedCells,
         started,
         gameMap,
+        incomeStatus,
         bonus: cellBonus
       })
     })
