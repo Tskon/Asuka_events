@@ -47,7 +47,6 @@ module.exports = function (router, models) {
       smartSectorChoose(playerData, playerEventData, isWinner, event.cellList, players)
 
       playerEventData.selectedCell = ''
-      console.log(playerData)
     })
 
     createBattleTables({
@@ -60,7 +59,6 @@ module.exports = function (router, models) {
 
     await Promise.all(
       players.map(player => {
-        // console.log(player)
         return models.Player.updateOne({ username: player.username }, player)
       })
     )
