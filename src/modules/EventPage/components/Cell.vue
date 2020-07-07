@@ -25,7 +25,10 @@
         {{ cell.name.toUpperCase() }}
       </div>
 
-      <div class="bonus-amount">
+      <div
+        class="bonus-amount"
+        :class="`bonus-${cell.incomeStatus}`"
+      >
         +{{ cell.bonus }}
       </div>
 
@@ -129,6 +132,18 @@ export default {
       position: absolute;
       bottom: 5px;
       right: 10px;
+    }
+
+    .bonus-reach {
+      color: lighten(#940194, 10%);
+    }
+
+    .bonus-middle {
+      color: #940194;
+    }
+
+    .bonus-poor {
+      color: darken(#940194, 10%);
     }
 
     .cell-name {
