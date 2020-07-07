@@ -26,6 +26,7 @@
       </div>
 
       <div
+        v-if="cell.bonus"
         class="bonus-amount"
         :class="`bonus-${cell.incomeStatus}`"
       >
@@ -132,6 +133,7 @@ export default {
       position: absolute;
       bottom: 5px;
       right: 10px;
+      font-size: 12px;
     }
 
     .bonus-reach {
@@ -150,6 +152,7 @@ export default {
       position: absolute;
       top: 5px;
       left: 10px;
+      opacity: .7;
     }
 
     .battle {
