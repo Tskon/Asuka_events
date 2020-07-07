@@ -150,6 +150,8 @@ export default {
   }
 
   .selectable-cell {
+    box-shadow: inset 0 0 10px green;
+
     &:hover{
       background-color: rgba(0,0,0,0.3);
     }
