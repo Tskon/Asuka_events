@@ -94,6 +94,7 @@ module.exports = function (router, models) {
         secondPair.looser = null
       }
 
+      // TODO разобраться почему не создаются таблицы
       models.BattleTable.create({
         eventSlug,
         turnNumber,
