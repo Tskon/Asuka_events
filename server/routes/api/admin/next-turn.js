@@ -74,8 +74,12 @@ module.exports = function (router, models) {
   async function createBattleTables({ cells, players, turnNumber, users, eventSlug }) {
     await Promise.all(cells.map((cell) => {
       const playerList = players
-        .filter(player => player.currentCell === cell.name)
+        .filter(player => {
+          const playerEvent = player.events.find(event => event.slug === eventSlug)
+          return playerEvent.currentCell === cell.name
+        })
         .map(player => player.username)
+
       if (playerList.length < 2) return
 
       const firstPair = { winner: null, looser: null }
