@@ -71,8 +71,8 @@ module.exports = function (router, models) {
     })
   })
 
-  function createBattleTables({ cells, players, turnNumber, users, eventSlug }) {
-    cells.forEach((cell) => {
+  async function createBattleTables({ cells, players, turnNumber, users, eventSlug }) {
+    await Promise.all(cells.map((cell) => {
       const playerList = players
         .filter(player => player.currentCell === cell.name)
         .map(player => player.username)
@@ -94,8 +94,7 @@ module.exports = function (router, models) {
         secondPair.looser = null
       }
 
-      // TODO разобраться почему не создаются таблицы
-      models.BattleTable.create({
+      return models.BattleTable.create({
         eventSlug,
         turnNumber,
         cellName: cell.name,
@@ -112,7 +111,7 @@ module.exports = function (router, models) {
         secondPair,
         finalPair
       })
-    })
+    }))
   }
 
   function smartSectorChoose(player, playerEventData, isWinner, cells, players) {
