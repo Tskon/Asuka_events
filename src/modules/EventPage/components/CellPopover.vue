@@ -62,6 +62,7 @@ export default {
   },
 
   props: {
+    // TODO не приходит список игроков
     cell: {
       type: Object,
       required: true
