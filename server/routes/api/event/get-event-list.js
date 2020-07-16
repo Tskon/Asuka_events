@@ -13,16 +13,15 @@ module.exports = function (router, models) {
         const findedPlayerEvent = player.events.find(playerEvent => playerEvent.slug === event.slug)
         if (!findedPlayerEvent) return
 
-        const findedUser = users.find(user => user.username === player.username)
-
         const changedPlayer = {
-          ...findedUser,
+          username: player.username,
           score: findedPlayerEvent.score,
           currentCell: findedPlayerEvent.currentCell,
           selectedCell: findedPlayerEvent.selectedCell,
           ownedCell: findedPlayerEvent.ownedCell,
           ownInRowCount: findedPlayerEvent.ownInRowCount
         }
+
         eventPlayers.push(changedPlayer)
       })
 
@@ -43,17 +42,12 @@ module.exports = function (router, models) {
           bonus,
           connectedCells,
           incomeStatus,
-          players: filteredPlayers.map(player => {
-            return users.find(user => user.username === player.username)
-          })
+          players: filteredPlayers
         }
       })
 
       const currentCell = cellsWithPlayers.find((cell) => {
-        // TODO cell.players = [undefined, undefined]
-        console.log(cell)
-        return false
-        // return cell.players.some(player => player.username === req.user.username)
+        return cell.players.some(player => player.username === req.user.username)
       })
 
       const filteredData = cellsWithPlayers.map((cell) => {
