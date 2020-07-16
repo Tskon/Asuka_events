@@ -10,11 +10,10 @@ module.exports = function (router, models) {
       const eventPlayers = []
 
       players.forEach(player => {
-        const findedPlayer = player.events.find(playerEvent => playerEvent.slug === event.slug)
-        if (!findedPlayer || !findedPlayer.eventList) return
+        const findedPlayerEvent = player.events.find(playerEvent => playerEvent.slug === event.slug)
+        if (!findedPlayerEvent) return
 
-        const findedUser = users.find(user => user.username === findedPlayer.username)
-        const findedPlayerEvent = findedPlayer.events.find(playerEvent => playerEvent.slug === event.slug)
+        const findedUser = users.find(user => user.username === player.username)
 
         const changedPlayer = {
           ...findedUser,
@@ -33,7 +32,9 @@ module.exports = function (router, models) {
 
       const cellsWithPlayers = event.cellList.map((cell) => {
         const { name, started, bonus, connectedCells, gameMap, incomeStatus } = cell
-        const filteredPlayers = eventPlayers.filter(player => player.currentCell === cell.name)
+        const filteredPlayers = eventPlayers.filter(player => {
+          return player.currentCell === cell.name
+        })
 
         return {
           name,
@@ -49,7 +50,10 @@ module.exports = function (router, models) {
       })
 
       const currentCell = cellsWithPlayers.find((cell) => {
-        return cell.players.some(player => player.username === req.user.username)
+        // TODO cell.players = [undefined, undefined]
+        console.log(cell)
+        return false
+        // return cell.players.some(player => player.username === req.user.username)
       })
 
       const filteredData = cellsWithPlayers.map((cell) => {
