@@ -25,6 +25,14 @@
       </label>
     </div>
     <label class="edit-label pb-1">
+      <span class="pb-1 pr-2">Количество ходов:</span>
+      <b-form-input
+        v-model="turnCount"
+        type="number"
+        class="edit-input"
+      />
+    </label>
+    <label class="edit-label pb-1">
       <span class="pb-1 pr-2">Обозначения колонок:</span>
       <b-form-tags
         v-model="columns"
@@ -154,6 +162,7 @@ export default {
     return {
       slug: '',
       name: '',
+      turnCount: 0,
       columns: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'],
       rows: [1, 2, 3, 4, 5, 6],
       startedSectors: ['a1', 'h6'],
