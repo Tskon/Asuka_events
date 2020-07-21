@@ -162,7 +162,7 @@ export default {
     return {
       slug: '',
       name: '',
-      turnCount: 0,
+      turnCount: 20,
       columns: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'],
       rows: [1, 2, 3, 4, 5, 6],
       startedSectors: ['a1', 'h6'],
