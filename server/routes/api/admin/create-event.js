@@ -3,6 +3,7 @@ module.exports = function (router, models) {
     const {
       slug,
       name,
+      turnCount,
       columns,
       rows,
       startedSectors,
@@ -25,6 +26,7 @@ module.exports = function (router, models) {
     if (
       !slug
       || !name
+      || !turnCount
       || !columns.length
       || !rows.length
       || !startedSectors.length
@@ -48,7 +50,7 @@ module.exports = function (router, models) {
       gameMapList
     })
 
-    const turnList = createTurns()
+    const turnList = createTurns(turnCount)
 
     await models.Event.create({
       slug,
@@ -183,42 +185,22 @@ function getConnectedCells(cellName, columns, rows) {
   return result
 }
 
-function createTurns() {
-  return [
+function createTurns(count) {
+  const result = [
     {
       turnNumber: 1,
       fog: false,
       type: 'selectStartSector'
-    },
-    {
-      turnNumber: 2,
-      fog: false,
-      type: 'commonTurn'
-    },
-    {
-      turnNumber: 3,
-      fog: false,
-      type: 'commonTurn'
-    },
-    {
-      turnNumber: 4,
-      fog: false,
-      type: 'commonTurn'
-    },
-    {
-      turnNumber: 5,
-      fog: false,
-      type: 'commonTurn'
-    },
-    {
-      turnNumber: 6,
-      fog: false,
-      type: 'commonTurn'
-    },
-    {
-      turnNumber: 7,
-      fog: false,
-      type: 'commonTurn'
     }
   ]
+
+  for (let i = 2; i <= count; i++) {
+    result.push({
+      turnNumber: i,
+      fog: false,
+      type: 'commonTurn'
+    })
+  }
+
+  return result
 }
