@@ -192,6 +192,7 @@ export default {
       const {
         slug,
         name,
+        turnCount,
         columns,
         rows,
         startedSectors,
@@ -205,6 +206,7 @@ export default {
       this.createEvent({
         slug,
         name,
+        turnCount,
         columns,
         rows,
         startedSectors,
