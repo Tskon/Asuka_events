@@ -34,14 +34,12 @@ export default {
   },
 
   created() {
-    if (this.currentEvent) {
-      this.fetchMap(this.currentEvent.slug)
-    }
+    this.fetchEvents()
   },
 
   methods: {
     ...mapActions({
-      fetchMap: 'map/fetchMap',
+      fetchEvents: 'events/fetchEvents',
       setCurrentEvent: 'events/setCurrentEvent'
     }),
 
