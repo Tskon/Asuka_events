@@ -163,20 +163,20 @@ export default {
       slug: '',
       name: '',
       turnCount: 20,
-      columns: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'],
-      rows: [1, 2, 3, 4, 5, 6],
-      startedSectors: ['a1', 'h6'],
+      columns: ['a', 'b', 'c'],
+      rows: [1, 2, 3],
+      startedSectors: ['a1', 'c3'],
       bonusForWin: 0,
       richEconomyCells: {
-        list: ['b2', 'b3'],
+        list: ['a2', 'a3'],
         bonus: 30
       },
       middleEconomyCells: {
-        list: ['c2', 'c3'],
+        list: ['b1', 'b2'],
         bonus: 20
       },
       poorEconomyCells: {
-        list: ['d2', 'd3'],
+        list: ['c1', 'c2'],
         bonus: 10
       },
       gameMapList: ['Название карты 1', 'Название карты 2']
