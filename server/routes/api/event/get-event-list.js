@@ -3,7 +3,7 @@ module.exports = function (router, models) {
     const [eventList, players, users] = await Promise.all([
       models.Event.find(),
       models.Player.find({}, 'username events'),
-      models.User.find({ isPlayer: true }, 'username clanTag clanName avatar')
+      models.User.find({}, 'username clanTag clanName avatar')
     ])
 
     const parsedEventList = eventList.map(async event => {
@@ -35,6 +35,14 @@ module.exports = function (router, models) {
           return player.currentCell === cell.name
         })
 
+        const filteredPlayersWithPlayerData = filteredPlayers.map(player => {
+          const user = users.find(user => user.username === player.username)
+          return {
+            ...player._doc,
+            ...user._doc
+          }
+        })
+
         return {
           name,
           gameMap,
@@ -42,7 +50,7 @@ module.exports = function (router, models) {
           bonus,
           connectedCells,
           incomeStatus,
-          players: filteredPlayers
+          players: filteredPlayersWithPlayerData
         }
       })
 
