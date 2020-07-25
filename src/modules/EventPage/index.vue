@@ -27,6 +27,12 @@ export default {
     PlayerInfo
   },
 
+  data() {
+    return {
+      fetchInterval: null
+    }
+  },
+
   computed: {
     ...mapGetters({
       eventList: 'events/eventList'
@@ -35,6 +41,12 @@ export default {
 
   created() {
     this.fetchEvents()
+
+    this.fetchInterval = setInterval(this.fetchEvents, 5000)
+  },
+
+  beforeDestroy() {
+    clearInterval(this.fetchInterval)
   },
 
   methods: {
