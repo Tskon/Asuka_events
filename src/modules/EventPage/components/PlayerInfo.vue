@@ -53,9 +53,9 @@ export default {
     }),
 
     scoreForNextTurn() {
-      const currentCell = this.event.cellList.find(cell => cell.name === this.event.ownedCell)
+      const currentCell = this.event.cellList.find(cell => cell.name === this.playerCurrentEvent.ownedCell)
       const cellBonus = currentCell ? currentCell.bonus : 0
-      return (this.event.ownInRowCount > 2) ? 0 : cellBonus
+      return (this.playerCurrentEvent.ownInRowCount > 2) ? 0 : cellBonus
     }
   },
 
