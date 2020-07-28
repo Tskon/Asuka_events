@@ -107,7 +107,7 @@
     </div>
     <BattleTableResultBlock
       v-if="!isEditMode && isResultBlockAvailable"
-      :slug="currentBattleTable.slug"
+      :slug="currentBattleTable.eventSlug"
       class="pt-3"
       @resultSended="onResultSended"
     />

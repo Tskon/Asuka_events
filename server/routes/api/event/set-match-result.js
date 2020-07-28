@@ -1,13 +1,19 @@
 module.exports = function (router, models) {
   router.post('/event/set-match-result', async (req, res) => {
+    const { isWinner, eventSlug } = req.body
+
     const turnsCount = await models.Log.countDocuments()
+
     const player = await models.Player.findOne({ username: req.user.username})
+    const currentEvent = player.events.find(event => event.slug === eventSlug)
+
     const battleTable = await models.BattleTable.findOne({
+      eventSlug,
       turnNumber: turnsCount + 1,
-      cellName: player.currentCell
+      cellName: currentEvent.currentCell
     })
 
-    const { isWinner } = req.body
+    // TODO разобраться почему не записывается победа
 
     const isFirstPairWinner = battleTable.firstPair.winner === req.user.username
     const isSecondPairWinner = battleTable.secondPair.winner === req.user.username
