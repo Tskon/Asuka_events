@@ -44,7 +44,7 @@ export default {
     }),
     onClick(value) {
       this.preventPopover = true
-      const valueText = value ? 'Сообщить о <b>Победе?</b>' : 'Сообщить о <b>Поражении?</b>'
+      const valueText = value ? 'Сообщить о Победе?' : 'Сообщить о Поражении?'
       this.$bvModal.msgBoxConfirm(valueText)
         .then(async (isOk) => {
           this.$root.$emit('bv::hide::popover')
