@@ -23,6 +23,13 @@ import { mapActions } from "vuex"
 export default {
   name: "BattleTableResultBlock",
 
+  props: {
+    slug: {
+      type: String,
+      default: ''
+    }
+  },
+
   data() {
     return {
       preventPopover: false
@@ -42,6 +49,7 @@ export default {
     ...mapActions({
       setBattleStatus: 'map/setBattleStatus'
     }),
+
     onClick(value) {
       this.preventPopover = true
       const valueText = value ? 'Сообщить о Победе?' : 'Сообщить о Поражении?'
@@ -52,7 +60,7 @@ export default {
             this.preventPopover = false
             return
           }
-          await this.setBattleStatus(value)
+          await this.setBattleStatus({isWinner: value, eventSlug: this.slug})
           this.$emit('resultSended')
           this.preventPopover = false
         })

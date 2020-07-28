@@ -47,8 +47,8 @@ export default {
         })
     },
 
-    setBattleStatus(context, isWinner) {
-      return axios.post('/api/event/set-match-result', { isWinner })
+    setBattleStatus(context, {isWinner, eventSlug}) {
+      return axios.post('/api/event/set-match-result', { isWinner, eventSlug })
     },
 
     clearCurrentBattleTable({ commit }) {
