@@ -37,10 +37,10 @@ module.exports = function (router, models) {
       }
     }
 
-
     await models.BattleTable.updateOne({
+      eventSlug,
       turnNumber: turnsCount + 1,
-      cellName: player.currentCell
+      cellName: currentEvent.currentCell
     }, battleTable)
 
     res.send({
