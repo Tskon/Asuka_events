@@ -1,5 +1,3 @@
-// TODO если нет победителя - всех на стартовые сектора.
-
 module.exports = function (router, models) {
   router.post('/admin/next-turn', async (req, res) => {
     const turnsCount = await models.Log.countDocuments({ eventSlug: req.body.eventSlug })
