@@ -1,3 +1,5 @@
+// TODO создавать боевую таблицу
+
 module.exports = function (router, models) {
   router.post('/admin/set-player-data', async (req, res) => {
     const {
