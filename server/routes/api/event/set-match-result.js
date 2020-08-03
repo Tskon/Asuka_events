@@ -13,8 +13,6 @@ module.exports = function (router, models) {
       cellName: currentEvent.currentCell
     })
 
-    // TODO разобраться почему не записывается победа
-
     const isFirstPairWinner = battleTable.firstPair.winner === req.user.username
     const isSecondPairWinner = battleTable.secondPair.winner === req.user.username
     const isFinalPairWinner = battleTable.finalPair.winner === req.user.username
