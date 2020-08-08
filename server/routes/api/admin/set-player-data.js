@@ -10,16 +10,11 @@ module.exports = function (router, models) {
       ownInRowCount
     } = req.body
 
-    const [playerFromDB, turnsCount, players, users] = await Promise.all([
+    const [playerFromDB, turnsCount, users] = await Promise.all([
       models.Player.findOne({ username }),
       models.Log.countDocuments({ eventSlug: req.body.eventSlug }),
-      models.Player.find({ events : { $elemMatch: {  slug : { $gte: eventSlug } } } }),
       models.User.find()
     ])
-
-    const playerListInCurrentCell = players.filter(player => {
-      return player.events.some(event => event.slug === eventSlug && event.currentCell === currentCell)
-    })
 
     const turnNumber = turnsCount + 1
 
@@ -45,6 +40,11 @@ module.exports = function (router, models) {
     })
 
     await models.Player.updateOne({ username } , playerFromDB)
+
+    const players = await models.Player.find({ events : { $elemMatch: {  slug : { $gte: eventSlug } } } })
+    const playerListInCurrentCell = players.filter(player => {
+      return player.events.some(event => event.slug === eventSlug && event.currentCell === currentCell)
+    })
 
     if (playerListInCurrentCell.length > 1) {
       createBattleTable(playerListInCurrentCell.map(player => player.username), users)
