@@ -61,6 +61,7 @@ module.exports = function (router, models) {
     }
 
     if (playerListInCurrentCell.length > 1) {
+      await models.BattleTable.deleteOne({ eventSlug, turnNumber, cellName: currentCell })
       createBattleTable(playerListInCurrentCell.map(player => player.username), users, currentCell)
     }
 
