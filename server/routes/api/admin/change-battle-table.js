@@ -1,5 +1,3 @@
-// TODO test battle table change
-
 module.exports = function (router, models) {
   router.post('/admin/change-battle-table', async (req, res) => {
     const users = await models.User.find()
