@@ -1,4 +1,4 @@
-// TODO поправить редактирование сектора
+// TODO test battle table change
 
 module.exports = function (router, models) {
   router.post('/admin/change-battle-table', async (req, res) => {
@@ -14,6 +14,7 @@ module.exports = function (router, models) {
     const { firstPairWinner, secondPairWinner, finalPairWinner, players } = req.body
 
     const newBattleTable = {
+      eventSlug: req.body.eventSlug,
       players: players.map(player => {
         return parsedUsers.find(user => user.username === player)
       } ),
@@ -34,7 +35,8 @@ module.exports = function (router, models) {
 
     await models.BattleTable.updateOne({
       turnNumber: turnsCount + 1,
-      cellName: req.body.cellName
+      cellName: req.body.cellName,
+      eventSlug: req.body.eventSlug
     }, newBattleTable)
 
     res.send({
