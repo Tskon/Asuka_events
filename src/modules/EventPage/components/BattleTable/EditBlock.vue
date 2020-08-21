@@ -241,6 +241,7 @@ export default {
       const finalPairWinner = formData.get('final-pair-p1-winner') || formData.get('final-pair-p2-winner')
 
       axios.post('/api/admin/change-battle-table', {
+        eventSlug: this.battleTableData.eventSlug,
         cellName: this.cellName,
         players,
         firstPairWinner,
