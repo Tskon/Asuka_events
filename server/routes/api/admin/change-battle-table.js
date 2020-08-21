@@ -1,3 +1,5 @@
+// TODO поправить редактирование сектора
+
 module.exports = function (router, models) {
   router.post('/admin/change-battle-table', async (req, res) => {
     const users = await models.User.find({ isPlayer: true })
