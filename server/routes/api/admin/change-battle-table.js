@@ -2,7 +2,7 @@
 
 module.exports = function (router, models) {
   router.post('/admin/change-battle-table', async (req, res) => {
-    const users = await models.User.find({ isPlayer: true })
+    const users = await models.User.find()
     const parsedUsers = users.map(({username, clanName, clanTag, avatar}) => ({
       username,
       clanName,
