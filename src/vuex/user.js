@@ -115,6 +115,7 @@ export default {
       const currentEvent = rootGetters['events/currentEvent']
       return state.events.find(event => event.slug === currentEvent.slug) || {}
     },
+    username: state => state.name,
     personalData: state => state.personalData
   }
 }
