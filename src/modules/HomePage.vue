@@ -32,7 +32,6 @@ export default {
     userEventList() {
       return this.playerEvents.map(playerEvent => {
         const fullEvent = this.events.find(event => event.slug === playerEvent.slug)
-        console.log(fullEvent)
         return fullEvent.name
       })
     }
