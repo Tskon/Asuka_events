@@ -4,7 +4,12 @@
 
     <div v-if="isAuth">
       Чтобы зааписаться в новый эвент обратись к Тактику.
-      Ты участвуешь в эвентах: {{ userEventList.join(', ') }}
+      <template v-if="userEventList.length">
+        Ты участвуешь в эвентах: {{ userEventList.join(', ') }}
+      </template>
+      <template>
+        Сейчас ты не участвуешь в эвентах.
+      </template>
     </div>
 
     <div v-if="!isAuth"/>
