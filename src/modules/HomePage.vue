@@ -1,6 +1,8 @@
 <template>
   <div class="home">
-    <h1>{{ greetings }}</h1>
+    <h1>Океаническая глобальная карта</h1>
+
+    {{ greetings }}
 
     <div v-if="isAuth">
       Чтобы зааписаться в новый эвент обратись к Тактику.
