@@ -1,7 +1,7 @@
 <template>
   <div
     id="app"
-    class="container-fluid"
+    class="app-wrapper container-fluid"
   >
     <Header/>
     <router-view/>
@@ -17,3 +17,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .app-wrapper {
+    height: 100%;
+  }
+</style>

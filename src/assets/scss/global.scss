@@ -2,6 +2,8 @@
   box-sizing: border-box;
 }
 
+
+
 .custom-file-input ~ .custom-file-label[data-browse]:after {
   content: 'Выбрать';
 }

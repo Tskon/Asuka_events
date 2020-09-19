@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    {{ greetings }}
+    <h1>{{ greetings }}</h1>
 
     <div v-if="isAuth">
       Чтобы зааписаться в новый эвент обратись к Тактику.
@@ -44,3 +44,15 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  max-width: 500px;
+  height: 100%;
+}
+</style>
