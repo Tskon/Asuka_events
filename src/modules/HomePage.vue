@@ -53,7 +53,7 @@ export default {
   text-align: center;
   margin: auto;
   max-width: 600px;
-  height: 100%;
+  height: calc(100% - 56px);
 }
 
 .greetings {
