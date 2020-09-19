@@ -1,8 +1,8 @@
 <template>
   <div class="home">
     <h1>Океаническая глобальная карта</h1>
+    <p class="greetings">{{ greetings }}</p>
 
-    {{ greetings }}
 
     <div v-if="isAuth">
       Чтобы зааписаться в новый эвент обратись к Тактику.
@@ -53,8 +53,13 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
   margin: auto;
-  max-width: 500px;
+  max-width: 600px;
   height: 100%;
+}
+
+.greetings {
+  font-size: 24px;
 }
 </style>
