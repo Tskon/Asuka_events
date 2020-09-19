@@ -7,7 +7,7 @@
       class="row"
     >
       <b-navbar-brand to="/">
-        Asuka
+        ОГБ
       </b-navbar-brand>
       <b-navbar-toggle target="nav-collapse"/>
       <b-collapse
