@@ -2,8 +2,6 @@
   <div class="home">
     <h1>Океаническая глобальная карта</h1>
     <p class="greetings">{{ greetings }}</p>
-
-
     <div v-if="isAuth">
       Чтобы зааписаться в новый эвент обратись к Тактику.
       <template v-if="userEventList.length">
@@ -13,7 +11,6 @@
         Сейчас ты не участвуешь в эвентах.
       </template>
     </div>
-
     <div v-if="!isAuth"/>
   </div>
 </template>
