@@ -18,7 +18,8 @@
           </li>
         </ul>
       </template>
-      <template>
+
+      <template v-else>
         Сейчас ты не участвуешь в эвентах.
       </template>
     </div>
@@ -71,7 +72,7 @@ export default {
 
 .greetings {
   font-size: 24px;
-  margin: 0 auto;
+  margin: 0 auto 24px;
 }
 
 .event-list {
