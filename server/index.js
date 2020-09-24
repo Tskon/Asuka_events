@@ -51,7 +51,7 @@ app
    */
   .use('/api/user', (req, res, next) => {
     if (req.isAuthenticated()) next()
-    else res.send({ status: 'error', message: 'Вы не авторизованы. User' })
+    else res.send({ status: 'error' })
   })
   .use('/api/admin', (req, res, next) => {
     if (req.user && req.user.isAdmin) next()
