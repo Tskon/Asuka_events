@@ -1,5 +1,3 @@
-// TODO проверить работу
-
 const bCrypt = require('bcrypt-nodejs')
 
 const generateHash = (password) => bCrypt.hashSync(password, bCrypt.genSaltSync(8), null)
