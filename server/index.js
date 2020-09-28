@@ -60,7 +60,7 @@ app
   .use('/api/event', async (req, res, next) => {
     const player = await models.Player.findOne({username: req.user.username})
     if (player.events.length) next()
-    else res.send({ status: 'error', message: 'Не достаточно прав. Admin' })
+    else res.send({ status: 'error' })
   })
   .use('/api', require('./routes/api/index')(passport, app))
 
