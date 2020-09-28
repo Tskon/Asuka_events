@@ -21,6 +21,7 @@ export default {
   actions: {
     async fetchEvents(context) {
       const {data} = await axios.post('/api/event/get-event-list')
+      if (!data.data) return
       context.commit('setEvents', data.data.eventList)
     },
 
