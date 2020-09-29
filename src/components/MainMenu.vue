@@ -1,7 +1,7 @@
 <template>
   <b-navbar-nav>
     <b-nav-item
-      v-if="isAuth && eventList && eventList.length"
+      v-if="isAuth && (playerEvents.length || isAdmin)"
       to="/event"
     >
       Эвенты
@@ -29,7 +29,7 @@ export default {
     ...mapGetters({
       isAuth: 'user/isAuth',
       isAdmin: 'user/isAdmin',
-      eventList: 'events/eventList'
+      playerEvents: 'user/playerEvents'
     })
   }
 }
