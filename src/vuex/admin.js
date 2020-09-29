@@ -58,6 +58,7 @@ export default {
         .then(({ data }) => {
           if (data.status !== 'ok') return
           context.dispatch('getAdminData')
+          context.dispatch('user/getPlayerData', null, { root: true })
           if (context.rootState.user.name === payload.username) {
             context.dispatch('user/getUser', null, { root: true })
           }
