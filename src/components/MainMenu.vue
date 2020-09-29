@@ -1,7 +1,7 @@
 <template>
   <b-navbar-nav>
     <b-nav-item
-      v-if="isAuth"
+      v-if="isAuth && eventList && eventList.length"
       to="/event"
     >
       Эвенты
@@ -28,7 +28,8 @@ export default {
   computed: {
     ...mapGetters({
       isAuth: 'user/isAuth',
-      isAdmin: 'user/isAdmin'
+      isAdmin: 'user/isAdmin',
+      eventList: 'events/eventList'
     })
   }
 }
