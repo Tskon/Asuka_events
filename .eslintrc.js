@@ -13,6 +13,7 @@ module.exports = {
     "indent": ["error", 2],
     "no-console": "off",
     "no-shadow": "off",
+    "custom-event-name-casing": "off",
     "no-use-before-define": "off",
     "no-param-reassign": "off",
     "consistent-return": "off",
