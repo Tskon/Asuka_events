@@ -27,7 +27,7 @@ module.exports = {
     "func-names": "off",
     "semi": [2, "never"],
     "comma-dangle": ["error", "never"],
-    "vue/html-closing-bracket-spacing)": "off",
+    "vue/custom-event-name-casing": "off",
     "vue/html-closing-bracket-spacing": ["error", {
       "startTag": "never",
       "endTag": "never",
