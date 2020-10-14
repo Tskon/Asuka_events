@@ -46,6 +46,7 @@
         </b-form-checkbox>
       </div>
     </div>
+
     <div
       v-if="battleTableData.players.length > 2"
       class="pairBlock"
@@ -92,6 +93,7 @@
         </b-form-checkbox>
       </div>
     </div>
+
     <div
       class="pairBlock mb-2"
     >
@@ -124,7 +126,7 @@
           class="mr-2"
         />
         <b-form-checkbox
-          :checked="false"
+          :checked="isFinalPairPlayer2Checked"
           :value="battleTableData.secondPair.winner"
           name="final-pair-p2-winner"
           size="lg"
@@ -133,6 +135,7 @@
         </b-form-checkbox>
       </div>
     </div>
+
     <b-button
       type="submit"
       variant="warning"
@@ -198,13 +201,15 @@ export default {
       return this.getCheckboxInitStatus(this.battleTableData.players[3], this.battleTableData.secondPair)
     },
     isFinalPairPlayer1Checked() {
-      return this.battleTableData.firstPair.winner === this.battleTableData.finalPair.winner
-        ? !!this.battleTableData.finalPair.winner
+      return this.battleTableData.finalPair.winner
+      && this.battleTableData.firstPair.winner === this.battleTableData.finalPair.winner
+        ? this.battleTableData.finalPair.winner
         : false
     },
     isFinalPairPlayer2Checked() {
-      return this.battleTableData.secondPair.winner === this.battleTableData.finalPair.winner
-        ? !!this.battleTableData.finalPair.winner
+      return this.battleTableData.finalPair.winner
+      && this.battleTableData.secondPair.winner === this.battleTableData.finalPair.winner
+        ? this.battleTableData.finalPair.winner
         : false
     }
   },
