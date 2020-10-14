@@ -65,6 +65,7 @@
         <b-form-checkbox
           :checked="isPair2Player1Checked"
           :value="getCheckboxValue(battleTableData.players[2])"
+          :disabled="battleTableData.players.length === 3"
           name="pair2-p1-winner"
           size="lg"
         >
