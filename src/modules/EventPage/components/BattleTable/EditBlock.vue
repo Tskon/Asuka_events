@@ -56,14 +56,14 @@
       <div class="d-flex flex-row align-items-center mb-2">
         <b-form-select
           :options="playerOptions"
-          :value="battleTableData.players[3] && battleTableData.players[3].username"
+          :value="battleTableData.players[2] && battleTableData.players[2].username"
           name="pair2-p1"
           size="sm"
           class="mr-2"
         />
         <b-form-checkbox
           :checked="isPair2Player1Checked"
-          :value="getCheckboxValue(battleTableData.players[3])"
+          :value="getCheckboxValue(battleTableData.players[2])"
           name="pair2-p1-winner"
           size="lg"
         >
@@ -76,14 +76,14 @@
       >
         <b-form-select
           :options="playerOptions"
-          :value="battleTableData.players[4] && battleTableData.players[4].username"
+          :value="battleTableData.players[3] && battleTableData.players[3].username"
           name="pair2-p2"
           size="sm"
           class="mr-2"
         />
         <b-form-checkbox
           :checked="isPair2Player2Checked"
-          :value="getCheckboxValue(battleTableData.players[4])"
+          :value="getCheckboxValue(battleTableData.players[3])"
           :disabled="battleTableData.players.length === 3"
           name="pair2-p2-winner"
           size="lg"
