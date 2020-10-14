@@ -124,7 +124,7 @@
           class="mr-2"
         />
         <b-form-checkbox
-          :checked="isFinalPairPlayer2Checked"
+          :checked="false"
           :value="battleTableData.secondPair.winner"
           name="final-pair-p2-winner"
           size="lg"
@@ -199,13 +199,13 @@ export default {
     },
     isFinalPairPlayer1Checked() {
       return this.battleTableData.firstPair.winner === this.battleTableData.finalPair.winner
-        ? this.battleTableData.finalPair.winner
-        : null
+        ? !!this.battleTableData.finalPair.winner
+        : false
     },
     isFinalPairPlayer2Checked() {
       return this.battleTableData.secondPair.winner === this.battleTableData.finalPair.winner
-        ? this.battleTableData.finalPair.winner
-        : null
+        ? !!this.battleTableData.finalPair.winner
+        : false
     }
   },
 
