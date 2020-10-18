@@ -7,11 +7,14 @@ module.exports = function (router, models) {
     const player = await models.Player.findOne({ username: req.user.username})
     const currentEvent = player.events.find(event => event.slug === eventSlug)
 
-    const battleTable = await models.BattleTable.findOne({
-      eventSlug,
-      turnNumber: turnsCount + 1,
-      cellName: currentEvent.currentCell
-    })
+    const [battleTable, currentEventMeta] = await Promise.all([
+      models.BattleTable.findOne({
+        eventSlug,
+        turnNumber: turnsCount + 1,
+        cellName: currentEvent.currentCell
+      }),
+      models.Event.findOne({slug: currentEvent.slug})
+    ])
 
     const isFirstPairWinner = battleTable.firstPair.winner === req.user.username
     const isSecondPairWinner = battleTable.secondPair.winner === req.user.username
@@ -40,6 +43,11 @@ module.exports = function (router, models) {
       turnNumber: turnsCount + 1,
       cellName: currentEvent.currentCell
     }, battleTable)
+
+    if (isWinner) {
+      currentEvent.score += currentEventMeta.bonusForWin
+      await models.Player.updateOne({ username: req.user.username}, player)
+    }
 
     res.send({
       status: 'success',
