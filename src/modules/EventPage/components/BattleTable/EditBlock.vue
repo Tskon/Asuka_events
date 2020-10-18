@@ -67,7 +67,6 @@
         <b-form-checkbox
           v-model="pair2Player1Checked"
           :value="getCheckboxValue(battleTableData.players[2])"
-          :disabled="battleTableData.players.length === 3"
           name="pair2-p1-winner"
           size="lg"
           @change="(value) => { if (value) pair2Player2Checked = false}"
@@ -89,7 +88,6 @@
         <b-form-checkbox
           v-model="pair2Player2Checked"
           :value="getCheckboxValue(battleTableData.players[3])"
-          :disabled="battleTableData.players.length === 3"
           name="pair2-p2-winner"
           size="lg"
           @change="(value) => { if (value) pair2Player1Checked = false}"
