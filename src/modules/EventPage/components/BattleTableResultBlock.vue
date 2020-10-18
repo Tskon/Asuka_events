@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex justify-content-between">
     <b-button
-      class="w-100 mr-2"
+      class="w-100"
       variant="success"
       @click="onClick(true)"
     >
