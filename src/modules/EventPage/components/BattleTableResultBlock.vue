@@ -7,13 +7,13 @@
     >
       Победа
     </b-button>
-    <b-button
-      class="w-100 ml-2"
-      variant="danger"
-      @click="onClick(false)"
-    >
-      Поражение
-    </b-button>
+    <!--    <b-button-->
+    <!--      class="w-100 ml-2"-->
+    <!--      variant="danger"-->
+    <!--      @click="onClick(false)"-->
+    <!--    >-->
+    <!--      Поражение-->
+    <!--    </b-button>-->
   </div>
 </template>
 
