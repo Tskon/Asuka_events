@@ -1,7 +1,7 @@
 <template>
   <b-popover
     :target="`cell-popover-${eventSlug}-${cell.name}`"
-    :title="'Действия для сектора ' + cell.name.toUpperCase()"
+    :title="`Действия для сектора ${cell.name.toUpperCase()} (${cell.gameMap})`"
     triggers="focus"
     placement="rightbottom"
     custom-class="w-100"
@@ -10,8 +10,6 @@
   >
     <template v-if="cell.players.length">
       <b-card class="mb-2 pt-0">
-        {{ cell.gameMap }}
-        <hr/>
         Команды в секторе:
         <ol class="pl-3 mb-0">
           <li

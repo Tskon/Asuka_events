@@ -1,19 +1,19 @@
 <template>
   <div class="d-flex justify-content-between">
     <b-button
-      class="w-100 mr-2"
+      class="w-100"
       variant="success"
       @click="onClick(true)"
     >
       Победа
     </b-button>
-    <b-button
-      class="w-100 ml-2"
-      variant="danger"
-      @click="onClick(false)"
-    >
-      Поражение
-    </b-button>
+    <!--    <b-button-->
+    <!--      class="w-100 ml-2"-->
+    <!--      variant="danger"-->
+    <!--      @click="onClick(false)"-->
+    <!--    >-->
+    <!--      Поражение-->
+    <!--    </b-button>-->
   </div>
 </template>
 

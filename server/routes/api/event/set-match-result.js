@@ -46,7 +46,7 @@ module.exports = function (router, models) {
 
     if (isWinner) {
       currentEvent.score += eventData.bonusForWin
-      await models.Player.update({username: req.user.username}, player)
+      await models.Player.updateOne({username: req.user.username}, player)
     }
 
     res.send({

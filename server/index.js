@@ -9,8 +9,17 @@ const MongoStore = require('connect-mongo')(session)
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const mongoose = require('mongoose')
-
+const WebSocket = require('ws')
+const UUID = require('uuid')
 const models = require('./dbModels')
+
+const wss = new WebSocket.Server({ port: 4321 })
+wss.on('connection', (ws) => {
+  ws.id = UUID()
+  ws.on('message', (message) => {
+    ws.send(`[${ws.id}]: ${message}`)
+  })
+})
 
 mongoose.Promise = global.Promise
 
