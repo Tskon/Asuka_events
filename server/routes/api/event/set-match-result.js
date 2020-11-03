@@ -2,9 +2,12 @@ module.exports = function (router, models) {
   router.post('/event/set-match-result', async (req, res) => {
     const { isWinner, eventSlug } = req.body
 
-    const turnsCount = await models.Log.countDocuments()
+    const [turnsCount, player, eventData] = await Promise.all([
+      models.Log.countDocuments(),
+      models.Player.findOne({ username: req.user.username}),
+      models.Event.findOne({ slug: eventSlug })
+    ])
 
-    const player = await models.Player.findOne({ username: req.user.username})
     const currentEvent = player.events.find(event => event.slug === eventSlug)
 
     const battleTable = await models.BattleTable.findOne({
@@ -40,6 +43,11 @@ module.exports = function (router, models) {
       turnNumber: turnsCount + 1,
       cellName: currentEvent.currentCell
     }, battleTable)
+
+    if (isWinner) {
+      currentEvent.score += eventData.bonusForWin
+      await models.Player.update({username: req.user.username}, player)
+    }
 
     res.send({
       status: 'success',
