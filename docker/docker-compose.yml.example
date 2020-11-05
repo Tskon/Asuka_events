@@ -1,21 +1,25 @@
-version: '3.1'
+version: '3.7'
 
 services:
-  database:
-    image: mongo
-    container_name: mongo-events
+  mongo:
+    image: mongo:latest
     environment:
-      - MONGO_INITDB_DATABASE=db-name
-      - MONGO_INITDB_ROOT_USERNAME=root-user
-      - MONGO_INITDB_ROOT_PASSWORD=root-password
-    volumes:
-      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
-      - ./mongo-volume:/data/db
+      MONGO_INITDB_ROOT_USERNAME: root-username
+      MONGO_INITDB_ROOT_PASSWORD: root-password
     ports:
-      - '27017-27019:27017-27019'
+      - 27017:27017
+    volumes:
+      - ./mongodbStorage:/data/db
+    restart: always
 
-  adminer:
-    image: adminer
+  mongo-express:
+    image: mongo-express
     restart: always
     ports:
-      - 9090:8080
+      - 9090:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root-username
+      ME_CONFIG_MONGODB_ADMINPASSWORD: root-password
+
+volumes:
+  mongodbStorage:
