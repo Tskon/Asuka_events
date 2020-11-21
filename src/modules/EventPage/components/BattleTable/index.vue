@@ -170,21 +170,20 @@ export default {
       const findPlayer = username => {
         return this.currentBattleTable.players.find(player => player.username === username)
       }
-      console.log(123, players)
 
       if (players.length === 2) {
-        this.pair1 = [findPlayer(firstPair.winner)]
-        this.pair2 = [findPlayer(secondPair.winner)]
-        this.finalPair = [findPlayer(firstPair.winner), findPlayer(secondPair.winner)]
+        this.pair1 = [players[0]]
+        this.pair2 = [players[1]]
+        this.finalPair = [players[0], players[1]]
       }
       if (players.length === 3) {
         this.pair1 = [players[0], players[1]]
-        this.pair2 = [findPlayer(secondPair.winner)]
+        this.pair2 = [players[3]]
         this.finalPair = [findPlayer(firstPair.winner), findPlayer(secondPair.winner)]
       }
       if (players.length >= 4) {
         this.pair1 = [players[0], players[1]]
-        this.pair2 = [players[3], players[4]]
+        this.pair2 = [players[2], players[3]]
         this.finalPair = [findPlayer(firstPair.winner), findPlayer(secondPair.winner)]
       }
     }
@@ -196,7 +195,6 @@ export default {
     }),
 
     getPlayerName(playerObject) {
-      console.log(playerObject)
       return playerObject ? playerObject.clanTag : '------'
     },
 
