@@ -178,7 +178,7 @@ export default {
       }
       if (players.length === 3) {
         this.pair1 = [players[0], players[1]]
-        this.pair2 = [players[3]]
+        this.pair2 = [players[2]]
         this.finalPair = [findPlayer(firstPair.winner), findPlayer(secondPair.winner)]
       }
       if (players.length >= 4) {
