@@ -5,7 +5,7 @@
       {{ greetings }}
     </p>
     <div v-if="isAuth">
-      Чтобы зааписаться в новый эвент обратись к Тактику.
+      Чтобы записаться в новый эвент обратись к Тактику.
       <template v-if="userEventList.length">
         <ul class="event-list">
           Ты участвуешь в эвентах:
